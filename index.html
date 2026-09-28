@@ -1,2769 +1,799 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Multibagger Hunter</title>
-
 <style>
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background:
-        radial-gradient(circle at top left, #102746 0%, #07111f 35%, #050b14 100%);
-    color: #eaf2ff;
-}
-
-header {
-    background: rgba(5,15,28,.96);
-    border-bottom: 1px solid #233b56;
-    padding: 20px 25px;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    flex-wrap: wrap;
-}
-
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.brand-icon {
-    font-size: 32px;
-}
-
-.brand h1 {
-    margin: 0;
-    font-size: 28px;
-}
-
-.brand h1 span {
-    color: #20df8a;
-}
-
-.brand p {
-    margin: 4px 0 0;
-    color: #8ea6c4;
-    font-size: 11px;
-}
-
-.header-info {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.header-card {
-    min-width: 155px;
-    padding: 9px 12px;
-    background: #0b1a2c;
-    border: 1px solid #28425f;
-    border-radius: 8px;
-}
-
-.header-card small {
-    display: block;
-    color: #7e95af;
-    font-size: 8px;
-    margin-bottom: 4px;
-}
-
-.header-card strong {
-    font-size: 12px;
-}
-
-.green {
-    color: #20df8a !important;
-}
-
-.red {
-    color: #ff5c6c !important;
-}
-
-.yellow {
-    color: #ffd449 !important;
-}
-
-.blue {
-    color: #62a7ff !important;
-}
-
-.container {
-    max-width: 1500px;
-    margin: auto;
-    padding: 16px;
-}
-
-.tabs {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-bottom: 14px;
-}
-
-.tab {
-    height: 45px;
-    border: 1px solid #29445f;
-    background: #0b1829;
-    color: #93a9c2;
-    border-radius: 9px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.tab.active {
-    background: linear-gradient(135deg,#1677ff,#0c58dd);
-    color: white;
-    border-color: #378bff;
-}
-
-.panel {
-    background: linear-gradient(145deg,#0d1d30,#081626);
-    border: 1px solid #243e59;
-    border-radius: 12px;
-    padding: 15px;
-    margin-bottom: 14px;
-}
-
-.title-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.title-row h2 {
-    margin: 0;
-    font-size: 16px;
-}
-
-.badge {
-    padding: 4px 8px;
-    border-radius: 6px;
-    background: #102742;
-    color: #7eb4ff;
-    font-size: 9px;
-    font-weight: bold;
-}
-
-.period-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.subbox {
-    background: #091728;
-    border: 1px solid #263f5b;
-    border-radius: 9px;
-    padding: 12px;
-}
-
-.subtitle {
-    font-size: 10px;
-    color: #b7c8dc;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-.quick {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-}
-
-.quick button {
-    padding: 8px 12px;
-    border: 1px solid #29435e;
-    background: #0d1e33;
-    color: #91a7c0;
-    border-radius: 6px;
-    font-size: 10px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.quick button.active {
-    background: #1677ff;
-    color: white;
-    border-color: #378bff;
-}
-
-.custom-grid {
-    display: grid;
-    grid-template-columns: 1fr 18px 1fr;
-    align-items: end;
-    gap: 6px;
-}
-
-.field {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.field label {
-    color: #7e95af;
-    font-size: 8px;
-    font-weight: bold;
-}
-
-input,
-select {
-    width: 100%;
-    height: 35px;
-    padding: 7px 9px;
-    background: #0c1b2e;
-    border: 1px solid #29435f;
-    border-radius: 7px;
-    color: #e8f2ff;
-    font-size: 11px;
-}
-
-.scanner-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 9px;
-    align-items: end;
-}
-
-.scan-btn {
-    width: 100%;
-    height: 35px;
-    border: 0;
-    border-radius: 7px;
-    background: linear-gradient(135deg,#1677ff,#0b5ee8);
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.status {
-    margin-top: 8px;
-    font-size: 10px;
-    color: #8298b1;
-}
-
-.status.ok {
-    color: #20df8a;
-}
-
-.status.error {
-    color: #ff5c6c;
-}
-
-.table-wrap {
-    overflow-x: auto;
-    border: 1px solid #253e59;
-    border-radius: 8px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 1050px;
-}
-
-th {
-    background: #11263e;
-    color: #a9bdd2;
-    padding: 9px 8px;
-    font-size: 9px;
-    text-align: right;
-    white-space: nowrap;
-    border-bottom: 1px solid #29445f;
-}
-
-th:first-child,
-td:first-child {
-    text-align: left;
-}
-
-td {
-    padding: 9px 8px;
-    font-size: 10px;
-    text-align: right;
-    border-bottom: 1px solid #182d45;
-}
-
-tbody tr:hover {
-    background: rgba(27,111,255,.08);
-}
-
-.code {
-    color: #62a7ff;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.outlier {
-    background: rgba(32,223,138,.14);
-    color: #20df8a !important;
-    font-weight: bold;
-    box-shadow: inset 3px 0 0 #20df8a;
-}
-
-.detail-grid {
-    display: grid;
-    grid-template-columns: repeat(6,1fr);
-    gap: 8px;
-    margin-bottom: 10px;
-}
-
-.stat {
-    background: #0a192b;
-    border: 1px solid #29435f;
-    border-radius: 8px;
-    padding: 10px;
-}
-
-.stat small {
-    display: block;
-    color: #748ca6;
-    font-size: 8px;
-    margin-bottom: 5px;
-}
-
-.stat strong {
-    font-size: 16px;
-}
-
-.action-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.action-box {
-    background: #091728;
-    border: 1px solid #29435f;
-    border-radius: 8px;
-    padding: 12px;
-}
-
-.action-title {
-    font-weight: bold;
-    font-size: 11px;
-    margin-bottom: 8px;
-}
-
-.labels {
-    display: flex;
-    justify-content: space-between;
-    color: #7f96af;
-    font-size: 8px;
-    margin-bottom: 5px;
-}
-
-.action-bar {
-    height: 10px;
-    position: relative;
-    border-radius: 20px;
-    background: linear-gradient(
-        to right,
-        #ff475b,
-        #ff883e,
-        #ffd448,
-        #8995a7,
-        #35dc82,
-        #00b979
-    );
-}
-
-.pointer {
-    position: absolute;
-    top: -7px;
-    left: 50%;
-    width: 3px;
-    height: 24px;
-    background: white;
-}
-
-.info {
-    color: #8298b1;
-    font-size: 10px;
-    line-height: 1.9;
-}
-
-.info strong {
-    color: #e1edfa;
-}
-
-.acc {
-    display: inline-block;
-    padding: 4px 7px;
-    border-radius: 10px;
-    background: rgba(32,223,138,.15);
-    color: #20df8a;
-    font-size: 8px;
-    font-weight: bold;
-}
-
-.dist {
-    display: inline-block;
-    padding: 4px 7px;
-    border-radius: 10px;
-    background: rgba(255,92,108,.15);
-    color: #ff6473;
-    font-size: 8px;
-    font-weight: bold;
-}
-
-.empty {
-    min-height: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.empty-icon {
-    font-size: 52px;
-}
-
-.empty p {
-    color: #8195ae;
-    max-width: 450px;
-    line-height: 1.6;
-    font-size: 12px;
-}
-
-.note {
-    margin-top: 9px;
-    color: #687e99;
-    font-size: 9px;
-    line-height: 1.6;
-}
-
-@media(max-width:1000px) {
-    .scanner-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .detail-grid {
-        grid-template-columns: repeat(3,1fr);
-    }
-}
-
-@media(max-width:700px) {
-    .tabs,
-    .period-grid,
-    .scanner-grid,
-    .action-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .detail-grid {
-        grid-template-columns: repeat(2,1fr);
-    }
-}
-
-
-/* =========================================================
-   LIGHT THEME OVERRIDE
-   Hanya mengubah warna/background, struktur & JavaScript tetap.
-========================================================= */
-
 :root{
-    --bg:#f5f8fb;
-    --card:#ffffff;
-    --line:#dbe4ec;
-    --text:#142033;
-    --muted:#6c7d91;
-    --green:#08a66a;
-    --green-2:#12b978;
-    --blue:#2f7ff7;
-    --purple:#8b55e6;
-    --orange:#ff8a18;
-    --red:#ea4d5b;
+  --bg:#f6f9fc;
+  --card:#ffffff;
+  --line:#dfe7ee;
+  --text:#162235;
+  --muted:#6d7e93;
+  --green:#09a66a;
+  --green2:#12b879;
+  --green-soft:#eaf9f2;
+  --blue:#2d7ff9;
+  --blue-soft:#edf4ff;
+  --purple:#9256e8;
+  --purple-soft:#f4efff;
+  --orange:#ff8916;
+  --orange-soft:#fff2e4;
+  --red:#eb4d5c;
+  --shadow:0 4px 14px rgba(33,61,88,.055);
 }
-
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
 body{
-    background:#f5f8fb !important;
-    color:#142033 !important;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
 }
-
-header{
-    background:#ffffff !important;
-    border-bottom:1px solid #dbe4ec !important;
+button,input,select{font:inherit}
+.app{display:flex;min-height:100vh}
+.sidebar{
+  width:214px;position:fixed;left:0;top:0;bottom:0;background:#fff;
+  border-right:1px solid var(--line);z-index:20;display:flex;flex-direction:column;
 }
-
-.brand p{
-    color:#6f8094 !important;
+.logo{
+  height:66px;display:flex;align-items:center;gap:8px;padding:0 20px;
+  border-bottom:1px solid var(--line);font-size:24px;font-weight:800;letter-spacing:-1px
 }
-
-.header-card{
-    background:#ffffff !important;
-    border:1px solid #d7e2eb !important;
+.logo-mark{font-size:20px}
+.nav{padding:16px 9px;overflow:auto}
+.nav-group{padding:10px 12px 6px;color:#7c8da0;font-size:11px}
+.nav-item{
+  display:flex;align-items:center;gap:10px;padding:9px 12px;margin:2px 0;
+  border-radius:7px;color:#425871;text-decoration:none;font-size:12px
 }
-
-.header-card small,
-.field label,
-.status,
-.subtitle,
-.note,
-.labels,
-.info,
-.info-lines,
-.action-caption{
-    color:#6d7f93 !important;
+.nav-item:hover{background:#f5f8fb}
+.nav-item.active{background:var(--green-soft);color:var(--green);font-weight:700}
+.nav-icon{width:17px;text-align:center}
+.nav-spacer{flex:1}
+.sidebar-foot{border-top:1px solid var(--line);padding:10px 9px 14px}
+.main{margin-left:214px;min-width:0;flex:1}
+.topbar{
+  height:66px;background:#fff;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;padding:0 20px;gap:14px;position:sticky;top:0;z-index:10
 }
-
-.tabs{
-    border-bottom-color:#dce5ed !important;
+.search{width:min(560px,55vw);position:relative}
+.search input{
+  width:100%;height:38px;border:1px solid #cfdbe5;background:#fbfdff;border-radius:7px;
+  padding:0 14px 0 38px;outline:none;color:#22344a
 }
-
-.tab{
-    background:#ffffff !important;
-    color:#526981 !important;
-    border-color:transparent !important;
-}
-
-.tab.active{
-    background:#08a66a !important;
-    color:#ffffff !important;
-    border-color:#08a66a !important;
-}
-
-.panel,
-.sub-box,
-.subbox,
-.action-box,
-.stat{
-    background:#ffffff !important;
-    border-color:#dbe4ec !important;
-}
-
-.sub-box,
-.subbox{
-    box-shadow:none !important;
-}
-
-.badge{
-    background:#edf5ff !important;
-    color:#2f72c7 !important;
-}
-
-.quick-button,
-.quick button{
-    background:#ffffff !important;
-    border-color:#ccd9e3 !important;
-    color:#536a80 !important;
-}
-
-.quick-button.active,
-.quick button.active{
-    background:#2f7ff7 !important;
-    color:#ffffff !important;
-    border-color:#2f7ff7 !important;
-}
-
-input,
-select{
-    background:#ffffff !important;
-    color:#26384e !important;
-    border-color:#ccd8e2 !important;
-}
-
-input::placeholder{
-    color:#9aa9b7 !important;
-}
-
-.scan-button,
-.scan-btn{
-    background:#08a66a !important;
-    color:#ffffff !important;
-}
-
-.table-wrap{
-    border-color:#dbe4ec !important;
-}
-
-table{
-    background:#ffffff !important;
-}
-
-thead th,
-th{
-    background:#f3f7fa !important;
-    color:#61758a !important;
-    border-bottom-color:#dbe4ec !important;
-}
-
-tbody td,
-td{
-    color:#26384e;
-    border-bottom-color:#e9eef3 !important;
-}
-
-tbody tr:hover{
-    background:#f6fbf9 !important;
-}
-
-.code{
-    color:#1f6fbe !important;
-}
-
-.avg-outlier,
-.outlier{
-    background:#e8f8f0 !important;
-    color:#008b5c !important;
-    box-shadow:inset 3px 0 0 #08a66a !important;
-}
-
-.green,
-.green-t{
-    color:#08a66a !important;
-}
-
-.red,
-.red-t{
-    color:#e94b5a !important;
-}
-
-.yellow,
-.yellow-t{
-    color:#d89800 !important;
-}
-
-.blue{
-    color:#2f7ff7 !important;
-}
-
-.detail-btn,
-.btn-outline{
-    background:#ffffff !important;
-    color:#3b6287 !important;
-    border-color:#cbd8e2 !important;
-}
-
-.detail-btn:hover,
-.btn-outline:hover{
-    background:#f3f8fc !important;
-}
-
-.card{
-    box-shadow:0 4px 14px rgba(33,61,88,.05) !important;
-}
-
-.card.g{
-    background:#f1fbf6 !important;
-}
-
-.card.b{
-    background:#f2f7ff !important;
-}
-
-.card.p{
-    background:#f8f4ff !important;
-}
-
-.card.o{
-    background:#fff7ee !important;
-}
-
-.card-note{
-    color:#7b8d9f !important;
-}
-
-.action-bar{
-    background:linear-gradient(
-        to right,
-        #ef5a5e,
-        #ff9b3d 30%,
-        #f6d75c 48%,
-        #97a7b7 50%,
-        #53c68b 68%,
-        #08b777
-    ) !important;
-}
-
-.pointer{
-    background:#1c3348 !important;
-}
-
-.acc{
-    background:#e6f8ef !important;
-    color:#08a66a !important;
-}
-
-.dist{
-    background:#fff0f2 !important;
-    color:#e94b5a !important;
-}
-
-.status.ok{
-    color:#08a66a !important;
-}
-
-.status.error{
-    color:#e94b5a !important;
-}
-
-.empty{
-    color:#6f8296 !important;
-}
-
-.empty p{
-    color:#7b8ea1 !important;
-}
-
-.pagination,
-.count,
-.page-info{
-    color:#718498 !important;
-}
-
-.toast{
-    background:#142033 !important;
-    color:#ffffff !important;
-}
-
-.mode-empty{
-    background:#ffffff !important;
-}
-
+.search-icon{position:absolute;left:13px;top:9px;color:#718398}
+.top-right{margin-left:auto;display:flex;align-items:center;gap:15px;color:#52667c;font-size:12px}
+.avatar{width:30px;height:30px;border-radius:50%;background:#7f8d9d;color:#fff;display:grid;place-items:center;font-weight:700;font-size:11px}
+.content{padding:17px 20px 30px}
+.hero{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:11px}
+.hero-title{display:flex;gap:11px;align-items:flex-start}
 .hero-icon{
-    background:#e6f8ef !important;
-    color:#08a66a !important;
+  width:42px;height:42px;border-radius:10px;background:#e7f8f0;color:var(--green);
+  display:grid;place-items:center;font-size:23px
 }
-
-/* Keep the page airy and white */
-.container{
-    background:transparent !important;
+.hero h1{margin:0;font-size:28px;line-height:1.05;letter-spacing:-.8px}
+.hero p{margin:5px 0 0;color:var(--muted);font-size:11px}
+.data-status{
+  min-width:250px;padding:10px 13px;border:1px solid #cfeade;background:#f1fbf7;border-radius:8px
 }
-
+.data-status b{font-size:11px;color:#2c4a5d}
+.status-row{display:flex;align-items:center;gap:8px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--green)}
+.status-sub{margin-top:4px;color:#7a8c9d;font-size:9px}
+.tabs{display:flex;gap:24px;border-bottom:1px solid var(--line);margin-bottom:13px}
+.tab{border:0;background:none;padding:10px 10px 11px;color:#4e6580;font-size:12px;border-bottom:2px solid transparent;cursor:pointer}
+.tab.active{color:var(--green);font-weight:700;border-bottom-color:var(--green)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);margin-bottom:12px}
+.filter{padding:13px 14px}
+.filter-title{font-size:13px;font-weight:750;margin-bottom:9px}
+.filters{display:grid;grid-template-columns:1.65fr 1fr 1fr 1fr 1fr 1fr auto;gap:9px;align-items:end}
+.field label{display:block;color:#6e8094;font-size:9px;margin-bottom:5px}
+select,input[type="date"],input[type="number"],input[type="text"]{
+  width:100%;height:34px;border:1px solid #ccd9e3;background:#fff;color:#26384e;
+  border-radius:6px;padding:0 9px;outline:none;font-size:10px
+}
+select:focus,input:focus{border-color:#8db8f4;box-shadow:0 0 0 2px rgba(45,127,249,.08)}
+.period-quick{display:flex;gap:5px;flex-wrap:wrap}
+.period-quick button{
+  border:1px solid #d1dde6;background:#fff;height:28px;padding:0 9px;border-radius:5px;
+  color:#536a80;font-size:9px;cursor:pointer
+}
+.period-quick button.active{background:var(--green);color:#fff;border-color:var(--green)}
+.btn-primary{height:34px;padding:0 15px;border:0;border-radius:6px;background:var(--green);color:#fff;font-weight:700;font-size:10px;cursor:pointer}
+.reset{font-size:9px;color:var(--green);text-align:right;margin-top:6px;cursor:pointer}
+.custom-dates{display:grid;grid-template-columns:1fr 18px 1fr;gap:6px;align-items:end;margin-top:10px}
+.arrow{padding-bottom:8px;text-align:center;color:#7890a5}
+.filters-note{margin-top:8px;color:#8291a2;font-size:9px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.card{
+  border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:12px 13px;
+  min-height:92px;background:#fff
+}
+.card.g{background:linear-gradient(135deg,#f2fcf7,#fff)}
+.card.b{background:linear-gradient(135deg,#f3f8ff,#fff)}
+.card.p{background:linear-gradient(135deg,#fbf7ff,#fff)}
+.card.o{background:linear-gradient(135deg,#fff9f3,#fff)}
+.card-top{display:flex;justify-content:space-between;align-items:center;color:#708195;font-size:9px}
+.card-icon{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;font-size:17px}
+.card.g .card-icon{background:#e2f7ed;color:var(--green)}
+.card.b .card-icon{background:#e8f1ff;color:var(--blue)}
+.card.p .card-icon{background:#efe8ff;color:var(--purple)}
+.card.o .card-icon{background:#ffecd9;color:var(--orange)}
+.card-value{margin-top:3px;font-size:20px;font-weight:800;letter-spacing:-.4px}
+.card-note{font-size:8px;color:#8292a3;margin-top:3px}
+.results{padding:0}
+.results-head{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 14px 8px}
+.results-head h2{margin:0;font-size:15px}
+.results-head p{margin:4px 0 0;color:#7a8c9e;font-size:9px}
+.actions{display:flex;gap:8px;align-items:center}
+.btn-outline{height:29px;border:1px solid #cfdae3;background:#fff;color:#52697e;border-radius:6px;padding:0 10px;font-size:9px;cursor:pointer}
+.count{font-size:9px;color:#718499}
+.table-wrap{overflow:auto;border-top:1px solid #edf1f4}
+table{width:100%;border-collapse:collapse;min-width:1130px}
+th{
+  background:#fbfcfd;color:#65788d;font-size:8.5px;font-weight:700;padding:8px;
+  text-align:left;border-bottom:1px solid var(--line);white-space:nowrap
+}
+td{padding:8px;border-bottom:1px solid #edf1f4;font-size:9px;white-space:nowrap}
+td.num,th.num{text-align:right}
+tbody tr:hover{background:#fbfefd}
+.code{font-weight:800;color:#16283d}
+.chip{display:inline-flex;padding:4px 7px;border-radius:5px;color:#fff;font-size:8px;font-weight:700}
+.chip.blue{background:#2f82f4}
+.chip.orange{background:#ff8a18}
+.chip.purple{background:#9154e7}
+.chip.cyan{background:#0ba6cc}
+.chip.teal{background:#12a67c}
+.avg-outlier{color:#008b5c;font-weight:800;background:#e7f8f0;border-radius:4px}
+.green-t{color:var(--green);font-weight:700}
+.red-t{color:var(--red);font-weight:700}
+.yellow-t{color:#d99a00;font-weight:700}
+.detail-btn{height:26px;border:1px solid #cad7e1;background:#fff;color:#3e6183;border-radius:5px;padding:0 9px;font-size:8.5px;cursor:pointer}
+.detail-btn:hover{background:#f5faff}
+.pagination{display:flex;justify-content:space-between;align-items:center;padding:9px 13px;color:#75879a;font-size:9px}
+.pages{display:flex;gap:4px}
+.pages button{min-width:25px;height:25px;border:1px solid #d5e0e8;background:#fff;color:#61758a;border-radius:5px;font-size:9px;cursor:pointer}
+.pages button.active{background:var(--green);color:#fff;border-color:var(--green)}
+.detail{padding:13px}
+.detail-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.detail-title{font-size:16px;font-weight:800}
+.detail-sub{font-size:9px;color:#73869a;margin-top:3px}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:9px}
+.stat{border:1px solid var(--line);background:#fbfdff;border-radius:7px;padding:9px}
+.stat small{display:block;color:#7b8da0;font-size:7.5px;margin-bottom:4px}
+.stat strong{font-size:14px}
+.action-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:8px;margin-bottom:9px}
+.action-box{border:1px solid var(--line);background:#fff;border-radius:7px;padding:10px}
+.barlabels{display:flex;justify-content:space-between;color:#7f91a3;font-size:7.5px;margin-bottom:5px}
+.bar{
+  height:9px;border-radius:999px;
+  background:linear-gradient(to right,#ef5a5e,#ff9a3d 30%,#f5d65a 48%,#98a6b5 50%,#55c98e 68%,#09b676);
+  position:relative
+}
+.pointer{position:absolute;top:-5px;width:3px;height:19px;background:#20364a;left:50%}
+.info-text{font-size:9px;line-height:1.8;color:#7b8da0}
+.info-text strong{color:#2c4054}
+.mode-empty{padding:65px 20px;text-align:center}
+.mode-empty .icon{font-size:44px}
+.mode-empty h2{margin:8px 0 5px}
+.mode-empty p{max-width:520px;margin:0 auto;color:#7b8ea3;font-size:11px;line-height:1.6}
+.toast{
+  display:none;position:fixed;right:18px;bottom:18px;z-index:50;
+  padding:10px 13px;border-radius:7px;background:#162235;color:#fff;font-size:10px;box-shadow:0 12px 28px rgba(0,0,0,.16)
+}
+@media(max-width:1200px){
+  .filters{grid-template-columns:repeat(4,1fr)}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:900px){
+  .sidebar{width:68px}
+  .logo{justify-content:center;padding:0}
+  .logo .txt,.nav-group,.nav-label{display:none}
+  .nav-item{justify-content:center}
+  .main{margin-left:68px}
+  .hero{flex-direction:column}
+  .data-status{width:100%}
+  .filters,.cards,.action-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:620px){
+  .topbar{padding:0 10px}
+  .top-right .username{display:none}
+  .content{padding:12px}
+  .filters,.cards,.stats,.action-grid{grid-template-columns:1fr}
+  .search{width:100%}
+}
 </style>
-
 </head>
 
-
 <body>
+<div class="app">
 
+<aside class="sidebar">
+  <div class="logo"><span class="logo-mark">📊</span><span class="txt">Stockbit</span></div>
 
-<header>
+  <nav class="nav">
+    <div class="nav-group">Navigasi</div>
+    <a class="nav-item" href="#"><span class="nav-icon">⌂</span><span class="nav-label">Home</span></a>
+    <a class="nav-item" href="#"><span class="nav-icon">☆</span><span class="nav-label">Watchlist</span></a>
 
-    <div class="header">
+    <div class="nav-group">Jurnal</div>
+    <a class="nav-item" href="#"><span class="nav-icon">▣</span><span class="nav-label">Stream</span></a>
+    <a class="nav-item" href="#"><span class="nav-icon">◉</span><span class="nav-label">Discovery</span></a>
+    <a class="nav-item" href="#"><span class="nav-icon">⌕</span><span class="nav-label">Screener</span></a>
+    <a class="nav-item" href="#"><span class="nav-icon">⌁</span><span class="nav-label">Chart</span></a>
 
-        <div class="brand">
+    <div class="nav-group">Portfolio</div>
+    <a class="nav-item" href="#"><span class="nav-icon">▣</span><span class="nav-label">Portfolio</span></a>
+    <a class="nav-item" href="#"><span class="nav-icon">▤</span><span class="nav-label">Order</span></a>
+    <a class="nav-item" href="#"><span class="nav-icon">◫</span><span class="nav-label">Transaction History</span></a>
 
-            <div class="brand-icon">📊</div>
+    <div class="nav-group">Tools</div>
+    <a class="nav-item active" href="#"><span class="nav-icon">📈</span><span class="nav-label">Multibagger Hunter <span style="font-size:8px;background:#0abf7d;color:#fff;border-radius:10px;padding:2px 5px;margin-left:4px">New</span></span></a>
+    <a class="nav-item" href="#"><span class="nav-icon">◩</span><span class="nav-label">Analisis</span></a>
+    <a class="nav-item" href="#"><span class="nav-icon">◎</span><span class="nav-label">Bandar Detector</span></a>
+    <a class="nav-item" href="#"><span class="nav-icon">◌</span><span class="nav-label">Insider Trade</span></a>
+  </nav>
 
-            <div>
+  <div class="nav-spacer"></div>
 
-                <h1>
-                    MULTIBAGGER
-                    <span>HUNTER</span>
-                </h1>
+  <div class="sidebar-foot">
+    <a class="nav-item" href="#"><span class="nav-icon">⚙</span><span class="nav-label">Pengaturan</span></a>
+  </div>
+</aside>
 
-                <p>
-                    Broker Accumulation & Average Buy Outlier Screener
-                </p>
+<main class="main">
 
-            </div>
-
-        </div>
-
-
-        <div class="header-info">
-
-            <div class="header-card">
-
-                <small>
-                    DATA TERAKHIR
-                </small>
-
-                <strong id="updatedAt">
-                    Belum tersedia
-                </strong>
-
-            </div>
-
-
-            <div class="header-card">
-
-                <small>
-                    TOTAL EMITEN
-                </small>
-
-                <strong
-                    id="totalIssuer"
-                    class="green">
-
-                    -
-
-                </strong>
-
-            </div>
-
-
-            <div class="header-card">
-
-                <small>
-                    STATUS DATA
-                </small>
-
-                <strong
-                    id="dataStatus">
-
-                    MENGHUBUNGKAN...
-
-                </strong>
-
-            </div>
-
-        </div>
-
+  <header class="topbar">
+    <div class="search">
+      <span class="search-icon">⌕</span>
+      <input id="searchBox" type="text" placeholder="Cari saham, emiten, atau berita...">
     </div>
+    <div class="top-right">
+      <span>💬</span><span>🔔</span><div class="avatar">AS</div>
+      <span class="username">Arif Setiadi</span><span>⌄</span>
+    </div>
+  </header>
 
-</header>
+  <div class="content">
 
+    <section class="hero">
+      <div class="hero-title">
+        <div class="hero-icon">📈</div>
+        <div>
+          <h1>Multibagger Hunter</h1>
+          <p>Temukan saham dengan akumulasi broker besar dan average buy rendah.</p>
+        </div>
+      </div>
 
-<div class="container">
-
-
-    <!-- MODE -->
+      <div class="data-status">
+        <div class="status-row">
+          <span class="dot"></span>
+          <b id="statusTitle">Menghubungkan data...</b>
+        </div>
+        <div class="status-sub">Update terakhir: <strong id="updatedAt">-</strong></div>
+      </div>
+    </section>
 
     <div class="tabs">
-
-        <button
-            class="tab active"
-            onclick="changeMode('multibagger')">
-
-            🟢 MULTIBAGGER
-
-        </button>
-
-
-        <button
-            class="tab"
-            onclick="changeMode('swing')">
-
-            🔵 SWING
-
-        </button>
-
-
-        <button
-            class="tab"
-            onclick="changeMode('daytrade')">
-
-            🟠 DAY TRADE
-
-        </button>
-
+      <button class="tab active" onclick="selectMode('multibagger',this)">Screener</button>
+      <button class="tab" onclick="showToast('Watchlist belum diaktifkan.')">Watchlist</button>
+      <button class="tab" onclick="showToast('Riwayat pencarian belum diaktifkan.')">Riwayat Pencarian</button>
+      <button class="tab" onclick="showToast('Panduan formula belum diaktifkan.')">Panduan</button>
     </div>
-
-
-    <!-- MULTIBAGGER -->
 
     <div id="multibaggerApp">
 
+      <section class="panel filter">
+        <div class="filter-title">Filter & Pengaturan</div>
 
-        <!-- PERIOD -->
+        <div class="filters">
 
-        <div class="panel">
-
-            <div class="title-row">
-
-                <h2>
-                    📅 Periode Analisis
-                </h2>
-
-                <span
-                    class="badge"
-                    id="periodLabel">
-
-                    6 Bulan
-
-                </span>
-
+          <div class="field">
+            <label>Periode Analisis</label>
+            <div class="period-quick">
+              <button id="q1" onclick="setQuick(1)">1 Bulan</button>
+              <button id="q3" onclick="setQuick(3)">3 Bulan</button>
+              <button id="q6" class="active" onclick="setQuick(6)">6 Bulan</button>
+              <button id="q12" onclick="setQuick(12)">12 Bulan</button>
+              <button id="q24" onclick="setQuick(24)">24 Bulan</button>
             </div>
+          </div>
 
+          <div class="field">
+            <label>Pilihan Saham</label>
+            <select id="stockFilter"><option value="all">Semua Emiten</option></select>
+          </div>
 
-            <div class="period-grid">
+          <div class="field">
+            <label>Semua Emiten</label>
+            <select id="sectorFilter"><option value="all">Semua Sektor</option></select>
+          </div>
 
+          <div class="field">
+            <label>Broker Dominan</label>
+            <select id="brokerFilter"><option value="all">Semua Broker</option></select>
+          </div>
 
-                <div class="subbox">
+          <div class="field">
+            <label>Avg Buy Maksimal</label>
+            <input id="maxAvg" type="number" placeholder="Contoh: 1.000">
+          </div>
 
-                    <div class="subtitle">
-                        PERIODE CEPAT
-                    </div>
+          <div class="field">
+            <label>Min. Gap (%)</label>
+            <input id="minGap" type="number" value="10" min="0">
+          </div>
 
+          <div class="field">
+            <label>Urutan</label>
+            <select id="sortBy">
+              <option value="gap">Gap Terbesar</option>
+              <option value="avg">Avg Buy Terendah</option>
+              <option value="net">Net Buy Terbesar</option>
+            </select>
+          </div>
 
-                    <div class="quick">
-
-                        <button
-                            onclick="setPeriod(1)"
-                            id="p1">
-
-                            1 Bulan
-
-                        </button>
-
-                        <button
-                            onclick="setPeriod(3)"
-                            id="p3">
-
-                            3 Bulan
-
-                        </button>
-
-                        <button
-                            class="active"
-                            onclick="setPeriod(6)"
-                            id="p6">
-
-                            6 Bulan
-
-                        </button>
-
-                        <button
-                            onclick="setPeriod(12)"
-                            id="p12">
-
-                            12 Bulan
-
-                        </button>
-
-                        <button
-                            onclick="setPeriod(24)"
-                            id="p24">
-
-                            24 Bulan
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <div class="subbox">
-
-                    <div class="subtitle">
-                        RENTANG CUSTOM
-                    </div>
-
-
-                    <div class="custom-grid">
-
-
-                        <div class="field">
-
-                            <label>
-                                DARI
-                            </label>
-
-                            <input
-                                type="date"
-                                id="startDate">
-
-                        </div>
-
-
-                        <div style="
-                            text-align:center;
-                            color:#7288a3;
-                            padding-bottom:9px;
-                        ">
-
-                            →
-
-                        </div>
-
-
-                        <div class="field">
-
-                            <label>
-                                SAMPAI
-                            </label>
-
-                            <input
-                                type="date"
-                                id="endDate">
-
-                        </div>
-
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
-
+          <div class="field">
+            <label>&nbsp;</label>
+            <button class="btn-primary" onclick="runScan()">⌕ Terapkan Filter</button>
+            <div class="reset" onclick="resetFilters()">Reset</div>
+          </div>
         </div>
 
-
-        <!-- FILTER -->
-
-        <div class="panel">
-
-            <div class="title-row">
-
-                <h2>
-                    🎯 Scanner ALL Emiten
-                </h2>
-
-                <span class="badge">
-                    DATA API
-                </span>
-
-            </div>
-
-
-            <div class="scanner-grid">
-
-
-                <div class="field">
-
-                    <label>
-                        POLA
-                    </label>
-
-                    <select id="pattern">
-
-                        <option value="outlier">
-                            Avg Buy Beda Sendiri
-                        </option>
-
-                        <option value="lowest">
-                            Avg Buy Terendah
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>
-                        MIN. GAP (%)
-                    </label>
-
-                    <input
-                        type="number"
-                        id="minGap"
-                        value="20"
-                        min="0">
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>
-                        MIN. BROKER
-                    </label>
-
-                    <input
-                        type="number"
-                        id="minBroker"
-                        value="5"
-                        min="2">
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>
-                        URUTKAN
-                    </label>
-
-                    <select id="sortBy">
-
-                        <option value="gap">
-                            Gap Terbesar
-                        </option>
-
-                        <option value="avg">
-                            Avg Buy Terendah
-                        </option>
-
-                        <option value="net">
-                            Net Buy Terbesar
-                        </option>
-
-                    </select>
-
-                </div>
-
-            </div>
-
-
-            <div style="margin-top:10px;">
-
-                <button
-                    class="scan-btn"
-                    onclick="scanAll()">
-
-                    🔎 SCAN ALL EMITEN
-
-                </button>
-
-            </div>
-
-
-            <div
-                class="status"
-                id="status">
-
-                Menghubungkan ke data broker...
-
-            </div>
-
+        <div class="custom-dates">
+          <div class="field">
+            <label>Tanggal Mulai</label>
+            <input type="date" id="startDate">
+          </div>
+          <div class="arrow">→</div>
+          <div class="field">
+            <label>Tanggal Akhir</label>
+            <input type="date" id="endDate">
+          </div>
         </div>
 
+        <div class="filters-note">
+          Periode custom digunakan sebagai parameter analisis saat dataset historis per tanggal tersedia.
+        </div>
+      </section>
 
-        <!-- RESULT -->
-
-        <div class="panel">
-
-            <div class="title-row">
-
-                <h2>
-                    📈 Hasil Scanner
-                </h2>
-
-                <span
-                    class="badge"
-                    id="resultCount">
-
-                    0 SAHAM
-
-                </span>
-
-            </div>
-
-
-            <div class="table-wrap">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>No</th>
-                            <th>Kode</th>
-                            <th>Harga</th>
-                            <th>Broker Outlier</th>
-                            <th>Avg Buy</th>
-                            <th>Median Avg</th>
-                            <th>Gap</th>
-                            <th>Net Buy</th>
-                            <th>Broker</th>
-                            <th>Detail</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody id="resultTable"></tbody>
-
-                </table>
-
-            </div>
-
+      <section class="cards">
+        <div class="card g">
+          <div class="card-top"><span>Total Saham Tersaring</span><div class="card-icon">⬆</div></div>
+          <div class="card-value" id="cardStocks">0</div>
+          <div class="card-note" id="cardStocksNote">dari 0 emiten</div>
         </div>
 
-
-        <!-- DETAIL -->
-
-        <div class="panel">
-
-            <div class="title-row">
-
-                <h2>
-                    📊 Detail Broker -
-                    <span id="detailCode">
-                        -
-                    </span>
-                </h2>
-
-                <span
-                    class="badge"
-                    id="detailPeriod">
-
-                    -
-
-                </span>
-
-            </div>
-
-
-            <div class="detail-grid">
-
-
-                <div class="stat">
-
-                    <small>
-                        HARGA
-                    </small>
-
-                    <strong
-                        class="green"
-                        id="detailPrice">
-
-                        -
-
-                    </strong>
-
-                </div>
-
-
-                <div class="stat">
-
-                    <small>
-                        BROKER ACC
-                    </small>
-
-                    <strong
-                        class="green"
-                        id="detailAcc">
-
-                        -
-
-                    </strong>
-
-                </div>
-
-
-                <div class="stat">
-
-                    <small>
-                        BROKER DIST
-                    </small>
-
-                    <strong
-                        class="red"
-                        id="detailDist">
-
-                        -
-
-                    </strong>
-
-                </div>
-
-
-                <div class="stat">
-
-                    <small>
-                        AVG TERENDAH
-                    </small>
-
-                    <strong
-                        class="green"
-                        id="detailLowest">
-
-                        -
-
-                    </strong>
-
-                </div>
-
-
-                <div class="stat">
-
-                    <small>
-                        BROKER OUTLIER
-                    </small>
-
-                    <strong
-                        class="blue"
-                        id="detailBroker">
-
-                        -
-
-                    </strong>
-
-                </div>
-
-
-                <div class="stat">
-
-                    <small>
-                        GAP MEDIAN
-                    </small>
-
-                    <strong
-                        class="yellow"
-                        id="detailGap">
-
-                        -
-
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="action-grid">
-
-
-                <div class="action-box">
-
-                    <div class="action-title">
-                        Broker Action
-                    </div>
-
-                    <div class="labels">
-                        <span>Big Dist</span>
-                        <span>Neutral</span>
-                        <span>Big Acc</span>
-                    </div>
-
-                    <div class="action-bar">
-
-                        <div
-                            class="pointer"
-                            id="pointer">
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="action-box">
-
-                    <div class="action-title">
-                        Analisis Avg Buy
-                    </div>
-
-
-                    <div class="info">
-
-                        Harga:
-                        <strong id="infoPrice">
-                            -
-                        </strong>
-
-                        <br>
-
-                        Median:
-                        <strong id="infoMedian">
-                            -
-                        </strong>
-
-                        <br>
-
-                        Outlier:
-                        <strong id="infoLowest">
-                            -
-                        </strong>
-
-                        <br>
-
-                        Gap:
-                        <strong id="infoGap">
-                            -
-                        </strong>
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
-
-            <div class="table-wrap">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>No</th>
-                            <th>Broker</th>
-                            <th>B.Val</th>
-                            <th>B.Lot</th>
-                            <th>B.Avg</th>
-                            <th>S.Val</th>
-                            <th>S.Lot</th>
-                            <th>S.Avg</th>
-                            <th>Net</th>
-                            <th>Action</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody
-                        id="detailTable">
-                    </tbody>
-
-                </table>
-
-            </div>
-
-
-            <div class="note">
-
-                🟢 Hijau = Avg Buy berada jauh
-                di bawah median broker. Data berasal
-                dari file broker_live.json yang dibuat
-                oleh GitHub Actions.
-
-            </div>
-
+        <div class="card b">
+          <div class="card-top"><span>Total Net Buy</span><div class="card-icon">◉</div></div>
+          <div class="card-value" id="cardNet">Rp0</div>
+          <div class="card-note">broker outlier</div>
         </div>
 
+        <div class="card p">
+          <div class="card-top"><span>Rata-rata Net Buy per Saham</span><div class="card-icon">↗</div></div>
+          <div class="card-value" id="cardAvgNet">Rp0</div>
+          <div class="card-note">hasil filter saat ini</div>
+        </div>
 
+        <div class="card o">
+          <div class="card-top"><span>Broker Paling Sering Outlier</span><div class="card-icon">●</div></div>
+          <div class="card-value" id="cardBroker">-</div>
+          <div class="card-note">hasil filter saat ini</div>
+        </div>
+      </section>
+
+      <section class="panel results">
+
+        <div class="results-head">
+          <div>
+            <h2>Hasil Screener</h2>
+            <p id="resultMeta">Menampilkan 0 saham</p>
+          </div>
+
+          <div class="actions">
+            <span class="count" id="resultCount">0 saham</span>
+            <button class="btn-outline" onclick="exportCSV()">⇩ Export</button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Kode</th>
+                <th>Nama Saham</th>
+                <th>Sektor</th>
+                <th>Broker Outlier</th>
+                <th class="num">Avg Buy (Rp)</th>
+                <th class="num">Median Avg (Rp)</th>
+                <th class="num">Harga Sekarang (Rp)</th>
+                <th class="num">Gap (%)</th>
+                <th class="num">Net Buy (Rp)</th>
+                <th class="num">Broker</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="resultTable"></tbody>
+          </table>
+        </div>
+
+        <div class="pagination">
+          <div id="pageInfo">Belum ada data</div>
+          <div class="pages" id="pages"></div>
+        </div>
+      </section>
+
+      <section class="panel detail">
+
+        <div class="detail-head">
+          <div>
+            <div class="detail-title">Detail Broker - <span id="detailCode">-</span></div>
+            <div class="detail-sub" id="detailSub">Pilih saham dari hasil screener.</div>
+          </div>
+          <button class="btn-outline" onclick="showToast('Watchlist belum diaktifkan.')">☆ Watchlist</button>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><small>HARGA SEKARANG</small><strong class="green" id="detailPrice">-</strong></div>
+          <div class="stat"><small>AVG BUY TERENDAH</small><strong class="green" id="detailLowest">-</strong></div>
+          <div class="stat"><small>MEDIAN AVG</small><strong id="detailMedian">-</strong></div>
+          <div class="stat"><small>GAP</small><strong class="yellow-t" id="detailGap">-</strong></div>
+          <div class="stat"><small>BROKER OUTLIER</small><strong class="blue" id="detailBroker">-</strong></div>
+        </div>
+
+        <div class="action-grid">
+          <div class="action-box">
+            <div style="font-size:10px;font-weight:700;margin-bottom:7px">Broker Action</div>
+            <div class="barlabels"><span>Big Dist</span><span>Neutral</span><span>Big Acc</span></div>
+            <div class="bar"><div class="pointer" id="pointer"></div></div>
+          </div>
+
+          <div class="action-box">
+            <div style="font-size:10px;font-weight:700;margin-bottom:7px">Catatan Screening</div>
+            <div class="info-text">
+              Avg Buy hijau menandakan nilai tersebut berada jauh di bawah median broker.
+            </div>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Broker</th>
+                <th>B.Val</th>
+                <th>B.Lot</th>
+                <th>B.Avg</th>
+                <th>S.Val</th>
+                <th>S.Lot</th>
+                <th>S.Avg</th>
+                <th>Net</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="detailTable"></tbody>
+          </table>
+        </div>
+
+      </section>
     </div>
 
-
-    <!-- SWING -->
-
-    <div
-        id="swingApp"
-        style="display:none;">
-
-        <div class="panel empty">
-
-            <div>
-
-                <div class="empty-icon">
-                    🔵
-                </div>
-
-                <h2>
-                    SWING
-                </h2>
-
-                <p>
-                    Formula Swing belum dibuat.
-                    Modul ini masih kosong.
-                </p>
-
-                <span class="badge">
-                    DEVELOPMENT
-                </span>
-
-            </div>
-
-        </div>
-
+    <div id="swingApp" style="display:none">
+      <section class="panel mode-empty">
+        <div class="icon">🔵</div>
+        <h2>SWING</h2>
+        <p>Modul Swing sudah disiapkan, tetapi formulanya belum diaktifkan.</p>
+      </section>
     </div>
 
-
-    <!-- DAY TRADE -->
-
-    <div
-        id="daytradeApp"
-        style="display:none;">
-
-        <div class="panel empty">
-
-            <div>
-
-                <div class="empty-icon">
-                    🟠
-                </div>
-
-                <h2>
-                    DAY TRADE
-                </h2>
-
-                <p>
-                    Formula Day Trade belum dibuat.
-                    Modul ini masih kosong.
-                </p>
-
-                <span class="badge">
-                    DEVELOPMENT
-                </span>
-
-            </div>
-
-        </div>
-
+    <div id="dayApp" style="display:none">
+      <section class="panel mode-empty">
+        <div class="icon">🟠</div>
+        <h2>DAY TRADE</h2>
+        <p>Modul Day Trade sudah disiapkan, tetapi formulanya belum diaktifkan.</p>
+      </section>
     </div>
 
-
+  </div>
+</main>
 </div>
 
+<div class="toast" id="toast"></div>
 
 <script>
+let liveData=null;
+let allRows=[];
+let filteredRows=[];
+let currentPage=1;
+const pageSize=20;
 
-
-let liveData = null;
-
-
-/* ====================================
-   FORMAT
-==================================== */
-
-function number(value) {
-
-    return new Intl.NumberFormat(
-        "id-ID"
-    ).format(
-        Math.round(
-            Number(value) || 0
-        )
-    );
-
+function n(v){const x=Number(v);return Number.isFinite(x)?x:0}
+function fmt(v){return new Intl.NumberFormat('id-ID').format(Math.round(n(v)))}
+function money(v){
+  const x=n(v),a=Math.abs(x),s=x<0?'-':'';
+  if(a>=1e12)return s+'Rp'+(a/1e12).toFixed(2)+' T';
+  if(a>=1e9)return s+'Rp'+(a/1e9).toFixed(2)+' M';
+  if(a>=1e6)return s+'Rp'+(a/1e6).toFixed(1)+' Jt';
+  return s+'Rp'+fmt(a);
 }
-
-
-function money(value) {
-
-    value =
-        Number(value) || 0;
-
-
-    const abs =
-        Math.abs(value);
-
-
-    const sign =
-        value < 0 ? "-" : "";
-
-
-    if (abs >= 1000000000) {
-
-        return (
-            sign +
-            "Rp" +
-            (abs / 1000000000)
-                .toFixed(2) +
-            " B"
-        );
-
-    }
-
-
-    if (abs >= 1000000) {
-
-        return (
-            sign +
-            "Rp" +
-            (abs / 1000000)
-                .toFixed(1) +
-            " M"
-        );
-
-    }
-
-
-    return (
-        sign +
-        "Rp" +
-        number(abs)
-    );
-
+function median(values){
+  const a=values.map(n).filter(x=>x>0).sort((x,y)=>x-y);
+  if(!a.length)return 0;
+  const m=Math.floor(a.length/2);
+  return a.length%2?a[m]:(a[m-1]+a[m])/2;
 }
-
-
-function median(values) {
-
-    const arr =
-        values
-            .filter(
-                x =>
-                    Number(x) > 0
-            )
-            .sort(
-                (a,b) =>
-                    a - b
-            );
-
-
-    if (!arr.length) {
-
-        return 0;
-
-    }
-
-
-    const mid =
-        Math.floor(
-            arr.length / 2
-        );
-
-
-    if (
-        arr.length % 2 === 0
-    ) {
-
-        return (
-            arr[mid - 1] +
-            arr[mid]
-        ) / 2;
-
-    }
-
-
-    return arr[mid];
-
+function dateInput(d){
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 }
-
-
-/* ====================================
-   LOAD LIVE JSON
-==================================== */
-
-async function loadLiveData() {
-
-    const status =
-        document.getElementById(
-            "status"
-        );
-
-
-    try {
-
-        status.innerText =
-            "Mengambil data broker asli...";
-
-
-        /*
-           Cache-busting supaya browser
-           tidak menggunakan JSON lama.
-        */
-
-        const response =
-            await fetch(
-                "./data/broker_live.json?t=" +
-                Date.now()
-            );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "HTTP " +
-                response.status
-            );
-
-        }
-
-
-        liveData =
-            await response.json();
-
-
-        const stocks =
-            liveData.stocks || {};
-
-
-        const total =
-            Object.keys(
-                stocks
-            ).length;
-
-
-        document.getElementById(
-            "totalIssuer"
-        ).innerText =
-            total;
-
-
-        document.getElementById(
-            "updatedAt"
-        ).innerText =
-            liveData.updated_at ||
-            "-";
-
-
-        document.getElementById(
-            "dataStatus"
-        ).innerText =
-            "DATA ASLI";
-
-
-        document.getElementById(
-            "dataStatus"
-        ).className =
-            "green";
-
-
-        status.innerText =
-            "✅ Data broker berhasil dimuat: " +
-            total +
-            " emiten.";
-
-
-        status.className =
-            "status ok";
-
-
-        scanAll();
-
-
-    }
-    catch(error) {
-
-
-        console.error(error);
-
-
-        status.innerText =
-            "❌ Gagal membaca data/broker_live.json: " +
-            error.message;
-
-
-        status.className =
-            "status error";
-
-
-        document.getElementById(
-            "dataStatus"
-        ).innerText =
-            "GAGAL MEMUAT";
-
-    }
-
+function setQuick(months){
+  document.querySelectorAll('.period-quick button').forEach(b=>b.classList.remove('active'));
+  const el=document.getElementById('q'+months); if(el)el.classList.add('active');
+  const end=new Date(),start=new Date();
+  start.setMonth(start.getMonth()-months);
+  document.getElementById('startDate').value=dateInput(start);
+  document.getElementById('endDate').value=dateInput(end);
+  runScan();
 }
-
-
-/* ====================================
-   PERIOD
-==================================== */
-
-function setPeriod(months) {
-
-
-    document
-        .querySelectorAll(
-            ".quick button"
-        )
-        .forEach(
-            button =>
-                button.classList.remove(
-                    "active"
-                )
-        );
-
-
-    document.getElementById(
-        "p" + months
-    ).classList.add(
-        "active"
-    );
-
-
-    const end =
-        new Date();
-
-
-    const start =
-        new Date();
-
-
-    start.setMonth(
-        start.getMonth() -
-        months
-    );
-
-
-    document.getElementById(
-        "startDate"
-    ).value =
-        dateInput(start);
-
-
-    document.getElementById(
-        "endDate"
-    ).value =
-        dateInput(end);
-
-
-    document.getElementById(
-        "periodLabel"
-    ).innerText =
-        months +
-        " Bulan";
-
-
-    document.getElementById(
-        "detailPeriod"
-    ).innerText =
-        months +
-        " Bulan";
-
-
-    scanAll();
-
+function chipClass(b){
+  const map={LG:'blue',RX:'orange',MG:'purple',YP:'blue',CC:'orange',RB:'cyan',AK:'orange',DH:'purple',YB:'cyan',IF:'teal',CP:'orange'};
+  return map[b]||'blue';
 }
-
-
-function dateInput(date) {
-
-    return (
-        date.getFullYear() +
-        "-" +
-        String(
-            date.getMonth() + 1
-        ).padStart(2,"0") +
-        "-" +
-        String(
-            date.getDate()
-        ).padStart(2,"0")
-    );
-
+function escapeHtml(v){
+  return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 }
-
-
-/* ====================================
-   CUSTOM DATE
-==================================== */
-
-document
-    .getElementById(
-        "startDate"
-    )
-    .addEventListener(
-        "change",
-        function() {
-
-            document
-                .querySelectorAll(
-                    ".quick button"
-                )
-                .forEach(
-                    button =>
-                        button.classList.remove(
-                            "active"
-                        )
-                );
-
-
-            document.getElementById(
-                "periodLabel"
-            ).innerText =
-                "Custom";
-
-
-            document.getElementById(
-                "detailPeriod"
-            ).innerText =
-                "Custom";
-
-        }
-    );
-
-
-document
-    .getElementById(
-        "endDate"
-    )
-    .addEventListener(
-        "change",
-        function() {
-
-            document
-                .querySelectorAll(
-                    ".quick button"
-                )
-                .forEach(
-                    button =>
-                        button.classList.remove(
-                            "active"
-                        )
-                );
-
-
-            document.getElementById(
-                "periodLabel"
-            ).innerText =
-                "Custom";
-
-
-            document.getElementById(
-                "detailPeriod"
-            ).innerText =
-                "Custom";
-
-        }
-    );
-
-
-/* ====================================
-   SCAN
-==================================== */
-
-function scanAll() {
-
-
-    if (!liveData) {
-
-        return;
-
-    }
-
-
-    const stocks =
-        liveData.stocks || {};
-
-
-    const minGap =
-        Number(
-            document.getElementById(
-                "minGap"
-            ).value
-        ) || 0;
-
-
-    const minBroker =
-        Number(
-            document.getElementById(
-                "minBroker"
-            ).value
-        ) || 2;
-
-
-    const sortBy =
-        document.getElementById(
-            "sortBy"
-        ).value;
-
-
-    const results = [];
-
-
-    Object.entries(
-        stocks
-    ).forEach(
-        ([ticker, stock]) => {
-
-
-            const brokers =
-                (stock.brokers || [])
-                .filter(
-                    broker =>
-                        Number(
-                            broker.bavg
-                        ) > 0
-                );
-
-
-            if (
-                brokers.length <
-                minBroker
-            ) {
-
-                return;
-
-            }
-
-
-            const averages =
-                brokers.map(
-                    broker =>
-                        Number(
-                            broker.bavg
-                        )
-                );
-
-
-            const med =
-                median(
-                    averages
-                );
-
-
-            if (!med) {
-
-                return;
-
-            }
-
-
-            const sorted =
-                [...brokers]
-                .sort(
-                    (a,b) =>
-                        Number(a.bavg) -
-                        Number(b.bavg)
-                );
-
-
-            const lowest =
-                sorted[0];
-
-
-            const gap =
-                (
-                    (
-                        med -
-                        Number(
-                            lowest.bavg
-                        )
-                    ) /
-                    med
-                ) *
-                100;
-
-
-            if (
-                gap <
-                minGap
-            ) {
-
-                return;
-
-            }
-
-
-            results.push({
-
-                ticker,
-
-                price:
-                    stock.price || 0,
-
-                broker:
-                    lowest.broker,
-
-                avg:
-                    Number(
-                        lowest.bavg
-                    ),
-
-                median:
-                    med,
-
-                gap,
-
-                net:
-                    Number(
-                        lowest.nval || 0
-                    ),
-
-                brokerCount:
-                    brokers.length
-
-            });
-
-        }
-    );
-
-
-    if (
-        sortBy === "avg"
-    ) {
-
-        results.sort(
-            (a,b) =>
-                a.avg -
-                b.avg
-        );
-
-    }
-    else if (
-        sortBy === "net"
-    ) {
-
-        results.sort(
-            (a,b) =>
-                b.net -
-                a.net
-        );
-
-    }
-    else {
-
-        results.sort(
-            (a,b) =>
-                b.gap -
-                a.gap
-        );
-
-    }
-
-
-    const table =
-        document.getElementById(
-            "resultTable"
-        );
-
-
-    table.innerHTML = "";
-
-
-    document.getElementById(
-        "resultCount"
-    ).innerText =
-        results.length +
-        " SAHAM";
-
-
-    if (!results.length) {
-
-        table.innerHTML = `
-
-            <tr>
-
-                <td
-                    colspan="10"
-                    style="
-                        text-align:center;
-                        padding:30px;
-                        color:#7890aa;
-                    "
-                >
-
-                    Tidak ada emiten yang
-                    memenuhi filter.
-
-                </td>
-
-            </tr>
-
-        `;
-
-        return;
-
-    }
-
-
-    results.forEach(
-        (item,index) => {
-
-
-            const gapClass =
-                item.gap >= 25
-                    ? "green"
-                    : "yellow";
-
-
-            const netClass =
-                item.net >= 0
-                    ? "green"
-                    : "red";
-
-
-            table.innerHTML += `
-
-                <tr>
-
-                    <td>
-                        ${index + 1}
-                    </td>
-
-                    <td>
-
-                        <span
-                            class="code"
-                            onclick="
-                                showDetail(
-                                    '${item.ticker}'
-                                )
-                            "
-                        >
-
-                            ${item.ticker}
-
-                        </span>
-
-                    </td>
-
-                    <td>
-                        ${
-                            item.price
-                            ? "Rp" +
-                              number(
-                                  item.price
-                              )
-                            : "-"
-                        }
-                    </td>
-
-                    <td>
-                        <b>
-                            ${item.broker}
-                        </b>
-                    </td>
-
-                    <td class="outlier">
-                        Rp${number(item.avg)}
-                    </td>
-
-                    <td>
-                        Rp${number(item.median)}
-                    </td>
-
-                    <td
-                        class="${gapClass}"
-                    >
-                        ${item.gap.toFixed(1)}%
-                    </td>
-
-                    <td
-                        class="${netClass}"
-                    >
-                        ${money(item.net)}
-                    </td>
-
-                    <td>
-                        ${item.brokerCount}
-                    </td>
-
-                    <td>
-
-                        <button
-                            class="detail-btn"
-                            onclick="
-                                showDetail(
-                                    '${item.ticker}'
-                                )
-                            "
-                        >
-
-                            Detail
-
-                        </button>
-
-                    </td>
-
-                </tr>
-
-            `;
-
-        }
-    );
-
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.style.display='block';
+  clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.style.display='none',2200);
 }
-
-
-/* ====================================
-   DETAIL
-==================================== */
-
-function showDetail(
-    ticker
-) {
-
-
-    if (!liveData) {
-
-        return;
-
-    }
-
-
-    const stock =
-        liveData.stocks[
-            ticker
-        ];
-
-
-    if (!stock) {
-
-        return;
-
-    }
-
-
-    const brokers =
-        (stock.brokers || [])
-        .filter(
-            broker =>
-                Number(
-                    broker.bavg
-                ) > 0
-        )
-        .sort(
-            (a,b) =>
-                Number(a.bavg) -
-                Number(b.bavg)
-        );
-
-
-    if (!brokers.length) {
-
-        return;
-
-    }
-
-
-    const med =
-        median(
-            brokers.map(
-                broker =>
-                    Number(
-                        broker.bavg
-                    )
-            )
-        );
-
-
-    const lowest =
-        brokers[0];
-
-
-    const gap =
-        (
-            (
-                med -
-                Number(
-                    lowest.bavg
-                )
-            ) /
-            med
-        ) *
-        100;
-
-
-    let acc = 0;
-
-    let dist = 0;
-
-    let totalNet = 0;
-
-
-    brokers.forEach(
-        broker => {
-
-            const net =
-                Number(
-                    broker.nval || 0
-                );
-
-
-            totalNet += net;
-
-
-            if (net >= 0) {
-
-                acc++;
-
-            } else {
-
-                dist++;
-
-            }
-
-        }
-    );
-
-
-    document.getElementById(
-        "detailCode"
-    ).innerText =
-        ticker;
-
-
-    document.getElementById(
-        "detailPrice"
-    ).innerText =
-        stock.price
-            ? "Rp" +
-              number(
-                  stock.price
-              )
-            : "-";
-
-
-    document.getElementById(
-        "detailAcc"
-    ).innerText =
-        acc;
-
-
-    document.getElementById(
-        "detailDist"
-    ).innerText =
-        dist;
-
-
-    document.getElementById(
-        "detailLowest"
-    ).innerText =
-        "Rp" +
-        number(
-            lowest.bavg
-        );
-
-
-    document.getElementById(
-        "detailBroker"
-    ).innerText =
-        lowest.broker;
-
-
-    document.getElementById(
-        "detailGap"
-    ).innerText =
-        gap.toFixed(1) +
-        "%";
-
-
-    document.getElementById(
-        "infoPrice"
-    ).innerText =
-        stock.price
-            ? "Rp" +
-              number(
-                  stock.price
-              )
-            : "-";
-
-
-    document.getElementById(
-        "infoMedian"
-    ).innerText =
-        "Rp" +
-        number(
-            med
-        );
-
-
-    document.getElementById(
-        "infoLowest"
-    ).innerText =
-        lowest.broker +
-        " / Rp" +
-        number(
-            lowest.bavg
-        );
-
-
-    document.getElementById(
-        "infoGap"
-    ).innerText =
-        gap.toFixed(1) +
-        "%";
-
-
-    let pointer =
-        50 +
-        totalNet /
-        1000000000 *
-        30;
-
-
-    pointer =
-        Math.max(
-            5,
-            Math.min(
-                95,
-                pointer
-            )
-        );
-
-
-    document.getElementById(
-        "pointer"
-    ).style.left =
-        pointer +
-        "%";
-
-
-    const table =
-        document.getElementById(
-            "detailTable"
-        );
-
-
-    table.innerHTML = "";
-
-
-    brokers.forEach(
-        (broker,index) => {
-
-
-            const net =
-                Number(
-                    broker.nval || 0
-                );
-
-
-            const isOutlier =
-                Number(
-                    broker.bavg
-                ) <=
-                med * 0.90;
-
-
-            const action =
-                net >= 0
-                    ? "ACC"
-                    : "DIST";
-
-
-            const actionClass =
-                net >= 0
-                    ? "acc"
-                    : "dist";
-
-
-            table.innerHTML += `
-
-                <tr>
-
-                    <td>
-                        ${index + 1}
-                    </td>
-
-                    <td>
-                        <b
-                            style="
-                                color:#62a7ff;
-                            "
-                        >
-                            ${broker.broker}
-                        </b>
-                    </td>
-
-                    <td class="green">
-                        ${money(
-                            broker.bval
-                        )}
-                    </td>
-
-                    <td>
-                        ${number(
-                            broker.bvol
-                        )}
-                    </td>
-
-                    <td
-                        class="${
-                            isOutlier
-                                ? "outlier"
-                                : ""
-                        }"
-                    >
-                        Rp${number(
-                            broker.bavg
-                        )}
-                    </td>
-
-                    <td class="red">
-                        ${money(
-                            broker.sval
-                        )}
-                    </td>
-
-                    <td>
-                        ${number(
-                            broker.svol
-                        )}
-                    </td>
-
-                    <td class="red">
-                        ${
-                            broker.savg
-                            ? "Rp" +
-                              number(
-                                  broker.savg
-                              )
-                            : "-"
-                        }
-                    </td>
-
-                    <td
-                        class="${
-                            net >= 0
-                                ? "green"
-                                : "red"
-                        }"
-                    >
-                        ${money(net)}
-                    </td>
-
-                    <td>
-
-                        <span
-                            class="${actionClass}"
-                        >
-
-                            ${action}
-
-                        </span>
-
-                    </td>
-
-                </tr>
-
-            `;
-
-        }
-    );
-
-
-    window.scrollTo({
-        top:
-            document
-                .querySelector(
-                    "#detailCode"
-                )
-                .getBoundingClientRect()
-                .top +
-            window.scrollY -
-            100,
-
-        behavior:
-            "smooth"
+function selectMode(mode,tab){
+  document.getElementById('multibaggerApp').style.display=mode==='multibagger'?'block':'none';
+  document.getElementById('swingApp').style.display=mode==='swing'?'block':'none';
+  document.getElementById('dayApp').style.display=mode==='daytrade'?'block':'none';
+  if(tab){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));tab.classList.add('active')}
+}
+function parseLive(){
+  if(!liveData||!liveData.stocks)return [];
+  const rows=[];
+  Object.entries(liveData.stocks).forEach(([ticker,stock])=>{
+    const brokers=(stock.brokers||[]).map(b=>({
+      broker:String(b.broker||'').toUpperCase(),
+      brokerName:b.broker_name||'',
+      bval:n(b.bval),bvol:n(b.bvol),bavg:n(b.bavg),
+      sval:n(b.sval),svol:n(b.svol),savg:n(b.savg),
+      net:n(b.nval)
+    })).filter(b=>b.bavg>0);
+    if(!brokers.length)return;
+    const med=median(brokers.map(b=>b.bavg));
+    const sorted=[...brokers].sort((a,b)=>a.bavg-b.bavg);
+    const low=sorted[0];
+    if(!med||!low)return;
+    rows.push({
+      ticker,
+      name:stock.name||ticker,
+      sector:stock.sector||'-',
+      price:n(stock.price),
+      broker:low.broker,
+      avg:low.bavg,
+      median:med,
+      gap:((med-low.bavg)/med)*100,
+      net:low.net,
+      brokerCount:brokers.length,
+      brokers,
+      source:stock
     });
+  });
+  return rows;
+}
+function populateFilters(){
+  const stock=document.getElementById('stockFilter');
+  const s=document.getElementById('sectorFilter');
+  const b=document.getElementById('brokerFilter');
 
+  const stocks=[...new Set(allRows.map(r=>r.ticker).filter(Boolean))].sort();
+  const sectors=[...new Set(allRows.map(r=>r.sector).filter(x=>x&&x!=='-'))].sort();
+  const brokers=[...new Set(allRows.map(r=>r.broker).filter(Boolean))].sort();
+
+  stock.innerHTML='<option value="all">Semua Emiten</option>'+
+    stocks.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join('');
+
+  s.innerHTML='<option value="all">Semua Sektor</option>'+
+    sectors.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join('');
+
+  b.innerHTML='<option value="all">Semua Broker</option>'+
+    brokers.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join('');
+}
+function runScan(){
+  const stock=document.getElementById('stockFilter').value;
+  const sector=document.getElementById('sectorFilter').value;
+  const broker=document.getElementById('brokerFilter').value;
+  const maxAvg=n(document.getElementById('maxAvg').value);
+  const minGap=n(document.getElementById('minGap').value);
+  const sort=document.getElementById('sortBy').value;
+  const q=(document.getElementById('searchBox').value||'').trim().toUpperCase();
+
+  filteredRows=allRows.filter(r=>{
+    if(stock!=='all'&&r.ticker!==stock)return false;
+    if(sector!=='all'&&r.sector!==sector)return false;
+    if(broker!=='all'&&r.broker!==broker)return false;
+    if(maxAvg>0&&r.avg>maxAvg)return false;
+    if(r.gap<minGap)return false;
+    if(q&&!r.ticker.includes(q)&&!r.name.toUpperCase().includes(q))return false;
+    return true;
+  });
+
+  if(sort==='avg')filteredRows.sort((a,b)=>a.avg-b.avg);
+  else if(sort==='net')filteredRows.sort((a,b)=>b.net-a.net);
+  else filteredRows.sort((a,b)=>b.gap-a.gap);
+
+  currentPage=1;
+  renderResults();
+  updateCards();
+  if(filteredRows.length)showDetail(filteredRows[0].ticker);
+  else clearDetail();
+}
+function updateCards(){
+  const total=filteredRows.length;
+  const totalNet=filteredRows.reduce((s,r)=>s+r.net,0);
+  const avg=total?totalNet/total:0;
+  const freq={};filteredRows.forEach(r=>freq[r.broker]=(freq[r.broker]||0)+1);
+  const dom=Object.keys(freq).sort((a,b)=>freq[b]-freq[a])[0]||'-';
+  document.getElementById('cardStocks').textContent=total;
+  document.getElementById('cardStocksNote').textContent='dari '+allRows.length+' emiten';
+  document.getElementById('cardNet').textContent=money(totalNet);
+  document.getElementById('cardAvgNet').textContent=money(avg);
+  document.getElementById('cardBroker').textContent=dom;
+  document.getElementById('resultCount').textContent=total+' saham';
+  document.getElementById('resultMeta').textContent='Menampilkan '+Math.min(pageSize,total)+' dari '+total+' saham';
+}
+function renderResults(){
+  const start=(currentPage-1)*pageSize;
+  const rows=filteredRows.slice(start,start+pageSize);
+  const body=document.getElementById('resultTable');
+
+  if(!rows.length){
+    body.innerHTML='<tr><td colspan="12" class="empty">Tidak ada emiten yang memenuhi filter.</td></tr>';
+  }else{
+    body.innerHTML=rows.map((r,i)=>`
+      <tr>
+        <td>${start+i+1}</td>
+        <td><span class="code">${escapeHtml(r.ticker)}</span></td>
+        <td>${escapeHtml(r.name)}</td>
+        <td style="color:#718499">${escapeHtml(r.sector)}</td>
+        <td><span class="chip ${chipClass(r.broker)}">${escapeHtml(r.broker)}</span></td>
+        <td class="num avg-outlier">Rp${fmt(r.avg)}</td>
+        <td class="num">Rp${fmt(r.median)}</td>
+        <td class="num">${r.price?'Rp'+fmt(r.price):'-'}</td>
+        <td class="num ${r.gap>=20?'green-t':'yellow-t'}">↑ ${r.gap.toFixed(1)}%</td>
+        <td class="num ${r.net>=0?'green-t':'red-t'}">${money(r.net)}</td>
+        <td class="num">${r.brokerCount}</td>
+        <td><button class="detail-btn" onclick="showDetail('${r.ticker}')">Detail ↗</button></td>
+      </tr>
+    `).join('');
+  }
+  document.getElementById('pageInfo').textContent=
+    filteredRows.length
+      ? `Menampilkan ${start+1} - ${Math.min(start+pageSize,filteredRows.length)} dari ${filteredRows.length} saham`
+      : 'Belum ada data';
+  renderPages();
+}
+function renderPages(){
+  const el=document.getElementById('pages');
+  const total=Math.ceil(filteredRows.length/pageSize);
+  if(total<=1){el.innerHTML='';return}
+  let html=`<button onclick="goPage(${Math.max(1,currentPage-1)})">‹</button>`;
+  const max=Math.min(total,5);
+  for(let p=1;p<=max;p++)html+=`<button class="${p===currentPage?'active':''}" onclick="goPage(${p})">${p}</button>`;
+  if(total>5)html+=`<button onclick="goPage(${total})">${total}</button>`;
+  html+=`<button onclick="goPage(${Math.min(total,currentPage+1)})">›</button>`;
+  el.innerHTML=html;
+}
+function goPage(p){
+  const total=Math.max(1,Math.ceil(filteredRows.length/pageSize));
+  currentPage=Math.max(1,Math.min(total,p));renderResults();
+}
+function showDetail(ticker){
+  const r=allRows.find(x=>x.ticker===ticker);
+  if(!r)return;
+  document.getElementById('detailCode').textContent=r.ticker;
+  document.getElementById('detailSub').textContent=
+    `${r.name} • ${r.sector} • ${r.brokerCount} broker • Avg outlier ${r.gap.toFixed(1)}% di bawah median`;
+  document.getElementById('detailPrice').textContent=r.price?'Rp'+fmt(r.price):'-';
+  document.getElementById('detailLowest').textContent='Rp'+fmt(r.avg);
+  document.getElementById('detailMedian').textContent='Rp'+fmt(r.median);
+  document.getElementById('detailGap').textContent=r.gap.toFixed(1)+'%';
+  document.getElementById('detailBroker').textContent=r.broker;
+
+  const totalNet=r.brokers.reduce((s,b)=>s+b.net,0);
+  let pos=50+(totalNet/Math.max(1,Math.abs(totalNet)+1))*35;
+  pos=Math.max(5,Math.min(95,pos));
+  document.getElementById('pointer').style.left=pos+'%';
+
+  const body=document.getElementById('detailTable');
+  const sorted=[...r.brokers].sort((a,b)=>a.bavg-b.bavg);
+
+  body.innerHTML=sorted.map((b,i)=>{
+    const out=b.bavg<=r.median*.9;
+    return `
+      <tr>
+        <td>${i+1}</td>
+        <td><b style="color:#2d74bd">${escapeHtml(b.broker)}</b></td>
+        <td class="green-t">${money(b.bval)}</td>
+        <td class="num">${fmt(b.bvol)}</td>
+        <td class="${out?'avg-outlier':''}">Rp${fmt(b.bavg)}</td>
+        <td class="red-t">${money(b.sval)}</td>
+        <td class="num">${fmt(b.svol)}</td>
+        <td class="red-t">${b.savg?'Rp'+fmt(b.savg):'-'}</td>
+        <td class="${b.net>=0?'green-t':'red-t'}">${money(b.net)}</td>
+        <td><span class="${b.net>=0?'acc':'dist'}">${b.net>=0?'ACC':'DIST'}</span></td>
+      </tr>`;
+  }).join('');
+}
+function clearDetail(){
+  ['detailCode','detailSub','detailPrice','detailLowest','detailMedian','detailGap','detailBroker'].forEach(id=>document.getElementById(id).textContent='-');
+  document.getElementById('detailTable').innerHTML='';
+}
+function resetFilters(){
+  document.getElementById('stockFilter').value='all';
+  document.getElementById('sectorFilter').value='all';
+  document.getElementById('brokerFilter').value='all';
+  document.getElementById('maxAvg').value='';
+  document.getElementById('minGap').value='10';
+  document.getElementById('sortBy').value='gap';
+  document.getElementById('searchBox').value='';
+  setQuick(6);
+}
+function exportCSV(){
+  if(!filteredRows.length){showToast('Tidak ada data untuk diekspor.');return}
+  const header=['Kode','Nama','Sektor','Broker Outlier','Avg Buy','Median Avg','Harga','Gap %','Net Buy','Jumlah Broker'];
+  const rows=filteredRows.map(r=>[r.ticker,r.name,r.sector,r.broker,r.avg,r.median,r.price,r.gap.toFixed(2),r.net,r.brokerCount]);
+  const csv=[header,...rows].map(row=>row.map(v=>`"${String(v).replaceAll('"','""')}"`).join(',')).join('\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='multibagger_hunter_results.csv';a.click();
+  URL.revokeObjectURL(url);
+}
+async function loadData(){
+  try{
+    const res=await fetch('./data/broker_live.json?t='+Date.now(),{cache:'no-store'});
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    liveData=await res.json();
+    allRows=parseLive();
+
+    const total=Object.keys(liveData.stocks||{}).length;
+    document.getElementById('updatedAt').textContent=liveData.updated_at||liveData.end_date||'-';
+    document.getElementById('statusTitle').textContent='Data tersedia';
+    document.getElementById('statusTitle').style.color='var(--green)';
+    populateFilters();
+    runScan();
+
+  }catch(err){
+    console.error(err);
+    document.getElementById('statusTitle').textContent='Data belum tersedia';
+    document.getElementById('statusTitle').style.color='#d18a00';
+    document.getElementById('resultTable').innerHTML=
+      `<tr><td colspan="12" class="empty">Gagal membaca <b>data/broker_live.json</b>.<br>${escapeHtml(err.message)}</td></tr>`;
+  }
 }
 
+document.getElementById('searchBox').addEventListener('input',()=>runScan());
+document.getElementById('stockFilter').addEventListener('change',()=>runScan());
+document.getElementById('sectorFilter').addEventListener('change',()=>runScan());
+document.getElementById('brokerFilter').addEventListener('change',()=>runScan());
+document.getElementById('maxAvg').addEventListener('input',()=>runScan());
+document.getElementById('minGap').addEventListener('input',()=>runScan());
+document.getElementById('sortBy').addEventListener('change',()=>runScan());
 
-/* ====================================
-   MODE
-==================================== */
+const end=new Date(),start=new Date();
+start.setMonth(start.getMonth()-6);
+document.getElementById('startDate').value=dateInput(start);
+document.getElementById('endDate').value=dateInput(end);
 
-function changeMode(
-    mode
-) {
-
-
-    const multibagger =
-        document.getElementById(
-            "multibaggerApp"
-        );
-
-
-    const swing =
-        document.getElementById(
-            "swingApp"
-        );
-
-
-    const daytrade =
-        document.getElementById(
-            "daytradeApp"
-        );
-
-
-    multibagger.style.display =
-        mode === "multibagger"
-            ? "block"
-            : "none";
-
-
-    swing.style.display =
-        mode === "swing"
-            ? "block"
-            : "none";
-
-
-    daytrade.style.display =
-        mode === "daytrade"
-            ? "block"
-            : "none";
-
-
-    document
-        .querySelectorAll(
-            ".tab"
-        )
-        .forEach(
-            tab =>
-                tab.classList.remove(
-                    "active"
-                )
-        );
-
-
-    if (mode === "multibagger") {
-
-        document
-            .querySelectorAll(
-                ".tab"
-            )[0]
-            .classList.add(
-                "active"
-            );
-
-    }
-
-
-    if (mode === "swing") {
-
-        document
-            .querySelectorAll(
-                ".tab"
-            )[1]
-            .classList.add(
-                "active"
-            );
-
-    }
-
-
-    if (mode === "daytrade") {
-
-        document
-            .querySelectorAll(
-                ".tab"
-            )[2]
-            .classList.add(
-                "active"
-            );
-
-    }
-
-}
-
-
-/* ====================================
-   INIT
-==================================== */
-
-function init() {
-
-
-    const end =
-        new Date();
-
-
-    const start =
-        new Date();
-
-
-    start.setMonth(
-        start.getMonth() - 6
-    );
-
-
-    document.getElementById(
-        "startDate"
-    ).value =
-        dateInput(start);
-
-
-    document.getElementById(
-        "endDate"
-    ).value =
-        dateInput(end);
-
-
-    loadLiveData();
-
-}
-
-
-init();
-
+loadData();
 </script>
-
 </body>
 </html>
