@@ -1,0 +1,637 @@
+name: Update Broker Data
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    # 19:30 WIB = 12:30 UTC
+    - cron: "30 12 * * 1-5"
+
+permissions:
+  contents: write
+
+jobs:
+
+  update:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+
+        with:
+          python-version: "3.12"
+
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+
+      - name: Download broker data
+        env:
+          IDX_EDGE_API_KEY: ${{ secrets.IDX_EDGE_API_KEY }}
+
+        run: |
+
+          mkdir -p data
+
+          python <<'PY'
+
+          import requests
+          import json
+          import time
+          from datetime import date, timedelta, datetime
+
+          API_KEY = __import__("os").environ["IDX_EDGE_API_KEY"]
+
+          BASE = "https://stock.arjum.com"
+
+          HEADERS = {
+              "X-API-Key": API_KEY,
+              "Accept": "application/json"
+          }
+
+
+          # -----------------------------------
+          # DATE
+          # -----------------------------------
+
+          today = date.today()
+
+          start = today.replace(
+              year=today.year - 1
+          )
+
+          end = today
+
+
+          # -----------------------------------
+          # GET LIST EMITEN
+          # -----------------------------------
+
+          print("Mengambil daftar emiten...")
+
+
+          response = requests.get(
+              BASE + "/api/market-cap",
+              headers=HEADERS,
+              timeout=60
+          )
+
+
+          response.raise_for_status()
+
+          market_data = response.json()
+
+
+          # -----------------------------------
+          # EXTRACT STOCK CODES
+          # -----------------------------------
+
+          codes = set()
+
+          prices = {}
+
+
+          def walk(obj):
+
+              if isinstance(obj, dict):
+
+                  code = None
+
+                  for key in [
+                      "code",
+                      "ticker",
+                      "symbol",
+                      "stock_code"
+                  ]:
+
+                      value = obj.get(key)
+
+                      if isinstance(value, str):
+
+                          value = value.upper().strip()
+
+                          if (
+                              len(value) == 4
+                              and value.isalpha()
+                          ):
+
+                              code = value
+
+                              codes.add(code)
+
+                              break
+
+
+                  if code:
+
+                      for price_key in [
+                          "price",
+                          "last_price",
+                          "close",
+                          "last"
+                      ]:
+
+                          value = obj.get(price_key)
+
+                          if isinstance(
+                              value,
+                              (int, float)
+                          ):
+
+                              prices[code] = value
+
+                              break
+
+
+                  for value in obj.values():
+
+                      walk(value)
+
+
+              elif isinstance(obj, list):
+
+                  for value in obj:
+
+                      walk(value)
+
+
+          walk(market_data)
+
+
+          codes = sorted(codes)
+
+
+          print(
+              "Total emiten ditemukan:",
+              len(codes)
+          )
+
+
+          if not codes:
+
+              raise RuntimeError(
+                  "Tidak menemukan kode emiten dari /api/market-cap"
+              )
+
+
+          # -----------------------------------
+          # DOWNLOAD BROKER SUMMARY
+          # -----------------------------------
+
+          result = {
+
+              "generated_at":
+                  datetime.utcnow().isoformat() + "Z",
+
+              "period": {
+
+                  "start":
+                      start.isoformat(),
+
+                  "end":
+                      end.isoformat()
+
+              },
+
+              "source":
+                  "IDX Edge PRO",
+
+              "stocks": {}
+
+          }
+
+
+          success = 0
+
+          failed = []
+
+
+          for number, code in enumerate(
+              codes,
+              start=1
+          ):
+
+
+              url =
+                  BASE +
+                  "/api/broker-summary/" +
+                  code
+
+
+              params = {
+
+                  "start_date":
+                      start.isoformat(),
+
+                  "end_date":
+                      end.isoformat(),
+
+                  "all_data":
+                      "true",
+
+                  "flow":
+                      "all"
+
+              }
+
+
+              print(
+                  f"[{number}/{len(codes)}] {code}"
+              )
+
+
+              ok = False
+
+
+              for attempt in range(4):
+
+                  try:
+
+                      r = requests.get(
+                          url,
+                          headers=HEADERS,
+                          params=params,
+                          timeout=60
+                      )
+
+
+                      if r.status_code == 429:
+
+                          wait =
+                              10 * (
+                                  attempt + 1
+                              )
+
+                          print(
+                              "Rate limit. Tunggu",
+                              wait,
+                              "detik..."
+                          )
+
+                          time.sleep(wait)
+
+                          continue
+
+
+                      if r.status_code != 200:
+
+                          print(
+                              "HTTP",
+                              r.status_code
+                          )
+
+                          break
+
+
+                      payload =
+                          r.json()
+
+
+                      brokers = {}
+
+
+                      # --------------------------------
+                      # BROKER SUMMARY
+                      # --------------------------------
+
+                      for item in payload.get(
+                          "brokers",
+                          []
+                      ):
+
+
+                          broker =
+                              item.get(
+                                  "broker_code"
+                              )
+
+
+                          if not broker:
+
+                              continue
+
+
+                          brokers[broker] = {
+
+                              "broker":
+                                  broker,
+
+                              "broker_name":
+                                  item.get(
+                                      "broker_name",
+                                      ""
+                                  ),
+
+                              "bval":
+                                  item.get(
+                                      "bval",
+                                      0
+                                  ),
+
+                              "bvol":
+                                  item.get(
+                                      "bvol",
+                                      0
+                                  ),
+
+                              "bavg":
+                                  None,
+
+                              "sval":
+                                  item.get(
+                                      "sval",
+                                      0
+                                  ),
+
+                              "svol":
+                                  item.get(
+                                      "svol",
+                                      0
+                                  ),
+
+                              "savg":
+                                  None,
+
+                              "nval":
+                                  item.get(
+                                      "nval",
+                                      0
+                                  ),
+
+                              "nvol":
+                                  item.get(
+                                      "nvol",
+                                      0
+                                  )
+
+                          }
+
+
+                      # --------------------------------
+                      # BROKER LEVELS
+                      # --------------------------------
+
+                      for level in payload.get(
+                          "broker_levels",
+                          []
+                      ):
+
+
+                          buy =
+                              level.get(
+                                  "buy"
+                              ) or {}
+
+
+                          sell =
+                              level.get(
+                                  "sell"
+                              ) or {}
+
+
+                          buy_code =
+                              buy.get(
+                                  "broker_code"
+                              )
+
+
+                          sell_code =
+                              sell.get(
+                                  "broker_code"
+                              )
+
+
+                          if buy_code:
+
+                              if buy_code not in brokers:
+
+                                  brokers[
+                                      buy_code
+                                  ] = {
+
+                                      "broker":
+                                          buy_code,
+
+                                      "broker_name":
+                                          buy.get(
+                                              "broker_name",
+                                              ""
+                                          ),
+
+                                      "bval": 0,
+
+                                      "bvol": 0,
+
+                                      "bavg":
+                                          buy.get(
+                                              "bavg"
+                                          ),
+
+                                      "sval": 0,
+
+                                      "svol": 0,
+
+                                      "savg":
+                                          None,
+
+                                      "nval": 0,
+
+                                      "nvol": 0
+
+                                  }
+
+                              else:
+
+                                  brokers[
+                                      buy_code
+                                  ][
+                                      "bavg"
+                                  ] =
+                                      buy.get(
+                                          "bavg"
+                                      )
+
+
+                          if sell_code:
+
+                              if sell_code not in brokers:
+
+                                  brokers[
+                                      sell_code
+                                  ] = {
+
+                                      "broker":
+                                          sell_code,
+
+                                      "broker_name":
+                                          sell.get(
+                                              "broker_name",
+                                              ""
+                                          ),
+
+                                      "bval": 0,
+
+                                      "bvol": 0,
+
+                                      "bavg":
+                                          None,
+
+                                      "sval": 0,
+
+                                      "svol": 0,
+
+                                      "savg":
+                                          sell.get(
+                                              "savg"
+                                          ),
+
+                                      "nval": 0,
+
+                                      "nvol": 0
+
+                                  }
+
+                              else:
+
+                                  brokers[
+                                      sell_code
+                                  ][
+                                      "savg"
+                                  ] =
+                                      sell.get(
+                                          "savg"
+                                      )
+
+
+                      result["stocks"][code] = {
+
+                          "price":
+                              prices.get(
+                                  code
+                              ),
+
+                          "broker_start_date":
+                              payload.get(
+                                  "broker_start_date"
+                              ),
+
+                          "broker_end_date":
+                              payload.get(
+                                  "broker_end_date"
+                              ),
+
+                          "brokers":
+                              list(
+                                  brokers.values()
+                              )
+
+                      }
+
+
+                      success += 1
+
+                      ok = True
+
+                      break
+
+
+                  except Exception as e:
+
+                      print(
+                          "Error:",
+                          str(e)
+                      )
+
+                      time.sleep(
+                          5 * (
+                              attempt + 1
+                          )
+                      )
+
+
+              if not ok:
+
+                  failed.append(code)
+
+
+              # Jangan menghajar API
+              time.sleep(0.12)
+
+
+          # -----------------------------------
+          # SAVE
+          # -----------------------------------
+
+          result["summary"] = {
+
+              "total_emiten":
+                  len(codes),
+
+              "berhasil":
+                  success,
+
+              "gagal":
+                  len(failed),
+
+              "failed_codes":
+                  failed
+
+          }
+
+
+          with open(
+              "data/broker_live.json",
+              "w",
+              encoding="utf-8"
+          ) as f:
+
+              json.dump(
+                  result,
+                  f,
+                  ensure_ascii=False,
+                  indent=2
+              )
+
+
+          print()
+          print(
+              "SELESAI"
+          )
+
+          print(
+              "Berhasil:",
+              success
+          )
+
+          print(
+              "Gagal:",
+              len(failed)
+          )
+
+
+          PY
+
+
+      - name: Commit data
+        run: |
+
+          git config user.name "github-actions"
+
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add data/broker_live.json
+
+          git diff --cached --quiet || \
+            git commit -m "Update broker market data"
+
+          git push
