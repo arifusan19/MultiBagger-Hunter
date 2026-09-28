@@ -11,29 +11,22 @@ permissions:
   contents: write
 
 jobs:
-
   update:
-
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout repository
         uses: actions/checkout@v4
 
-
-      - name: Install Python
+      - name: Setup Python
         uses: actions/setup-python@v5
-
         with:
           python-version: "3.12"
 
-
-      - name: Install dependencies
+      - name: Install requests
         run: |
           python -m pip install --upgrade pip
           pip install requests
-
 
       - name: Download broker data
         env:
@@ -41,18 +34,29 @@ jobs:
 
         run: |
 
-          mkdir -p data
+          python - <<'PY'
 
-          python <<'PY'
-
-          import requests
+          import os
           import json
           import time
-          from datetime import date, timedelta, datetime
+          import requests
+          from datetime import date, timedelta
 
-          API_KEY = __import__("os").environ["IDX_EDGE_API_KEY"]
 
-          BASE = "https://stock.arjum.com"
+          # =====================================================
+          # CONFIG
+          # =====================================================
+
+          API_KEY = os.environ.get("IDX_EDGE_API_KEY")
+
+          if not API_KEY:
+              raise RuntimeError(
+                  "Secret IDX_EDGE_API_KEY belum tersedia."
+              )
+
+
+          BASE_URL = "https://stock.arjum.com"
+
 
           HEADERS = {
               "X-API-Key": API_KEY,
@@ -60,112 +64,116 @@ jobs:
           }
 
 
-          # -----------------------------------
-          # DATE
-          # -----------------------------------
+          session = requests.Session()
+          session.headers.update(HEADERS)
 
-          today = date.today()
 
-          start = today.replace(
-              year=today.year - 1
+          # =====================================================
+          # PERIODE DATA
+          # 24 BULAN
+          # =====================================================
+
+          end_date = date.today()
+
+          start_date = (
+              end_date -
+              timedelta(days=730)
           )
 
-          end = today
+
+          print(
+              "Periode:",
+              start_date.isoformat(),
+              "->",
+              end_date.isoformat()
+          )
 
 
-          # -----------------------------------
-          # GET LIST EMITEN
-          # -----------------------------------
+          # =====================================================
+          # 1. AMBIL DAFTAR EMITEN
+          # =====================================================
 
+          print("")
           print("Mengambil daftar emiten...")
 
 
-          response = requests.get(
-              BASE + "/api/market-cap",
-              headers=HEADERS,
+          response = session.get(
+              BASE_URL + "/api/market-cap",
               timeout=60
           )
 
 
-          response.raise_for_status()
+          print(
+              "HTTP market-cap:",
+              response.status_code
+          )
+
+
+          if response.status_code != 200:
+
+              print(response.text[:3000])
+
+              raise RuntimeError(
+                  "Gagal mengambil daftar emiten."
+              )
+
 
           market_data = response.json()
 
 
-          # -----------------------------------
-          # EXTRACT STOCK CODES
-          # -----------------------------------
+          # =====================================================
+          # 2. EXTRACT KODE SAHAM
+          # =====================================================
 
           codes = set()
 
-          prices = {}
 
-
-          def walk(obj):
+          def extract_codes(obj):
 
               if isinstance(obj, dict):
 
-                  code = None
+                  for key, value in obj.items():
 
-                  for key in [
-                      "code",
-                      "ticker",
-                      "symbol",
-                      "stock_code"
-                  ]:
+                      key_name = str(key).lower()
 
-                      value = obj.get(key)
+                      if key_name in (
+                          "code",
+                          "ticker",
+                          "symbol",
+                          "stock_code",
+                          "stockcode"
+                      ):
 
-                      if isinstance(value, str):
+                          if isinstance(value, str):
 
-                          value = value.upper().strip()
-
-                          if (
-                              len(value) == 4
-                              and value.isalpha()
-                          ):
-
-                              code = value
-
-                              codes.add(code)
-
-                              break
+                              candidate = (
+                                  value
+                                  .strip()
+                                  .upper()
+                              )
 
 
-                  if code:
+                              if (
+                                  len(candidate) == 4
+                                  and candidate.isalpha()
+                              ):
 
-                      for price_key in [
-                          "price",
-                          "last_price",
-                          "close",
-                          "last"
-                      ]:
-
-                          value = obj.get(price_key)
-
-                          if isinstance(
-                              value,
-                              (int, float)
-                          ):
-
-                              prices[code] = value
-
-                              break
+                                  codes.add(candidate)
 
 
-                  for value in obj.values():
-
-                      walk(value)
+                      extract_codes(value)
 
 
               elif isinstance(obj, list):
 
-                  for value in obj:
+                  for item in obj:
 
-                      walk(value)
+                      extract_codes(item)
 
 
-          walk(market_data)
+          extract_codes(
+              market_data
+          )
 
 
           codes = sorted(codes)
@@ -180,31 +188,27 @@ jobs:
           if not codes:
 
               raise RuntimeError(
-                  "Tidak menemukan kode emiten dari /api/market-cap"
+                  "Tidak ada kode emiten yang ditemukan."
               )
 
 
-          # -----------------------------------
-          # DOWNLOAD BROKER SUMMARY
-          # -----------------------------------
+          # =====================================================
+          # 3. OUTPUT
+          # =====================================================
 
-          result = {
-
-              "generated_at":
-                  datetime.utcnow().isoformat() + "Z",
-
-              "period": {
-
-                  "start":
-                      start.isoformat(),
-
-                  "end":
-                      end.isoformat()
-
-              },
+          output = {
 
               "source":
                   "IDX Edge PRO",
+
+              "updated_at":
+                  date.today().isoformat(),
+
+              "start_date":
+                  start_date.isoformat(),
+
+              "end_date":
+                  end_date.isoformat(),
 
               "stocks": {}
 
@@ -216,363 +220,478 @@ jobs:
           failed = []
 
 
-          for number, code in enumerate(
+          # =====================================================
+          # 4. AMBIL BROKER SUMMARY
+          # =====================================================
+
+          for index, code in enumerate(
               codes,
               start=1
           ):
 
 
-              url =
-                  BASE +
+              print("")
+              print(
+                  f"[{index}/{len(codes)}] {code}"
+              )
+
+
+              url = (
+                  BASE_URL +
                   "/api/broker-summary/" +
                   code
+              )
 
 
               params = {
 
                   "start_date":
-                      start.isoformat(),
+                      start_date.isoformat(),
 
                   "end_date":
-                      end.isoformat(),
+                      end_date.isoformat(),
+
+                  "broker_limit":
+                      100,
+
+                  "level_limit":
+                      100,
 
                   "all_data":
                       "true",
 
                   "flow":
-                      "all"
+                      "all",
+
+                  "net":
+                      "false"
 
               }
 
 
-              print(
-                  f"[{number}/{len(codes)}] {code}"
-              )
+              try:
 
 
-              ok = False
+                  result = session.get(
+                      url,
+                      params=params,
+                      timeout=60
+                  )
 
 
-              for attempt in range(4):
+                  if result.status_code == 429:
 
-                  try:
-
-                      r = requests.get(
-                          url,
-                          headers=HEADERS,
-                          params=params,
-                          timeout=60
+                      print(
+                          "RATE LIMIT tercapai."
                       )
 
+                      failed.append({
 
-                      if r.status_code == 429:
+                          "ticker": code,
 
-                          wait =
-                              10 * (
-                                  attempt + 1
-                              )
+                          "error":
+                              "rate_limit"
 
-                          print(
-                              "Rate limit. Tunggu",
-                              wait,
-                              "detik..."
-                          )
-
-                          time.sleep(wait)
-
-                          continue
-
-
-                      if r.status_code != 200:
-
-                          print(
-                              "HTTP",
-                              r.status_code
-                          )
-
-                          break
-
-
-                      payload =
-                          r.json()
-
-
-                      brokers = {}
-
-
-                      # --------------------------------
-                      # BROKER SUMMARY
-                      # --------------------------------
-
-                      for item in payload.get(
-                          "brokers",
-                          []
-                      ):
-
-
-                          broker =
-                              item.get(
-                                  "broker_code"
-                              )
-
-
-                          if not broker:
-
-                              continue
-
-
-                          brokers[broker] = {
-
-                              "broker":
-                                  broker,
-
-                              "broker_name":
-                                  item.get(
-                                      "broker_name",
-                                      ""
-                                  ),
-
-                              "bval":
-                                  item.get(
-                                      "bval",
-                                      0
-                                  ),
-
-                              "bvol":
-                                  item.get(
-                                      "bvol",
-                                      0
-                                  ),
-
-                              "bavg":
-                                  None,
-
-                              "sval":
-                                  item.get(
-                                      "sval",
-                                      0
-                                  ),
-
-                              "svol":
-                                  item.get(
-                                      "svol",
-                                      0
-                                  ),
-
-                              "savg":
-                                  None,
-
-                              "nval":
-                                  item.get(
-                                      "nval",
-                                      0
-                                  ),
-
-                              "nvol":
-                                  item.get(
-                                      "nvol",
-                                      0
-                                  )
-
-                          }
-
-
-                      # --------------------------------
-                      # BROKER LEVELS
-                      # --------------------------------
-
-                      for level in payload.get(
-                          "broker_levels",
-                          []
-                      ):
-
-
-                          buy =
-                              level.get(
-                                  "buy"
-                              ) or {}
-
-
-                          sell =
-                              level.get(
-                                  "sell"
-                              ) or {}
-
-
-                          buy_code =
-                              buy.get(
-                                  "broker_code"
-                              )
-
-
-                          sell_code =
-                              sell.get(
-                                  "broker_code"
-                              )
-
-
-                          if buy_code:
-
-                              if buy_code not in brokers:
-
-                                  brokers[
-                                      buy_code
-                                  ] = {
-
-                                      "broker":
-                                          buy_code,
-
-                                      "broker_name":
-                                          buy.get(
-                                              "broker_name",
-                                              ""
-                                          ),
-
-                                      "bval": 0,
-
-                                      "bvol": 0,
-
-                                      "bavg":
-                                          buy.get(
-                                              "bavg"
-                                          ),
-
-                                      "sval": 0,
-
-                                      "svol": 0,
-
-                                      "savg":
-                                          None,
-
-                                      "nval": 0,
-
-                                      "nvol": 0
-
-                                  }
-
-                              else:
-
-                                  brokers[
-                                      buy_code
-                                  ][
-                                      "bavg"
-                                  ] =
-                                      buy.get(
-                                          "bavg"
-                                      )
-
-
-                          if sell_code:
-
-                              if sell_code not in brokers:
-
-                                  brokers[
-                                      sell_code
-                                  ] = {
-
-                                      "broker":
-                                          sell_code,
-
-                                      "broker_name":
-                                          sell.get(
-                                              "broker_name",
-                                              ""
-                                          ),
-
-                                      "bval": 0,
-
-                                      "bvol": 0,
-
-                                      "bavg":
-                                          None,
-
-                                      "sval": 0,
-
-                                      "svol": 0,
-
-                                      "savg":
-                                          sell.get(
-                                              "savg"
-                                          ),
-
-                                      "nval": 0,
-
-                                      "nvol": 0
-
-                                  }
-
-                              else:
-
-                                  brokers[
-                                      sell_code
-                                  ][
-                                      "savg"
-                                  ] =
-                                      sell.get(
-                                          "savg"
-                                      )
-
-
-                      result["stocks"][code] = {
-
-                          "price":
-                              prices.get(
-                                  code
-                              ),
-
-                          "broker_start_date":
-                              payload.get(
-                                  "broker_start_date"
-                              ),
-
-                          "broker_end_date":
-                              payload.get(
-                                  "broker_end_date"
-                              ),
-
-                          "brokers":
-                              list(
-                                  brokers.values()
-                              )
-
-                      }
-
-
-                      success += 1
-
-                      ok = True
+                      })
 
                       break
 
 
-                  except Exception as e:
+                  if result.status_code != 200:
 
                       print(
-                          "Error:",
-                          str(e)
+                          "HTTP:",
+                          result.status_code
                       )
 
-                      time.sleep(
-                          5 * (
-                              attempt + 1
+                      print(
+                          result.text[:500]
+                      )
+
+                      failed.append({
+
+                          "ticker": code,
+
+                          "error":
+                              "HTTP " +
+                              str(
+                                  result.status_code
+                              )
+
+                      })
+
+                      continue
+
+
+                  payload = result.json()
+
+
+                  # -------------------------------------------------
+                  # BROKER MAP
+                  # -------------------------------------------------
+
+                  broker_map = {}
+
+
+                  # -------------------------------------------------
+                  # BROKER SUMMARY
+                  # -------------------------------------------------
+
+                  for broker in payload.get(
+                      "brokers",
+                      []
+                  ):
+
+
+                      broker_code = broker.get(
+                          "broker_code"
+                      )
+
+
+                      if not broker_code:
+                          continue
+
+
+                      broker_map[
+                          broker_code
+                      ] = {
+
+                          "broker":
+                              broker_code,
+
+                          "broker_name":
+                              broker.get(
+                                  "broker_name",
+                                  ""
+                              ),
+
+                          "bval":
+                              broker.get(
+                                  "bval",
+                                  0
+                              ),
+
+                          "bvol":
+                              broker.get(
+                                  "bvol",
+                                  0
+                              ),
+
+                          "bfrq":
+                              broker.get(
+                                  "bfrq",
+                                  0
+                              ),
+
+                          "sval":
+                              broker.get(
+                                  "sval",
+                                  0
+                              ),
+
+                          "svol":
+                              broker.get(
+                                  "svol",
+                                  0
+                              ),
+
+                          "sfrq":
+                              broker.get(
+                                  "sfrq",
+                                  0
+                              ),
+
+                          "nval":
+                              broker.get(
+                                  "nval",
+                                  0
+                              ),
+
+                          "nvol":
+                              broker.get(
+                                  "nvol",
+                                  0
+                              ),
+
+                          "bavg":
+                              None,
+
+                          "savg":
+                              None
+
+                      }
+
+
+                  # -------------------------------------------------
+                  # BUY / SELL LEVELS
+                  # Mengisi B.Avg dan S.Avg
+                  # -------------------------------------------------
+
+                  for level in payload.get(
+                      "broker_levels",
+                      []
+                  ):
+
+
+                      buy =
+                          level.get(
+                              "buy"
+                          ) or {}
+
+
+                      sell =
+                          level.get(
+                              "sell"
+                          ) or {}
+
+
+                      buy_code =
+                          buy.get(
+                              "broker_code"
                           )
-                      )
 
 
-              if not ok:
-
-                  failed.append(code)
-
-
-              # Jangan menghajar API
-              time.sleep(0.12)
+                      sell_code =
+                          sell.get(
+                              "broker_code"
+                          )
 
 
-          # -----------------------------------
-          # SAVE
-          # -----------------------------------
+                      # -----------------------------
+                      # BUY
+                      # -----------------------------
 
-          result["summary"] = {
+                      if buy_code:
+
+
+                          if buy_code not in broker_map:
+
+                              broker_map[
+                                  buy_code
+                              ] = {
+
+                                  "broker":
+                                      buy_code,
+
+                                  "broker_name":
+                                      buy.get(
+                                          "broker_name",
+                                          ""
+                                      ),
+
+                                  "bval":
+                                      buy.get(
+                                          "bval",
+                                          0
+                                      ),
+
+                                  "bvol":
+                                      buy.get(
+                                          "bvol",
+                                          0
+                                      ),
+
+                                  "bfrq":
+                                      buy.get(
+                                          "bfrq",
+                                          0
+                                      ),
+
+                                  "sval":
+                                      0,
+
+                                  "svol":
+                                      0,
+
+                                  "sfrq":
+                                      0,
+
+                                  "nval":
+                                      0,
+
+                                  "nvol":
+                                      0,
+
+                                  "bavg":
+                                      None,
+
+                                  "savg":
+                                      None
+
+                              }
+
+
+                          broker_map[
+                              buy_code
+                          ][
+                              "bavg"
+                          ] = buy.get(
+                              "bavg"
+                          )
+
+
+                      # -----------------------------
+                      # SELL
+                      # -----------------------------
+
+                      if sell_code:
+
+
+                          if sell_code not in broker_map:
+
+                              broker_map[
+                                  sell_code
+                              ] = {
+
+                                  "broker":
+                                      sell_code,
+
+                                  "broker_name":
+                                      sell.get(
+                                          "broker_name",
+                                          ""
+                                      ),
+
+                                  "bval":
+                                      0,
+
+                                  "bvol":
+                                      0,
+
+                                  "bfrq":
+                                      0,
+
+                                  "sval":
+                                      sell.get(
+                                          "sval",
+                                          0
+                                      ),
+
+                                  "svol":
+                                      sell.get(
+                                          "svol",
+                                          0
+                                      ),
+
+                                  "sfrq":
+                                      sell.get(
+                                          "sfrq",
+                                          0
+                                      ),
+
+                                  "nval":
+                                      0,
+
+                                  "nvol":
+                                      0,
+
+                                  "bavg":
+                                      None,
+
+                                  "savg":
+                                      None
+
+                              }
+
+
+                          broker_map[
+                              sell_code
+                          ][
+                              "savg"
+                          ] = sell.get(
+                              "savg"
+                          )
+
+
+                  # -------------------------------------------------
+                  # SIMPAN DATA EMITEN
+                  # -------------------------------------------------
+
+                  output[
+                      "stocks"
+                  ][code] = {
+
+                      "stock_code":
+                          payload.get(
+                              "stock_code",
+                              code
+                          ),
+
+                      "broker_start_date":
+                          payload.get(
+                              "broker_start_date"
+                          ),
+
+                      "broker_end_date":
+                          payload.get(
+                              "broker_end_date"
+                          ),
+
+                      "broker_date_min":
+                          payload.get(
+                              "broker_date_min"
+                          ),
+
+                      "broker_date_max":
+                          payload.get(
+                              "broker_date_max"
+                          ),
+
+                      "broker_net":
+                          payload.get(
+                              "broker_net",
+                              {}
+                          ),
+
+                      "brokers":
+                          list(
+                              broker_map.values()
+                          )
+
+                  }
+
+
+                  success += 1
+
+
+                  print(
+                      "  OK:",
+                      len(broker_map),
+                      "broker"
+                  )
+
+
+              except Exception as error:
+
+
+                  print(
+                      "  ERROR:",
+                      str(error)
+                  )
+
+
+                  failed.append({
+
+                      "ticker":
+                          code,
+
+                      "error":
+                          str(error)
+
+                  })
+
+
+              # jeda kecil
+              time.sleep(0.15)
+
+
+          # =====================================================
+          # 5. SUMMARY
+          # =====================================================
+
+          output[
+              "summary"
+          ] = {
 
               "total_emiten":
                   len(codes),
@@ -583,55 +702,77 @@ jobs:
               "gagal":
                   len(failed),
 
-              "failed_codes":
+              "failed":
                   failed
 
           }
+
+
+          # =====================================================
+          # 6. SAVE JSON
+          # =====================================================
+
+          os.makedirs(
+              "data",
+              exist_ok=True
+          )
 
 
           with open(
               "data/broker_live.json",
               "w",
               encoding="utf-8"
-          ) as f:
+          ) as file:
 
               json.dump(
-                  result,
-                  f,
+                  output,
+                  file,
                   ensure_ascii=False,
                   indent=2
               )
 
 
-          print()
+          print("")
+          print("==============================")
+          print("UPDATE SELESAI")
           print(
-              "SELESAI"
+              "Total emiten:",
+              len(codes)
           )
-
           print(
               "Berhasil:",
               success
           )
-
           print(
               "Gagal:",
               len(failed)
           )
+          print("==============================")
 
 
           PY
 
 
-      - name: Commit data
+      - name: Save updated data
         run: |
 
-          git config user.name "github-actions"
+          git config user.name \
+            "github-actions[bot]"
 
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.email \
+            "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add data/broker_live.json
 
-          git diff --cached --quiet || \
-            git commit -m "Update broker market data"
+          if git diff --cached --quiet; then
 
-          git push
+            echo "Tidak ada perubahan data."
+
+          else
+
+            git commit \
+              -m "Update live broker data"
+
+            git push
+
+          fi
