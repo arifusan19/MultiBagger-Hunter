@@ -2,1220 +2,478 @@
 <html lang="id">
 
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Multibagger Hunter</title>
-
-
-    <style>
-
-        * {
-            box-sizing: border-box;
-        }
-
-
-        body {
-            margin: 0;
-
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
-
-            color: #eaf2ff;
-
-            background:
-                radial-gradient(
-                    circle at top left,
-                    #102746 0%,
-                    #07111f 35%,
-                    #050b14 100%
-                );
-
-            min-height: 100vh;
-        }
-
-
-        /* =========================
-           HEADER
-        ========================= */
-
-        header {
-            background:
-                rgba(5, 15, 28, 0.96);
-
-            border-bottom:
-                1px solid #233b56;
-
-            padding:
-                20px 25px;
-        }
-
-
-        .header-top {
-            display: flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                center;
-
-            gap: 15px;
-
-            flex-wrap: wrap;
-        }
-
-
-        .brand {
-            display: flex;
-
-            align-items: center;
-
-            gap: 12px;
-        }
-
-
-        .brand-icon {
-            font-size: 34px;
-        }
-
-
-        .brand h1 {
-            margin: 0;
-
-            font-size: 28px;
-
-            letter-spacing: -0.5px;
-        }
-
-
-        .brand h1 span {
-            color: #20df8a;
-        }
-
-
-        .brand p {
-            margin:
-                5px 0 0;
-
-            font-size: 12px;
-
-            color: #8ea6c4;
-        }
-
-
-        .header-info {
-            display: flex;
-
-            gap: 10px;
-
-            flex-wrap: wrap;
-        }
-
-
-        .header-card {
-            min-width: 170px;
-
-            background:
-                #0b1a2c;
-
-            border:
-                1px solid #28425f;
-
-            border-radius:
-                9px;
-
-            padding:
-                10px 13px;
-        }
-
-
-        .header-card small {
-            display: block;
-
-            font-size: 9px;
-
-            color: #7e95af;
-
-            margin-bottom: 5px;
-        }
-
-
-        .header-card strong {
-            font-size: 13px;
-        }
-
-
-        .live-status {
-            color: #20df8a;
-        }
-
-
-        .offline-status {
-            color: #ffd34a;
-        }
-
-
-        /* =========================
-           MAIN
-        ========================= */
-
-        .container {
-            max-width: 1500px;
-
-            margin: auto;
-
-            padding:
-                16px;
-        }
-
-
-        /* =========================
-           MODE
-        ========================= */
-
-        .mode-tabs {
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 8px;
-
-            margin-bottom: 14px;
-        }
-
-
-        .mode-tab {
-            height: 46px;
-
-            border:
-                1px solid #29445f;
-
-            background:
-                #0b1829;
-
-            color: #93a9c2;
-
-            border-radius:
-                9px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-        }
-
-
-        .mode-tab.active {
-            background:
-                linear-gradient(
-                    135deg,
-                    #1677ff,
-                    #0c58dd
-                );
-
-            color: white;
-
-            border-color:
-                #378bff;
-
-            box-shadow:
-                0 0 18px
-                rgba(22,119,255,0.18);
-        }
-
-
-        .mode-tab.swing {
-            color: #70a9ff;
-        }
-
-
-        .mode-tab.daytrade {
-            color: #ffb458;
-        }
-
-
-        /* =========================
-           PANELS
-        ========================= */
-
-        .panel {
-            background:
-                linear-gradient(
-                    145deg,
-                    #0d1d30,
-                    #081626
-                );
-
-            border:
-                1px solid #243e59;
-
-            border-radius:
-                12px;
-
-            padding:
-                16px;
-
-            margin-bottom:
-                14px;
-
-            box-shadow:
-                0 8px 25px
-                rgba(0,0,0,0.18);
-        }
-
-
-        .section-title {
-            display: flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                center;
-
-            gap: 10px;
-
-            margin-bottom:
-                12px;
-        }
-
-
-        .section-title h2 {
-            margin: 0;
-
-            font-size: 16px;
-        }
-
-
-        .section-badge {
-            padding:
-                4px 8px;
-
-            border-radius:
-                6px;
-
-            background:
-                #102742;
-
-            color: #7eb4ff;
-
-            font-size: 9px;
-
-            font-weight: bold;
-        }
-
-
-        /* =========================
-           PERIOD
-        ========================= */
-
-        .period-grid {
-            display: grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
-            gap: 12px;
-        }
-
-
-        .sub-box {
-            background:
-                #091728;
-
-            border:
-                1px solid #263f5b;
-
-            border-radius:
-                9px;
-
-            padding:
-                12px;
-        }
-
-
-        .sub-title {
-            margin-bottom:
-                9px;
-
-            font-size: 11px;
-
-            font-weight: bold;
-
-            color: #b5c8dc;
-        }
-
-
-        .quick-buttons {
-            display: flex;
-
-            gap: 6px;
-
-            flex-wrap: wrap;
-        }
-
-
-        .quick-button {
-            padding:
-                8px 12px;
-
-            border:
-                1px solid #29435e;
-
-            background:
-                #0d1e33;
-
-            color: #91a7c0;
-
-            border-radius:
-                6px;
-
-            font-size: 10px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-        }
-
-
-        .quick-button.active {
-            background:
-                #1677ff;
-
-            border-color:
-                #378bff;
-
-            color: white;
-        }
-
-
-        .custom-grid {
-            display: grid;
-
-            grid-template-columns:
-                1fr 20px 1fr;
-
-            align-items: end;
-
-            gap: 6px;
-        }
-
-
-        .arrow {
-            text-align:
-                center;
-
-            color:
-                #6e84a0;
-
-            padding-bottom:
-                9px;
-        }
-
-
-        /* =========================
-           INPUT
-        ========================= */
-
-        .field {
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            gap: 5px;
-        }
-
-
-        .field label {
-            color:
-                #7e95af;
-
-            font-size:
-                9px;
-
-            font-weight:
-                bold;
-        }
-
-
-        input,
-        select {
-            width:
-                100%;
-
-            height:
-                36px;
-
-            padding:
-                8px 10px;
-
-            border:
-                1px solid #29435f;
-
-            border-radius:
-                7px;
-
-            background:
-                #0c1b2e;
-
-            color:
-                #e8f2ff;
-
-            outline:
-                none;
-
-            font-size:
-                12px;
-        }
-
-
-        input:focus,
-        select:focus {
-            border-color:
-                #378bff;
-
-            box-shadow:
-                0 0 0 2px
-                rgba(55,139,255,0.12);
-        }
-
-
-        /* =========================
-           SCANNER
-        ========================= */
-
-        .scanner-grid {
-            display: grid;
-
-            grid-template-columns:
-                2fr
-                1fr
-                1fr
-                1fr;
-
-            gap:
-                9px;
-
-            align-items:
-                end;
-        }
-
-
-        .scan-button {
-            width:
-                100%;
-
-            height:
-                36px;
-
-            border:
-                none;
-
-            border-radius:
-                7px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #1677ff,
-                    #0b5ee8
-                );
-
-            color:
-                white;
-
-            font-size:
-                11px;
-
-            font-weight:
-                bold;
-
-            cursor:
-                pointer;
-        }
-
-
-        .scan-button:hover {
-            filter:
-                brightness(1.08);
-        }
-
-
-        /* =========================
-           IMPORT
-        ========================= */
-
-        .import-grid {
-            display: grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
-            gap: 10px;
-        }
-
-
-        .file-input {
-            border:
-                1px dashed #395575;
-
-            background:
-                #091728;
-
-            padding:
-                12px;
-
-            border-radius:
-                8px;
-        }
-
-
-        .status {
-            margin-top:
-                7px;
-
-            color:
-                #91a7c0;
-
-            font-size:
-                10px;
-
-            line-height:
-                1.5;
-        }
-
-
-        .status.success {
-            color:
-                #20df8a;
-        }
-
-
-        .status.error {
-            color:
-                #ff6573;
-        }
-
-
-        .template-button {
-            height:
-                36px;
-
-            border:
-                1px solid #29435f;
-
-            background:
-                #102138;
-
-            color:
-                #9db4cc;
-
-            border-radius:
-                7px;
-
-            cursor:
-                pointer;
-
-            font-size:
-                10px;
-
-            font-weight:
-                bold;
-        }
-
-
-        /* =========================
-           RESULT
-        ========================= */
-
-        .result-head {
-            display:
-                flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                center;
-
-            flex-wrap:
-                wrap;
-
-            gap:
-                8px;
-        }
-
-
-        .result-count {
-            padding:
-                5px 9px;
-
-            border:
-                1px solid #705d17;
-
-            background:
-                rgba(123,100,0,0.13);
-
-            color:
-                #ffd449;
-
-            border-radius:
-                6px;
-
-            font-size:
-                9px;
-
-            font-weight:
-                bold;
-        }
-
-
-        /* =========================
-           TABLE
-        ========================= */
-
-        .table-wrap {
-            overflow-x:
-                auto;
-
-            border:
-                1px solid #253e59;
-
-            border-radius:
-                8px;
-        }
-
-
-        table {
-            width:
-                100%;
-
-            border-collapse:
-                collapse;
-
-            min-width:
-                1050px;
-        }
-
-
-        thead th {
-            background:
-                #11263e;
-
-            color:
-                #a9bdd2;
-
-            padding:
-                9px 8px;
-
-            font-size:
-                9px;
-
-            text-align:
-                right;
-
-            white-space:
-                nowrap;
-
-            border-bottom:
-                1px solid #29445f;
-        }
-
-
-        thead th:first-child {
-            text-align:
-                left;
-        }
-
-
-        tbody td {
-            padding:
-                9px 8px;
-
-            font-size:
-                10px;
-
-            text-align:
-                right;
-
-            border-bottom:
-                1px solid #182d45;
-
-            color:
-                #d9e7f5;
-        }
-
-
-        tbody td:first-child {
-            text-align:
-                left;
-        }
-
-
-        tbody tr:hover {
-            background:
-                rgba(27,111,255,0.07);
-        }
-
-
-        .code {
-            color:
-                #62a7ff;
-
-            font-weight:
-                bold;
-
-            cursor:
-                pointer;
-        }
-
-
-        .code:hover {
-            color:
-                white;
-        }
-
-
-        .green {
-            color:
-                #20df8a !important;
-
-            font-weight:
-                bold;
-        }
-
-
-        .red {
-            color:
-                #ff5c6c !important;
-
-            font-weight:
-                bold;
-        }
-
-
-        .yellow {
-            color:
-                #ffd449 !important;
-
-            font-weight:
-                bold;
-        }
-
-
-        .avg-outlier {
-            background:
-                rgba(32,223,138,0.14);
-
-            color:
-                #20df8a !important;
-
-            font-weight:
-                bold;
-
-            box-shadow:
-                inset 3px 0 0 #20df8a;
-        }
-
-
-        .detail-btn {
-            padding:
-                5px 8px;
-
-            border:
-                none;
-
-            border-radius:
-                5px;
-
-            background:
-                #176fff;
-
-            color:
-                white;
-
-            font-size:
-                9px;
-
-            cursor:
-                pointer;
-        }
-
-
-        /* =========================
-           DETAIL STATS
-        ========================= */
-
-        .detail-stats {
-            display:
-                grid;
-
-            grid-template-columns:
-                repeat(6, 1fr);
-
-            gap:
-                8px;
-
-            margin-bottom:
-                10px;
-        }
-
-
-        .stat {
-            background:
-                #0a192b;
-
-            border:
-                1px solid #29435f;
-
-            border-radius:
-                8px;
-
-            padding:
-                10px;
-        }
-
-
-        .stat small {
-            display:
-                block;
-
-            color:
-                #748ca6;
-
-            font-size:
-                8px;
-
-            margin-bottom:
-                5px;
-        }
-
-
-        .stat strong {
-            font-size:
-                16px;
-        }
-
-
-        /* =========================
-           ACTION
-        ========================= */
-
-        .action-grid {
-            display:
-                grid;
-
-            grid-template-columns:
-                1.5fr 1fr;
-
-            gap:
-                10px;
-
-            margin-bottom:
-                10px;
-        }
-
-
-        .action-box {
-            background:
-                #091728;
-
-            border:
-                1px solid #29435f;
-
-            border-radius:
-                8px;
-
-            padding:
-                12px;
-        }
-
-
-        .action-title {
-            font-size:
-                11px;
-
-            font-weight:
-                bold;
-
-            margin-bottom:
-                8px;
-        }
-
-
-        .action-labels {
-            display:
-                flex;
-
-            justify-content:
-                space-between;
-
-            font-size:
-                8px;
-
-            color:
-                #7f96af;
-
-            margin-bottom:
-                5px;
-        }
-
-
-        .action-bar {
-            position:
-                relative;
-
-            height:
-                10px;
-
-            border-radius:
-                20px;
-
-            background:
-                linear-gradient(
-                    to right,
-                    #ff475b,
-                    #ff883e,
-                    #ffd448,
-                    #8c97a8,
-                    #35dc82,
-                    #00b979
-                );
-        }
-
-
-        .action-pointer {
-            position:
-                absolute;
-
-            width:
-                3px;
-
-            height:
-                24px;
-
-            top:
-                -7px;
-
-            left:
-                50%;
-
-            background:
-                white;
-        }
-
-
-        .action-caption {
-            display:
-                flex;
-
-            justify-content:
-                space-between;
-
-            color:
-                #6d849d;
-
-            font-size:
-                8px;
-
-            margin-top:
-                5px;
-        }
-
-
-        .info-lines {
-            font-size:
-                10px;
-
-            line-height:
-                1.9;
-
-            color:
-                #8298b2;
-        }
-
-
-        .info-lines strong {
-            color:
-                #e1edfa;
-        }
-
-
-        /* =========================
-           BADGE
-        ========================= */
-
-        .badge {
-            display:
-                inline-block;
-
-            padding:
-                4px 7px;
-
-            border-radius:
-                10px;
-
-            font-size:
-                8px;
-
-            font-weight:
-                bold;
-        }
-
-
-        .badge-acc {
-            background:
-                rgba(32,223,138,0.15);
-
-            color:
-                #20df8a;
-        }
-
-
-        .badge-dist {
-            background:
-                rgba(255,92,108,0.15);
-
-            color:
-                #ff6473;
-        }
-
-
-        /* =========================
-           EMPTY
-        ========================= */
-
-        .empty {
-            min-height:
-                400px;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            text-align:
-                center;
-        }
-
-
-        .empty-icon {
-            font-size:
-                55px;
-
-            margin-bottom:
-                10px;
-        }
-
-
-        .empty h2 {
-            margin:
-                0 0 8px;
-        }
-
-
-        .empty p {
-            color:
-                #8097b1;
-
-            max-width:
-                480px;
-
-            line-height:
-                1.6;
-
-            font-size:
-                12px;
-        }
-
-
-        /* =========================
-           NOTE
-        ========================= */
-
-        .note {
-            margin-top:
-                10px;
-
-            color:
-                #687e99;
-
-            font-size:
-                9px;
-
-            line-height:
-                1.6;
-        }
-
-
-        /* =========================
-           RESPONSIVE
-        ========================= */
-
-        @media (max-width: 1100px) {
-
-            .scanner-grid {
-                grid-template-columns:
-                    1fr 1fr;
-            }
-
-            .detail-stats {
-                grid-template-columns:
-                    repeat(3, 1fr);
-            }
-
-        }
-
-
-        @media (max-width: 800px) {
-
-            .mode-tabs {
-                grid-template-columns:
-                    1fr;
-            }
-
-            .period-grid {
-                grid-template-columns:
-                    1fr;
-            }
-
-            .import-grid {
-                grid-template-columns:
-                    1fr;
-            }
-
-            .scanner-grid {
-                grid-template-columns:
-                    1fr;
-            }
-
-            .action-grid {
-                grid-template-columns:
-                    1fr;
-            }
-
-            .detail-stats {
-                grid-template-columns:
-                    repeat(2, 1fr);
-            }
-
-        }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Multibagger Hunter</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at top left, #102746 0%, #07111f 35%, #050b14 100%);
+    color: #eaf2ff;
+}
+
+header {
+    background: rgba(5,15,28,.96);
+    border-bottom: 1px solid #233b56;
+    padding: 20px 25px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    font-size: 32px;
+}
+
+.brand h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.brand h1 span {
+    color: #20df8a;
+}
+
+.brand p {
+    margin: 4px 0 0;
+    color: #8ea6c4;
+    font-size: 11px;
+}
+
+.header-info {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.header-card {
+    min-width: 155px;
+    padding: 9px 12px;
+    background: #0b1a2c;
+    border: 1px solid #28425f;
+    border-radius: 8px;
+}
+
+.header-card small {
+    display: block;
+    color: #7e95af;
+    font-size: 8px;
+    margin-bottom: 4px;
+}
+
+.header-card strong {
+    font-size: 12px;
+}
+
+.green {
+    color: #20df8a !important;
+}
+
+.red {
+    color: #ff5c6c !important;
+}
+
+.yellow {
+    color: #ffd449 !important;
+}
+
+.blue {
+    color: #62a7ff !important;
+}
+
+.container {
+    max-width: 1500px;
+    margin: auto;
+    padding: 16px;
+}
+
+.tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.tab {
+    height: 45px;
+    border: 1px solid #29445f;
+    background: #0b1829;
+    color: #93a9c2;
+    border-radius: 9px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.tab.active {
+    background: linear-gradient(135deg,#1677ff,#0c58dd);
+    color: white;
+    border-color: #378bff;
+}
+
+.panel {
+    background: linear-gradient(145deg,#0d1d30,#081626);
+    border: 1px solid #243e59;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 14px;
+}
+
+.title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.title-row h2 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.badge {
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: #102742;
+    color: #7eb4ff;
+    font-size: 9px;
+    font-weight: bold;
+}
+
+.period-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.subbox {
+    background: #091728;
+    border: 1px solid #263f5b;
+    border-radius: 9px;
+    padding: 12px;
+}
+
+.subtitle {
+    font-size: 10px;
+    color: #b7c8dc;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.quick {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.quick button {
+    padding: 8px 12px;
+    border: 1px solid #29435e;
+    background: #0d1e33;
+    color: #91a7c0;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.quick button.active {
+    background: #1677ff;
+    color: white;
+    border-color: #378bff;
+}
+
+.custom-grid {
+    display: grid;
+    grid-template-columns: 1fr 18px 1fr;
+    align-items: end;
+    gap: 6px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.field label {
+    color: #7e95af;
+    font-size: 8px;
+    font-weight: bold;
+}
+
+input,
+select {
+    width: 100%;
+    height: 35px;
+    padding: 7px 9px;
+    background: #0c1b2e;
+    border: 1px solid #29435f;
+    border-radius: 7px;
+    color: #e8f2ff;
+    font-size: 11px;
+}
+
+.scanner-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 9px;
+    align-items: end;
+}
+
+.scan-btn {
+    width: 100%;
+    height: 35px;
+    border: 0;
+    border-radius: 7px;
+    background: linear-gradient(135deg,#1677ff,#0b5ee8);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.status {
+    margin-top: 8px;
+    font-size: 10px;
+    color: #8298b1;
+}
+
+.status.ok {
+    color: #20df8a;
+}
+
+.status.error {
+    color: #ff5c6c;
+}
+
+.table-wrap {
+    overflow-x: auto;
+    border: 1px solid #253e59;
+    border-radius: 8px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1050px;
+}
+
+th {
+    background: #11263e;
+    color: #a9bdd2;
+    padding: 9px 8px;
+    font-size: 9px;
+    text-align: right;
+    white-space: nowrap;
+    border-bottom: 1px solid #29445f;
+}
+
+th:first-child,
+td:first-child {
+    text-align: left;
+}
+
+td {
+    padding: 9px 8px;
+    font-size: 10px;
+    text-align: right;
+    border-bottom: 1px solid #182d45;
+}
+
+tbody tr:hover {
+    background: rgba(27,111,255,.08);
+}
+
+.code {
+    color: #62a7ff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.outlier {
+    background: rgba(32,223,138,.14);
+    color: #20df8a !important;
+    font-weight: bold;
+    box-shadow: inset 3px 0 0 #20df8a;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.stat {
+    background: #0a192b;
+    border: 1px solid #29435f;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.stat small {
+    display: block;
+    color: #748ca6;
+    font-size: 8px;
+    margin-bottom: 5px;
+}
+
+.stat strong {
+    font-size: 16px;
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.action-box {
+    background: #091728;
+    border: 1px solid #29435f;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.action-title {
+    font-weight: bold;
+    font-size: 11px;
+    margin-bottom: 8px;
+}
+
+.labels {
+    display: flex;
+    justify-content: space-between;
+    color: #7f96af;
+    font-size: 8px;
+    margin-bottom: 5px;
+}
+
+.action-bar {
+    height: 10px;
+    position: relative;
+    border-radius: 20px;
+    background: linear-gradient(
+        to right,
+        #ff475b,
+        #ff883e,
+        #ffd448,
+        #8995a7,
+        #35dc82,
+        #00b979
+    );
+}
+
+.pointer {
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    width: 3px;
+    height: 24px;
+    background: white;
+}
+
+.info {
+    color: #8298b1;
+    font-size: 10px;
+    line-height: 1.9;
+}
+
+.info strong {
+    color: #e1edfa;
+}
+
+.acc {
+    display: inline-block;
+    padding: 4px 7px;
+    border-radius: 10px;
+    background: rgba(32,223,138,.15);
+    color: #20df8a;
+    font-size: 8px;
+    font-weight: bold;
+}
+
+.dist {
+    display: inline-block;
+    padding: 4px 7px;
+    border-radius: 10px;
+    background: rgba(255,92,108,.15);
+    color: #ff6473;
+    font-size: 8px;
+    font-weight: bold;
+}
+
+.empty {
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.empty-icon {
+    font-size: 52px;
+}
+
+.empty p {
+    color: #8195ae;
+    max-width: 450px;
+    line-height: 1.6;
+    font-size: 12px;
+}
+
+.note {
+    margin-top: 9px;
+    color: #687e99;
+    font-size: 9px;
+    line-height: 1.6;
+}
+
+@media(max-width:1000px) {
+    .scanner-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .detail-grid {
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+
+@media(max-width:700px) {
+    .tabs,
+    .period-grid,
+    .scanner-grid,
+    .action-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+</style>
 
 </head>
 
@@ -1225,16 +483,11 @@
 
 <header>
 
-
-    <div class="header-top">
-
+    <div class="header">
 
         <div class="brand">
 
-            <div class="brand-icon">
-                📊
-            </div>
-
+            <div class="brand-icon">📊</div>
 
             <div>
 
@@ -1244,8 +497,7 @@
                 </h1>
 
                 <p>
-                    Broker Accumulation &
-                    Average Buy Outlier Screener
+                    Broker Accumulation & Average Buy Outlier Screener
                 </p>
 
             </div>
@@ -1255,14 +507,13 @@
 
         <div class="header-info">
 
-
             <div class="header-card">
 
                 <small>
-                    DATA TERAKHIR DIPERBARUI
+                    DATA TERAKHIR
                 </small>
 
-                <strong id="updateTime">
+                <strong id="updatedAt">
                     Belum tersedia
                 </strong>
 
@@ -1275,8 +526,12 @@
                     TOTAL EMITEN
                 </small>
 
-                <strong id="issuerCount">
+                <strong
+                    id="totalIssuer"
+                    class="green">
+
                     -
+
                 </strong>
 
             </div>
@@ -1289,21 +544,17 @@
                 </small>
 
                 <strong
-                    id="dataStatus"
-                    class="offline-status">
+                    id="dataStatus">
 
-                    BELUM TERHUBUNG
+                    MENGHUBUNGKAN...
 
                 </strong>
 
             </div>
 
-
         </div>
 
-
     </div>
-
 
 </header>
 
@@ -1311,16 +562,12 @@
 <div class="container">
 
 
-    <!-- =========================
-         MODE
-    ========================= -->
+    <!-- MODE -->
 
-    <div class="mode-tabs">
-
+    <div class="tabs">
 
         <button
-            class="mode-tab active"
-            id="tab-multibagger"
+            class="tab active"
             onclick="changeMode('multibagger')">
 
             🟢 MULTIBAGGER
@@ -1329,8 +576,7 @@
 
 
         <button
-            class="mode-tab swing"
-            id="tab-swing"
+            class="tab"
             onclick="changeMode('swing')">
 
             🔵 SWING
@@ -1339,119 +585,34 @@
 
 
         <button
-            class="mode-tab daytrade"
-            id="tab-daytrade"
+            class="tab"
             onclick="changeMode('daytrade')">
 
             🟠 DAY TRADE
 
         </button>
 
-
     </div>
 
 
-    <!-- =========================
-         MULTIBAGGER
-    ========================= -->
+    <!-- MULTIBAGGER -->
 
     <div id="multibaggerApp">
 
 
-        <!-- =========================
-             IMPORT
-        ========================= -->
+        <!-- PERIOD -->
 
         <div class="panel">
 
-
-            <div class="section-title">
-
-                <h2>
-                    📥 Import Data Broker
-                </h2>
-
-                <span class="section-badge">
-                    CSV
-                </span>
-
-            </div>
-
-
-            <div class="import-grid">
-
-
-                <div class="file-input">
-
-
-                    <div class="field">
-
-                        <label>
-                            FILE DATA BROKER
-                        </label>
-
-
-                        <input
-                            type="file"
-                            id="csvFile"
-                            accept=".csv"
-                        >
-
-                    </div>
-
-
-                    <div
-                        class="status"
-                        id="importStatus">
-
-                        Pilih file CSV untuk
-                        menjalankan scanner.
-
-                    </div>
-
-
-                </div>
-
-
-                <button
-                    class="template-button"
-                    onclick="downloadTemplate()">
-
-                    📄 DOWNLOAD TEMPLATE CSV
-
-                </button>
-
-
-            </div>
-
-
-            <div class="note">
-
-                Format CSV:
-                date,ticker,broker,buy_value,buy_lot,buy_avg,sell_value,sell_lot,sell_avg
-
-            </div>
-
-
-        </div>
-
-
-        <!-- =========================
-             PERIOD
-        ========================= -->
-
-        <div class="panel">
-
-
-            <div class="section-title">
+            <div class="title-row">
 
                 <h2>
                     📅 Periode Analisis
                 </h2>
 
                 <span
-                    class="section-badge"
-                    id="periodStatus">
+                    class="badge"
+                    id="periodLabel">
 
                     6 Bulan
 
@@ -1463,78 +624,65 @@
             <div class="period-grid">
 
 
-                <div class="sub-box">
+                <div class="subbox">
 
-
-                    <div class="sub-title">
-                        Periode Cepat
+                    <div class="subtitle">
+                        PERIODE CEPAT
                     </div>
 
 
-                    <div class="quick-buttons">
-
+                    <div class="quick">
 
                         <button
-                            class="quick-button"
-                            id="quick-1"
-                            onclick="setQuickPeriod(1)">
+                            onclick="setPeriod(1)"
+                            id="p1">
 
                             1 Bulan
 
                         </button>
 
-
                         <button
-                            class="quick-button"
-                            id="quick-3"
-                            onclick="setQuickPeriod(3)">
+                            onclick="setPeriod(3)"
+                            id="p3">
 
                             3 Bulan
 
                         </button>
 
-
                         <button
-                            class="quick-button active"
-                            id="quick-6"
-                            onclick="setQuickPeriod(6)">
+                            class="active"
+                            onclick="setPeriod(6)"
+                            id="p6">
 
                             6 Bulan
 
                         </button>
 
-
                         <button
-                            class="quick-button"
-                            id="quick-12"
-                            onclick="setQuickPeriod(12)">
+                            onclick="setPeriod(12)"
+                            id="p12">
 
                             12 Bulan
 
                         </button>
 
-
                         <button
-                            class="quick-button"
-                            id="quick-24"
-                            onclick="setQuickPeriod(24)">
+                            onclick="setPeriod(24)"
+                            id="p24">
 
                             24 Bulan
 
                         </button>
 
-
                     </div>
-
 
                 </div>
 
 
-                <div class="sub-box">
+                <div class="subbox">
 
-
-                    <div class="sub-title">
-                        Rentang Custom
+                    <div class="subtitle">
+                        RENTANG CUSTOM
                     </div>
 
 
@@ -1549,14 +697,19 @@
 
                             <input
                                 type="date"
-                                id="startDate"
-                            >
+                                id="startDate">
 
                         </div>
 
 
-                        <div class="arrow">
+                        <div style="
+                            text-align:center;
+                            color:#7288a3;
+                            padding-bottom:9px;
+                        ">
+
                             →
+
                         </div>
 
 
@@ -1568,14 +721,12 @@
 
                             <input
                                 type="date"
-                                id="endDate"
-                            >
+                                id="endDate">
 
                         </div>
 
 
                     </div>
-
 
                 </div>
 
@@ -1586,21 +737,18 @@
         </div>
 
 
-        <!-- =========================
-             SCANNER
-        ========================= -->
+        <!-- FILTER -->
 
         <div class="panel">
 
-
-            <div class="section-title">
+            <div class="title-row">
 
                 <h2>
                     🎯 Scanner ALL Emiten
                 </h2>
 
-                <span class="section-badge">
-                    MULTIBAGGER
+                <span class="badge">
+                    DATA API
                 </span>
 
             </div>
@@ -1614,7 +762,6 @@
                     <label>
                         POLA
                     </label>
-
 
                     <select id="pattern">
 
@@ -1634,17 +781,14 @@
                 <div class="field">
 
                     <label>
-                        MINIMUM GAP (%)
+                        MIN. GAP (%)
                     </label>
-
 
                     <input
                         type="number"
                         id="minGap"
                         value="20"
-                        min="0"
-                        step="1"
-                    >
+                        min="0">
 
                 </div>
 
@@ -1655,13 +799,11 @@
                         MIN. BROKER
                     </label>
 
-
                     <input
                         type="number"
                         id="minBroker"
                         value="5"
-                        min="2"
-                    >
+                        min="2">
 
                 </div>
 
@@ -1671,7 +813,6 @@
                     <label>
                         URUTKAN
                     </label>
-
 
                     <select id="sortBy">
 
@@ -1691,14 +832,13 @@
 
                 </div>
 
-
             </div>
 
 
             <div style="margin-top:10px;">
 
                 <button
-                    class="scan-button"
+                    class="scan-btn"
                     onclick="scanAll()">
 
                     🔎 SCAN ALL EMITEN
@@ -1708,123 +848,75 @@
             </div>
 
 
+            <div
+                class="status"
+                id="status">
+
+                Menghubungkan ke data broker...
+
+            </div>
+
         </div>
 
 
-        <!-- =========================
-             SCANNER RESULT
-        ========================= -->
+        <!-- RESULT -->
 
         <div class="panel">
 
-
-            <div class="section-title result-head">
-
+            <div class="title-row">
 
                 <h2>
                     📈 Hasil Scanner
                 </h2>
 
-
                 <span
-                    class="result-count"
-                    id="foundCount">
+                    class="badge"
+                    id="resultCount">
 
                     0 SAHAM
 
                 </span>
-
 
             </div>
 
 
             <div class="table-wrap">
 
-
                 <table>
-
 
                     <thead>
 
                         <tr>
 
-                            <th>
-                                No
-                            </th>
-
-                            <th>
-                                Kode
-                            </th>
-
-                            <th>
-                                Harga
-                            </th>
-
-                            <th>
-                                Broker Outlier
-                            </th>
-
-                            <th>
-                                Avg Buy
-                            </th>
-
-                            <th>
-                                Median Avg
-                            </th>
-
-                            <th>
-                                Gap
-                            </th>
-
-                            <th>
-                                Net Buy
-                            </th>
-
-                            <th>
-                                Broker
-                            </th>
-
-                            <th>
-                                Detail
-                            </th>
+                            <th>No</th>
+                            <th>Kode</th>
+                            <th>Harga</th>
+                            <th>Broker Outlier</th>
+                            <th>Avg Buy</th>
+                            <th>Median Avg</th>
+                            <th>Gap</th>
+                            <th>Net Buy</th>
+                            <th>Broker</th>
+                            <th>Detail</th>
 
                         </tr>
 
                     </thead>
 
-
-                    <tbody
-                        id="scannerTable">
-
-                    </tbody>
-
+                    <tbody id="resultTable"></tbody>
 
                 </table>
 
-
             </div>
-
-
-            <div class="note">
-
-                Broker outlier = broker dengan Avg Buy
-                terendah dibanding median Avg Buy broker
-                lainnya dalam emiten yang sama.
-
-            </div>
-
 
         </div>
 
 
-        <!-- =========================
-             DETAIL
-        ========================= -->
+        <!-- DETAIL -->
 
         <div class="panel">
 
-
-            <div class="section-title">
+            <div class="title-row">
 
                 <h2>
                     📊 Detail Broker -
@@ -1833,10 +925,9 @@
                     </span>
                 </h2>
 
-
                 <span
-                    class="section-badge"
-                    id="detailDate">
+                    class="badge"
+                    id="detailPeriod">
 
                     -
 
@@ -1845,13 +936,13 @@
             </div>
 
 
-            <div class="detail-stats">
+            <div class="detail-grid">
 
 
                 <div class="stat">
 
                     <small>
-                        HARGA SEKARANG
+                        HARGA
                     </small>
 
                     <strong
@@ -1868,7 +959,7 @@
                 <div class="stat">
 
                     <small>
-                        BROKER AKUMULASI
+                        BROKER ACC
                     </small>
 
                     <strong
@@ -1885,7 +976,7 @@
                 <div class="stat">
 
                     <small>
-                        BROKER DISTRIBUSI
+                        BROKER DIST
                     </small>
 
                     <strong
@@ -1902,7 +993,7 @@
                 <div class="stat">
 
                     <small>
-                        AVG BUY TERENDAH
+                        AVG TERENDAH
                     </small>
 
                     <strong
@@ -1922,7 +1013,9 @@
                         BROKER OUTLIER
                     </small>
 
-                    <strong id="detailBroker">
+                    <strong
+                        class="blue"
+                        id="detailBroker">
 
                         -
 
@@ -1947,7 +1040,6 @@
 
                 </div>
 
-
             </div>
 
 
@@ -1956,105 +1048,65 @@
 
                 <div class="action-box">
 
-
                     <div class="action-title">
                         Broker Action
                     </div>
 
-
-                    <div class="action-labels">
-
-                        <span>
-                            Big Dist
-                        </span>
-
-                        <span>
-                            Neutral
-                        </span>
-
-                        <span>
-                            Big Acc
-                        </span>
-
+                    <div class="labels">
+                        <span>Big Dist</span>
+                        <span>Neutral</span>
+                        <span>Big Acc</span>
                     </div>
-
 
                     <div class="action-bar">
 
                         <div
-                            class="action-pointer"
-                            id="actionPointer">
+                            class="pointer"
+                            id="pointer">
 
                         </div>
 
                     </div>
-
-
-                    <div class="action-caption">
-
-                        <span>
-                            Distribusi
-                        </span>
-
-                        <span>
-                            Netral
-                        </span>
-
-                        <span>
-                            Akumulasi
-                        </span>
-
-                    </div>
-
 
                 </div>
 
 
                 <div class="action-box">
 
-
                     <div class="action-title">
                         Analisis Avg Buy
                     </div>
 
 
-                    <div class="info-lines">
+                    <div class="info">
 
+                        Harga:
+                        <strong id="infoPrice">
+                            -
+                        </strong>
 
-                        <div>
-                            Harga:
-                            <strong id="infoPrice">
-                                -
-                            </strong>
-                        </div>
+                        <br>
 
+                        Median:
+                        <strong id="infoMedian">
+                            -
+                        </strong>
 
-                        <div>
-                            Median:
-                            <strong id="infoMedian">
-                                -
-                            </strong>
-                        </div>
+                        <br>
 
+                        Outlier:
+                        <strong id="infoLowest">
+                            -
+                        </strong>
 
-                        <div>
-                            Outlier:
-                            <strong id="infoLowest">
-                                -
-                            </strong>
-                        </div>
+                        <br>
 
-
-                        <div>
-                            Gap:
-                            <strong id="infoGap">
-                                -
-                            </strong>
-                        </div>
-
+                        Gap:
+                        <strong id="infoGap">
+                            -
+                        </strong>
 
                     </div>
-
 
                 </div>
 
@@ -2064,80 +1116,44 @@
 
             <div class="table-wrap">
 
-
                 <table>
-
 
                     <thead>
 
                         <tr>
 
-                            <th>
-                                No
-                            </th>
-
-                            <th>
-                                Broker
-                            </th>
-
-                            <th>
-                                B.Val
-                            </th>
-
-                            <th>
-                                B.Lot
-                            </th>
-
-                            <th>
-                                B.Avg
-                            </th>
-
-                            <th>
-                                S.Val
-                            </th>
-
-                            <th>
-                                S.Lot
-                            </th>
-
-                            <th>
-                                S.Avg
-                            </th>
-
-                            <th>
-                                Net
-                            </th>
-
-                            <th>
-                                Action
-                            </th>
+                            <th>No</th>
+                            <th>Broker</th>
+                            <th>B.Val</th>
+                            <th>B.Lot</th>
+                            <th>B.Avg</th>
+                            <th>S.Val</th>
+                            <th>S.Lot</th>
+                            <th>S.Avg</th>
+                            <th>Net</th>
+                            <th>Action</th>
 
                         </tr>
 
                     </thead>
 
-
                     <tbody
                         id="detailTable">
-
                     </tbody>
 
-
                 </table>
-
 
             </div>
 
 
             <div class="note">
 
-                🟢 Highlight hijau menunjukkan Avg Buy
-                yang berada jauh di bawah median broker.
-                Ini adalah indikator screening, bukan
-                jaminan bahwa saham akan menjadi multibagger.
+                🟢 Hijau = Avg Buy berada jauh
+                di bawah median broker. Data berasal
+                dari file broker_live.json yang dibuat
+                oleh GitHub Actions.
 
             </div>
-
 
         </div>
 
@@ -2145,9 +1161,7 @@
     </div>
 
 
-    <!-- =========================
-         SWING
-    ========================= -->
+    <!-- SWING -->
 
     <div
         id="swingApp"
@@ -2166,12 +1180,11 @@
                 </h2>
 
                 <p>
-                    Modul Swing belum diaktifkan.
-                    Formula screening Swing akan dimasukkan
-                    nanti setelah kriterianya ditentukan.
+                    Formula Swing belum dibuat.
+                    Modul ini masih kosong.
                 </p>
 
-                <span class="section-badge">
+                <span class="badge">
                     DEVELOPMENT
                 </span>
 
@@ -2182,9 +1195,7 @@
     </div>
 
 
-    <!-- =========================
-         DAY TRADE
-    ========================= -->
+    <!-- DAY TRADE -->
 
     <div
         id="daytradeApp"
@@ -2203,12 +1214,11 @@
                 </h2>
 
                 <p>
-                    Modul Day Trade belum diaktifkan.
-                    Formula screening Day Trade akan dimasukkan
-                    nanti setelah kriterianya ditentukan.
+                    Formula Day Trade belum dibuat.
+                    Modul ini masih kosong.
                 </p>
 
-                <span class="section-badge">
+                <span class="badge">
                     DEVELOPMENT
                 </span>
 
@@ -2225,548 +1235,38 @@
 <script>
 
 
-/* =========================================
-   GLOBAL DATA
-========================================= */
+let liveData = null;
 
-let rawData = [];
 
-let groupedData = {};
-
-let currentDetailCode = null;
-
-
-/* =========================================
-   DATE HELPERS
-========================================= */
-
-function pad(n) {
-
-    return String(n).padStart(2, "0");
-
-}
-
-
-function dateToInput(date) {
-
-    return (
-        date.getFullYear() +
-        "-" +
-        pad(date.getMonth() + 1) +
-        "-" +
-        pad(date.getDate())
-    );
-
-}
-
-
-function formatDate(dateString) {
-
-    if (!dateString) {
-        return "-";
-    }
-
-    const parts =
-        dateString.split("-");
-
-    if (parts.length !== 3) {
-        return dateString;
-    }
-
-    return (
-        parts[2] +
-        "-" +
-        parts[1] +
-        "-" +
-        parts[0]
-    );
-
-}
-
-
-function setDefaultPeriod() {
-
-    const end = new Date();
-
-    const start = new Date();
-
-    start.setMonth(
-        start.getMonth() - 6
-    );
-
-    document.getElementById(
-        "startDate"
-    ).value =
-        dateToInput(start);
-
-    document.getElementById(
-        "endDate"
-    ).value =
-        dateToInput(end);
-
-}
-
-
-/* =========================================
-   QUICK PERIOD
-========================================= */
-
-function setQuickPeriod(months) {
-
-
-    document
-        .querySelectorAll(".quick-button")
-        .forEach(button => {
-
-            button.classList.remove(
-                "active"
-            );
-
-        });
-
-
-    const active =
-        document.getElementById(
-            "quick-" + months
-        );
-
-
-    if (active) {
-
-        active.classList.add(
-            "active"
-        );
-
-    }
-
-
-    const end = new Date();
-
-    const start = new Date();
-
-    start.setMonth(
-        start.getMonth() - months
-    );
-
-
-    document.getElementById(
-        "startDate"
-    ).value =
-        dateToInput(start);
-
-
-    document.getElementById(
-        "endDate"
-    ).value =
-        dateToInput(end);
-
-
-    document.getElementById(
-        "periodStatus"
-    ).innerText =
-        months + " Bulan";
-
-
-    updateDetailDate();
-
-}
-
-
-/* =========================================
-   CUSTOM DATE CHANGE
-========================================= */
-
-document
-    .getElementById("startDate")
-    .addEventListener(
-        "change",
-        function() {
-
-            document
-                .querySelectorAll(".quick-button")
-                .forEach(button => {
-
-                    button.classList.remove(
-                        "active"
-                    );
-
-                });
-
-            document.getElementById(
-                "periodStatus"
-            ).innerText =
-                "Custom";
-
-            updateDetailDate();
-
-        }
-    );
-
-
-document
-    .getElementById("endDate")
-    .addEventListener(
-        "change",
-        function() {
-
-            document
-                .querySelectorAll(".quick-button")
-                .forEach(button => {
-
-                    button.classList.remove(
-                        "active"
-                    );
-
-                });
-
-            document.getElementById(
-                "periodStatus"
-            ).innerText =
-                "Custom";
-
-            updateDetailDate();
-
-        }
-    );
-
-
-function updateDetailDate() {
-
-    const start =
-        document.getElementById(
-            "startDate"
-        ).value;
-
-    const end =
-        document.getElementById(
-            "endDate"
-        ).value;
-
-
-    if (!start || !end) {
-
-        document.getElementById(
-            "detailDate"
-        ).innerText =
-            "-";
-
-        return;
-
-    }
-
-
-    document.getElementById(
-        "detailDate"
-    ).innerText =
-        formatDate(start) +
-        " → " +
-        formatDate(end);
-
-}
-
-
-/* =========================================
-   CSV PARSER
-========================================= */
-
-function parseCSV(text) {
-
-
-    const lines =
-        text
-            .replace(/\r/g, "")
-            .split("\n")
-            .filter(
-                line =>
-                    line.trim() !== ""
-            );
-
-
-    if (lines.length < 2) {
-
-        throw new Error(
-            "CSV tidak memiliki data."
-        );
-
-    }
-
-
-    const headers =
-        parseCSVLine(lines[0])
-            .map(
-                value =>
-                    value.trim()
-                        .toLowerCase()
-            );
-
-
-    const rows = [];
-
-
-    for (
-        let i = 1;
-        i < lines.length;
-        i++
-    ) {
-
-
-        const values =
-            parseCSVLine(lines[i]);
-
-
-        if (!values.length) {
-            continue;
-        }
-
-
-        const row = {};
-
-
-        headers.forEach(
-            (header, index) => {
-
-                row[header] =
-                    values[index]
-                        ? values[index].trim()
-                        : "";
-
-            }
-        );
-
-
-        rows.push(row);
-
-    }
-
-
-    return rows;
-
-}
-
-
-function parseCSVLine(line) {
-
-
-    const result = [];
-
-    let current = "";
-
-    let insideQuotes = false;
-
-
-    for (
-        let i = 0;
-        i < line.length;
-        i++
-    ) {
-
-
-        const char =
-            line[i];
-
-
-        if (
-            char === '"' &&
-            line[i + 1] === '"'
-        ) {
-
-            current += '"';
-
-            i++;
-
-            continue;
-
-        }
-
-
-        if (char === '"') {
-
-            insideQuotes =
-                !insideQuotes;
-
-            continue;
-
-        }
-
-
-        if (
-            char === "," &&
-            !insideQuotes
-        ) {
-
-            result.push(current);
-
-            current = "";
-
-        } else {
-
-            current += char;
-
-        }
-
-    }
-
-
-    result.push(current);
-
-
-    return result;
-
-}
-
-
-/* =========================================
-   NUMBER HELPERS
-========================================= */
-
-function toNumber(value) {
-
-
-    if (
-        value === undefined ||
-        value === null ||
-        value === ""
-    ) {
-
-        return 0;
-
-    }
-
-
-    let text =
-        String(value)
-            .trim()
-            .replace(/\s/g, "")
-            .replace(/Rp/gi, "");
-
-
-    /*
-       Mendukung:
-       1,234.56
-       1.234,56
-       1234.56
-       1234
-    */
-
-    if (
-        text.includes(",") &&
-        text.includes(".")
-    ) {
-
-        if (
-            text.lastIndexOf(",") >
-            text.lastIndexOf(".")
-        ) {
-
-            text =
-                text
-                    .replace(/\./g, "")
-                    .replace(",", ".");
-
-        } else {
-
-            text =
-                text.replace(/,/g, "");
-
-        }
-
-    } else if (
-        text.includes(",")
-    ) {
-
-        text =
-            text.replace(",", ".");
-
-    }
-
-
-    const number =
-        Number(text);
-
-
-    return Number.isFinite(number)
-        ? number
-        : 0;
-
-}
-
-
-/* =========================================
-   MEDIAN
-========================================= */
-
-function median(values) {
-
-
-    const clean =
-        values
-            .filter(
-                value =>
-                    Number.isFinite(value) &&
-                    value > 0
-            )
-            .sort(
-                (a, b) =>
-                    a - b
-            );
-
-
-    if (!clean.length) {
-
-        return 0;
-
-    }
-
-
-    const middle =
-        Math.floor(
-            clean.length / 2
-        );
-
-
-    if (
-        clean.length % 2 === 0
-    ) {
-
-        return (
-            clean[middle - 1] +
-            clean[middle]
-        ) / 2;
-
-    }
-
-
-    return clean[middle];
-
-}
-
-
-/* =========================================
+/* ====================================
    FORMAT
-========================================= */
+==================================== */
 
-function formatNumber(value) {
+function number(value) {
 
     return new Intl.NumberFormat(
         "id-ID"
     ).format(
-        Math.round(value)
+        Math.round(
+            Number(value) || 0
+        )
     );
 
 }
 
 
-function formatMoney(value) {
+function money(value) {
 
-
-    const sign =
-        value < 0
-            ? "-"
-            : "";
+    value =
+        Number(value) || 0;
 
 
     const abs =
         Math.abs(value);
+
+
+    const sign =
+        value < 0 ? "-" : "";
 
 
     if (abs >= 1000000000) {
@@ -2774,9 +1274,8 @@ function formatMoney(value) {
         return (
             sign +
             "Rp" +
-            (
-                abs / 1000000000
-            ).toFixed(2) +
+            (abs / 1000000000)
+                .toFixed(2) +
             " B"
         );
 
@@ -2788,9 +1287,8 @@ function formatMoney(value) {
         return (
             sign +
             "Rp" +
-            (
-                abs / 1000000
-            ).toFixed(1) +
+            (abs / 1000000)
+                .toFixed(1) +
             " M"
         );
 
@@ -2800,652 +1298,352 @@ function formatMoney(value) {
     return (
         sign +
         "Rp" +
-        formatNumber(abs)
+        number(abs)
     );
 
 }
 
 
-/* =========================================
-   IMPORT CSV
-========================================= */
+function median(values) {
 
-document
-    .getElementById("csvFile")
-    .addEventListener(
-        "change",
-        function(event) {
-
-
-            const file =
-                event.target.files[0];
-
-
-            if (!file) {
-
-                return;
-
-            }
+    const arr =
+        values
+            .filter(
+                x =>
+                    Number(x) > 0
+            )
+            .sort(
+                (a,b) =>
+                    a - b
+            );
 
 
-            const reader =
-                new FileReader();
+    if (!arr.length) {
 
-
-            reader.onload =
-                function(e) {
-
-
-                    try {
-
-
-                        const text =
-                            e.target.result;
-
-
-                        rawData =
-                            parseCSV(text);
-
-
-                        validateCSV();
-
-
-                        setStatus(
-                            "success",
-                            "✅ " +
-                            rawData.length +
-                            " baris berhasil dibaca."
-                        );
-
-
-                        buildGroupedData();
-
-
-                        document.getElementById(
-                            "dataStatus"
-                        ).innerText =
-                            "DATA TERSEDIA";
-
-
-                        document.getElementById(
-                            "dataStatus"
-                        ).className =
-                            "live-status";
-
-
-                        updateIssuerCount();
-
-
-                        updateDataTimestamp();
-
-
-                    }
-                    catch(error) {
-
-
-                        rawData = [];
-
-
-                        groupedData = {};
-
-
-                        setStatus(
-                            "error",
-                            "❌ " +
-                            error.message
-                        );
-
-
-                    }
-
-                };
-
-
-            reader.readAsText(file);
-
-        }
-    );
-
-
-function validateCSV() {
-
-
-    const required = [
-        "date",
-        "ticker",
-        "broker",
-        "buy_value",
-        "buy_lot",
-        "buy_avg",
-        "sell_value",
-        "sell_lot",
-        "sell_avg"
-    ];
-
-
-    if (!rawData.length) {
-
-        throw new Error(
-            "File kosong."
-        );
+        return 0;
 
     }
 
 
-    const first =
-        rawData[0];
+    const mid =
+        Math.floor(
+            arr.length / 2
+        );
 
 
-    const missing =
-        required.filter(
-            column =>
-                !Object.prototype.hasOwnProperty.call(
-                    first,
-                    column
+    if (
+        arr.length % 2 === 0
+    ) {
+
+        return (
+            arr[mid - 1] +
+            arr[mid]
+        ) / 2;
+
+    }
+
+
+    return arr[mid];
+
+}
+
+
+/* ====================================
+   LOAD LIVE JSON
+==================================== */
+
+async function loadLiveData() {
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+
+    try {
+
+        status.innerText =
+            "Mengambil data broker asli...";
+
+
+        /*
+           Cache-busting supaya browser
+           tidak menggunakan JSON lama.
+        */
+
+        const response =
+            await fetch(
+                "./data/broker_live.json?t=" +
+                Date.now()
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "HTTP " +
+                response.status
+            );
+
+        }
+
+
+        liveData =
+            await response.json();
+
+
+        const stocks =
+            liveData.stocks || {};
+
+
+        const total =
+            Object.keys(
+                stocks
+            ).length;
+
+
+        document.getElementById(
+            "totalIssuer"
+        ).innerText =
+            total;
+
+
+        document.getElementById(
+            "updatedAt"
+        ).innerText =
+            liveData.updated_at ||
+            "-";
+
+
+        document.getElementById(
+            "dataStatus"
+        ).innerText =
+            "DATA ASLI";
+
+
+        document.getElementById(
+            "dataStatus"
+        ).className =
+            "green";
+
+
+        status.innerText =
+            "✅ Data broker berhasil dimuat: " +
+            total +
+            " emiten.";
+
+
+        status.className =
+            "status ok";
+
+
+        scanAll();
+
+
+    }
+    catch(error) {
+
+
+        console.error(error);
+
+
+        status.innerText =
+            "❌ Gagal membaca data/broker_live.json: " +
+            error.message;
+
+
+        status.className =
+            "status error";
+
+
+        document.getElementById(
+            "dataStatus"
+        ).innerText =
+            "GAGAL MEMUAT";
+
+    }
+
+}
+
+
+/* ====================================
+   PERIOD
+==================================== */
+
+function setPeriod(months) {
+
+
+    document
+        .querySelectorAll(
+            ".quick button"
+        )
+        .forEach(
+            button =>
+                button.classList.remove(
+                    "active"
                 )
         );
 
 
-    if (missing.length) {
-
-        throw new Error(
-            "Kolom tidak lengkap: " +
-            missing.join(", ")
-        );
-
-    }
-
-
-    rawData.forEach(
-        row => {
-
-            if (!row.ticker) {
-
-                throw new Error(
-                    "Ada baris tanpa ticker."
-                );
-
-            }
-
-            if (!row.broker) {
-
-                throw new Error(
-                    "Ada baris tanpa broker."
-                );
-
-            }
-
-        }
+    document.getElementById(
+        "p" + months
+    ).classList.add(
+        "active"
     );
-
-}
-
-
-/* =========================================
-   GROUP DATA
-========================================= */
-
-function buildGroupedData() {
-
-
-    groupedData = {};
-
-
-    rawData.forEach(
-        row => {
-
-
-            const date =
-                row.date;
-
-
-            const ticker =
-                row.ticker
-                    .toUpperCase();
-
-
-            const broker =
-                row.broker
-                    .toUpperCase();
-
-
-            if (!groupedData[ticker]) {
-
-                groupedData[ticker] = {
-
-                    dates: [],
-
-                    brokers: {}
-
-                };
-
-            }
-
-
-            if (
-                !groupedData[ticker]
-                    .dates
-                    .includes(date)
-            ) {
-
-                groupedData[ticker]
-                    .dates
-                    .push(date);
-
-            }
-
-
-            if (
-                !groupedData[ticker]
-                    .brokers[broker]
-            ) {
-
-                groupedData[ticker]
-                    .brokers[broker] = {
-
-                        buyValue: 0,
-                        buyLot: 0,
-                        sellValue: 0,
-                        sellLot: 0,
-
-                        buyAvgWeightedValue: 0,
-                        sellAvgWeightedValue: 0,
-
-                        rows: 0
-
-                    };
-
-            }
-
-
-            const item =
-                groupedData[ticker]
-                    .brokers[broker];
-
-
-            const buyValue =
-                toNumber(
-                    row.buy_value
-                );
-
-
-            const buyLot =
-                toNumber(
-                    row.buy_lot
-                );
-
-
-            const sellValue =
-                toNumber(
-                    row.sell_value
-                );
-
-
-            const sellLot =
-                toNumber(
-                    row.sell_lot
-                );
-
-
-            const buyAvg =
-                toNumber(
-                    row.buy_avg
-                );
-
-
-            const sellAvg =
-                toNumber(
-                    row.sell_avg
-                );
-
-
-            item.buyValue +=
-                buyValue;
-
-
-            item.buyLot +=
-                buyLot;
-
-
-            item.sellValue +=
-                sellValue;
-
-
-            item.sellLot +=
-                sellLot;
-
-
-            /*
-              Weighted average.
-              Prioritas:
-              nilai transaksi / lot.
-            */
-
-            if (buyLot > 0) {
-
-                item.buyAvgWeightedValue +=
-                    buyAvg *
-                    buyLot;
-
-            }
-
-
-            if (sellLot > 0) {
-
-                item.sellAvgWeightedValue +=
-                    sellAvg *
-                    sellLot;
-
-            }
-
-
-            item.rows++;
-
-        }
-    );
-
-
-    Object.keys(groupedData)
-        .forEach(
-            ticker => {
-
-
-                const brokers =
-                    groupedData[ticker]
-                        .brokers;
-
-
-                Object.keys(brokers)
-                    .forEach(
-                        broker => {
-
-
-                            const item =
-                                brokers[broker];
-
-
-                            item.buyAvg =
-                                item.buyLot > 0
-                                    ? item.buyAvgWeightedValue /
-                                      item.buyLot
-                                    : 0;
-
-
-                            item.sellAvg =
-                                item.sellLot > 0
-                                    ? item.sellAvgWeightedValue /
-                                      item.sellLot
-                                    : 0;
-
-
-                            item.net =
-                                item.buyValue -
-                                item.sellValue;
-
-                        }
-                    );
-
-            }
-        );
-
-}
-
-
-/* =========================================
-   DATE FILTER
-========================================= */
-
-function getFilteredRawData() {
-
-
-    const start =
-        document.getElementById(
-            "startDate"
-        ).value;
 
 
     const end =
-        document.getElementById(
-            "endDate"
-        ).value;
+        new Date();
 
 
-    if (!start || !end) {
-
-        return rawData;
-
-    }
+    const start =
+        new Date();
 
 
-    return rawData.filter(
-        row => {
+    start.setMonth(
+        start.getMonth() -
+        months
+    );
 
-            return (
-                row.date >= start &&
-                row.date <= end
-            );
 
-        }
+    document.getElementById(
+        "startDate"
+    ).value =
+        dateInput(start);
+
+
+    document.getElementById(
+        "endDate"
+    ).value =
+        dateInput(end);
+
+
+    document.getElementById(
+        "periodLabel"
+    ).innerText =
+        months +
+        " Bulan";
+
+
+    document.getElementById(
+        "detailPeriod"
+    ).innerText =
+        months +
+        " Bulan";
+
+
+    scanAll();
+
+}
+
+
+function dateInput(date) {
+
+    return (
+        date.getFullYear() +
+        "-" +
+        String(
+            date.getMonth() + 1
+        ).padStart(2,"0") +
+        "-" +
+        String(
+            date.getDate()
+        ).padStart(2,"0")
     );
 
 }
 
 
-/* =========================================
-   BUILD PERIOD DATA
-========================================= */
+/* ====================================
+   CUSTOM DATE
+==================================== */
 
-function buildPeriodGroupedData() {
+document
+    .getElementById(
+        "startDate"
+    )
+    .addEventListener(
+        "change",
+        function() {
 
-
-    const filtered =
-        getFilteredRawData();
-
-
-    const result = {};
-
-
-    filtered.forEach(
-        row => {
-
-
-            const ticker =
-                row.ticker
-                    .toUpperCase();
-
-
-            const broker =
-                row.broker
-                    .toUpperCase();
-
-
-            if (!result[ticker]) {
-
-                result[ticker] = {
-
-                    brokers: {},
-
-                    dates: []
-
-                };
-
-            }
-
-
-            if (
-                !result[ticker]
-                    .dates
-                    .includes(row.date)
-            ) {
-
-                result[ticker]
-                    .dates
-                    .push(row.date);
-
-            }
-
-
-            if (
-                !result[ticker]
-                    .brokers[broker]
-            ) {
-
-                result[ticker]
-                    .brokers[broker] = {
-
-                        buyValue: 0,
-                        buyLot: 0,
-                        sellValue: 0,
-                        sellLot: 0,
-
-                        buyAvgWeightedValue: 0,
-                        sellAvgWeightedValue: 0
-
-                    };
-
-            }
-
-
-            const item =
-                result[ticker]
-                    .brokers[broker];
-
-
-            const buyValue =
-                toNumber(
-                    row.buy_value
+            document
+                .querySelectorAll(
+                    ".quick button"
+                )
+                .forEach(
+                    button =>
+                        button.classList.remove(
+                            "active"
+                        )
                 );
 
 
-            const buyLot =
-                toNumber(
-                    row.buy_lot
-                );
+            document.getElementById(
+                "periodLabel"
+            ).innerText =
+                "Custom";
 
 
-            const buyAvg =
-                toNumber(
-                    row.buy_avg
-                );
-
-
-            const sellValue =
-                toNumber(
-                    row.sell_value
-                );
-
-
-            const sellLot =
-                toNumber(
-                    row.sell_lot
-                );
-
-
-            const sellAvg =
-                toNumber(
-                    row.sell_avg
-                );
-
-
-            item.buyValue +=
-                buyValue;
-
-
-            item.buyLot +=
-                buyLot;
-
-
-            item.sellValue +=
-                sellValue;
-
-
-            item.sellLot +=
-                sellLot;
-
-
-            item.buyAvgWeightedValue +=
-                buyAvg *
-                buyLot;
-
-
-            item.sellAvgWeightedValue +=
-                sellAvg *
-                sellLot;
+            document.getElementById(
+                "detailPeriod"
+            ).innerText =
+                "Custom";
 
         }
     );
 
 
-    Object.keys(result)
-        .forEach(
-            ticker => {
+document
+    .getElementById(
+        "endDate"
+    )
+    .addEventListener(
+        "change",
+        function() {
+
+            document
+                .querySelectorAll(
+                    ".quick button"
+                )
+                .forEach(
+                    button =>
+                        button.classList.remove(
+                            "active"
+                        )
+                );
 
 
-                const brokers =
-                    result[ticker]
-                        .brokers;
+            document.getElementById(
+                "periodLabel"
+            ).innerText =
+                "Custom";
 
 
-                Object.keys(brokers)
-                    .forEach(
-                        broker => {
+            document.getElementById(
+                "detailPeriod"
+            ).innerText =
+                "Custom";
+
+        }
+    );
 
 
-                            const item =
-                                brokers[broker];
-
-
-                            item.buyAvg =
-                                item.buyLot > 0
-                                    ? item.buyAvgWeightedValue /
-                                      item.buyLot
-                                    : 0;
-
-
-                            item.sellAvg =
-                                item.sellLot > 0
-                                    ? item.sellAvgWeightedValue /
-                                      item.sellLot
-                                    : 0;
-
-
-                            item.net =
-                                item.buyValue -
-                                item.sellValue;
-
-                        }
-                    );
-
-            }
-        );
-
-
-    return result;
-
-}
-
-
-/* =========================================
-   SCAN ALL
-========================================= */
+/* ====================================
+   SCAN
+==================================== */
 
 function scanAll() {
 
 
-    if (!rawData.length) {
-
-        setStatus(
-            "error",
-            "❌ Import data CSV terlebih dahulu."
-        );
+    if (!liveData) {
 
         return;
 
     }
 
 
-    const data =
-        buildPeriodGroupedData();
+    const stocks =
+        liveData.stocks || {};
 
 
     const minGap =
@@ -3453,7 +1651,7 @@ function scanAll() {
             document.getElementById(
                 "minGap"
             ).value
-        );
+        ) || 0;
 
 
     const minBroker =
@@ -3461,13 +1659,7 @@ function scanAll() {
             document.getElementById(
                 "minBroker"
             ).value
-        );
-
-
-    const pattern =
-        document.getElementById(
-            "pattern"
-        ).value;
+        ) || 2;
 
 
     const sortBy =
@@ -3479,276 +1671,160 @@ function scanAll() {
     const results = [];
 
 
-    Object.entries(data)
-        .forEach(
-            ([ticker, stock]) => {
+    Object.entries(
+        stocks
+    ).forEach(
+        ([ticker, stock]) => {
 
 
-                const brokerEntries =
-                    Object.entries(
-                        stock.brokers
-                    );
+            const brokers =
+                (stock.brokers || [])
+                .filter(
+                    broker =>
+                        Number(
+                            broker.bavg
+                        ) > 0
+                );
 
 
-                if (
-                    brokerEntries.length <
-                    minBroker
-                ) {
+            if (
+                brokers.length <
+                minBroker
+            ) {
 
-                    return;
+                return;
 
-                }
-
-
-                const valid =
-                    brokerEntries.filter(
-                        ([broker, item]) =>
-                            item.buyAvg > 0
-                    );
+            }
 
 
-                if (
-                    valid.length <
-                    minBroker
-                ) {
-
-                    return;
-
-                }
-
-
-                const averages =
-                    valid.map(
-                        ([broker, item]) =>
-                            item.buyAvg
-                    );
+            const averages =
+                brokers.map(
+                    broker =>
+                        Number(
+                            broker.bavg
+                        )
+                );
 
 
-                const med =
-                    median(
-                        averages
-                    );
+            const med =
+                median(
+                    averages
+                );
 
 
-                if (!med) {
+            if (!med) {
 
-                    return;
+                return;
 
-                }
-
-
-                const sorted =
-                    [...valid]
-                        .sort(
-                            (
-                                a,
-                                b
-                            ) =>
-                                a[1].buyAvg -
-                                b[1].buyAvg
-                        );
+            }
 
 
-                const lowest =
-                    sorted[0];
+            const sorted =
+                [...brokers]
+                .sort(
+                    (a,b) =>
+                        Number(a.bavg) -
+                        Number(b.bavg)
+                );
 
 
-                const lowestBroker =
-                    lowest[0];
+            const lowest =
+                sorted[0];
 
 
-                const lowestData =
-                    lowest[1];
-
-
-                let gap =
+            const gap =
+                (
                     (
-                        (
-                            med -
-                            lowestData.buyAvg
-                        ) /
-                        med
-                    ) * 100;
+                        med -
+                        Number(
+                            lowest.bavg
+                        )
+                    ) /
+                    med
+                ) *
+                100;
 
 
-                /*
-                Untuk scanner lowest,
-                gap tetap dihitung,
-                agar hasil tetap informatif.
-                */
+            if (
+                gap <
+                minGap
+            ) {
 
-                if (
-                    pattern === "outlier" &&
-                    gap < minGap
-                ) {
-
-                    return;
-
-                }
-
-
-                /*
-                Harga sekarang:
-                ambil harga terbaru dari
-                kolom optional "price"
-                */
-
-                const price =
-                    getLatestPrice(
-                        ticker,
-                        data
-                    );
-
-
-                results.push({
-
-                    ticker,
-
-                    price,
-
-                    broker:
-                        lowestBroker,
-
-                    avg:
-                        lowestData.buyAvg,
-
-                    median:
-                        med,
-
-                    gap,
-
-                    net:
-                        lowestData.net,
-
-                    brokerCount:
-                        valid.length
-
-                });
-
-            }
-        );
-
-
-    /*
-    SORT
-    */
-
-    results.sort(
-        (a, b) => {
-
-            if (sortBy === "avg") {
-
-                return (
-                    a.avg -
-                    b.avg
-                );
+                return;
 
             }
 
 
-            if (sortBy === "net") {
+            results.push({
 
-                return (
-                    b.net -
-                    a.net
-                );
+                ticker,
 
-            }
+                price:
+                    stock.price || 0,
 
+                broker:
+                    lowest.broker,
 
-            return (
-                b.gap -
-                a.gap
-            );
+                avg:
+                    Number(
+                        lowest.bavg
+                    ),
+
+                median:
+                    med,
+
+                gap,
+
+                net:
+                    Number(
+                        lowest.nval || 0
+                    ),
+
+                brokerCount:
+                    brokers.length
+
+            });
 
         }
     );
 
 
-    renderScannerResults(
-        results
-    );
-
-
-    if (results.length) {
-
-        showDetail(
-            results[0].ticker,
-            data
-        );
-
-    }
-
-}
-
-
-/* =========================================
-   GET LATEST PRICE
-========================================= */
-
-function getLatestPrice(
-    ticker,
-    periodData
-) {
-
-
-    /*
-       Kalau CSV punya kolom "price",
-       gunakan harga dari tanggal paling baru.
-    */
-
-    const rows =
-        getFilteredRawData()
-            .filter(
-                row =>
-                    row.ticker
-                        .toUpperCase() ===
-                    ticker
-            )
-            .sort(
-                (a, b) =>
-                    b.date.localeCompare(
-                        a.date
-                    )
-            );
-
-
-    for (
-        const row of rows
+    if (
+        sortBy === "avg"
     ) {
 
-        const price =
-            toNumber(
-                row.price
-            );
-
-
-        if (price > 0) {
-
-            return price;
-
-        }
+        results.sort(
+            (a,b) =>
+                a.avg -
+                b.avg
+        );
 
     }
+    else if (
+        sortBy === "net"
+    ) {
 
+        results.sort(
+            (a,b) =>
+                b.net -
+                a.net
+        );
 
-    return 0;
+    }
+    else {
 
-}
+        results.sort(
+            (a,b) =>
+                b.gap -
+                a.gap
+        );
 
-
-/* =========================================
-   RENDER SCANNER
-========================================= */
-
-function renderScannerResults(
-    results
-) {
+    }
 
 
     const table =
         document.getElementById(
-            "scannerTable"
+            "resultTable"
         );
 
 
@@ -3756,7 +1832,7 @@ function renderScannerResults(
 
 
     document.getElementById(
-        "foundCount"
+        "resultCount"
     ).innerText =
         results.length +
         " SAHAM";
@@ -3777,7 +1853,7 @@ function renderScannerResults(
                     "
                 >
 
-                    Tidak ada saham yang
+                    Tidak ada emiten yang
                     memenuhi filter.
 
                 </td>
@@ -3792,7 +1868,7 @@ function renderScannerResults(
 
 
     results.forEach(
-        (item, index) => {
+        (item,index) => {
 
 
             const gapClass =
@@ -3833,36 +1909,40 @@ function renderScannerResults(
                     </td>
 
                     <td>
-
                         ${
-                            item.price > 0
+                            item.price
                             ? "Rp" +
-                              formatNumber(
+                              number(
                                   item.price
                               )
                             : "-"
                         }
-
                     </td>
 
                     <td>
-                        <b>${item.broker}</b>
+                        <b>
+                            ${item.broker}
+                        </b>
                     </td>
 
-                    <td class="avg-outlier">
-                        Rp${formatNumber(item.avg)}
+                    <td class="outlier">
+                        Rp${number(item.avg)}
                     </td>
 
                     <td>
-                        Rp${formatNumber(item.median)}
+                        Rp${number(item.median)}
                     </td>
 
-                    <td class="${gapClass}">
+                    <td
+                        class="${gapClass}"
+                    >
                         ${item.gap.toFixed(1)}%
                     </td>
 
-                    <td class="${netClass}">
-                        ${formatMoney(item.net)}
+                    <td
+                        class="${netClass}"
+                    >
+                        ${money(item.net)}
                     </td>
 
                     <td>
@@ -3896,26 +1976,26 @@ function renderScannerResults(
 }
 
 
-/* =========================================
+/* ====================================
    DETAIL
-========================================= */
+==================================== */
 
 function showDetail(
-    ticker,
-    periodData = null
+    ticker
 ) {
 
 
-    if (!periodData) {
+    if (!liveData) {
 
-        periodData =
-            buildPeriodGroupedData();
+        return;
 
     }
 
 
     const stock =
-        periodData[ticker];
+        liveData.stocks[
+            ticker
+        ];
 
 
     if (!stock) {
@@ -3925,69 +2005,54 @@ function showDetail(
     }
 
 
-    currentDetailCode =
-        ticker;
-
-
-    const entries =
-        Object.entries(
-            stock.brokers
-        )
+    const brokers =
+        (stock.brokers || [])
         .filter(
-            ([broker, item]) =>
-                item.buyAvg > 0
+            broker =>
+                Number(
+                    broker.bavg
+                ) > 0
+        )
+        .sort(
+            (a,b) =>
+                Number(a.bavg) -
+                Number(b.bavg)
         );
 
 
-    if (!entries.length) {
+    if (!brokers.length) {
 
         return;
 
     }
 
 
-    /*
-    Sort Avg Buy rendah -> tinggi
-    */
-
-    entries.sort(
-        (a, b) =>
-            a[1].buyAvg -
-            b[1].buyAvg
-    );
-
-
-    const avgs =
-        entries.map(
-            ([broker, item]) =>
-                item.buyAvg
+    const med =
+        median(
+            brokers.map(
+                broker =>
+                    Number(
+                        broker.bavg
+                    )
+            )
         );
 
 
-    const med =
-        median(avgs);
-
-
     const lowest =
-        entries[0];
-
-
-    const lowestBroker =
-        lowest[0];
-
-
-    const lowestData =
-        lowest[1];
+        brokers[0];
 
 
     const gap =
         (
             (
                 med -
-                lowestData.buyAvg
+                Number(
+                    lowest.bavg
+                )
             ) /
             med
-        ) * 100;
+        ) *
+        100;
 
 
     let acc = 0;
@@ -3997,13 +2062,19 @@ function showDetail(
     let totalNet = 0;
 
 
-    entries.forEach(
-        ([broker, item]) => {
+    brokers.forEach(
+        broker => {
+
+            const net =
+                Number(
+                    broker.nval || 0
+                );
 
 
-            if (
-                item.net >= 0
-            ) {
+            totalNet += net;
+
+
+            if (net >= 0) {
 
                 acc++;
 
@@ -4013,19 +2084,8 @@ function showDetail(
 
             }
 
-
-            totalNet +=
-                item.net;
-
         }
     );
-
-
-    const price =
-        getLatestPrice(
-            ticker,
-            periodData
-        );
 
 
     document.getElementById(
@@ -4037,9 +2097,11 @@ function showDetail(
     document.getElementById(
         "detailPrice"
     ).innerText =
-        price > 0
+        stock.price
             ? "Rp" +
-              formatNumber(price)
+              number(
+                  stock.price
+              )
             : "-";
 
 
@@ -4059,15 +2121,15 @@ function showDetail(
         "detailLowest"
     ).innerText =
         "Rp" +
-        formatNumber(
-            lowestData.buyAvg
+        number(
+            lowest.bavg
         );
 
 
     document.getElementById(
         "detailBroker"
     ).innerText =
-        lowestBroker;
+        lowest.broker;
 
 
     document.getElementById(
@@ -4080,9 +2142,11 @@ function showDetail(
     document.getElementById(
         "infoPrice"
     ).innerText =
-        price > 0
+        stock.price
             ? "Rp" +
-              formatNumber(price)
+              number(
+                  stock.price
+              )
             : "-";
 
 
@@ -4090,16 +2154,18 @@ function showDetail(
         "infoMedian"
     ).innerText =
         "Rp" +
-        formatNumber(med);
+        number(
+            med
+        );
 
 
     document.getElementById(
         "infoLowest"
     ).innerText =
-        lowestBroker +
+        lowest.broker +
         " / Rp" +
-        formatNumber(
-            lowestData.buyAvg
+        number(
+            lowest.bavg
         );
 
 
@@ -4110,45 +2176,29 @@ function showDetail(
         "%";
 
 
-    updateDetailDate();
-
-
-    /*
-    Pointer action
-    */
-
     let pointer =
         50 +
-        (
-            totalNet /
-            50000000
+        totalNet /
+        1000000000 *
+        30;
+
+
+    pointer =
+        Math.max(
+            5,
+            Math.min(
+                95,
+                pointer
+            )
         );
 
 
-    if (pointer < 5) {
-
-        pointer = 5;
-
-    }
-
-
-    if (pointer > 95) {
-
-        pointer = 95;
-
-    }
-
-
     document.getElementById(
-        "actionPointer"
+        "pointer"
     ).style.left =
         pointer +
         "%";
 
-
-    /*
-    DETAIL TABLE
-    */
 
     const table =
         document.getElementById(
@@ -4159,41 +2209,33 @@ function showDetail(
     table.innerHTML = "";
 
 
-    entries.forEach(
-        ([broker, item], index) => {
+    brokers.forEach(
+        (broker,index) => {
 
 
-            const netClass =
-                item.net >= 0
-                    ? "green"
-                    : "red";
+            const net =
+                Number(
+                    broker.nval || 0
+                );
 
-
-            /*
-            Avg <= 90% median
-            */
 
             const isOutlier =
-                item.buyAvg <=
+                Number(
+                    broker.bavg
+                ) <=
                 med * 0.90;
 
 
-            const avgClass =
-                isOutlier
-                    ? "avg-outlier"
-                    : "";
+            const action =
+                net >= 0
+                    ? "ACC"
+                    : "DIST";
 
 
             const actionClass =
-                item.net >= 0
-                    ? "badge-acc"
-                    : "badge-dist";
-
-
-            const actionText =
-                item.net >= 0
-                    ? "ACC"
-                    : "DIST";
+                net >= 0
+                    ? "acc"
+                    : "dist";
 
 
             table.innerHTML += `
@@ -4205,71 +2247,79 @@ function showDetail(
                     </td>
 
                     <td>
-                        <b style="
-                            color:#62a7ff;
-                        ">
-                            ${broker}
+                        <b
+                            style="
+                                color:#62a7ff;
+                            "
+                        >
+                            ${broker.broker}
                         </b>
                     </td>
 
                     <td class="green">
-                        ${formatMoney(
-                            item.buyValue
+                        ${money(
+                            broker.bval
                         )}
                     </td>
 
                     <td>
-                        ${item.buyLot.toFixed(1)} K
+                        ${number(
+                            broker.bvol
+                        )}
                     </td>
 
                     <td
-                        class="${avgClass}"
-                        style="
-                            color:
-                            ${
-                                isOutlier
-                                ? "#20df8a"
-                                : "#dce8f5"
-                            };
-                        "
+                        class="${
+                            isOutlier
+                                ? "outlier"
+                                : ""
+                        }"
                     >
-
-                        Rp${formatNumber(
-                            item.buyAvg
+                        Rp${number(
+                            broker.bavg
                         )}
-
                     </td>
 
                     <td class="red">
-                        ${formatMoney(
-                            item.sellValue
+                        ${money(
+                            broker.sval
                         )}
                     </td>
 
                     <td>
-                        ${item.sellLot.toFixed(1)} K
+                        ${number(
+                            broker.svol
+                        )}
                     </td>
 
                     <td class="red">
-                        Rp${formatNumber(
-                            item.sellAvg
-                        )}
+                        ${
+                            broker.savg
+                            ? "Rp" +
+                              number(
+                                  broker.savg
+                              )
+                            : "-"
+                        }
                     </td>
 
-                    <td class="${netClass}">
-                        ${formatMoney(
-                            item.net
-                        )}
+                    <td
+                        class="${
+                            net >= 0
+                                ? "green"
+                                : "red"
+                        }"
+                    >
+                        ${money(net)}
                     </td>
 
                     <td>
 
                         <span
-                            class="badge
-                            ${actionClass}"
+                            class="${actionClass}"
                         >
 
-                            ${actionText}
+                            ${action}
 
                         </span>
 
@@ -4282,230 +2332,163 @@ function showDetail(
         }
     );
 
-}
 
+    window.scrollTo({
+        top:
+            document
+                .querySelector(
+                    "#detailCode"
+                )
+                .getBoundingClientRect()
+                .top +
+            window.scrollY -
+            100,
 
-/* =========================================
-   ISSUE COUNT
-========================================= */
-
-function updateIssuerCount() {
-
-
-    const issuers =
-        new Set(
-            rawData.map(
-                row =>
-                    row.ticker
-                        .toUpperCase()
-            )
-        );
-
-
-    document.getElementById(
-        "issuerCount"
-    ).innerText =
-        issuers.size;
+        behavior:
+            "smooth"
+    });
 
 }
 
 
-/* =========================================
-   DATA TIMESTAMP
-========================================= */
-
-function updateDataTimestamp() {
-
-
-    const dates =
-        rawData
-            .map(
-                row => row.date
-            )
-            .filter(Boolean)
-            .sort();
-
-
-    if (!dates.length) {
-
-        return;
-
-    }
-
-
-    const latest =
-        dates[dates.length - 1];
-
-
-    document.getElementById(
-        "updateTime"
-    ).innerText =
-        formatDate(latest);
-
-}
-
-
-/* =========================================
-   STATUS
-========================================= */
-
-function setStatus(
-    type,
-    message
-) {
-
-
-    const element =
-        document.getElementById(
-            "importStatus"
-        );
-
-
-    element.className =
-        "status " +
-        type;
-
-
-    element.innerText =
-        message;
-
-}
-
-
-/* =========================================
-   TEMPLATE CSV
-========================================= */
-
-function downloadTemplate() {
-
-
-    const csv =
-
-`date,ticker,broker,buy_value,buy_lot,buy_avg,sell_value,sell_lot,sell_avg,price
-2026-09-29,ENRG,LG,1800000000,39.8,486,1880000000,24.1,609,650
-2026-09-29,ENRG,RX,1200000000,20.0,593,800000000,13.0,621,650
-2026-09-29,ENRG,MG,730000000,10.1,609,1810000000,7.1,636,650`;
-
-
-    const blob =
-        new Blob(
-            [csv],
-            {
-                type:
-                    "text/csv;charset=utf-8;"
-            }
-        );
-
-
-    const url =
-        URL.createObjectURL(
-            blob
-        );
-
-
-    const link =
-        document.createElement(
-            "a"
-        );
-
-
-    link.href = url;
-
-    link.download =
-        "broker_data_template.csv";
-
-
-    link.click();
-
-
-    URL.revokeObjectURL(
-        url
-    );
-
-}
-
-
-/* =========================================
+/* ====================================
    MODE
-========================================= */
+==================================== */
 
 function changeMode(
     mode
 ) {
 
 
-    const modes = [
-        "multibagger",
-        "swing",
-        "daytrade"
-    ];
+    const multibagger =
+        document.getElementById(
+            "multibaggerApp"
+        );
 
 
-    modes.forEach(
-        item => {
+    const swing =
+        document.getElementById(
+            "swingApp"
+        );
 
 
-            document.getElementById(
-                item + "App"
-            ).style.display =
-                item === mode
-                    ? "block"
-                    : "none";
+    const daytrade =
+        document.getElementById(
+            "daytradeApp"
+        );
 
 
-            document.getElementById(
-                "tab-" + item
-            ).classList.toggle(
-                "active",
-                item === mode
+    multibagger.style.display =
+        mode === "multibagger"
+            ? "block"
+            : "none";
+
+
+    swing.style.display =
+        mode === "swing"
+            ? "block"
+            : "none";
+
+
+    daytrade.style.display =
+        mode === "daytrade"
+            ? "block"
+            : "none";
+
+
+    document
+        .querySelectorAll(
+            ".tab"
+        )
+        .forEach(
+            tab =>
+                tab.classList.remove(
+                    "active"
+                )
+        );
+
+
+    if (mode === "multibagger") {
+
+        document
+            .querySelectorAll(
+                ".tab"
+            )[0]
+            .classList.add(
+                "active"
             );
 
-        }
+    }
+
+
+    if (mode === "swing") {
+
+        document
+            .querySelectorAll(
+                ".tab"
+            )[1]
+            .classList.add(
+                "active"
+            );
+
+    }
+
+
+    if (mode === "daytrade") {
+
+        document
+            .querySelectorAll(
+                ".tab"
+            )[2]
+            .classList.add(
+                "active"
+            );
+
+    }
+
+}
+
+
+/* ====================================
+   INIT
+==================================== */
+
+function init() {
+
+
+    const end =
+        new Date();
+
+
+    const start =
+        new Date();
+
+
+    start.setMonth(
+        start.getMonth() - 6
     );
 
-}
 
-
-/* =========================================
-   INIT
-========================================= */
-
-function initialize() {
-
-
-    setDefaultPeriod();
-
-
-    updateDetailDate();
+    document.getElementById(
+        "startDate"
+    ).value =
+        dateInput(start);
 
 
     document.getElementById(
-        "updateTime"
-    ).innerText =
-        "Belum tersedia";
+        "endDate"
+    ).value =
+        dateInput(end);
 
 
-    document.getElementById(
-        "issuerCount"
-    ).innerText =
-        "-";
-
-
-    document.getElementById(
-        "foundCount"
-    ).innerText =
-        "0 SAHAM";
-
+    loadLiveData();
 
 }
 
 
-initialize();
-
+init();
 
 </script>
 
-
 </body>
-
 </html>
