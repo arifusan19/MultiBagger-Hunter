@@ -5,8 +5,10 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Multibagger Hunter</title>
 
@@ -22,20 +24,19 @@
             margin: 0;
 
             font-family:
-                Inter,
                 Arial,
                 Helvetica,
                 sans-serif;
+
+            color: #eaf2ff;
 
             background:
                 radial-gradient(
                     circle at top left,
                     #102746 0%,
-                    #07111f 38%,
+                    #07111f 35%,
                     #050b14 100%
                 );
-
-            color: #eaf2ff;
 
             min-height: 100vh;
         }
@@ -46,24 +47,27 @@
         ========================= */
 
         header {
-            padding: 22px 30px;
+            background:
+                rgba(5, 15, 28, 0.96);
 
             border-bottom:
-                1px solid #203552;
+                1px solid #233b56;
 
-            background:
-                rgba(5, 15, 28, 0.92);
+            padding:
+                20px 25px;
         }
 
 
         .header-top {
             display: flex;
 
-            justify-content: space-between;
+            justify-content:
+                space-between;
 
-            align-items: center;
+            align-items:
+                center;
 
-            gap: 20px;
+            gap: 15px;
 
             flex-wrap: wrap;
         }
@@ -86,7 +90,7 @@
         .brand h1 {
             margin: 0;
 
-            font-size: 30px;
+            font-size: 28px;
 
             letter-spacing: -0.5px;
         }
@@ -98,15 +102,16 @@
 
 
         .brand p {
-            margin: 5px 0 0;
+            margin:
+                5px 0 0;
+
+            font-size: 12px;
 
             color: #8ea6c4;
-
-            font-size: 13px;
         }
 
 
-        .header-cards {
+        .header-info {
             display: flex;
 
             gap: 10px;
@@ -116,47 +121,45 @@
 
 
         .header-card {
-            min-width: 180px;
-
-            padding: 12px 16px;
-
-            border:
-                1px solid #284463;
-
-            border-radius: 10px;
+            min-width: 170px;
 
             background:
-                linear-gradient(
-                    145deg,
-                    #0f2037,
-                    #0b1729
-                );
+                #0b1a2c;
+
+            border:
+                1px solid #28425f;
+
+            border-radius:
+                9px;
+
+            padding:
+                10px 13px;
         }
 
 
         .header-card small {
             display: block;
 
-            color: #8ea6c4;
+            font-size: 9px;
 
-            font-size: 10px;
+            color: #7e95af;
 
             margin-bottom: 5px;
         }
 
 
         .header-card strong {
-            font-size: 14px;
+            font-size: 13px;
         }
 
 
-        .live {
+        .live-status {
             color: #20df8a;
         }
 
 
-        .demo {
-            color: #ff5c69;
+        .offline-status {
+            color: #ffd34a;
         }
 
 
@@ -169,25 +172,29 @@
 
             margin: auto;
 
-            padding: 18px;
+            padding:
+                16px;
         }
 
 
         /* =========================
-           MODE TABS
+           MODE
         ========================= */
 
         .mode-tabs {
-            display: flex;
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
 
             gap: 8px;
 
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
 
         .mode-tab {
-            flex: 1;
+            height: 46px;
 
             border:
                 1px solid #29445f;
@@ -195,24 +202,14 @@
             background:
                 #0b1829;
 
-            color: #9fb1c8;
+            color: #93a9c2;
 
-            padding: 13px;
-
-            border-radius: 9px;
-
-            font-size: 14px;
+            border-radius:
+                9px;
 
             font-weight: bold;
 
             cursor: pointer;
-
-            transition: 0.2s;
-        }
-
-
-        .mode-tab:hover {
-            border-color: #3c6390;
         }
 
 
@@ -220,91 +217,97 @@
             background:
                 linear-gradient(
                     135deg,
-                    #0d71ff,
-                    #1454e8
+                    #1677ff,
+                    #0c58dd
                 );
-
-            border-color: #3181ff;
 
             color: white;
 
+            border-color:
+                #378bff;
+
             box-shadow:
-                0 0 16px
-                rgba(20, 100, 255, 0.2);
+                0 0 18px
+                rgba(22,119,255,0.18);
         }
 
 
         .mode-tab.swing {
-            color: #6fa5ff;
+            color: #70a9ff;
         }
 
 
         .mode-tab.daytrade {
-            color: #ffab45;
+            color: #ffb458;
         }
 
 
         /* =========================
-           PANEL
+           PANELS
         ========================= */
 
         .panel {
             background:
                 linear-gradient(
                     145deg,
-                    rgba(13, 28, 47, 0.98),
-                    rgba(8, 19, 33, 0.98)
+                    #0d1d30,
+                    #081626
                 );
 
             border:
-                1px solid #263f5b;
+                1px solid #243e59;
 
-            border-radius: 13px;
+            border-radius:
+                12px;
 
-            padding: 17px;
+            padding:
+                16px;
 
-            margin-bottom: 16px;
+            margin-bottom:
+                14px;
 
             box-shadow:
                 0 8px 25px
-                rgba(0, 0, 0, 0.2);
+                rgba(0,0,0,0.18);
         }
 
-
-        /* =========================
-           PANEL TITLE
-        ========================= */
 
         .section-title {
             display: flex;
 
-            justify-content: space-between;
+            justify-content:
+                space-between;
 
-            align-items: center;
+            align-items:
+                center;
 
             gap: 10px;
 
-            margin-bottom: 14px;
+            margin-bottom:
+                12px;
         }
 
 
         .section-title h2 {
             margin: 0;
 
-            font-size: 17px;
+            font-size: 16px;
         }
 
 
         .section-badge {
-            padding: 5px 9px;
+            padding:
+                4px 8px;
 
-            border-radius: 7px;
+            border-radius:
+                6px;
 
-            background: #10253e;
+            background:
+                #102742;
 
             color: #7eb4ff;
 
-            font-size: 10px;
+            font-size: 9px;
 
             font-weight: bold;
         }
@@ -314,81 +317,83 @@
            PERIOD
         ========================= */
 
-        .period-layout {
+        .period-grid {
             display: grid;
 
             grid-template-columns:
                 1fr 1fr;
 
-            gap: 14px;
+            gap: 12px;
         }
 
 
         .sub-box {
-            border:
-                1px solid #253f5e;
-
             background:
-                #0a1728;
+                #091728;
 
-            border-radius: 10px;
+            border:
+                1px solid #263f5b;
 
-            padding: 13px;
+            border-radius:
+                9px;
+
+            padding:
+                12px;
         }
 
 
-        .sub-box-title {
-            color: #b7c8dc;
+        .sub-title {
+            margin-bottom:
+                9px;
 
-            font-size: 12px;
+            font-size: 11px;
 
             font-weight: bold;
 
-            margin-bottom: 9px;
+            color: #b5c8dc;
         }
 
 
         .quick-buttons {
             display: flex;
 
-            gap: 7px;
+            gap: 6px;
 
             flex-wrap: wrap;
         }
 
 
         .quick-button {
-            background: #102138;
-
-            color: #9db1ca;
+            padding:
+                8px 12px;
 
             border:
-                1px solid #28425f;
+                1px solid #29435e;
 
-            padding:
-                8px 13px;
+            background:
+                #0d1e33;
 
-            border-radius: 7px;
+            color: #91a7c0;
 
-            cursor: pointer;
+            border-radius:
+                6px;
 
-            font-size: 12px;
+            font-size: 10px;
 
             font-weight: bold;
+
+            cursor: pointer;
         }
 
 
         .quick-button.active {
-            color: white;
-
             background:
-                linear-gradient(
-                    135deg,
-                    #1677ff,
-                    #0d5ce8
-                );
+                #1677ff;
 
-            border-color: #3989ff;
+            border-color:
+                #378bff;
+
+            color: white;
         }
 
 
@@ -400,33 +405,56 @@
 
             align-items: end;
 
-            gap: 7px;
-        }
-
-
-        .field {
-            display: flex;
-
-            flex-direction: column;
-
             gap: 6px;
         }
 
 
+        .arrow {
+            text-align:
+                center;
+
+            color:
+                #6e84a0;
+
+            padding-bottom:
+                9px;
+        }
+
+
+        /* =========================
+           INPUT
+        ========================= */
+
+        .field {
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap: 5px;
+        }
+
+
         .field label {
-            color: #8ea6c4;
+            color:
+                #7e95af;
 
-            font-size: 10px;
+            font-size:
+                9px;
 
-            font-weight: bold;
+            font-weight:
+                bold;
         }
 
 
         input,
         select {
-            width: 100%;
+            width:
+                100%;
 
-            height: 37px;
+            height:
+                36px;
 
             padding:
                 8px 10px;
@@ -434,38 +462,36 @@
             border:
                 1px solid #29435f;
 
+            border-radius:
+                7px;
+
             background:
-                #0d1d31;
+                #0c1b2e;
 
-            color: #e8f1fc;
+            color:
+                #e8f2ff;
 
-            border-radius: 7px;
+            outline:
+                none;
 
-            outline: none;
+            font-size:
+                12px;
         }
 
 
         input:focus,
         select:focus {
-            border-color: #3181ff;
+            border-color:
+                #378bff;
 
             box-shadow:
                 0 0 0 2px
-                rgba(49, 129, 255, 0.12);
-        }
-
-
-        .arrow {
-            text-align: center;
-
-            color: #6f89a7;
-
-            padding-bottom: 10px;
+                rgba(55,139,255,0.12);
         }
 
 
         /* =========================
-           SCANNER FILTER
+           SCANNER
         ========================= */
 
         .scanner-grid {
@@ -477,496 +503,662 @@
                 1fr
                 1fr;
 
-            gap: 10px;
+            gap:
+                9px;
+
+            align-items:
+                end;
         }
 
 
         .scan-button {
-            height: 37px;
+            width:
+                100%;
 
-            border: 0;
+            height:
+                36px;
 
-            border-radius: 7px;
+            border:
+                none;
+
+            border-radius:
+                7px;
 
             background:
                 linear-gradient(
                     135deg,
                     #1677ff,
-                    #0b5be9
+                    #0b5ee8
                 );
 
-            color: white;
+            color:
+                white;
 
-            font-size: 12px;
+            font-size:
+                11px;
 
-            font-weight: bold;
+            font-weight:
+                bold;
 
-            cursor: pointer;
-
-            box-shadow:
-                0 5px 14px
-                rgba(22, 119, 255, 0.2);
+            cursor:
+                pointer;
         }
 
 
         .scan-button:hover {
-            filter: brightness(1.08);
+            filter:
+                brightness(1.08);
         }
 
 
         /* =========================
-           RESULT HEADER
+           IMPORT
         ========================= */
 
-        .result-header {
-            display: flex;
+        .import-grid {
+            display: grid;
 
-            justify-content: space-between;
+            grid-template-columns:
+                1fr 1fr;
 
-            align-items: center;
-
-            flex-wrap: wrap;
-
-            gap: 12px;
+            gap: 10px;
         }
 
 
-        .found-badge {
+        .file-input {
+            border:
+                1px dashed #395575;
+
+            background:
+                #091728;
+
+            padding:
+                12px;
+
+            border-radius:
+                8px;
+        }
+
+
+        .status {
+            margin-top:
+                7px;
+
+            color:
+                #91a7c0;
+
+            font-size:
+                10px;
+
+            line-height:
+                1.5;
+        }
+
+
+        .status.success {
+            color:
+                #20df8a;
+        }
+
+
+        .status.error {
+            color:
+                #ff6573;
+        }
+
+
+        .template-button {
+            height:
+                36px;
+
+            border:
+                1px solid #29435f;
+
+            background:
+                #102138;
+
+            color:
+                #9db4cc;
+
+            border-radius:
+                7px;
+
+            cursor:
+                pointer;
+
+            font-size:
+                10px;
+
+            font-weight:
+                bold;
+        }
+
+
+        /* =========================
+           RESULT
+        ========================= */
+
+        .result-head {
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                8px;
+        }
+
+
+        .result-count {
             padding:
                 5px 9px;
 
-            color: #ffd94a;
-
             border:
-                1px solid #816a15;
+                1px solid #705d17;
 
             background:
-                rgba(128, 100, 0, 0.16);
+                rgba(123,100,0,0.13);
 
-            border-radius: 8px;
+            color:
+                #ffd449;
 
-            font-size: 10px;
+            border-radius:
+                6px;
 
-            font-weight: bold;
+            font-size:
+                9px;
+
+            font-weight:
+                bold;
         }
 
 
         /* =========================
-           RESULT TABLE
+           TABLE
         ========================= */
 
         .table-wrap {
-            overflow-x: auto;
+            overflow-x:
+                auto;
 
             border:
-                1px solid #243c57;
+                1px solid #253e59;
 
-            border-radius: 9px;
+            border-radius:
+                8px;
         }
 
 
         table {
-            width: 100%;
+            width:
+                100%;
 
-            border-collapse: collapse;
+            border-collapse:
+                collapse;
 
-            min-width: 1050px;
+            min-width:
+                1050px;
         }
 
 
         thead th {
             background:
-                #11243a;
+                #11263e;
 
-            color: #afc0d4;
-
-            font-size: 10px;
+            color:
+                #a9bdd2;
 
             padding:
-                10px 9px;
+                9px 8px;
 
-            text-align: right;
+            font-size:
+                9px;
+
+            text-align:
+                right;
+
+            white-space:
+                nowrap;
 
             border-bottom:
-                1px solid #29425f;
-
-            white-space: nowrap;
+                1px solid #29445f;
         }
 
 
         thead th:first-child {
-            text-align: left;
+            text-align:
+                left;
         }
 
 
         tbody td {
             padding:
-                10px 9px;
+                9px 8px;
+
+            font-size:
+                10px;
+
+            text-align:
+                right;
 
             border-bottom:
-                1px solid #182f49;
+                1px solid #182d45;
 
-            color: #dbe7f5;
-
-            font-size: 11px;
-
-            text-align: right;
+            color:
+                #d9e7f5;
         }
 
 
         tbody td:first-child {
-            text-align: left;
+            text-align:
+                left;
         }
 
 
         tbody tr:hover {
             background:
-                rgba(25, 112, 255, 0.08);
+                rgba(27,111,255,0.07);
         }
 
 
-        .stock-code {
-            color: white;
+        .code {
+            color:
+                #62a7ff;
 
-            font-weight: bold;
+            font-weight:
+                bold;
 
-            font-size: 12px;
-
-            cursor: pointer;
+            cursor:
+                pointer;
         }
 
 
-        .stock-code:hover {
-            color: #56a0ff;
+        .code:hover {
+            color:
+                white;
         }
 
 
-        .gap-high {
-            color: #20df8a;
+        .green {
+            color:
+                #20df8a !important;
 
-            font-weight: bold;
+            font-weight:
+                bold;
         }
 
 
-        .gap-medium {
-            color: #ffd34a;
+        .red {
+            color:
+                #ff5c6c !important;
 
-            font-weight: bold;
+            font-weight:
+                bold;
         }
 
 
-        .negative {
-            color: #ff5b68 !important;
+        .yellow {
+            color:
+                #ffd449 !important;
+
+            font-weight:
+                bold;
         }
 
 
-        .positive {
-            color: #20df8a !important;
+        .avg-outlier {
+            background:
+                rgba(32,223,138,0.14);
+
+            color:
+                #20df8a !important;
+
+            font-weight:
+                bold;
+
+            box-shadow:
+                inset 3px 0 0 #20df8a;
         }
 
 
-        .detail-button {
+        .detail-btn {
             padding:
-                6px 9px;
+                5px 8px;
 
-            border: 0;
+            border:
+                none;
 
-            border-radius: 5px;
+            border-radius:
+                5px;
 
             background:
-                #116eff;
+                #176fff;
 
-            color: white;
+            color:
+                white;
 
-            font-size: 10px;
+            font-size:
+                9px;
 
-            cursor: pointer;
+            cursor:
+                pointer;
         }
 
 
         /* =========================
-           DETAIL HEADER
+           DETAIL STATS
         ========================= */
 
-        .detail-grid {
-            display: grid;
+        .detail-stats {
+            display:
+                grid;
 
             grid-template-columns:
-                1.5fr
-                repeat(5, 1fr);
+                repeat(6, 1fr);
 
-            gap: 9px;
+            gap:
+                8px;
 
-            margin-bottom: 14px;
+            margin-bottom:
+                10px;
         }
 
 
-        .stat-card {
-            border:
-                1px solid #29435e;
-
-            border-radius: 9px;
-
-            padding: 11px;
-
+        .stat {
             background:
-                #0b1a2c;
+                #0a192b;
+
+            border:
+                1px solid #29435f;
+
+            border-radius:
+                8px;
+
+            padding:
+                10px;
         }
 
 
-        .stat-card small {
-            display: block;
+        .stat small {
+            display:
+                block;
 
-            color: #7e95af;
+            color:
+                #748ca6;
 
-            font-size: 9px;
+            font-size:
+                8px;
 
-            margin-bottom: 4px;
+            margin-bottom:
+                5px;
         }
 
 
-        .stat-card strong {
-            font-size: 18px;
-        }
-
-
-        .stat-green strong {
-            color: #20df8a;
-        }
-
-
-        .stat-yellow strong {
-            color: #ffd34a;
-        }
-
-
-        .stat-blue strong {
-            color: #60a2ff;
+        .stat strong {
+            font-size:
+                16px;
         }
 
 
         /* =========================
-           ACTION BAR
+           ACTION
         ========================= */
 
         .action-grid {
-            display: grid;
+            display:
+                grid;
 
             grid-template-columns:
-                1fr
-                1.8fr;
+                1.5fr 1fr;
 
-            gap: 12px;
+            gap:
+                10px;
 
-            margin-bottom: 14px;
+            margin-bottom:
+                10px;
         }
 
 
         .action-box {
-            border:
-                1px solid #29435e;
-
             background:
-                #0a1728;
+                #091728;
 
-            border-radius: 9px;
+            border:
+                1px solid #29435f;
 
-            padding: 13px;
+            border-radius:
+                8px;
+
+            padding:
+                12px;
         }
 
 
         .action-title {
-            font-size: 12px;
+            font-size:
+                11px;
 
-            font-weight: bold;
+            font-weight:
+                bold;
 
-            margin-bottom: 9px;
+            margin-bottom:
+                8px;
         }
 
 
-        .labels {
-            display: flex;
+        .action-labels {
+            display:
+                flex;
 
             justify-content:
                 space-between;
 
-            color: #8298b1;
+            font-size:
+                8px;
 
-            font-size: 9px;
+            color:
+                #7f96af;
 
-            margin-bottom: 5px;
+            margin-bottom:
+                5px;
         }
 
 
-        .bar {
-            height: 11px;
+        .action-bar {
+            position:
+                relative;
 
-            border-radius: 20px;
+            height:
+                10px;
+
+            border-radius:
+                20px;
 
             background:
                 linear-gradient(
                     to right,
-                    #ff4b5f,
-                    #ff8a3d,
-                    #ffd449,
-                    #8e99a8,
-                    #35d982,
-                    #00b878
+                    #ff475b,
+                    #ff883e,
+                    #ffd448,
+                    #8c97a8,
+                    #35dc82,
+                    #00b979
                 );
-
-            position: relative;
         }
 
 
-        .pointer {
-            position: absolute;
+        .action-pointer {
+            position:
+                absolute;
 
-            width: 3px;
+            width:
+                3px;
 
-            height: 25px;
+            height:
+                24px;
 
-            background: white;
+            top:
+                -7px;
 
-            top: -7px;
+            left:
+                50%;
 
-            left: 61%;
-
-            box-shadow:
-                0 0 0 2px
-                rgba(255,255,255,0.15);
+            background:
+                white;
         }
 
 
         .action-caption {
-            display: flex;
+            display:
+                flex;
 
             justify-content:
                 space-between;
 
-            color: #6f86a0;
+            color:
+                #6d849d;
 
-            font-size: 8px;
+            font-size:
+                8px;
 
-            margin-top: 5px;
+            margin-top:
+                5px;
         }
 
 
-        .mini-info {
-            color: #8195ae;
+        .info-lines {
+            font-size:
+                10px;
 
-            font-size: 10px;
+            line-height:
+                1.9;
 
-            line-height: 1.7;
+            color:
+                #8298b2;
         }
 
 
-        .mini-info strong {
-            color: #dbe9f8;
+        .info-lines strong {
+            color:
+                #e1edfa;
         }
 
 
         /* =========================
-           LOW AVG
+           BADGE
         ========================= */
 
-        .avg-low {
-            background:
-                rgba(32, 223, 138, 0.14);
-
-            color: #20df8a !important;
-
-            font-weight: bold;
-
-            border-radius: 4px;
-        }
-
-
-        .avg-normal {
-            color: #dce7f4;
-        }
-
-
         .badge {
-            display: inline-block;
+            display:
+                inline-block;
 
             padding:
                 4px 7px;
 
-            border-radius: 10px;
+            border-radius:
+                10px;
 
-            font-size: 8px;
+            font-size:
+                8px;
 
-            font-weight: bold;
+            font-weight:
+                bold;
         }
 
 
         .badge-acc {
             background:
-                rgba(32, 223, 138, 0.18);
+                rgba(32,223,138,0.15);
 
-            color: #20df8a;
+            color:
+                #20df8a;
         }
 
 
         .badge-dist {
             background:
-                rgba(255, 79, 96, 0.17);
+                rgba(255,92,108,0.15);
 
-            color: #ff6472;
+            color:
+                #ff6473;
         }
 
 
         /* =========================
-           MODE EMPTY
+           EMPTY
         ========================= */
 
-        .empty-mode {
-            min-height: 380px;
+        .empty {
+            min-height:
+                400px;
 
-            display: flex;
+            display:
+                flex;
 
-            align-items: center;
+            align-items:
+                center;
 
-            justify-content: center;
+            justify-content:
+                center;
 
-            text-align: center;
+            text-align:
+                center;
         }
 
 
         .empty-icon {
-            font-size: 55px;
+            font-size:
+                55px;
 
-            margin-bottom: 10px;
+            margin-bottom:
+                10px;
         }
 
 
-        .empty-mode h2 {
+        .empty h2 {
             margin:
                 0 0 8px;
         }
 
 
-        .empty-mode p {
-            color: #8298b1;
+        .empty p {
+            color:
+                #8097b1;
 
-            max-width: 450px;
+            max-width:
+                480px;
 
-            font-size: 13px;
+            line-height:
+                1.6;
+
+            font-size:
+                12px;
         }
 
 
         /* =========================
-           FOOTER NOTE
+           NOTE
         ========================= */
 
         .note {
-            margin-top: 11px;
+            margin-top:
+                10px;
 
-            color: #687f9b;
+            color:
+                #687e99;
 
-            font-size: 9px;
+            font-size:
+                9px;
 
-            line-height: 1.6;
+            line-height:
+                1.6;
         }
 
 
@@ -974,16 +1166,41 @@
            RESPONSIVE
         ========================= */
 
-        @media (max-width: 1000px) {
+        @media (max-width: 1100px) {
 
             .scanner-grid {
                 grid-template-columns:
                     1fr 1fr;
             }
 
-            .detail-grid {
+            .detail-stats {
                 grid-template-columns:
                     repeat(3, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 800px) {
+
+            .mode-tabs {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .period-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .import-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .scanner-grid {
+                grid-template-columns:
+                    1fr;
             }
 
             .action-grid {
@@ -991,40 +1208,9 @@
                     1fr;
             }
 
-        }
-
-
-        @media (max-width: 700px) {
-
-            header {
-                padding: 18px;
-            }
-
-            .brand h1 {
-                font-size: 23px;
-            }
-
-            .container {
-                padding: 10px;
-            }
-
-            .period-layout {
-                grid-template-columns:
-                    1fr;
-            }
-
-            .scanner-grid {
-                grid-template-columns:
-                    1fr;
-            }
-
-            .detail-grid {
+            .detail-stats {
                 grid-template-columns:
                     repeat(2, 1fr);
-            }
-
-            .mode-tabs {
-                flex-direction: column;
             }
 
         }
@@ -1039,6 +1225,7 @@
 
 <header>
 
+
     <div class="header-top">
 
 
@@ -1048,6 +1235,7 @@
                 📊
             </div>
 
+
             <div>
 
                 <h1>
@@ -1056,7 +1244,8 @@
                 </h1>
 
                 <p>
-                    Broker Accumulation & Avg Outlier Screener
+                    Broker Accumulation &
+                    Average Buy Outlier Screener
                 </p>
 
             </div>
@@ -1064,7 +1253,7 @@
         </div>
 
 
-        <div class="header-cards">
+        <div class="header-info">
 
 
             <div class="header-card">
@@ -1074,7 +1263,7 @@
                 </small>
 
                 <strong id="updateTime">
-                    -
+                    Belum tersedia
                 </strong>
 
             </div>
@@ -1086,8 +1275,8 @@
                     TOTAL EMITEN
                 </small>
 
-                <strong class="live">
-                    950
+                <strong id="issuerCount">
+                    -
                 </strong>
 
             </div>
@@ -1096,18 +1285,25 @@
             <div class="header-card">
 
                 <small>
-                    MODE DATA
+                    STATUS DATA
                 </small>
 
-                <strong class="demo">
-                    SIMULASI (CONTOH)
+                <strong
+                    id="dataStatus"
+                    class="offline-status">
+
+                    BELUM TERHUBUNG
+
                 </strong>
 
             </div>
 
+
         </div>
 
+
     </div>
+
 
 </header>
 
@@ -1116,15 +1312,16 @@
 
 
     <!-- =========================
-         STRATEGY MENU
+         MODE
     ========================= -->
 
     <div class="mode-tabs">
 
+
         <button
             class="mode-tab active"
-            onclick="changeMode('multibagger')"
-            id="tab-multibagger">
+            id="tab-multibagger"
+            onclick="changeMode('multibagger')">
 
             🟢 MULTIBAGGER
 
@@ -1133,8 +1330,8 @@
 
         <button
             class="mode-tab swing"
-            onclick="changeMode('swing')"
-            id="tab-swing">
+            id="tab-swing"
+            onclick="changeMode('swing')">
 
             🔵 SWING
 
@@ -1143,46 +1340,133 @@
 
         <button
             class="mode-tab daytrade"
-            onclick="changeMode('daytrade')"
-            id="tab-daytrade">
+            id="tab-daytrade"
+            onclick="changeMode('daytrade')">
 
             🟠 DAY TRADE
 
         </button>
 
+
     </div>
 
 
     <!-- =========================
-         MULTIBAGGER APP
+         MULTIBAGGER
     ========================= -->
 
     <div id="multibaggerApp">
 
 
-        <!-- PERIOD -->
+        <!-- =========================
+             IMPORT
+        ========================= -->
 
         <div class="panel">
+
 
             <div class="section-title">
 
                 <h2>
-                    1. Periode Analisis
+                    📥 Import Data Broker
                 </h2>
 
                 <span class="section-badge">
-                    Tanggal otomatis
+                    CSV
                 </span>
 
             </div>
 
 
-            <div class="period-layout">
+            <div class="import-grid">
+
+
+                <div class="file-input">
+
+
+                    <div class="field">
+
+                        <label>
+                            FILE DATA BROKER
+                        </label>
+
+
+                        <input
+                            type="file"
+                            id="csvFile"
+                            accept=".csv"
+                        >
+
+                    </div>
+
+
+                    <div
+                        class="status"
+                        id="importStatus">
+
+                        Pilih file CSV untuk
+                        menjalankan scanner.
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    class="template-button"
+                    onclick="downloadTemplate()">
+
+                    📄 DOWNLOAD TEMPLATE CSV
+
+                </button>
+
+
+            </div>
+
+
+            <div class="note">
+
+                Format CSV:
+                date,ticker,broker,buy_value,buy_lot,buy_avg,sell_value,sell_lot,sell_avg
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =========================
+             PERIOD
+        ========================= -->
+
+        <div class="panel">
+
+
+            <div class="section-title">
+
+                <h2>
+                    📅 Periode Analisis
+                </h2>
+
+                <span
+                    class="section-badge"
+                    id="periodStatus">
+
+                    6 Bulan
+
+                </span>
+
+            </div>
+
+
+            <div class="period-grid">
 
 
                 <div class="sub-box">
 
-                    <div class="sub-box-title">
+
+                    <div class="sub-title">
                         Periode Cepat
                     </div>
 
@@ -1192,8 +1476,8 @@
 
                         <button
                             class="quick-button"
-                            onclick="setQuickPeriod(1)"
-                            id="quick-1">
+                            id="quick-1"
+                            onclick="setQuickPeriod(1)">
 
                             1 Bulan
 
@@ -1202,8 +1486,8 @@
 
                         <button
                             class="quick-button"
-                            onclick="setQuickPeriod(3)"
-                            id="quick-3">
+                            id="quick-3"
+                            onclick="setQuickPeriod(3)">
 
                             3 Bulan
 
@@ -1212,8 +1496,8 @@
 
                         <button
                             class="quick-button active"
-                            onclick="setQuickPeriod(6)"
-                            id="quick-6">
+                            id="quick-6"
+                            onclick="setQuickPeriod(6)">
 
                             6 Bulan
 
@@ -1222,8 +1506,8 @@
 
                         <button
                             class="quick-button"
-                            onclick="setQuickPeriod(12)"
-                            id="quick-12">
+                            id="quick-12"
+                            onclick="setQuickPeriod(12)">
 
                             12 Bulan
 
@@ -1232,21 +1516,24 @@
 
                         <button
                             class="quick-button"
-                            onclick="setQuickPeriod(24)"
-                            id="quick-24">
+                            id="quick-24"
+                            onclick="setQuickPeriod(24)">
 
                             24 Bulan
 
                         </button>
 
+
                     </div>
+
 
                 </div>
 
 
                 <div class="sub-box">
 
-                    <div class="sub-box-title">
+
+                    <div class="sub-title">
                         Rentang Custom
                     </div>
 
@@ -1262,7 +1549,8 @@
 
                             <input
                                 type="date"
-                                id="startDate">
+                                id="startDate"
+                            >
 
                         </div>
 
@@ -1280,11 +1568,14 @@
 
                             <input
                                 type="date"
-                                id="endDate">
+                                id="endDate"
+                            >
 
                         </div>
 
+
                     </div>
+
 
                 </div>
 
@@ -1295,7 +1586,9 @@
         </div>
 
 
-        <!-- SCANNER FILTER -->
+        <!-- =========================
+             SCANNER
+        ========================= -->
 
         <div class="panel">
 
@@ -1303,11 +1596,11 @@
             <div class="section-title">
 
                 <h2>
-                    2. Filter Scanner
+                    🎯 Scanner ALL Emiten
                 </h2>
 
                 <span class="section-badge">
-                    ALL EMITEN
+                    MULTIBAGGER
                 </span>
 
             </div>
@@ -1322,10 +1615,11 @@
                         POLA
                     </label>
 
+
                     <select id="pattern">
 
                         <option value="outlier">
-                            Avg Buy Outlier (Rendah Sendiri)
+                            Avg Buy Beda Sendiri
                         </option>
 
                         <option value="lowest">
@@ -1340,14 +1634,17 @@
                 <div class="field">
 
                     <label>
-                        MIN. GAP (%)
+                        MINIMUM GAP (%)
                     </label>
+
 
                     <input
                         type="number"
                         id="minGap"
                         value="20"
-                        min="0">
+                        min="0"
+                        step="1"
+                    >
 
                 </div>
 
@@ -1355,31 +1652,42 @@
                 <div class="field">
 
                     <label>
-                        MIN. JUMLAH BROKER
+                        MIN. BROKER
                     </label>
+
 
                     <input
                         type="number"
                         id="minBroker"
                         value="5"
-                        min="2">
+                        min="2"
+                    >
 
                 </div>
 
 
-                <div>
+                <div class="field">
 
                     <label>
-                        &nbsp;
+                        URUTKAN
                     </label>
 
-                    <button
-                        class="scan-button"
-                        onclick="scanAll()">
 
-                        🔎 SCAN ALL EMITEN
+                    <select id="sortBy">
 
-                    </button>
+                        <option value="gap">
+                            Gap Terbesar
+                        </option>
+
+                        <option value="avg">
+                            Avg Buy Terendah
+                        </option>
+
+                        <option value="net">
+                            Net Buy Terbesar
+                        </option>
+
+                    </select>
 
                 </div>
 
@@ -1387,32 +1695,45 @@
             </div>
 
 
+            <div style="margin-top:10px;">
+
+                <button
+                    class="scan-button"
+                    onclick="scanAll()">
+
+                    🔎 SCAN ALL EMITEN
+
+                </button>
+
+            </div>
+
+
         </div>
 
 
-        <!-- RESULT -->
+        <!-- =========================
+             SCANNER RESULT
+        ========================= -->
 
         <div class="panel">
 
 
-            <div class="section-title result-header">
+            <div class="section-title result-head">
 
-                <div>
 
-                    <h2>
-                        🎯 HASIL SCANNER ALL EMITEN
-                    </h2>
-
-                </div>
+                <h2>
+                    📈 Hasil Scanner
+                </h2>
 
 
                 <span
-                    class="found-badge"
+                    class="result-count"
                     id="foundCount">
 
-                    Ditemukan 0 saham
+                    0 SAHAM
 
                 </span>
+
 
             </div>
 
@@ -1427,25 +1748,45 @@
 
                         <tr>
 
-                            <th>No</th>
+                            <th>
+                                No
+                            </th>
 
-                            <th>Kode</th>
+                            <th>
+                                Kode
+                            </th>
 
-                            <th>Harga</th>
+                            <th>
+                                Harga
+                            </th>
 
-                            <th>Broker Outlier</th>
+                            <th>
+                                Broker Outlier
+                            </th>
 
-                            <th>Avg Outlier</th>
+                            <th>
+                                Avg Buy
+                            </th>
 
-                            <th>Median Broker</th>
+                            <th>
+                                Median Avg
+                            </th>
 
-                            <th>Gap (%)</th>
+                            <th>
+                                Gap
+                            </th>
 
-                            <th>Net Buy Outlier</th>
+                            <th>
+                                Net Buy
+                            </th>
 
-                            <th>Jml Broker</th>
+                            <th>
+                                Broker
+                            </th>
 
-                            <th>Aksi</th>
+                            <th>
+                                Detail
+                            </th>
 
                         </tr>
 
@@ -1466,27 +1807,29 @@
 
             <div class="note">
 
-                Gap dihitung berdasarkan perbedaan Avg Buy
-                broker terendah terhadap median Avg Buy
-                broker pada emiten tersebut.
+                Broker outlier = broker dengan Avg Buy
+                terendah dibanding median Avg Buy broker
+                lainnya dalam emiten yang sama.
 
             </div>
+
 
         </div>
 
 
-        <!-- DETAIL -->
+        <!-- =========================
+             DETAIL
+        ========================= -->
 
         <div class="panel">
 
 
             <div class="section-title">
 
-
                 <h2>
-                    📊 DETAIL BROKER -
+                    📊 Detail Broker -
                     <span id="detailCode">
-                        ENRG
+                        -
                     </span>
                 </h2>
 
@@ -1499,67 +1842,71 @@
 
                 </span>
 
-
             </div>
 
 
-            <div class="detail-grid">
+            <div class="detail-stats">
 
 
-                <div class="stat-card">
+                <div class="stat">
 
                     <small>
                         HARGA SEKARANG
                     </small>
 
                     <strong
-                        class="stat-green"
+                        class="green"
                         id="detailPrice">
 
-                        Rp650
+                        -
 
                     </strong>
 
                 </div>
 
 
-                <div class="stat-card stat-green">
+                <div class="stat">
 
                     <small>
                         BROKER AKUMULASI
                     </small>
 
-                    <strong id="detailAcc">
-                        0
+                    <strong
+                        class="green"
+                        id="detailAcc">
+
+                        -
+
                     </strong>
 
                 </div>
 
 
-                <div class="stat-card">
+                <div class="stat">
 
                     <small>
                         BROKER DISTRIBUSI
                     </small>
 
                     <strong
-                        style="color:#ff5b68"
+                        class="red"
                         id="detailDist">
 
-                        0
+                        -
 
                     </strong>
 
                 </div>
 
 
-                <div class="stat-card stat-green">
+                <div class="stat">
 
                     <small>
                         AVG BUY TERENDAH
                     </small>
 
                     <strong
+                        class="green"
                         id="detailLowest">
 
                         -
@@ -1569,14 +1916,13 @@
                 </div>
 
 
-                <div class="stat-card stat-blue">
+                <div class="stat">
 
                     <small>
-                        BROKER
+                        BROKER OUTLIER
                     </small>
 
-                    <strong
-                        id="detailBroker">
+                    <strong id="detailBroker">
 
                         -
 
@@ -1585,13 +1931,14 @@
                 </div>
 
 
-                <div class="stat-card stat-yellow">
+                <div class="stat">
 
                     <small>
                         GAP MEDIAN
                     </small>
 
                     <strong
+                        class="yellow"
                         id="detailGap">
 
                         -
@@ -1611,13 +1958,11 @@
 
 
                     <div class="action-title">
-
                         Broker Action
-
                     </div>
 
 
-                    <div class="labels">
+                    <div class="action-labels">
 
                         <span>
                             Big Dist
@@ -1634,10 +1979,10 @@
                     </div>
 
 
-                    <div class="bar">
+                    <div class="action-bar">
 
                         <div
-                            class="pointer"
+                            class="action-pointer"
                             id="actionPointer">
 
                         </div>
@@ -1669,15 +2014,15 @@
 
 
                     <div class="action-title">
-                        Informasi Outlier
+                        Analisis Avg Buy
                     </div>
 
 
-                    <div class="mini-info">
+                    <div class="info-lines">
 
 
                         <div>
-                            Harga sekarang:
+                            Harga:
                             <strong id="infoPrice">
                                 -
                             </strong>
@@ -1685,7 +2030,7 @@
 
 
                         <div>
-                            Median Avg Buy:
+                            Median:
                             <strong id="infoMedian">
                                 -
                             </strong>
@@ -1693,7 +2038,7 @@
 
 
                         <div>
-                            Broker Avg Buy terendah:
+                            Outlier:
                             <strong id="infoLowest">
                                 -
                             </strong>
@@ -1701,7 +2046,7 @@
 
 
                         <div>
-                            Selisih terhadap median:
+                            Gap:
                             <strong id="infoGap">
                                 -
                             </strong>
@@ -1716,8 +2061,6 @@
 
             </div>
 
-
-            <!-- BROKER TABLE -->
 
             <div class="table-wrap">
 
@@ -1782,16 +2125,19 @@
 
                 </table>
 
+
             </div>
 
 
             <div class="note">
 
-                🟢 B.Avg yang jauh di bawah median broker
-                diberi highlight. Data saat ini masih simulasi
-                untuk pengembangan aplikasi.
+                🟢 Highlight hijau menunjukkan Avg Buy
+                yang berada jauh di bawah median broker.
+                Ini adalah indikator screening, bukan
+                jaminan bahwa saham akan menjadi multibagger.
 
             </div>
+
 
         </div>
 
@@ -1805,10 +2151,9 @@
 
     <div
         id="swingApp"
-        style="display:none">
+        style="display:none;">
 
-
-        <div class="panel empty-mode">
+        <div class="panel empty">
 
             <div>
 
@@ -1821,10 +2166,9 @@
                 </h2>
 
                 <p>
-                    Formula Swing belum ditentukan.
-                    Modul ini sengaja dikosongkan terlebih dahulu
-                    dan akan diisi setelah formula screening
-                    Swing selesai dibuat.
+                    Modul Swing belum diaktifkan.
+                    Formula screening Swing akan dimasukkan
+                    nanti setelah kriterianya ditentukan.
                 </p>
 
                 <span class="section-badge">
@@ -1835,7 +2179,6 @@
 
         </div>
 
-
     </div>
 
 
@@ -1845,10 +2188,9 @@
 
     <div
         id="daytradeApp"
-        style="display:none">
+        style="display:none;">
 
-
-        <div class="panel empty-mode">
+        <div class="panel empty">
 
             <div>
 
@@ -1861,9 +2203,9 @@
                 </h2>
 
                 <p>
-                    Formula Day Trade belum ditentukan.
-                    Modul ini sengaja dikosongkan terlebih dahulu
-                    sampai kita menemukan formula yang sesuai.
+                    Modul Day Trade belum diaktifkan.
+                    Formula screening Day Trade akan dimasukkan
+                    nanti setelah kriterianya ditentukan.
                 </p>
 
                 <span class="section-badge">
@@ -1874,7 +2216,6 @@
 
         </div>
 
-
     </div>
 
 
@@ -1884,284 +2225,29 @@
 <script>
 
 
-/*
-=========================================
-DATA CONTOH
-=========================================
-*/
+/* =========================================
+   GLOBAL DATA
+========================================= */
 
-const stocks = {
+let rawData = [];
 
+let groupedData = {};
 
-    ENRG: {
+let currentDetailCode = null;
 
-        price: 650,
 
-        brokers: [
+/* =========================================
+   DATE HELPERS
+========================================= */
 
-            { broker:"LG", buy:1800, buyLot:39.8, buyAvg:486, sell:1880, sellLot:24.1, sellAvg:609 },
+function pad(n) {
 
-            { broker:"RB", buy:200, buyLot:1.3, buyAvg:593, sell:325, sellLot:5.6, sellAvg:621 },
-
-            { broker:"MG", buy:730, buyLot:10.1, buyAvg:609, sell:1810, sellLot:7.1, sellAvg:636 },
-
-            { broker:"LX", buy:2100, buyLot:6.4, buyAvg:609, sell:2260, sellLot:27.6, sellAvg:695 },
-
-            { broker:"IF", buy:129, buyLot:4.9, buyAvg:603, sell:230, sellLot:2.4, sellAvg:691 },
-
-            { broker:"CC", buy:450, buyLot:5.1, buyAvg:621, sell:390, sellLot:3.8, sellAvg:634 },
-
-            { broker:"NI", buy:380, buyLot:4.8, buyAvg:612, sell:220, sellLot:2.1, sellAvg:605 },
-
-            { broker:"AZ", buy:290, buyLot:2.2, buyAvg:572, sell:410, sellLot:3.2, sellAvg:628 },
-
-            { broker:"BK", buy:180, buyLot:2.1, buyAvg:558, sell:90, sellLot:1.1, sellAvg:590 },
-
-            { broker:"AK", buy:233, buyLot:2.7, buyAvg:649, sell:362, sellLot:4.4, sellAvg:625 },
-
-            { broker:"CP", buy:3350, buyLot:35.4, buyAvg:657, sell:1820, sellLot:22.2, sellAvg:616 },
-
-            { broker:"DH", buy:1380, buyLot:18.0, buyAvg:663, sell:1510, sellLot:18.1, sellAvg:619 },
-
-            { broker:"YB", buy:590, buyLot:3.6, buyAvg:743, sell:502, sellLot:6.4, sellAvg:598 },
-
-            { broker:"YJ", buy:171, buyLot:2.9, buyAvg:589, sell:272, sellLot:3.7, sellAvg:648 },
-
-            { broker:"YP", buy:510, buyLot:6.2, buyAvg:641, sell:305, sellLot:3.1, sellAvg:613 }
-
-        ]
-
-    },
-
-
-    BUMI: {
-
-        price: 175,
-
-        brokers: [
-
-            { broker:"RX", buy:1200, buyLot:40, buyAvg:150, sell:500, sellLot:18, sellAvg:168 },
-
-            { broker:"LG", buy:950, buyLot:32, buyAvg:152, sell:700, sellLot:25, sellAvg:171 },
-
-            { broker:"CC", buy:800, buyLot:30, buyAvg:156, sell:600, sellLot:22, sellAvg:169 },
-
-            { broker:"YP", buy:600, buyLot:25, buyAvg:160, sell:720, sellLot:30, sellAvg:170 },
-
-            { broker:"AK", buy:450, buyLot:18, buyAvg:158, sell:300, sellLot:13, sellAvg:166 },
-
-            { broker:"MG", buy:400, buyLot:16, buyAvg:153, sell:520, sellLot:21, sellAvg:169 },
-
-            { broker:"RB", buy:300, buyLot:12, buyAvg:149, sell:180, sellLot:8, sellAvg:161 },
-
-            { broker:"DH", buy:275, buyLot:11, buyAvg:162, sell:390, sellLot:16, sellAvg:173 },
-
-            { broker:"BK", buy:250, buyLot:10, buyAvg:155, sell:160, sellLot:7, sellAvg:169 },
-
-            { broker:"CP", buy:500, buyLot:19, buyAvg:167, sell:420, sellLot:15, sellAvg:171 },
-
-            { broker:"IF", buy:350, buyLot:13, buyAvg:159, sell:210, sellLot:9, sellAvg:166 }
-
-        ]
-
-    },
-
-
-    NCKL: {
-
-        price: 1050,
-
-        brokers: [
-
-            { broker:"RX", buy:1800, buyLot:21, buyAvg:930, sell:700, sellLot:8, sellAvg:1010 },
-
-            { broker:"LG", buy:1450, buyLot:18, buyAvg:950, sell:900, sellLot:11, sellAvg:1020 },
-
-            { broker:"CC", buy:1100, buyLot:14, buyAvg:970, sell:950, sellLot:12, sellAvg:1015 },
-
-            { broker:"YP", buy:900, buyLot:11, buyAvg:985, sell:1100, sellLot:13, sellAvg:1030 },
-
-            { broker:"AK", buy:620, buyLot:8, buyAvg:940, sell:410, sellLot:5, sellAvg:1005 },
-
-            { broker:"MG", buy:530, buyLot:7, buyAvg:960, sell:700, sellLot:9, sellAvg:1010 },
-
-            { broker:"RB", buy:470, buyLot:6, buyAvg:955, sell:300, sellLot:4, sellAvg:1001 },
-
-            { broker:"DH", buy:550, buyLot:7, buyAvg:1020, sell:450, sellLot:6, sellAvg:1032 },
-
-            { broker:"CP", buy:700, buyLot:9, buyAvg:1015, sell:390, sellLot:5, sellAvg:1022 },
-
-            { broker:"IF", buy:490, buyLot:6, buyAvg:995, sell:510, sellLot:6, sellAvg:1020 },
-
-            { broker:"LG2", buy:300, buyLot:4, buyAvg:720, sell:150, sellLot:2, sellAvg:800 }
-
-        ]
-
-    },
-
-
-    ANTM: {
-
-        price: 2150,
-
-        brokers: [
-
-            { broker:"DH", buy:1000, buyLot:8, buyAvg:1420, sell:1180, sellLot:9, sellAvg:2100 },
-
-            { broker:"RX", buy:1500, buyLot:10, buyAvg:1780, sell:900, sellLot:7, sellAvg:2060 },
-
-            { broker:"LG", buy:1350, buyLot:9, buyAvg:1820, sell:850, sellLot:6, sellAvg:2100 },
-
-            { broker:"YP", buy:1200, buyLot:8, buyAvg:1900, sell:1000, sellLot:7, sellAvg:2080 },
-
-            { broker:"CC", buy:980, buyLot:7, buyAvg:1870, sell:850, sellLot:6, sellAvg:2050 },
-
-            { broker:"RB", buy:700, buyLot:5, buyAvg:1850, sell:600, sellLot:4, sellAvg:2040 },
-
-            { broker:"MG", buy:800, buyLot:6, buyAvg:1890, sell:700, sellLot:5, sellAvg:2060 },
-
-            { broker:"AK", buy:450, buyLot:3, buyAvg:1830, sell:500, sellLot:4, sellAvg:2050 },
-
-            { broker:"BK", buy:600, buyLot:4, buyAvg:1920, sell:350, sellLot:2, sellAvg:2080 },
-
-            { broker:"CP", buy:750, buyLot:5, buyAvg:1860, sell:420, sellLot:3, sellAvg:2020 }
-
-        ]
-
-    },
-
-
-    ITMG: {
-
-        price: 23500,
-
-        brokers: [
-
-            { broker:"XA", buy:1900, buyLot:8, buyAvg:17100, sell:600, sellLot:3, sellAvg:22300 },
-
-            { broker:"RX", buy:1750, buyLot:8, buyAvg:21600, sell:1200, sellLot:5, sellAvg:22900 },
-
-            { broker:"LG", buy:1300, buyLot:6, buyAvg:21400, sell:900, sellLot:4, sellAvg:23000 },
-
-            { broker:"CC", buy:1000, buyLot:4, buyAvg:21800, sell:850, sellLot:4, sellAvg:23100 },
-
-            { broker:"YP", buy:900, buyLot:4, buyAvg:22000, sell:1000, sellLot:4, sellAvg:23100 },
-
-            { broker:"AK", buy:750, buyLot:3, buyAvg:21900, sell:500, sellLot:2, sellAvg:22900 },
-
-            { broker:"MG", buy:650, buyLot:3, buyAvg:21700, sell:700, sellLot:3, sellAvg:23100 },
-
-            { broker:"RB", buy:500, buyLot:2, buyAvg:21400, sell:300, sellLot:1, sellAvg:22800 },
-
-            { broker:"BK", buy:450, buyLot:2, buyAvg:22100, sell:250, sellLot:1, sellAvg:23200 },
-
-            { broker:"CP", buy:850, buyLot:4, buyAvg:22200, sell:350, sellLot:2, sellAvg:23000 },
-
-            { broker:"DH", buy:380, buyLot:2, buyAvg:22000, sell:300, sellLot:1, sellAvg:23000 },
-
-            { broker:"IF", buy:420, buyLot:2, buyAvg:21800, sell:500, sellLot:2, sellAvg:22900 },
-
-            { broker:"YB", buy:350, buyLot:2, buyAvg:21600, sell:450, sellLot:2, sellAvg:22950 }
-
-        ]
-
-    }
-
-};
-
-
-/*
-=========================================
-MEDIAN
-=========================================
-*/
-
-function median(values) {
-
-    const sorted =
-        [...values].sort(
-            (a, b) => a - b
-        );
-
-    const middle =
-        Math.floor(
-            sorted.length / 2
-        );
-
-    if (sorted.length % 2 === 0) {
-
-        return (
-            sorted[middle - 1] +
-            sorted[middle]
-        ) / 2;
-
-    }
-
-    return sorted[middle];
+    return String(n).padStart(2, "0");
 
 }
 
 
-/*
-=========================================
-FORMAT
-=========================================
-*/
-
-function formatNumber(value) {
-
-    return new Intl.NumberFormat(
-        "id-ID"
-    ).format(
-        Math.round(value)
-    );
-
-}
-
-
-function formatMoney(value) {
-
-    const sign =
-        value < 0
-            ? "-"
-            : "";
-
-    const absolute =
-        Math.abs(value);
-
-    if (absolute >= 1000) {
-
-        return sign +
-            "Rp" +
-            (absolute / 1000)
-                .toFixed(1) +
-            " B";
-
-    }
-
-    return sign +
-        "Rp" +
-        Math.round(absolute) +
-        " M";
-
-}
-
-
-/*
-=========================================
-DATE
-=========================================
-*/
-
-function pad(number) {
-
-    return String(number)
-        .padStart(2, "0");
-
-}
-
-
-function toDateInput(date) {
+function dateToInput(date) {
 
     return (
         date.getFullYear() +
@@ -2176,23 +2262,57 @@ function toDateInput(date) {
 
 function formatDate(dateString) {
 
-    const date =
-        new Date(
-            dateString + "T00:00:00"
-        );
+    if (!dateString) {
+        return "-";
+    }
+
+    const parts =
+        dateString.split("-");
+
+    if (parts.length !== 3) {
+        return dateString;
+    }
 
     return (
-        pad(date.getDate()) +
+        parts[2] +
         "-" +
-        pad(date.getMonth() + 1) +
+        parts[1] +
         "-" +
-        date.getFullYear()
+        parts[0]
     );
 
 }
 
 
+function setDefaultPeriod() {
+
+    const end = new Date();
+
+    const start = new Date();
+
+    start.setMonth(
+        start.getMonth() - 6
+    );
+
+    document.getElementById(
+        "startDate"
+    ).value =
+        dateToInput(start);
+
+    document.getElementById(
+        "endDate"
+    ).value =
+        dateToInput(end);
+
+}
+
+
+/* =========================================
+   QUICK PERIOD
+========================================= */
+
 function setQuickPeriod(months) {
+
 
     document
         .querySelectorAll(".quick-button")
@@ -2205,28 +2325,24 @@ function setQuickPeriod(months) {
         });
 
 
-    const selected =
+    const active =
         document.getElementById(
             "quick-" + months
         );
 
 
-    if (selected) {
+    if (active) {
 
-        selected.classList.add(
+        active.classList.add(
             "active"
         );
 
     }
 
 
-    const end =
-        new Date();
+    const end = new Date();
 
-
-    const start =
-        new Date();
-
+    const start = new Date();
 
     start.setMonth(
         start.getMonth() - months
@@ -2236,18 +2352,82 @@ function setQuickPeriod(months) {
     document.getElementById(
         "startDate"
     ).value =
-        toDateInput(start);
+        dateToInput(start);
 
 
     document.getElementById(
         "endDate"
     ).value =
-        toDateInput(end);
+        dateToInput(end);
+
+
+    document.getElementById(
+        "periodStatus"
+    ).innerText =
+        months + " Bulan";
 
 
     updateDetailDate();
 
 }
+
+
+/* =========================================
+   CUSTOM DATE CHANGE
+========================================= */
+
+document
+    .getElementById("startDate")
+    .addEventListener(
+        "change",
+        function() {
+
+            document
+                .querySelectorAll(".quick-button")
+                .forEach(button => {
+
+                    button.classList.remove(
+                        "active"
+                    );
+
+                });
+
+            document.getElementById(
+                "periodStatus"
+            ).innerText =
+                "Custom";
+
+            updateDetailDate();
+
+        }
+    );
+
+
+document
+    .getElementById("endDate")
+    .addEventListener(
+        "change",
+        function() {
+
+            document
+                .querySelectorAll(".quick-button")
+                .forEach(button => {
+
+                    button.classList.remove(
+                        "active"
+                    );
+
+                });
+
+            document.getElementById(
+                "periodStatus"
+            ).innerText =
+                "Custom";
+
+            updateDetailDate();
+
+        }
+    );
 
 
 function updateDetailDate() {
@@ -2265,6 +2445,11 @@ function updateDetailDate() {
 
     if (!start || !end) {
 
+        document.getElementById(
+            "detailDate"
+        ).innerText =
+            "-";
+
         return;
 
     }
@@ -2280,56 +2465,987 @@ function updateDetailDate() {
 }
 
 
-/*
-=========================================
-UPDATE TIME
-=========================================
-*/
+/* =========================================
+   CSV PARSER
+========================================= */
 
-function updateTimestamp() {
-
-    const now =
-        new Date();
+function parseCSV(text) {
 
 
-    const formatter =
-        new Intl.DateTimeFormat(
-            "id-ID",
-            {
-                timeZone:
-                    "Asia/Jakarta",
+    const lines =
+        text
+            .replace(/\r/g, "")
+            .split("\n")
+            .filter(
+                line =>
+                    line.trim() !== ""
+            );
 
-                day: "2-digit",
 
-                month: "short",
+    if (lines.length < 2) {
 
-                year: "numeric",
+        throw new Error(
+            "CSV tidak memiliki data."
+        );
 
-                hour: "2-digit",
+    }
 
-                minute: "2-digit",
 
-                hour12: false
+    const headers =
+        parseCSVLine(lines[0])
+            .map(
+                value =>
+                    value.trim()
+                        .toLowerCase()
+            );
+
+
+    const rows = [];
+
+
+    for (
+        let i = 1;
+        i < lines.length;
+        i++
+    ) {
+
+
+        const values =
+            parseCSVLine(lines[i]);
+
+
+        if (!values.length) {
+            continue;
+        }
+
+
+        const row = {};
+
+
+        headers.forEach(
+            (header, index) => {
+
+                row[header] =
+                    values[index]
+                        ? values[index].trim()
+                        : "";
+
             }
         );
 
 
-    document.getElementById(
-        "updateTime"
-    ).innerText =
-        formatter.format(now) +
-        " WIB";
+        rows.push(row);
+
+    }
+
+
+    return rows;
 
 }
 
 
-/*
-=========================================
-SCAN ALL
-=========================================
-*/
+function parseCSVLine(line) {
+
+
+    const result = [];
+
+    let current = "";
+
+    let insideQuotes = false;
+
+
+    for (
+        let i = 0;
+        i < line.length;
+        i++
+    ) {
+
+
+        const char =
+            line[i];
+
+
+        if (
+            char === '"' &&
+            line[i + 1] === '"'
+        ) {
+
+            current += '"';
+
+            i++;
+
+            continue;
+
+        }
+
+
+        if (char === '"') {
+
+            insideQuotes =
+                !insideQuotes;
+
+            continue;
+
+        }
+
+
+        if (
+            char === "," &&
+            !insideQuotes
+        ) {
+
+            result.push(current);
+
+            current = "";
+
+        } else {
+
+            current += char;
+
+        }
+
+    }
+
+
+    result.push(current);
+
+
+    return result;
+
+}
+
+
+/* =========================================
+   NUMBER HELPERS
+========================================= */
+
+function toNumber(value) {
+
+
+    if (
+        value === undefined ||
+        value === null ||
+        value === ""
+    ) {
+
+        return 0;
+
+    }
+
+
+    let text =
+        String(value)
+            .trim()
+            .replace(/\s/g, "")
+            .replace(/Rp/gi, "");
+
+
+    /*
+       Mendukung:
+       1,234.56
+       1.234,56
+       1234.56
+       1234
+    */
+
+    if (
+        text.includes(",") &&
+        text.includes(".")
+    ) {
+
+        if (
+            text.lastIndexOf(",") >
+            text.lastIndexOf(".")
+        ) {
+
+            text =
+                text
+                    .replace(/\./g, "")
+                    .replace(",", ".");
+
+        } else {
+
+            text =
+                text.replace(/,/g, "");
+
+        }
+
+    } else if (
+        text.includes(",")
+    ) {
+
+        text =
+            text.replace(",", ".");
+
+    }
+
+
+    const number =
+        Number(text);
+
+
+    return Number.isFinite(number)
+        ? number
+        : 0;
+
+}
+
+
+/* =========================================
+   MEDIAN
+========================================= */
+
+function median(values) {
+
+
+    const clean =
+        values
+            .filter(
+                value =>
+                    Number.isFinite(value) &&
+                    value > 0
+            )
+            .sort(
+                (a, b) =>
+                    a - b
+            );
+
+
+    if (!clean.length) {
+
+        return 0;
+
+    }
+
+
+    const middle =
+        Math.floor(
+            clean.length / 2
+        );
+
+
+    if (
+        clean.length % 2 === 0
+    ) {
+
+        return (
+            clean[middle - 1] +
+            clean[middle]
+        ) / 2;
+
+    }
+
+
+    return clean[middle];
+
+}
+
+
+/* =========================================
+   FORMAT
+========================================= */
+
+function formatNumber(value) {
+
+    return new Intl.NumberFormat(
+        "id-ID"
+    ).format(
+        Math.round(value)
+    );
+
+}
+
+
+function formatMoney(value) {
+
+
+    const sign =
+        value < 0
+            ? "-"
+            : "";
+
+
+    const abs =
+        Math.abs(value);
+
+
+    if (abs >= 1000000000) {
+
+        return (
+            sign +
+            "Rp" +
+            (
+                abs / 1000000000
+            ).toFixed(2) +
+            " B"
+        );
+
+    }
+
+
+    if (abs >= 1000000) {
+
+        return (
+            sign +
+            "Rp" +
+            (
+                abs / 1000000
+            ).toFixed(1) +
+            " M"
+        );
+
+    }
+
+
+    return (
+        sign +
+        "Rp" +
+        formatNumber(abs)
+    );
+
+}
+
+
+/* =========================================
+   IMPORT CSV
+========================================= */
+
+document
+    .getElementById("csvFile")
+    .addEventListener(
+        "change",
+        function(event) {
+
+
+            const file =
+                event.target.files[0];
+
+
+            if (!file) {
+
+                return;
+
+            }
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function(e) {
+
+
+                    try {
+
+
+                        const text =
+                            e.target.result;
+
+
+                        rawData =
+                            parseCSV(text);
+
+
+                        validateCSV();
+
+
+                        setStatus(
+                            "success",
+                            "✅ " +
+                            rawData.length +
+                            " baris berhasil dibaca."
+                        );
+
+
+                        buildGroupedData();
+
+
+                        document.getElementById(
+                            "dataStatus"
+                        ).innerText =
+                            "DATA TERSEDIA";
+
+
+                        document.getElementById(
+                            "dataStatus"
+                        ).className =
+                            "live-status";
+
+
+                        updateIssuerCount();
+
+
+                        updateDataTimestamp();
+
+
+                    }
+                    catch(error) {
+
+
+                        rawData = [];
+
+
+                        groupedData = {};
+
+
+                        setStatus(
+                            "error",
+                            "❌ " +
+                            error.message
+                        );
+
+
+                    }
+
+                };
+
+
+            reader.readAsText(file);
+
+        }
+    );
+
+
+function validateCSV() {
+
+
+    const required = [
+        "date",
+        "ticker",
+        "broker",
+        "buy_value",
+        "buy_lot",
+        "buy_avg",
+        "sell_value",
+        "sell_lot",
+        "sell_avg"
+    ];
+
+
+    if (!rawData.length) {
+
+        throw new Error(
+            "File kosong."
+        );
+
+    }
+
+
+    const first =
+        rawData[0];
+
+
+    const missing =
+        required.filter(
+            column =>
+                !Object.prototype.hasOwnProperty.call(
+                    first,
+                    column
+                )
+        );
+
+
+    if (missing.length) {
+
+        throw new Error(
+            "Kolom tidak lengkap: " +
+            missing.join(", ")
+        );
+
+    }
+
+
+    rawData.forEach(
+        row => {
+
+            if (!row.ticker) {
+
+                throw new Error(
+                    "Ada baris tanpa ticker."
+                );
+
+            }
+
+            if (!row.broker) {
+
+                throw new Error(
+                    "Ada baris tanpa broker."
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   GROUP DATA
+========================================= */
+
+function buildGroupedData() {
+
+
+    groupedData = {};
+
+
+    rawData.forEach(
+        row => {
+
+
+            const date =
+                row.date;
+
+
+            const ticker =
+                row.ticker
+                    .toUpperCase();
+
+
+            const broker =
+                row.broker
+                    .toUpperCase();
+
+
+            if (!groupedData[ticker]) {
+
+                groupedData[ticker] = {
+
+                    dates: [],
+
+                    brokers: {}
+
+                };
+
+            }
+
+
+            if (
+                !groupedData[ticker]
+                    .dates
+                    .includes(date)
+            ) {
+
+                groupedData[ticker]
+                    .dates
+                    .push(date);
+
+            }
+
+
+            if (
+                !groupedData[ticker]
+                    .brokers[broker]
+            ) {
+
+                groupedData[ticker]
+                    .brokers[broker] = {
+
+                        buyValue: 0,
+                        buyLot: 0,
+                        sellValue: 0,
+                        sellLot: 0,
+
+                        buyAvgWeightedValue: 0,
+                        sellAvgWeightedValue: 0,
+
+                        rows: 0
+
+                    };
+
+            }
+
+
+            const item =
+                groupedData[ticker]
+                    .brokers[broker];
+
+
+            const buyValue =
+                toNumber(
+                    row.buy_value
+                );
+
+
+            const buyLot =
+                toNumber(
+                    row.buy_lot
+                );
+
+
+            const sellValue =
+                toNumber(
+                    row.sell_value
+                );
+
+
+            const sellLot =
+                toNumber(
+                    row.sell_lot
+                );
+
+
+            const buyAvg =
+                toNumber(
+                    row.buy_avg
+                );
+
+
+            const sellAvg =
+                toNumber(
+                    row.sell_avg
+                );
+
+
+            item.buyValue +=
+                buyValue;
+
+
+            item.buyLot +=
+                buyLot;
+
+
+            item.sellValue +=
+                sellValue;
+
+
+            item.sellLot +=
+                sellLot;
+
+
+            /*
+              Weighted average.
+              Prioritas:
+              nilai transaksi / lot.
+            */
+
+            if (buyLot > 0) {
+
+                item.buyAvgWeightedValue +=
+                    buyAvg *
+                    buyLot;
+
+            }
+
+
+            if (sellLot > 0) {
+
+                item.sellAvgWeightedValue +=
+                    sellAvg *
+                    sellLot;
+
+            }
+
+
+            item.rows++;
+
+        }
+    );
+
+
+    Object.keys(groupedData)
+        .forEach(
+            ticker => {
+
+
+                const brokers =
+                    groupedData[ticker]
+                        .brokers;
+
+
+                Object.keys(brokers)
+                    .forEach(
+                        broker => {
+
+
+                            const item =
+                                brokers[broker];
+
+
+                            item.buyAvg =
+                                item.buyLot > 0
+                                    ? item.buyAvgWeightedValue /
+                                      item.buyLot
+                                    : 0;
+
+
+                            item.sellAvg =
+                                item.sellLot > 0
+                                    ? item.sellAvgWeightedValue /
+                                      item.sellLot
+                                    : 0;
+
+
+                            item.net =
+                                item.buyValue -
+                                item.sellValue;
+
+                        }
+                    );
+
+            }
+        );
+
+}
+
+
+/* =========================================
+   DATE FILTER
+========================================= */
+
+function getFilteredRawData() {
+
+
+    const start =
+        document.getElementById(
+            "startDate"
+        ).value;
+
+
+    const end =
+        document.getElementById(
+            "endDate"
+        ).value;
+
+
+    if (!start || !end) {
+
+        return rawData;
+
+    }
+
+
+    return rawData.filter(
+        row => {
+
+            return (
+                row.date >= start &&
+                row.date <= end
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   BUILD PERIOD DATA
+========================================= */
+
+function buildPeriodGroupedData() {
+
+
+    const filtered =
+        getFilteredRawData();
+
+
+    const result = {};
+
+
+    filtered.forEach(
+        row => {
+
+
+            const ticker =
+                row.ticker
+                    .toUpperCase();
+
+
+            const broker =
+                row.broker
+                    .toUpperCase();
+
+
+            if (!result[ticker]) {
+
+                result[ticker] = {
+
+                    brokers: {},
+
+                    dates: []
+
+                };
+
+            }
+
+
+            if (
+                !result[ticker]
+                    .dates
+                    .includes(row.date)
+            ) {
+
+                result[ticker]
+                    .dates
+                    .push(row.date);
+
+            }
+
+
+            if (
+                !result[ticker]
+                    .brokers[broker]
+            ) {
+
+                result[ticker]
+                    .brokers[broker] = {
+
+                        buyValue: 0,
+                        buyLot: 0,
+                        sellValue: 0,
+                        sellLot: 0,
+
+                        buyAvgWeightedValue: 0,
+                        sellAvgWeightedValue: 0
+
+                    };
+
+            }
+
+
+            const item =
+                result[ticker]
+                    .brokers[broker];
+
+
+            const buyValue =
+                toNumber(
+                    row.buy_value
+                );
+
+
+            const buyLot =
+                toNumber(
+                    row.buy_lot
+                );
+
+
+            const buyAvg =
+                toNumber(
+                    row.buy_avg
+                );
+
+
+            const sellValue =
+                toNumber(
+                    row.sell_value
+                );
+
+
+            const sellLot =
+                toNumber(
+                    row.sell_lot
+                );
+
+
+            const sellAvg =
+                toNumber(
+                    row.sell_avg
+                );
+
+
+            item.buyValue +=
+                buyValue;
+
+
+            item.buyLot +=
+                buyLot;
+
+
+            item.sellValue +=
+                sellValue;
+
+
+            item.sellLot +=
+                sellLot;
+
+
+            item.buyAvgWeightedValue +=
+                buyAvg *
+                buyLot;
+
+
+            item.sellAvgWeightedValue +=
+                sellAvg *
+                sellLot;
+
+        }
+    );
+
+
+    Object.keys(result)
+        .forEach(
+            ticker => {
+
+
+                const brokers =
+                    result[ticker]
+                        .brokers;
+
+
+                Object.keys(brokers)
+                    .forEach(
+                        broker => {
+
+
+                            const item =
+                                brokers[broker];
+
+
+                            item.buyAvg =
+                                item.buyLot > 0
+                                    ? item.buyAvgWeightedValue /
+                                      item.buyLot
+                                    : 0;
+
+
+                            item.sellAvg =
+                                item.sellLot > 0
+                                    ? item.sellAvgWeightedValue /
+                                      item.sellLot
+                                    : 0;
+
+
+                            item.net =
+                                item.buyValue -
+                                item.sellValue;
+
+                        }
+                    );
+
+            }
+        );
+
+
+    return result;
+
+}
+
+
+/* =========================================
+   SCAN ALL
+========================================= */
 
 function scanAll() {
+
+
+    if (!rawData.length) {
+
+        setStatus(
+            "error",
+            "❌ Import data CSV terlebih dahulu."
+        );
+
+        return;
+
+    }
+
+
+    const data =
+        buildPeriodGroupedData();
 
 
     const minGap =
@@ -2348,16 +3464,34 @@ function scanAll() {
         );
 
 
+    const pattern =
+        document.getElementById(
+            "pattern"
+        ).value;
+
+
+    const sortBy =
+        document.getElementById(
+            "sortBy"
+        ).value;
+
+
     const results = [];
 
 
-    Object.entries(stocks)
+    Object.entries(data)
         .forEach(
-            ([code, stock]) => {
+            ([ticker, stock]) => {
+
+
+                const brokerEntries =
+                    Object.entries(
+                        stock.brokers
+                    );
 
 
                 if (
-                    stock.brokers.length <
+                    brokerEntries.length <
                     minBroker
                 ) {
 
@@ -2366,64 +3500,128 @@ function scanAll() {
                 }
 
 
-                const avgs =
-                    stock.brokers.map(
-                        item =>
-                            item.buyAvg
+                const valid =
+                    brokerEntries.filter(
+                        ([broker, item]) =>
+                            item.buyAvg > 0
                     );
 
 
-                const med =
-                    median(avgs);
-
-
-                const lowest =
-                    [...stock.brokers]
-                        .sort(
-                            (a, b) =>
-                                a.buyAvg -
-                                b.buyAvg
-                        )[0];
-
-
-                const gap =
-                    (
-                        (med -
-                            lowest.buyAvg) /
-                        med
-                    ) * 100;
-
-
-                if (gap < minGap) {
+                if (
+                    valid.length <
+                    minBroker
+                ) {
 
                     return;
 
                 }
 
 
-                const net =
-                    lowest.buy -
-                    lowest.sell;
+                const averages =
+                    valid.map(
+                        ([broker, item]) =>
+                            item.buyAvg
+                    );
+
+
+                const med =
+                    median(
+                        averages
+                    );
+
+
+                if (!med) {
+
+                    return;
+
+                }
+
+
+                const sorted =
+                    [...valid]
+                        .sort(
+                            (
+                                a,
+                                b
+                            ) =>
+                                a[1].buyAvg -
+                                b[1].buyAvg
+                        );
+
+
+                const lowest =
+                    sorted[0];
+
+
+                const lowestBroker =
+                    lowest[0];
+
+
+                const lowestData =
+                    lowest[1];
+
+
+                let gap =
+                    (
+                        (
+                            med -
+                            lowestData.buyAvg
+                        ) /
+                        med
+                    ) * 100;
+
+
+                /*
+                Untuk scanner lowest,
+                gap tetap dihitung,
+                agar hasil tetap informatif.
+                */
+
+                if (
+                    pattern === "outlier" &&
+                    gap < minGap
+                ) {
+
+                    return;
+
+                }
+
+
+                /*
+                Harga sekarang:
+                ambil harga terbaru dari
+                kolom optional "price"
+                */
+
+                const price =
+                    getLatestPrice(
+                        ticker,
+                        data
+                    );
 
 
                 results.push({
 
-                    code: code,
+                    ticker,
 
-                    price: stock.price,
+                    price,
 
-                    broker: lowest.broker,
+                    broker:
+                        lowestBroker,
 
-                    avg: lowest.buyAvg,
+                    avg:
+                        lowestData.buyAvg,
 
-                    median: med,
+                    median:
+                        med,
 
-                    gap: gap,
+                    gap,
 
-                    net: net,
+                    net:
+                        lowestData.net,
 
                     brokerCount:
-                        stock.brokers.length
+                        valid.length
 
                 });
 
@@ -2431,10 +3629,121 @@ function scanAll() {
         );
 
 
+    /*
+    SORT
+    */
+
     results.sort(
-        (a, b) =>
-            b.gap - a.gap
+        (a, b) => {
+
+            if (sortBy === "avg") {
+
+                return (
+                    a.avg -
+                    b.avg
+                );
+
+            }
+
+
+            if (sortBy === "net") {
+
+                return (
+                    b.net -
+                    a.net
+                );
+
+            }
+
+
+            return (
+                b.gap -
+                a.gap
+            );
+
+        }
     );
+
+
+    renderScannerResults(
+        results
+    );
+
+
+    if (results.length) {
+
+        showDetail(
+            results[0].ticker,
+            data
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   GET LATEST PRICE
+========================================= */
+
+function getLatestPrice(
+    ticker,
+    periodData
+) {
+
+
+    /*
+       Kalau CSV punya kolom "price",
+       gunakan harga dari tanggal paling baru.
+    */
+
+    const rows =
+        getFilteredRawData()
+            .filter(
+                row =>
+                    row.ticker
+                        .toUpperCase() ===
+                    ticker
+            )
+            .sort(
+                (a, b) =>
+                    b.date.localeCompare(
+                        a.date
+                    )
+            );
+
+
+    for (
+        const row of rows
+    ) {
+
+        const price =
+            toNumber(
+                row.price
+            );
+
+
+        if (price > 0) {
+
+            return price;
+
+        }
+
+    }
+
+
+    return 0;
+
+}
+
+
+/* =========================================
+   RENDER SCANNER
+========================================= */
+
+function renderScannerResults(
+    results
+) {
 
 
     const table =
@@ -2446,20 +3755,56 @@ function scanAll() {
     table.innerHTML = "";
 
 
+    document.getElementById(
+        "foundCount"
+    ).innerText =
+        results.length +
+        " SAHAM";
+
+
+    if (!results.length) {
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="10"
+                    style="
+                        text-align:center;
+                        padding:30px;
+                        color:#7890aa;
+                    "
+                >
+
+                    Tidak ada saham yang
+                    memenuhi filter.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
     results.forEach(
         (item, index) => {
 
 
             const gapClass =
                 item.gap >= 25
-                    ? "gap-high"
-                    : "gap-medium";
+                    ? "green"
+                    : "yellow";
 
 
             const netClass =
                 item.net >= 0
-                    ? "positive"
-                    : "negative";
+                    ? "green"
+                    : "red";
 
 
             table.innerHTML += `
@@ -2473,24 +3818,38 @@ function scanAll() {
                     <td>
 
                         <span
-                            class="stock-code"
-                            onclick="showDetail('${item.code}')">
+                            class="code"
+                            onclick="
+                                showDetail(
+                                    '${item.ticker}'
+                                )
+                            "
+                        >
 
-                            ${item.code}
+                            ${item.ticker}
 
                         </span>
 
                     </td>
 
                     <td>
-                        Rp${formatNumber(item.price)}
+
+                        ${
+                            item.price > 0
+                            ? "Rp" +
+                              formatNumber(
+                                  item.price
+                              )
+                            : "-"
+                        }
+
                     </td>
 
                     <td>
                         <b>${item.broker}</b>
                     </td>
 
-                    <td class="avg-low">
+                    <td class="avg-outlier">
                         Rp${formatNumber(item.avg)}
                     </td>
 
@@ -2503,7 +3862,6 @@ function scanAll() {
                     </td>
 
                     <td class="${netClass}">
-                        ${item.net >= 0 ? "+" : ""}
                         ${formatMoney(item.net)}
                     </td>
 
@@ -2514,10 +3872,15 @@ function scanAll() {
                     <td>
 
                         <button
-                            class="detail-button"
-                            onclick="showDetail('${item.code}')">
+                            class="detail-btn"
+                            onclick="
+                                showDetail(
+                                    '${item.ticker}'
+                                )
+                            "
+                        >
 
-                            ▥ Detail
+                            Detail
 
                         </button>
 
@@ -2530,73 +3893,73 @@ function scanAll() {
         }
     );
 
+}
 
-    if (results.length === 0) {
 
-        table.innerHTML = `
+/* =========================================
+   DETAIL
+========================================= */
 
-            <tr>
+function showDetail(
+    ticker,
+    periodData = null
+) {
 
-                <td
-                    colspan="10"
-                    style="
-                        text-align:center;
-                        padding:30px;
-                        color:#8195ae;
-                    ">
 
-                    Tidak ada emiten yang memenuhi
-                    filter saat ini.
+    if (!periodData) {
 
-                </td>
-
-            </tr>
-
-        `;
+        periodData =
+            buildPeriodGroupedData();
 
     }
 
 
-    document.getElementById(
-        "foundCount"
-    ).innerText =
-        "Ditemukan " +
-        results.length +
-        " saham";
-
-
-}
-
-
-/*
-=========================================
-DETAIL
-=========================================
-*/
-
-function showDetail(code) {
-
-
     const stock =
-        stocks[code];
+        periodData[ticker];
 
 
-    document.getElementById(
-        "detailCode"
-    ).innerText =
-        code;
+    if (!stock) {
+
+        return;
+
+    }
 
 
-    document.getElementById(
-        "detailPrice"
-    ).innerText =
-        "Rp" +
-        formatNumber(stock.price);
+    currentDetailCode =
+        ticker;
+
+
+    const entries =
+        Object.entries(
+            stock.brokers
+        )
+        .filter(
+            ([broker, item]) =>
+                item.buyAvg > 0
+        );
+
+
+    if (!entries.length) {
+
+        return;
+
+    }
+
+
+    /*
+    Sort Avg Buy rendah -> tinggi
+    */
+
+    entries.sort(
+        (a, b) =>
+            a[1].buyAvg -
+            b[1].buyAvg
+    );
 
 
     const avgs =
-        stock.brokers.map(
-            item =>
+        entries.map(
+            ([broker, item]) =>
                 item.buyAvg
         );
 
@@ -2605,23 +3968,24 @@ function showDetail(code) {
         median(avgs);
 
 
-    const sorted =
-        [...stock.brokers]
-            .sort(
-                (a, b) =>
-                    a.buyAvg -
-                    b.buyAvg
-            );
-
-
     const lowest =
-        sorted[0];
+        entries[0];
+
+
+    const lowestBroker =
+        lowest[0];
+
+
+    const lowestData =
+        lowest[1];
 
 
     const gap =
         (
-            (med -
-                lowest.buyAvg) /
+            (
+                med -
+                lowestData.buyAvg
+            ) /
             med
         ) * 100;
 
@@ -2633,30 +3997,50 @@ function showDetail(code) {
     let totalNet = 0;
 
 
-    stock.brokers
-        .forEach(
-            item => {
-
-                const net =
-                    item.buy -
-                    item.sell;
+    entries.forEach(
+        ([broker, item]) => {
 
 
-                totalNet += net;
+            if (
+                item.net >= 0
+            ) {
 
+                acc++;
 
-                if (net >= 0) {
+            } else {
 
-                    acc++;
-
-                } else {
-
-                    dist++;
-
-                }
+                dist++;
 
             }
+
+
+            totalNet +=
+                item.net;
+
+        }
+    );
+
+
+    const price =
+        getLatestPrice(
+            ticker,
+            periodData
         );
+
+
+    document.getElementById(
+        "detailCode"
+    ).innerText =
+        ticker;
+
+
+    document.getElementById(
+        "detailPrice"
+    ).innerText =
+        price > 0
+            ? "Rp" +
+              formatNumber(price)
+            : "-";
 
 
     document.getElementById(
@@ -2676,14 +4060,14 @@ function showDetail(code) {
     ).innerText =
         "Rp" +
         formatNumber(
-            lowest.buyAvg
+            lowestData.buyAvg
         );
 
 
     document.getElementById(
         "detailBroker"
     ).innerText =
-        lowest.broker;
+        lowestBroker;
 
 
     document.getElementById(
@@ -2696,10 +4080,10 @@ function showDetail(code) {
     document.getElementById(
         "infoPrice"
     ).innerText =
-        "Rp" +
-        formatNumber(
-            stock.price
-        );
+        price > 0
+            ? "Rp" +
+              formatNumber(price)
+            : "-";
 
 
     document.getElementById(
@@ -2712,10 +4096,10 @@ function showDetail(code) {
     document.getElementById(
         "infoLowest"
     ).innerText =
-        lowest.broker +
+        lowestBroker +
         " / Rp" +
         formatNumber(
-            lowest.buyAvg
+            lowestData.buyAvg
         );
 
 
@@ -2726,15 +4110,18 @@ function showDetail(code) {
         "%";
 
 
+    updateDetailDate();
+
+
     /*
-    POINTER
+    Pointer action
     */
 
     let pointer =
         50 +
         (
             totalNet /
-            3000
+            50000000
         );
 
 
@@ -2772,40 +4159,39 @@ function showDetail(code) {
     table.innerHTML = "";
 
 
-    sorted.forEach(
-        (item, index) => {
-
-
-            const net =
-                item.buy -
-                item.sell;
+    entries.forEach(
+        ([broker, item], index) => {
 
 
             const netClass =
-                net >= 0
-                    ? "positive"
-                    : "negative";
+                item.net >= 0
+                    ? "green"
+                    : "red";
 
 
-            const isLow =
+            /*
+            Avg <= 90% median
+            */
+
+            const isOutlier =
                 item.buyAvg <=
                 med * 0.90;
 
 
             const avgClass =
-                isLow
-                    ? "avg-low"
-                    : "avg-normal";
+                isOutlier
+                    ? "avg-outlier"
+                    : "";
 
 
             const actionClass =
-                net >= 0
+                item.net >= 0
                     ? "badge-acc"
                     : "badge-dist";
 
 
             const actionText =
-                net >= 0
+                item.net >= 0
                     ? "ACC"
                     : "DIST";
 
@@ -2819,47 +4205,69 @@ function showDetail(code) {
                     </td>
 
                     <td>
-                        <b
-                            style="color:#55a1ff">
-
-                            ${item.broker}
-
+                        <b style="
+                            color:#62a7ff;
+                        ">
+                            ${broker}
                         </b>
                     </td>
 
-                    <td class="positive">
-                        ${formatMoney(item.buy)}
+                    <td class="green">
+                        ${formatMoney(
+                            item.buyValue
+                        )}
                     </td>
 
                     <td>
                         ${item.buyLot.toFixed(1)} K
                     </td>
 
-                    <td class="${avgClass}">
-                        Rp${formatNumber(item.buyAvg)}
+                    <td
+                        class="${avgClass}"
+                        style="
+                            color:
+                            ${
+                                isOutlier
+                                ? "#20df8a"
+                                : "#dce8f5"
+                            };
+                        "
+                    >
+
+                        Rp${formatNumber(
+                            item.buyAvg
+                        )}
+
                     </td>
 
-                    <td class="negative">
-                        ${formatMoney(item.sell)}
+                    <td class="red">
+                        ${formatMoney(
+                            item.sellValue
+                        )}
                     </td>
 
                     <td>
                         ${item.sellLot.toFixed(1)} K
                     </td>
 
-                    <td style="color:#ff6a76">
-                        Rp${formatNumber(item.sellAvg)}
+                    <td class="red">
+                        Rp${formatNumber(
+                            item.sellAvg
+                        )}
                     </td>
 
                     <td class="${netClass}">
-                        ${net >= 0 ? "+" : ""}
-                        ${formatMoney(net)}
+                        ${formatMoney(
+                            item.net
+                        )}
                     </td>
 
                     <td>
 
                         <span
-                            class="badge ${actionClass}">
+                            class="badge
+                            ${actionClass}"
+                        >
 
                             ${actionText}
 
@@ -2874,19 +4282,156 @@ function showDetail(code) {
         }
     );
 
+}
 
-    updateDetailDate();
+
+/* =========================================
+   ISSUE COUNT
+========================================= */
+
+function updateIssuerCount() {
+
+
+    const issuers =
+        new Set(
+            rawData.map(
+                row =>
+                    row.ticker
+                        .toUpperCase()
+            )
+        );
+
+
+    document.getElementById(
+        "issuerCount"
+    ).innerText =
+        issuers.size;
 
 }
 
 
-/*
-=========================================
-MODE
-=========================================
-*/
+/* =========================================
+   DATA TIMESTAMP
+========================================= */
 
-function changeMode(mode) {
+function updateDataTimestamp() {
+
+
+    const dates =
+        rawData
+            .map(
+                row => row.date
+            )
+            .filter(Boolean)
+            .sort();
+
+
+    if (!dates.length) {
+
+        return;
+
+    }
+
+
+    const latest =
+        dates[dates.length - 1];
+
+
+    document.getElementById(
+        "updateTime"
+    ).innerText =
+        formatDate(latest);
+
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+function setStatus(
+    type,
+    message
+) {
+
+
+    const element =
+        document.getElementById(
+            "importStatus"
+        );
+
+
+    element.className =
+        "status " +
+        type;
+
+
+    element.innerText =
+        message;
+
+}
+
+
+/* =========================================
+   TEMPLATE CSV
+========================================= */
+
+function downloadTemplate() {
+
+
+    const csv =
+
+`date,ticker,broker,buy_value,buy_lot,buy_avg,sell_value,sell_lot,sell_avg,price
+2026-09-29,ENRG,LG,1800000000,39.8,486,1880000000,24.1,609,650
+2026-09-29,ENRG,RX,1200000000,20.0,593,800000000,13.0,621,650
+2026-09-29,ENRG,MG,730000000,10.1,609,1810000000,7.1,636,650`;
+
+
+    const blob =
+        new Blob(
+            [csv],
+            {
+                type:
+                    "text/csv;charset=utf-8;"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    link.href = url;
+
+    link.download =
+        "broker_data_template.csv";
+
+
+    link.click();
+
+
+    URL.revokeObjectURL(
+        url
+    );
+
+}
+
+
+/* =========================================
+   MODE
+========================================= */
+
+function changeMode(
+    mode
+) {
 
 
     const modes = [
@@ -2898,6 +4443,7 @@ function changeMode(mode) {
 
     modes.forEach(
         item => {
+
 
             document.getElementById(
                 item + "App"
@@ -2917,29 +4463,39 @@ function changeMode(mode) {
         }
     );
 
-
 }
 
 
-/*
-=========================================
-INIT
-=========================================
-*/
+/* =========================================
+   INIT
+========================================= */
 
 function initialize() {
 
 
-    updateTimestamp();
+    setDefaultPeriod();
 
 
-    setQuickPeriod(6);
+    updateDetailDate();
 
 
-    scanAll();
+    document.getElementById(
+        "updateTime"
+    ).innerText =
+        "Belum tersedia";
 
 
-    showDetail("ENRG");
+    document.getElementById(
+        "issuerCount"
+    ).innerText =
+        "-";
+
+
+    document.getElementById(
+        "foundCount"
+    ).innerText =
+        "0 SAHAM";
+
 
 }
 
