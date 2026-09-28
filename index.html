@@ -10,54 +10,237 @@
 
     <title>Multibagger Hunter</title>
 
+
     <style>
 
         * {
             box-sizing: border-box;
         }
 
+
         body {
             margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f3f6fa;
-            color: #172033;
+
+            font-family:
+                Inter,
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    #102746 0%,
+                    #07111f 38%,
+                    #050b14 100%
+                );
+
+            color: #eaf2ff;
+
+            min-height: 100vh;
         }
+
 
         /* =========================
            HEADER
         ========================= */
 
         header {
-            background: linear-gradient(
-                135deg,
-                #111827,
-                #172554
-            );
+            padding: 22px 30px;
 
-            color: white;
-            padding: 24px 30px;
+            border-bottom:
+                1px solid #203552;
+
+            background:
+                rgba(5, 15, 28, 0.92);
         }
 
-        header h1 {
+
+        .header-top {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .brand {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .brand-icon {
+            font-size: 34px;
+        }
+
+
+        .brand h1 {
             margin: 0;
+
             font-size: 30px;
+
+            letter-spacing: -0.5px;
         }
 
-        header p {
-            margin: 7px 0 0;
-            color: #cbd5e1;
+
+        .brand h1 span {
+            color: #20df8a;
+        }
+
+
+        .brand p {
+            margin: 5px 0 0;
+
+            color: #8ea6c4;
+
+            font-size: 13px;
+        }
+
+
+        .header-cards {
+            display: flex;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .header-card {
+            min-width: 180px;
+
+            padding: 12px 16px;
+
+            border:
+                1px solid #284463;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #0f2037,
+                    #0b1729
+                );
+        }
+
+
+        .header-card small {
+            display: block;
+
+            color: #8ea6c4;
+
+            font-size: 10px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .header-card strong {
             font-size: 14px;
         }
 
 
+        .live {
+            color: #20df8a;
+        }
+
+
+        .demo {
+            color: #ff5c69;
+        }
+
+
         /* =========================
-           CONTAINER
+           MAIN
         ========================= */
 
         .container {
-            max-width: 1250px;
+            max-width: 1500px;
+
             margin: auto;
-            padding: 25px;
+
+            padding: 18px;
+        }
+
+
+        /* =========================
+           MODE TABS
+        ========================= */
+
+        .mode-tabs {
+            display: flex;
+
+            gap: 8px;
+
+            margin-bottom: 16px;
+        }
+
+
+        .mode-tab {
+            flex: 1;
+
+            border:
+                1px solid #29445f;
+
+            background:
+                #0b1829;
+
+            color: #9fb1c8;
+
+            padding: 13px;
+
+            border-radius: 9px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .mode-tab:hover {
+            border-color: #3c6390;
+        }
+
+
+        .mode-tab.active {
+            background:
+                linear-gradient(
+                    135deg,
+                    #0d71ff,
+                    #1454e8
+                );
+
+            border-color: #3181ff;
+
+            color: white;
+
+            box-shadow:
+                0 0 16px
+                rgba(20, 100, 255, 0.2);
+        }
+
+
+        .mode-tab.swing {
+            color: #6fa5ff;
+        }
+
+
+        .mode-tab.daytrade {
+            color: #ffab45;
         }
 
 
@@ -66,543 +249,782 @@
         ========================= */
 
         .panel {
-            background: white;
-            border-radius: 14px;
-            padding: 20px;
-            margin-bottom: 18px;
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(13, 28, 47, 0.98),
+                    rgba(8, 19, 33, 0.98)
+                );
+
+            border:
+                1px solid #263f5b;
+
+            border-radius: 13px;
+
+            padding: 17px;
+
+            margin-bottom: 16px;
 
             box-shadow:
-                0 3px 12px rgba(15, 23, 42, 0.07);
+                0 8px 25px
+                rgba(0, 0, 0, 0.2);
         }
 
 
         /* =========================
-           FILTER
+           PANEL TITLE
         ========================= */
 
-        .filter-title {
-            margin: 0 0 18px;
-            font-size: 19px;
-        }
-
-        .filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            align-items: end;
-        }
-
-        .filter {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .filter label {
-            font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 6px;
-            color: #475569;
-        }
-
-        select,
-        input {
-            min-width: 145px;
-            height: 38px;
-            padding: 8px 10px;
-
-            border: 1px solid #cbd5e1;
-            border-radius: 7px;
-
-            background: white;
-            color: #172033;
-
-            font-size: 13px;
-        }
-
-        select:focus,
-        input:focus {
-            outline: none;
-            border-color: #2563eb;
-        }
-
-        button {
-            height: 38px;
-            padding: 0 20px;
-
-            border: none;
-            border-radius: 7px;
-
-            background: #2563eb;
-            color: white;
-
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #1d4ed8;
-        }
-
-
-        /* =========================
-           PERIOD BUTTON
-        ========================= */
-
-        .period-buttons {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
-        .period-button {
-            min-width: 70px;
-            height: 34px;
-
-            padding: 0 14px;
-
-            border: 1px solid #cbd5e1;
-            border-radius: 7px;
-
-            background: white;
-            color: #475569;
-
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .period-button.active {
-            background: #2563eb;
-            color: white;
-            border-color: #2563eb;
-        }
-
-
-        /* =========================
-           STOCK HEADER
-        ========================= */
-
-        .stock-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .stock-code {
-            font-size: 28px;
-            font-weight: bold;
-            color: #0f172a;
-        }
-
-        .stock-price {
-            margin-top: 5px;
-            color: #64748b;
-            font-size: 13px;
-        }
-
-        .stock-period {
-            background: #eff6ff;
-            color: #2563eb;
-
-            padding: 8px 13px;
-            border-radius: 20px;
-
-            font-size: 13px;
-            font-weight: bold;
-        }
-
-
-        /* =========================
-           BROKER ACTION
-        ========================= */
-
-        .action-title {
-            font-weight: bold;
-            font-size: 17px;
-            margin-bottom: 10px;
-        }
-
-        .action-labels {
-            display: flex;
-            justify-content: space-between;
-
-            color: #64748b;
-            font-size: 11px;
-
-            margin-bottom: 5px;
-        }
-
-        .action-bar {
-            position: relative;
-
-            height: 13px;
-            border-radius: 50px;
-
-            background: linear-gradient(
-                to right,
-                #ef4444 0%,
-                #ef4444 25%,
-                #f97316 38%,
-                #facc15 48%,
-                #94a3b8 50%,
-                #4ade80 62%,
-                #10b981 78%,
-                #059669 100%
-            );
-        }
-
-        .action-pointer {
-            position: absolute;
-
-            width: 3px;
-            height: 28px;
-
-            top: -7px;
-
-            background: #7c3aed;
-
-            box-shadow:
-                0 0 0 2px white;
-
-            left: 58%;
-        }
-
-        .action-note {
-            display: flex;
-            justify-content: space-between;
-
-            margin-top: 6px;
-
-            font-size: 10px;
-            color: #94a3b8;
-        }
-
-
-        /* =========================
-           SUMMARY
-        ========================= */
-
-        .summary {
-            display: grid;
-
-            grid-template-columns:
-                repeat(4, 1fr);
-
-            gap: 12px;
-        }
-
-        .summary-card {
-            padding: 14px;
-
-            border-radius: 10px;
-
-            background: #f8fafc;
-
-            border: 1px solid #e2e8f0;
-        }
-
-        .summary-card small {
-            color: #64748b;
-            font-size: 11px;
-        }
-
-        .summary-card strong {
-            display: block;
-
-            margin-top: 5px;
-
-            font-size: 21px;
-
-            color: #0f172a;
-        }
-
-        .summary-green strong {
-            color: #16a34a;
-        }
-
-        .summary-red strong {
-            color: #dc2626;
-        }
-
-        .summary-blue strong {
-            color: #2563eb;
-        }
-
-
-        /* =========================
-           TABLE
-        ========================= */
-
-        .table-header {
+        .section-title {
             display: flex;
 
             justify-content: space-between;
+
             align-items: center;
 
             gap: 10px;
 
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
-        .table-header h2 {
+
+        .section-title h2 {
             margin: 0;
-            font-size: 18px;
+
+            font-size: 17px;
         }
 
-        .table-info {
-            color: #64748b;
-            font-size: 11px;
+
+        .section-badge {
+            padding: 5px 9px;
+
+            border-radius: 7px;
+
+            background: #10253e;
+
+            color: #7eb4ff;
+
+            font-size: 10px;
+
+            font-weight: bold;
         }
+
+
+        /* =========================
+           PERIOD
+        ========================= */
+
+        .period-layout {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 14px;
+        }
+
+
+        .sub-box {
+            border:
+                1px solid #253f5e;
+
+            background:
+                #0a1728;
+
+            border-radius: 10px;
+
+            padding: 13px;
+        }
+
+
+        .sub-box-title {
+            color: #b7c8dc;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            margin-bottom: 9px;
+        }
+
+
+        .quick-buttons {
+            display: flex;
+
+            gap: 7px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .quick-button {
+            background: #102138;
+
+            color: #9db1ca;
+
+            border:
+                1px solid #28425f;
+
+            padding:
+                8px 13px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+
+        .quick-button.active {
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1677ff,
+                    #0d5ce8
+                );
+
+            border-color: #3989ff;
+        }
+
+
+        .custom-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr 20px 1fr;
+
+            align-items: end;
+
+            gap: 7px;
+        }
+
+
+        .field {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 6px;
+        }
+
+
+        .field label {
+            color: #8ea6c4;
+
+            font-size: 10px;
+
+            font-weight: bold;
+        }
+
+
+        input,
+        select {
+            width: 100%;
+
+            height: 37px;
+
+            padding:
+                8px 10px;
+
+            border:
+                1px solid #29435f;
+
+            background:
+                #0d1d31;
+
+            color: #e8f1fc;
+
+            border-radius: 7px;
+
+            outline: none;
+        }
+
+
+        input:focus,
+        select:focus {
+            border-color: #3181ff;
+
+            box-shadow:
+                0 0 0 2px
+                rgba(49, 129, 255, 0.12);
+        }
+
+
+        .arrow {
+            text-align: center;
+
+            color: #6f89a7;
+
+            padding-bottom: 10px;
+        }
+
+
+        /* =========================
+           SCANNER FILTER
+        ========================= */
+
+        .scanner-grid {
+            display: grid;
+
+            grid-template-columns:
+                2fr
+                1fr
+                1fr
+                1fr;
+
+            gap: 10px;
+        }
+
+
+        .scan-button {
+            height: 37px;
+
+            border: 0;
+
+            border-radius: 7px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1677ff,
+                    #0b5be9
+                );
+
+            color: white;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 5px 14px
+                rgba(22, 119, 255, 0.2);
+        }
+
+
+        .scan-button:hover {
+            filter: brightness(1.08);
+        }
+
+
+        /* =========================
+           RESULT HEADER
+        ========================= */
+
+        .result-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 12px;
+        }
+
+
+        .found-badge {
+            padding:
+                5px 9px;
+
+            color: #ffd94a;
+
+            border:
+                1px solid #816a15;
+
+            background:
+                rgba(128, 100, 0, 0.16);
+
+            border-radius: 8px;
+
+            font-size: 10px;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           RESULT TABLE
+        ========================= */
 
         .table-wrap {
             overflow-x: auto;
 
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
+            border:
+                1px solid #243c57;
+
+            border-radius: 9px;
         }
+
 
         table {
             width: 100%;
 
             border-collapse: collapse;
 
-            min-width: 930px;
+            min-width: 1050px;
         }
 
+
         thead th {
-            background: #e8eef7;
+            background:
+                #11243a;
 
-            color: #334155;
+            color: #afc0d4;
 
-            font-size: 11px;
+            font-size: 10px;
 
-            padding: 10px 8px;
+            padding:
+                10px 9px;
 
             text-align: right;
 
-            border-bottom: 1px solid #cbd5e1;
+            border-bottom:
+                1px solid #29425f;
+
+            white-space: nowrap;
         }
+
 
         thead th:first-child {
             text-align: left;
         }
 
-        tbody td {
-            padding: 9px 8px;
 
-            font-size: 12px;
+        tbody td {
+            padding:
+                10px 9px;
+
+            border-bottom:
+                1px solid #182f49;
+
+            color: #dbe7f5;
+
+            font-size: 11px;
 
             text-align: right;
-
-            border-bottom: 1px solid #edf2f7;
         }
+
 
         tbody td:first-child {
             text-align: left;
         }
 
-        tbody tr:nth-child(even) {
-            background: #fbfdff;
-        }
 
         tbody tr:hover {
-            background: #eff6ff;
+            background:
+                rgba(25, 112, 255, 0.08);
         }
 
 
-        /* =========================
-           BROKER
-        ========================= */
-
-        .broker-name {
-            font-weight: bold;
-
-            color: #2563eb;
-        }
-
-
-        /* =========================
-           VALUES
-        ========================= */
-
-        .buy-value {
-            color: #15803d;
-        }
-
-        .sell-value {
-            color: #dc2626;
-        }
-
-        .buy-avg {
-            color: #15803d;
+        .stock-code {
+            color: white;
 
             font-weight: bold;
 
-            background: #f0fdf4;
+            font-size: 12px;
+
+            cursor: pointer;
+        }
+
+
+        .stock-code:hover {
+            color: #56a0ff;
+        }
+
+
+        .gap-high {
+            color: #20df8a;
+
+            font-weight: bold;
+        }
+
+
+        .gap-medium {
+            color: #ffd34a;
+
+            font-weight: bold;
+        }
+
+
+        .negative {
+            color: #ff5b68 !important;
+        }
+
+
+        .positive {
+            color: #20df8a !important;
+        }
+
+
+        .detail-button {
+            padding:
+                6px 9px;
+
+            border: 0;
 
             border-radius: 5px;
-        }
 
-        .sell-avg {
-            color: #dc2626;
+            background:
+                #116eff;
 
-            font-weight: bold;
+            color: white;
 
-            background: #fef2f2;
+            font-size: 10px;
 
-            border-radius: 5px;
-        }
-
-        .net-positive {
-            color: #15803d;
-
-            font-weight: bold;
-        }
-
-        .net-negative {
-            color: #dc2626;
-
-            font-weight: bold;
+            cursor: pointer;
         }
 
 
         /* =========================
-           LOW AVG BUY
+           DETAIL HEADER
         ========================= */
 
-        .low-average {
-            background: #dcfce7 !important;
+        .detail-grid {
+            display: grid;
 
-            color: #166534 !important;
+            grid-template-columns:
+                1.5fr
+                repeat(5, 1fr);
+
+            gap: 9px;
+
+            margin-bottom: 14px;
+        }
+
+
+        .stat-card {
+            border:
+                1px solid #29435e;
+
+            border-radius: 9px;
+
+            padding: 11px;
+
+            background:
+                #0b1a2c;
+        }
+
+
+        .stat-card small {
+            display: block;
+
+            color: #7e95af;
+
+            font-size: 9px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .stat-card strong {
+            font-size: 18px;
+        }
+
+
+        .stat-green strong {
+            color: #20df8a;
+        }
+
+
+        .stat-yellow strong {
+            color: #ffd34a;
+        }
+
+
+        .stat-blue strong {
+            color: #60a2ff;
+        }
+
+
+        /* =========================
+           ACTION BAR
+        ========================= */
+
+        .action-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1.8fr;
+
+            gap: 12px;
+
+            margin-bottom: 14px;
+        }
+
+
+        .action-box {
+            border:
+                1px solid #29435e;
+
+            background:
+                #0a1728;
+
+            border-radius: 9px;
+
+            padding: 13px;
+        }
+
+
+        .action-title {
+            font-size: 12px;
 
             font-weight: bold;
+
+            margin-bottom: 9px;
+        }
+
+
+        .labels {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            color: #8298b1;
+
+            font-size: 9px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .bar {
+            height: 11px;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    to right,
+                    #ff4b5f,
+                    #ff8a3d,
+                    #ffd449,
+                    #8e99a8,
+                    #35d982,
+                    #00b878
+                );
+
+            position: relative;
+        }
+
+
+        .pointer {
+            position: absolute;
+
+            width: 3px;
+
+            height: 25px;
+
+            background: white;
+
+            top: -7px;
+
+            left: 61%;
 
             box-shadow:
-                inset 3px 0 0 #22c55e;
+                0 0 0 2px
+                rgba(255,255,255,0.15);
+        }
+
+
+        .action-caption {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            color: #6f86a0;
+
+            font-size: 8px;
+
+            margin-top: 5px;
+        }
+
+
+        .mini-info {
+            color: #8195ae;
+
+            font-size: 10px;
+
+            line-height: 1.7;
+        }
+
+
+        .mini-info strong {
+            color: #dbe9f8;
         }
 
 
         /* =========================
-           BADGES
+           LOW AVG
         ========================= */
+
+        .avg-low {
+            background:
+                rgba(32, 223, 138, 0.14);
+
+            color: #20df8a !important;
+
+            font-weight: bold;
+
+            border-radius: 4px;
+        }
+
+
+        .avg-normal {
+            color: #dce7f4;
+        }
+
 
         .badge {
             display: inline-block;
 
-            padding: 3px 7px;
+            padding:
+                4px 7px;
 
             border-radius: 10px;
 
-            font-size: 9px;
+            font-size: 8px;
 
             font-weight: bold;
         }
 
+
         .badge-acc {
-            background: #dcfce7;
-            color: #15803d;
+            background:
+                rgba(32, 223, 138, 0.18);
+
+            color: #20df8a;
         }
 
+
         .badge-dist {
-            background: #fee2e2;
-            color: #dc2626;
+            background:
+                rgba(255, 79, 96, 0.17);
+
+            color: #ff6472;
         }
 
 
         /* =========================
-           LEGEND
+           MODE EMPTY
         ========================= */
 
-        .legend {
-            display: flex;
+        .empty-mode {
+            min-height: 380px;
 
-            gap: 15px;
-
-            flex-wrap: wrap;
-
-            margin-top: 12px;
-
-            font-size: 11px;
-
-            color: #64748b;
-        }
-
-        .legend span {
             display: flex;
 
             align-items: center;
 
-            gap: 5px;
+            justify-content: center;
+
+            text-align: center;
         }
 
-        .dot {
-            width: 9px;
-            height: 9px;
 
-            border-radius: 50%;
+        .empty-icon {
+            font-size: 55px;
+
+            margin-bottom: 10px;
         }
 
-        .dot-green {
-            background: #22c55e;
+
+        .empty-mode h2 {
+            margin:
+                0 0 8px;
         }
 
-        .dot-red {
-            background: #ef4444;
-        }
 
-        .dot-yellow {
-            background: #facc15;
+        .empty-mode p {
+            color: #8298b1;
+
+            max-width: 450px;
+
+            font-size: 13px;
         }
 
 
         /* =========================
-           NOTE
+           FOOTER NOTE
         ========================= */
 
         .note {
-            margin-top: 12px;
+            margin-top: 11px;
 
-            font-size: 11px;
+            color: #687f9b;
 
-            color: #64748b;
-            line-height: 1.5;
+            font-size: 9px;
+
+            line-height: 1.6;
         }
 
 
         /* =========================
-           MOBILE
+           RESPONSIVE
         ========================= */
 
-        @media (max-width: 800px) {
+        @media (max-width: 1000px) {
 
-            header {
-                padding: 20px;
+            .scanner-grid {
+                grid-template-columns:
+                    1fr 1fr;
             }
 
-            header h1 {
-                font-size: 24px;
+            .detail-grid {
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+
+            .action-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 18px;
+            }
+
+            .brand h1 {
+                font-size: 23px;
             }
 
             .container {
-                padding: 12px;
+                padding: 10px;
             }
 
-            .summary {
+            .period-layout {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .scanner-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .detail-grid {
                 grid-template-columns:
                     repeat(2, 1fr);
             }
 
-            .filters {
+            .mode-tabs {
                 flex-direction: column;
-                align-items: stretch;
-            }
-
-            select,
-            input,
-            button {
-                width: 100%;
             }
 
         }
@@ -617,11 +1039,75 @@
 
 <header>
 
-    <h1>🚀 MULTIBAGGER HUNTER</h1>
+    <div class="header-top">
 
-    <p>
-        Broker Action & Accumulation Screener
-    </p>
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                📊
+            </div>
+
+            <div>
+
+                <h1>
+                    MULTIBAGGER
+                    <span>HUNTER</span>
+                </h1>
+
+                <p>
+                    Broker Accumulation & Avg Outlier Screener
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="header-cards">
+
+
+            <div class="header-card">
+
+                <small>
+                    DATA TERAKHIR DIPERBARUI
+                </small>
+
+                <strong id="updateTime">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="header-card">
+
+                <small>
+                    TOTAL EMITEN
+                </small>
+
+                <strong class="live">
+                    950
+                </strong>
+
+            </div>
+
+
+            <div class="header-card">
+
+                <small>
+                    MODE DATA
+                </small>
+
+                <strong class="demo">
+                    SIMULASI (CONTOH)
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </header>
 
@@ -629,409 +1115,765 @@
 <div class="container">
 
 
-    <!-- FILTER PANEL -->
+    <!-- =========================
+         STRATEGY MENU
+    ========================= -->
 
-    <div class="panel">
+    <div class="mode-tabs">
 
-        <h2 class="filter-title">
-            🔎 Filter Broker
-        </h2>
+        <button
+            class="mode-tab active"
+            onclick="changeMode('multibagger')"
+            id="tab-multibagger">
 
+            🟢 MULTIBAGGER
 
-        <div class="filters">
-
-
-            <div class="filter">
-
-                <label>
-                    Periode
-                </label>
-
-                <select id="period"
-                        onchange="changePeriod()">
-
-                    <option value="1">
-                        1 Bulan
-                    </option>
-
-                    <option value="3">
-                        3 Bulan
-                    </option>
-
-                    <option value="6"
-                            selected>
-                        6 Bulan
-                    </option>
-
-                    <option value="12">
-                        12 Bulan
-                    </option>
-
-                </select>
-
-            </div>
+        </button>
 
 
-            <div class="filter">
+        <button
+            class="mode-tab swing"
+            onclick="changeMode('swing')"
+            id="tab-swing">
 
-                <label>
-                    Saham
-                </label>
+            🔵 SWING
 
-                <select id="stock"
-                        onchange="render()">
-
-                    <option value="ENRG">
-                        ENRG
-                    </option>
-
-                    <option value="BUMI">
-                        BUMI
-                    </option>
-
-                    <option value="NCKL">
-                        NCKL
-                    </option>
-
-                </select>
-
-            </div>
+        </button>
 
 
-            <div class="filter">
+        <button
+            class="mode-tab daytrade"
+            onclick="changeMode('daytrade')"
+            id="tab-daytrade">
 
-                <label>
-                    Investor
-                </label>
+            🟠 DAY TRADE
 
-                <select id="investor">
-
-                    <option>
-                        All Investor
-                    </option>
-
-                    <option>
-                        Foreign
-                    </option>
-
-                    <option>
-                        Local
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div class="filter">
-
-                <label>
-                    Mode
-                </label>
-
-                <select id="mode">
-
-                    <option>
-                        Regular
-                    </option>
-
-                    <option>
-                        All Market
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <button onclick="render()">
-
-                🔎 SCREEN
-
-            </button>
-
-
-        </div>
+        </button>
 
     </div>
 
 
-    <!-- STOCK INFORMATION -->
+    <!-- =========================
+         MULTIBAGGER APP
+    ========================= -->
 
-    <div class="panel">
+    <div id="multibaggerApp">
 
-        <div class="stock-header">
 
-            <div>
+        <!-- PERIOD -->
 
-                <div class="stock-code"
-                     id="stockCode">
+        <div class="panel">
 
-                    ENRG
+            <div class="section-title">
+
+                <h2>
+                    1. Periode Analisis
+                </h2>
+
+                <span class="section-badge">
+                    Tanggal otomatis
+                </span>
+
+            </div>
+
+
+            <div class="period-layout">
+
+
+                <div class="sub-box">
+
+                    <div class="sub-box-title">
+                        Periode Cepat
+                    </div>
+
+
+                    <div class="quick-buttons">
+
+
+                        <button
+                            class="quick-button"
+                            onclick="setQuickPeriod(1)"
+                            id="quick-1">
+
+                            1 Bulan
+
+                        </button>
+
+
+                        <button
+                            class="quick-button"
+                            onclick="setQuickPeriod(3)"
+                            id="quick-3">
+
+                            3 Bulan
+
+                        </button>
+
+
+                        <button
+                            class="quick-button active"
+                            onclick="setQuickPeriod(6)"
+                            id="quick-6">
+
+                            6 Bulan
+
+                        </button>
+
+
+                        <button
+                            class="quick-button"
+                            onclick="setQuickPeriod(12)"
+                            id="quick-12">
+
+                            12 Bulan
+
+                        </button>
+
+
+                        <button
+                            class="quick-button"
+                            onclick="setQuickPeriod(24)"
+                            id="quick-24">
+
+                            24 Bulan
+
+                        </button>
+
+                    </div>
 
                 </div>
 
-                <div class="stock-price">
 
-                    Harga sekarang:
-                    <strong id="stockPrice">
+                <div class="sub-box">
+
+                    <div class="sub-box-title">
+                        Rentang Custom
+                    </div>
+
+
+                    <div class="custom-grid">
+
+
+                        <div class="field">
+
+                            <label>
+                                DARI
+                            </label>
+
+                            <input
+                                type="date"
+                                id="startDate">
+
+                        </div>
+
+
+                        <div class="arrow">
+                            →
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                SAMPAI
+                            </label>
+
+                            <input
+                                type="date"
+                                id="endDate">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- SCANNER FILTER -->
+
+        <div class="panel">
+
+
+            <div class="section-title">
+
+                <h2>
+                    2. Filter Scanner
+                </h2>
+
+                <span class="section-badge">
+                    ALL EMITEN
+                </span>
+
+            </div>
+
+
+            <div class="scanner-grid">
+
+
+                <div class="field">
+
+                    <label>
+                        POLA
+                    </label>
+
+                    <select id="pattern">
+
+                        <option value="outlier">
+                            Avg Buy Outlier (Rendah Sendiri)
+                        </option>
+
+                        <option value="lowest">
+                            Avg Buy Terendah
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        MIN. GAP (%)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="minGap"
+                        value="20"
+                        min="0">
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        MIN. JUMLAH BROKER
+                    </label>
+
+                    <input
+                        type="number"
+                        id="minBroker"
+                        value="5"
+                        min="2">
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        &nbsp;
+                    </label>
+
+                    <button
+                        class="scan-button"
+                        onclick="scanAll()">
+
+                        🔎 SCAN ALL EMITEN
+
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- RESULT -->
+
+        <div class="panel">
+
+
+            <div class="section-title result-header">
+
+                <div>
+
+                    <h2>
+                        🎯 HASIL SCANNER ALL EMITEN
+                    </h2>
+
+                </div>
+
+
+                <span
+                    class="found-badge"
+                    id="foundCount">
+
+                    Ditemukan 0 saham
+
+                </span>
+
+            </div>
+
+
+            <div class="table-wrap">
+
+
+                <table>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>No</th>
+
+                            <th>Kode</th>
+
+                            <th>Harga</th>
+
+                            <th>Broker Outlier</th>
+
+                            <th>Avg Outlier</th>
+
+                            <th>Median Broker</th>
+
+                            <th>Gap (%)</th>
+
+                            <th>Net Buy Outlier</th>
+
+                            <th>Jml Broker</th>
+
+                            <th>Aksi</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody
+                        id="scannerTable">
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+            <div class="note">
+
+                Gap dihitung berdasarkan perbedaan Avg Buy
+                broker terendah terhadap median Avg Buy
+                broker pada emiten tersebut.
+
+            </div>
+
+        </div>
+
+
+        <!-- DETAIL -->
+
+        <div class="panel">
+
+
+            <div class="section-title">
+
+
+                <h2>
+                    📊 DETAIL BROKER -
+                    <span id="detailCode">
+                        ENRG
+                    </span>
+                </h2>
+
+
+                <span
+                    class="section-badge"
+                    id="detailDate">
+
+                    -
+
+                </span>
+
+
+            </div>
+
+
+            <div class="detail-grid">
+
+
+                <div class="stat-card">
+
+                    <small>
+                        HARGA SEKARANG
+                    </small>
+
+                    <strong
+                        class="stat-green"
+                        id="detailPrice">
+
                         Rp650
+
                     </strong>
 
                 </div>
 
+
+                <div class="stat-card stat-green">
+
+                    <small>
+                        BROKER AKUMULASI
+                    </small>
+
+                    <strong id="detailAcc">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <small>
+                        BROKER DISTRIBUSI
+                    </small>
+
+                    <strong
+                        style="color:#ff5b68"
+                        id="detailDist">
+
+                        0
+
+                    </strong>
+
+                </div>
+
+
+                <div class="stat-card stat-green">
+
+                    <small>
+                        AVG BUY TERENDAH
+                    </small>
+
+                    <strong
+                        id="detailLowest">
+
+                        -
+
+                    </strong>
+
+                </div>
+
+
+                <div class="stat-card stat-blue">
+
+                    <small>
+                        BROKER
+                    </small>
+
+                    <strong
+                        id="detailBroker">
+
+                        -
+
+                    </strong>
+
+                </div>
+
+
+                <div class="stat-card stat-yellow">
+
+                    <small>
+                        GAP MEDIAN
+                    </small>
+
+                    <strong
+                        id="detailGap">
+
+                        -
+
+                    </strong>
+
+                </div>
+
+
             </div>
 
 
-            <div class="stock-period"
-                 id="periodLabel">
+            <div class="action-grid">
 
-                6 Bulan
+
+                <div class="action-box">
+
+
+                    <div class="action-title">
+
+                        Broker Action
+
+                    </div>
+
+
+                    <div class="labels">
+
+                        <span>
+                            Big Dist
+                        </span>
+
+                        <span>
+                            Neutral
+                        </span>
+
+                        <span>
+                            Big Acc
+                        </span>
+
+                    </div>
+
+
+                    <div class="bar">
+
+                        <div
+                            class="pointer"
+                            id="actionPointer">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="action-caption">
+
+                        <span>
+                            Distribusi
+                        </span>
+
+                        <span>
+                            Netral
+                        </span>
+
+                        <span>
+                            Akumulasi
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="action-box">
+
+
+                    <div class="action-title">
+                        Informasi Outlier
+                    </div>
+
+
+                    <div class="mini-info">
+
+
+                        <div>
+                            Harga sekarang:
+                            <strong id="infoPrice">
+                                -
+                            </strong>
+                        </div>
+
+
+                        <div>
+                            Median Avg Buy:
+                            <strong id="infoMedian">
+                                -
+                            </strong>
+                        </div>
+
+
+                        <div>
+                            Broker Avg Buy terendah:
+                            <strong id="infoLowest">
+                                -
+                            </strong>
+                        </div>
+
+
+                        <div>
+                            Selisih terhadap median:
+                            <strong id="infoGap">
+                                -
+                            </strong>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- BROKER TABLE -->
+
+            <div class="table-wrap">
+
+
+                <table>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                No
+                            </th>
+
+                            <th>
+                                Broker
+                            </th>
+
+                            <th>
+                                B.Val
+                            </th>
+
+                            <th>
+                                B.Lot
+                            </th>
+
+                            <th>
+                                B.Avg
+                            </th>
+
+                            <th>
+                                S.Val
+                            </th>
+
+                            <th>
+                                S.Lot
+                            </th>
+
+                            <th>
+                                S.Avg
+                            </th>
+
+                            <th>
+                                Net
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody
+                        id="detailTable">
+
+                    </tbody>
+
+
+                </table>
+
+            </div>
+
+
+            <div class="note">
+
+                🟢 B.Avg yang jauh di bawah median broker
+                diberi highlight. Data saat ini masih simulasi
+                untuk pengembangan aplikasi.
 
             </div>
 
         </div>
+
 
     </div>
 
 
-    <!-- BROKER ACTION -->
+    <!-- =========================
+         SWING
+    ========================= -->
 
-    <div class="panel">
-
-        <div class="action-title">
-
-            Broker Action ⓘ
-
-        </div>
+    <div
+        id="swingApp"
+        style="display:none">
 
 
-        <div class="action-labels">
+        <div class="panel empty-mode">
 
-            <span>
-                Big Dist
-            </span>
+            <div>
 
-            <span>
-                Neutral
-            </span>
+                <div class="empty-icon">
+                    🔵
+                </div>
 
-            <span>
-                Big Acc
-            </span>
+                <h2>
+                    SWING
+                </h2>
 
-        </div>
+                <p>
+                    Formula Swing belum ditentukan.
+                    Modul ini sengaja dikosongkan terlebih dahulu
+                    dan akan diisi setelah formula screening
+                    Swing selesai dibuat.
+                </p>
 
+                <span class="section-badge">
+                    DEVELOPMENT
+                </span>
 
-        <div class="action-bar">
-
-            <div class="action-pointer"
-                 id="pointer">
             </div>
 
         </div>
 
-
-        <div class="action-note">
-
-            <span>
-                Distribusi
-            </span>
-
-            <span>
-                Netral
-            </span>
-
-            <span>
-                Akumulasi
-            </span>
-
-        </div>
 
     </div>
 
 
-    <!-- SUMMARY -->
+    <!-- =========================
+         DAY TRADE
+    ========================= -->
 
-    <div class="panel">
-
-        <div class="summary">
-
-
-            <div class="summary-card summary-green">
-
-                <small>
-                    Broker Akumulasi
-                </small>
-
-                <strong id="accCount">
-                    0
-                </strong>
-
-            </div>
+    <div
+        id="daytradeApp"
+        style="display:none">
 
 
-            <div class="summary-card summary-red">
+        <div class="panel empty-mode">
 
-                <small>
-                    Broker Distribusi
-                </small>
+            <div>
 
-                <strong id="distCount">
-                    0
-                </strong>
+                <div class="empty-icon">
+                    🟠
+                </div>
 
-            </div>
+                <h2>
+                    DAY TRADE
+                </h2>
 
+                <p>
+                    Formula Day Trade belum ditentukan.
+                    Modul ini sengaja dikosongkan terlebih dahulu
+                    sampai kita menemukan formula yang sesuai.
+                </p>
 
-            <div class="summary-card summary-green">
-
-                <small>
-                    Avg Buy Terendah
-                </small>
-
-                <strong id="lowestAvg">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="summary-card summary-blue">
-
-                <small>
-                    Broker Avg Terendah
-                </small>
-
-                <strong id="lowestBroker">
-                    -
-                </strong>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-
-    <!-- BROKER TABLE -->
-
-    <div class="panel">
-
-
-        <div class="table-header">
-
-            <h2>
-                📊 Broker Action
-            </h2>
-
-            <div class="table-info">
-
-                Diurutkan berdasarkan Avg Buy
+                <span class="section-badge">
+                    DEVELOPMENT
+                </span>
 
             </div>
 
         </div>
 
-
-        <div class="table-wrap">
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            Broker
-                        </th>
-
-                        <th>
-                            B.Val
-                        </th>
-
-                        <th>
-                            B.Lot
-                        </th>
-
-                        <th>
-                            B.Avg
-                        </th>
-
-                        <th>
-                            S.Val
-                        </th>
-
-                        <th>
-                            S.Lot
-                        </th>
-
-                        <th>
-                            S.Avg
-                        </th>
-
-                        <th>
-                            Net
-                        </th>
-
-                        <th>
-                            Action
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody id="brokerTable">
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-
-        <div class="legend">
-
-            <span>
-
-                <i class="dot dot-green"></i>
-
-                Akumulasi
-
-            </span>
-
-
-            <span>
-
-                <i class="dot dot-red"></i>
-
-                Distribusi
-
-            </span>
-
-
-            <span>
-
-                <i class="dot dot-yellow"></i>
-
-                Avg Buy rendah
-
-            </span>
-
-        </div>
-
-
-        <div class="note">
-
-            ⚠ Data pada versi ini adalah data contoh
-            untuk membangun sistem. Nantinya akan kita
-            ganti dengan data broker saham Indonesia
-            yang sebenarnya.
-
-        </div>
 
     </div>
 
@@ -1057,185 +1899,35 @@ const stocks = {
 
         brokers: [
 
-            {
-                broker: "LG",
-                buy: 1800,
-                buyLot: 39.8,
-                buyAvg: 486,
-                sell: 1880,
-                sellLot: 24.1,
-                sellAvg: 609
-            },
+            { broker:"LG", buy:1800, buyLot:39.8, buyAvg:486, sell:1880, sellLot:24.1, sellAvg:609 },
 
-            {
-                broker: "RB",
-                buy: 200,
-                buyLot: 1.3,
-                buyAvg: 593,
-                sell: 325,
-                sellLot: 5.6,
-                sellAvg: 621
-            },
+            { broker:"RB", buy:200, buyLot:1.3, buyAvg:593, sell:325, sellLot:5.6, sellAvg:621 },
 
-            {
-                broker: "MG",
-                buy: 730,
-                buyLot: 10.1,
-                buyAvg: 609,
-                sell: 1810,
-                sellLot: 7.1,
-                sellAvg: 636
-            },
+            { broker:"MG", buy:730, buyLot:10.1, buyAvg:609, sell:1810, sellLot:7.1, sellAvg:636 },
 
-            {
-                broker: "LX",
-                buy: 2100,
-                buyLot: 6.4,
-                buyAvg: 609,
-                sell: 2260,
-                sellLot: 27.6,
-                sellAvg: 695
-            },
+            { broker:"LX", buy:2100, buyLot:6.4, buyAvg:609, sell:2260, sellLot:27.6, sellAvg:695 },
 
-            {
-                broker: "IF",
-                buy: 129,
-                buyLot: 4.9,
-                buyAvg: 603,
-                sell: 230,
-                sellLot: 2.4,
-                sellAvg: 691
-            },
+            { broker:"IF", buy:129, buyLot:4.9, buyAvg:603, sell:230, sellLot:2.4, sellAvg:691 },
 
-            {
-                broker: "CC",
-                buy: 450,
-                buyLot: 5.1,
-                buyAvg: 621,
-                sell: 390,
-                sellLot: 3.8,
-                sellAvg: 634
-            },
+            { broker:"CC", buy:450, buyLot:5.1, buyAvg:621, sell:390, sellLot:3.8, sellAvg:634 },
 
-            {
-                broker: "NI",
-                buy: 380,
-                buyLot: 4.8,
-                buyAvg: 612,
-                sell: 220,
-                sellLot: 2.1,
-                sellAvg: 605
-            },
+            { broker:"NI", buy:380, buyLot:4.8, buyAvg:612, sell:220, sellLot:2.1, sellAvg:605 },
 
-            {
-                broker: "AZ",
-                buy: 290,
-                buyLot: 2.2,
-                buyAvg: 572,
-                sell: 410,
-                sellLot: 3.2,
-                sellAvg: 628
-            },
+            { broker:"AZ", buy:290, buyLot:2.2, buyAvg:572, sell:410, sellLot:3.2, sellAvg:628 },
 
-            {
-                broker: "BK",
-                buy: 180,
-                buyLot: 2.1,
-                buyAvg: 558,
-                sell: 90,
-                sellLot: 1.1,
-                sellAvg: 590
-            },
+            { broker:"BK", buy:180, buyLot:2.1, buyAvg:558, sell:90, sellLot:1.1, sellAvg:590 },
 
-            {
-                broker: "AK",
-                buy: 233,
-                buyLot: 2.7,
-                buyAvg: 649,
-                sell: 362,
-                sellLot: 4.4,
-                sellAvg: 625
-            },
+            { broker:"AK", buy:233, buyLot:2.7, buyAvg:649, sell:362, sellLot:4.4, sellAvg:625 },
 
-            {
-                broker: "CP",
-                buy: 3350,
-                buyLot: 35.4,
-                buyAvg: 657,
-                sell: 1820,
-                sellLot: 22.2,
-                sellAvg: 616
-            },
+            { broker:"CP", buy:3350, buyLot:35.4, buyAvg:657, sell:1820, sellLot:22.2, sellAvg:616 },
 
-            {
-                broker: "DH",
-                buy: 1380,
-                buyLot: 18.0,
-                buyAvg: 663,
-                sell: 1510,
-                sellLot: 18.1,
-                sellAvg: 619
-            },
+            { broker:"DH", buy:1380, buyLot:18.0, buyAvg:663, sell:1510, sellLot:18.1, sellAvg:619 },
 
-            {
-                broker: "YB",
-                buy: 590,
-                buyLot: 3.6,
-                buyAvg: 743,
-                sell: 502,
-                sellLot: 6.4,
-                sellAvg: 598
-            },
+            { broker:"YB", buy:590, buyLot:3.6, buyAvg:743, sell:502, sellLot:6.4, sellAvg:598 },
 
-            {
-                broker: "YJ",
-                buy: 171,
-                buyLot: 2.9,
-                buyAvg: 589,
-                sell: 272,
-                sellLot: 3.7,
-                sellAvg: 648
-            },
+            { broker:"YJ", buy:171, buyLot:2.9, buyAvg:589, sell:272, sellLot:3.7, sellAvg:648 },
 
-            {
-                broker: "YP",
-                buy: 510,
-                buyLot: 6.2,
-                buyAvg: 641,
-                sell: 305,
-                sellLot: 3.1,
-                sellAvg: 613
-            },
-
-            {
-                broker: "GA",
-                buy: 430,
-                buyLot: 5.3,
-                buyAvg: 615,
-                sell: 270,
-                sellLot: 2.4,
-                sellAvg: 620
-            },
-
-            {
-                broker: "OD",
-                buy: 350,
-                buyLot: 4.5,
-                buyAvg: 601,
-                sell: 460,
-                sellLot: 6.1,
-                sellAvg: 627
-            },
-
-            {
-                broker: "XA",
-                buy: 280,
-                buyLot: 2.8,
-                buyAvg: 540,
-                sell: 130,
-                sellLot: 1.3,
-                sellAvg: 575
-            }
+            { broker:"YP", buy:510, buyLot:6.2, buyAvg:641, sell:305, sellLot:3.1, sellAvg:613 }
 
         ]
 
@@ -1248,95 +1940,27 @@ const stocks = {
 
         brokers: [
 
-            {
-                broker: "RX",
-                buy: 1200,
-                buyLot: 40,
-                buyAvg: 150,
-                sell: 500,
-                sellLot: 18,
-                sellAvg: 168
-            },
+            { broker:"RX", buy:1200, buyLot:40, buyAvg:150, sell:500, sellLot:18, sellAvg:168 },
 
-            {
-                broker: "LG",
-                buy: 950,
-                buyLot: 32,
-                buyAvg: 152,
-                sell: 700,
-                sellLot: 25,
-                sellAvg: 171
-            },
+            { broker:"LG", buy:950, buyLot:32, buyAvg:152, sell:700, sellLot:25, sellAvg:171 },
 
-            {
-                broker: "CC",
-                buy: 800,
-                buyLot: 30,
-                buyAvg: 156,
-                sell: 600,
-                sellLot: 22,
-                sellAvg: 169
-            },
+            { broker:"CC", buy:800, buyLot:30, buyAvg:156, sell:600, sellLot:22, sellAvg:169 },
 
-            {
-                broker: "YP",
-                buy: 600,
-                buyLot: 25,
-                buyAvg: 160,
-                sell: 720,
-                sellLot: 30,
-                sellAvg: 170
-            },
+            { broker:"YP", buy:600, buyLot:25, buyAvg:160, sell:720, sellLot:30, sellAvg:170 },
 
-            {
-                broker: "AK",
-                buy: 450,
-                buyLot: 18,
-                buyAvg: 158,
-                sell: 300,
-                sellLot: 13,
-                sellAvg: 166
-            },
+            { broker:"AK", buy:450, buyLot:18, buyAvg:158, sell:300, sellLot:13, sellAvg:166 },
 
-            {
-                broker: "MG",
-                buy: 400,
-                buyLot: 16,
-                buyAvg: 153,
-                sell: 520,
-                sellLot: 21,
-                sellAvg: 169
-            },
+            { broker:"MG", buy:400, buyLot:16, buyAvg:153, sell:520, sellLot:21, sellAvg:169 },
 
-            {
-                broker: "RB",
-                buy: 300,
-                buyLot: 12,
-                buyAvg: 149,
-                sell: 180,
-                sellLot: 8,
-                sellAvg: 161
-            },
+            { broker:"RB", buy:300, buyLot:12, buyAvg:149, sell:180, sellLot:8, sellAvg:161 },
 
-            {
-                broker: "DH",
-                buy: 275,
-                buyLot: 11,
-                buyAvg: 162,
-                sell: 390,
-                sellLot: 16,
-                sellAvg: 173
-            },
+            { broker:"DH", buy:275, buyLot:11, buyAvg:162, sell:390, sellLot:16, sellAvg:173 },
 
-            {
-                broker: "BK",
-                buy: 250,
-                buyLot: 10,
-                buyAvg: 155,
-                sell: 160,
-                sellLot: 7,
-                sellAvg: 169
-            }
+            { broker:"BK", buy:250, buyLot:10, buyAvg:155, sell:160, sellLot:7, sellAvg:169 },
+
+            { broker:"CP", buy:500, buyLot:19, buyAvg:167, sell:420, sellLot:15, sellAvg:171 },
+
+            { broker:"IF", buy:350, buyLot:13, buyAvg:159, sell:210, sellLot:9, sellAvg:166 }
 
         ]
 
@@ -1349,65 +1973,95 @@ const stocks = {
 
         brokers: [
 
-            {
-                broker: "RX",
-                buy: 1800,
-                buyLot: 21,
-                buyAvg: 930,
-                sell: 700,
-                sellLot: 8,
-                sellAvg: 1010
-            },
+            { broker:"RX", buy:1800, buyLot:21, buyAvg:930, sell:700, sellLot:8, sellAvg:1010 },
 
-            {
-                broker: "LG",
-                buy: 1450,
-                buyLot: 18,
-                buyAvg: 950,
-                sell: 900,
-                sellLot: 11,
-                sellAvg: 1020
-            },
+            { broker:"LG", buy:1450, buyLot:18, buyAvg:950, sell:900, sellLot:11, sellAvg:1020 },
 
-            {
-                broker: "CC",
-                buy: 1100,
-                buyLot: 14,
-                buyAvg: 970,
-                sell: 950,
-                sellLot: 12,
-                sellAvg: 1015
-            },
+            { broker:"CC", buy:1100, buyLot:14, buyAvg:970, sell:950, sellLot:12, sellAvg:1015 },
 
-            {
-                broker: "YP",
-                buy: 900,
-                buyLot: 11,
-                buyAvg: 985,
-                sell: 1100,
-                sellLot: 13,
-                sellAvg: 1030
-            },
+            { broker:"YP", buy:900, buyLot:11, buyAvg:985, sell:1100, sellLot:13, sellAvg:1030 },
 
-            {
-                broker: "AK",
-                buy: 620,
-                buyLot: 8,
-                buyAvg: 940,
-                sell: 410,
-                sellLot: 5,
-                sellAvg: 1005
-            },
+            { broker:"AK", buy:620, buyLot:8, buyAvg:940, sell:410, sellLot:5, sellAvg:1005 },
 
-            {
-                broker: "MG",
-                buy: 530,
-                buyLot: 7,
-                buyAvg: 960,
-                sell: 700,
-                sellLot: 9,
-                sellAvg: 1010
-            }
+            { broker:"MG", buy:530, buyLot:7, buyAvg:960, sell:700, sellLot:9, sellAvg:1010 },
+
+            { broker:"RB", buy:470, buyLot:6, buyAvg:955, sell:300, sellLot:4, sellAvg:1001 },
+
+            { broker:"DH", buy:550, buyLot:7, buyAvg:1020, sell:450, sellLot:6, sellAvg:1032 },
+
+            { broker:"CP", buy:700, buyLot:9, buyAvg:1015, sell:390, sellLot:5, sellAvg:1022 },
+
+            { broker:"IF", buy:490, buyLot:6, buyAvg:995, sell:510, sellLot:6, sellAvg:1020 },
+
+            { broker:"LG2", buy:300, buyLot:4, buyAvg:720, sell:150, sellLot:2, sellAvg:800 }
+
+        ]
+
+    },
+
+
+    ANTM: {
+
+        price: 2150,
+
+        brokers: [
+
+            { broker:"DH", buy:1000, buyLot:8, buyAvg:1420, sell:1180, sellLot:9, sellAvg:2100 },
+
+            { broker:"RX", buy:1500, buyLot:10, buyAvg:1780, sell:900, sellLot:7, sellAvg:2060 },
+
+            { broker:"LG", buy:1350, buyLot:9, buyAvg:1820, sell:850, sellLot:6, sellAvg:2100 },
+
+            { broker:"YP", buy:1200, buyLot:8, buyAvg:1900, sell:1000, sellLot:7, sellAvg:2080 },
+
+            { broker:"CC", buy:980, buyLot:7, buyAvg:1870, sell:850, sellLot:6, sellAvg:2050 },
+
+            { broker:"RB", buy:700, buyLot:5, buyAvg:1850, sell:600, sellLot:4, sellAvg:2040 },
+
+            { broker:"MG", buy:800, buyLot:6, buyAvg:1890, sell:700, sellLot:5, sellAvg:2060 },
+
+            { broker:"AK", buy:450, buyLot:3, buyAvg:1830, sell:500, sellLot:4, sellAvg:2050 },
+
+            { broker:"BK", buy:600, buyLot:4, buyAvg:1920, sell:350, sellLot:2, sellAvg:2080 },
+
+            { broker:"CP", buy:750, buyLot:5, buyAvg:1860, sell:420, sellLot:3, sellAvg:2020 }
+
+        ]
+
+    },
+
+
+    ITMG: {
+
+        price: 23500,
+
+        brokers: [
+
+            { broker:"XA", buy:1900, buyLot:8, buyAvg:17100, sell:600, sellLot:3, sellAvg:22300 },
+
+            { broker:"RX", buy:1750, buyLot:8, buyAvg:21600, sell:1200, sellLot:5, sellAvg:22900 },
+
+            { broker:"LG", buy:1300, buyLot:6, buyAvg:21400, sell:900, sellLot:4, sellAvg:23000 },
+
+            { broker:"CC", buy:1000, buyLot:4, buyAvg:21800, sell:850, sellLot:4, sellAvg:23100 },
+
+            { broker:"YP", buy:900, buyLot:4, buyAvg:22000, sell:1000, sellLot:4, sellAvg:23100 },
+
+            { broker:"AK", buy:750, buyLot:3, buyAvg:21900, sell:500, sellLot:2, sellAvg:22900 },
+
+            { broker:"MG", buy:650, buyLot:3, buyAvg:21700, sell:700, sellLot:3, sellAvg:23100 },
+
+            { broker:"RB", buy:500, buyLot:2, buyAvg:21400, sell:300, sellLot:1, sellAvg:22800 },
+
+            { broker:"BK", buy:450, buyLot:2, buyAvg:22100, sell:250, sellLot:1, sellAvg:23200 },
+
+            { broker:"CP", buy:850, buyLot:4, buyAvg:22200, sell:350, sellLot:2, sellAvg:23000 },
+
+            { broker:"DH", buy:380, buyLot:2, buyAvg:22000, sell:300, sellLot:1, sellAvg:23000 },
+
+            { broker:"IF", buy:420, buyLot:2, buyAvg:21800, sell:500, sellLot:2, sellAvg:22900 },
+
+            { broker:"YB", buy:350, buyLot:2, buyAvg:21600, sell:450, sellLot:2, sellAvg:22950 }
 
         ]
 
@@ -1418,59 +2072,76 @@ const stocks = {
 
 /*
 =========================================
-PERIODE
+MEDIAN
 =========================================
 */
 
-function getPeriodMultiplier(period) {
+function median(values) {
 
-    if (period === "1") {
-        return 0.20;
+    const sorted =
+        [...values].sort(
+            (a, b) => a - b
+        );
+
+    const middle =
+        Math.floor(
+            sorted.length / 2
+        );
+
+    if (sorted.length % 2 === 0) {
+
+        return (
+            sorted[middle - 1] +
+            sorted[middle]
+        ) / 2;
+
     }
 
-    if (period === "3") {
-        return 0.50;
-    }
-
-    if (period === "6") {
-        return 1.00;
-    }
-
-    if (period === "12") {
-        return 1.75;
-    }
-
-    return 1;
+    return sorted[middle];
 
 }
 
 
 /*
 =========================================
-FORMAT VALUE
+FORMAT
 =========================================
 */
 
-function formatValue(value) {
+function formatNumber(value) {
 
-    const absValue =
-        Math.abs(value);
+    return new Intl.NumberFormat(
+        "id-ID"
+    ).format(
+        Math.round(value)
+    );
+
+}
+
+
+function formatMoney(value) {
 
     const sign =
-        value < 0 ? "-" : "";
+        value < 0
+            ? "-"
+            : "";
 
-    if (absValue >= 1000) {
+    const absolute =
+        Math.abs(value);
+
+    if (absolute >= 1000) {
 
         return sign +
             "Rp" +
-            (absValue / 1000).toFixed(2) +
+            (absolute / 1000)
+                .toFixed(1) +
             " B";
 
     }
 
     return sign +
         "Rp" +
-        absValue.toFixed(0) +
+        Math.round(absolute) +
         " M";
 
 }
@@ -1478,184 +2149,593 @@ function formatValue(value) {
 
 /*
 =========================================
-FORMAT AVG
+DATE
 =========================================
 */
 
-function formatAvg(value) {
+function pad(number) {
 
-    return "Rp" +
-        Math.round(value);
+    return String(number)
+        .padStart(2, "0");
 
 }
 
 
-/*
-=========================================
-CHANGE PERIOD
-=========================================
-*/
+function toDateInput(date) {
 
-function changePeriod() {
-
-    render();
+    return (
+        date.getFullYear() +
+        "-" +
+        pad(date.getMonth() + 1) +
+        "-" +
+        pad(date.getDate())
+    );
 
 }
 
 
-/*
-=========================================
-RENDER
-=========================================
-*/
+function formatDate(dateString) {
 
-function render() {
+    const date =
+        new Date(
+            dateString + "T00:00:00"
+        );
 
+    return (
+        pad(date.getDate()) +
+        "-" +
+        pad(date.getMonth() + 1) +
+        "-" +
+        date.getFullYear()
+    );
 
-    const stockCode =
-        document.getElementById("stock").value;
-
-
-    const period =
-        document.getElementById("period").value;
-
-
-    const stock =
-        stocks[stockCode];
+}
 
 
-    const multiplier =
-        getPeriodMultiplier(period);
+function setQuickPeriod(months) {
 
+    document
+        .querySelectorAll(".quick-button")
+        .forEach(button => {
 
-    document.getElementById("stockCode").innerText =
-        stockCode;
-
-
-    document.getElementById("stockPrice").innerText =
-        "Rp" + stock.price;
-
-
-    document.getElementById("periodLabel").innerText =
-        period + " Bulan";
-
-
-    let data =
-        stock.brokers.map(item => {
-
-
-            const buy =
-                item.buy * multiplier;
-
-
-            const sell =
-                item.sell * multiplier;
-
-
-            const net =
-                buy - sell;
-
-
-            return {
-
-                ...item,
-
-                buyValue: buy,
-
-                sellValue: sell,
-
-                netValue: net
-
-            };
+            button.classList.remove(
+                "active"
+            );
 
         });
 
 
-    /*
-    Urutkan dari Avg Buy TERENDAH
-    */
+    const selected =
+        document.getElementById(
+            "quick-" + months
+        );
 
-    data.sort(
-        (a, b) =>
-            a.buyAvg - b.buyAvg
+
+    if (selected) {
+
+        selected.classList.add(
+            "active"
+        );
+
+    }
+
+
+    const end =
+        new Date();
+
+
+    const start =
+        new Date();
+
+
+    start.setMonth(
+        start.getMonth() - months
     );
 
 
-    let accCount = 0;
+    document.getElementById(
+        "startDate"
+    ).value =
+        toDateInput(start);
 
-    let distCount = 0;
 
-    let lowestAvg = Infinity;
+    document.getElementById(
+        "endDate"
+    ).value =
+        toDateInput(end);
 
-    let lowestBroker = "-";
+
+    updateDetailDate();
+
+}
+
+
+function updateDetailDate() {
+
+    const start =
+        document.getElementById(
+            "startDate"
+        ).value;
+
+    const end =
+        document.getElementById(
+            "endDate"
+        ).value;
+
+
+    if (!start || !end) {
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "detailDate"
+    ).innerText =
+        formatDate(start) +
+        " → " +
+        formatDate(end);
+
+}
+
+
+/*
+=========================================
+UPDATE TIME
+=========================================
+*/
+
+function updateTimestamp() {
+
+    const now =
+        new Date();
+
+
+    const formatter =
+        new Intl.DateTimeFormat(
+            "id-ID",
+            {
+                timeZone:
+                    "Asia/Jakarta",
+
+                day: "2-digit",
+
+                month: "short",
+
+                year: "numeric",
+
+                hour: "2-digit",
+
+                minute: "2-digit",
+
+                hour12: false
+            }
+        );
+
+
+    document.getElementById(
+        "updateTime"
+    ).innerText =
+        formatter.format(now) +
+        " WIB";
+
+}
+
+
+/*
+=========================================
+SCAN ALL
+=========================================
+*/
+
+function scanAll() {
+
+
+    const minGap =
+        Number(
+            document.getElementById(
+                "minGap"
+            ).value
+        );
+
+
+    const minBroker =
+        Number(
+            document.getElementById(
+                "minBroker"
+            ).value
+        );
+
+
+    const results = [];
+
+
+    Object.entries(stocks)
+        .forEach(
+            ([code, stock]) => {
+
+
+                if (
+                    stock.brokers.length <
+                    minBroker
+                ) {
+
+                    return;
+
+                }
+
+
+                const avgs =
+                    stock.brokers.map(
+                        item =>
+                            item.buyAvg
+                    );
+
+
+                const med =
+                    median(avgs);
+
+
+                const lowest =
+                    [...stock.brokers]
+                        .sort(
+                            (a, b) =>
+                                a.buyAvg -
+                                b.buyAvg
+                        )[0];
+
+
+                const gap =
+                    (
+                        (med -
+                            lowest.buyAvg) /
+                        med
+                    ) * 100;
+
+
+                if (gap < minGap) {
+
+                    return;
+
+                }
+
+
+                const net =
+                    lowest.buy -
+                    lowest.sell;
+
+
+                results.push({
+
+                    code: code,
+
+                    price: stock.price,
+
+                    broker: lowest.broker,
+
+                    avg: lowest.buyAvg,
+
+                    median: med,
+
+                    gap: gap,
+
+                    net: net,
+
+                    brokerCount:
+                        stock.brokers.length
+
+                });
+
+            }
+        );
+
+
+    results.sort(
+        (a, b) =>
+            b.gap - a.gap
+    );
+
+
+    const table =
+        document.getElementById(
+            "scannerTable"
+        );
+
+
+    table.innerHTML = "";
+
+
+    results.forEach(
+        (item, index) => {
+
+
+            const gapClass =
+                item.gap >= 25
+                    ? "gap-high"
+                    : "gap-medium";
+
+
+            const netClass =
+                item.net >= 0
+                    ? "positive"
+                    : "negative";
+
+
+            table.innerHTML += `
+
+                <tr>
+
+                    <td>
+                        ${index + 1}
+                    </td>
+
+                    <td>
+
+                        <span
+                            class="stock-code"
+                            onclick="showDetail('${item.code}')">
+
+                            ${item.code}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+                        Rp${formatNumber(item.price)}
+                    </td>
+
+                    <td>
+                        <b>${item.broker}</b>
+                    </td>
+
+                    <td class="avg-low">
+                        Rp${formatNumber(item.avg)}
+                    </td>
+
+                    <td>
+                        Rp${formatNumber(item.median)}
+                    </td>
+
+                    <td class="${gapClass}">
+                        ${item.gap.toFixed(1)}%
+                    </td>
+
+                    <td class="${netClass}">
+                        ${item.net >= 0 ? "+" : ""}
+                        ${formatMoney(item.net)}
+                    </td>
+
+                    <td>
+                        ${item.brokerCount}
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="detail-button"
+                            onclick="showDetail('${item.code}')">
+
+                            ▥ Detail
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+
+    if (results.length === 0) {
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="10"
+                    style="
+                        text-align:center;
+                        padding:30px;
+                        color:#8195ae;
+                    ">
+
+                    Tidak ada emiten yang memenuhi
+                    filter saat ini.
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+
+    document.getElementById(
+        "foundCount"
+    ).innerText =
+        "Ditemukan " +
+        results.length +
+        " saham";
+
+
+}
+
+
+/*
+=========================================
+DETAIL
+=========================================
+*/
+
+function showDetail(code) {
+
+
+    const stock =
+        stocks[code];
+
+
+    document.getElementById(
+        "detailCode"
+    ).innerText =
+        code;
+
+
+    document.getElementById(
+        "detailPrice"
+    ).innerText =
+        "Rp" +
+        formatNumber(stock.price);
+
+
+    const avgs =
+        stock.brokers.map(
+            item =>
+                item.buyAvg
+        );
+
+
+    const med =
+        median(avgs);
+
+
+    const sorted =
+        [...stock.brokers]
+            .sort(
+                (a, b) =>
+                    a.buyAvg -
+                    b.buyAvg
+            );
+
+
+    const lowest =
+        sorted[0];
+
+
+    const gap =
+        (
+            (med -
+                lowest.buyAvg) /
+            med
+        ) * 100;
+
+
+    let acc = 0;
+
+    let dist = 0;
 
     let totalNet = 0;
 
 
-    data.forEach(item => {
+    stock.brokers
+        .forEach(
+            item => {
 
-        if (item.netValue >= 0) {
-
-            accCount++;
-
-        } else {
-
-            distCount++;
-
-        }
+                const net =
+                    item.buy -
+                    item.sell;
 
 
-        totalNet +=
-            item.netValue;
+                totalNet += net;
 
 
-        if (item.buyAvg < lowestAvg) {
+                if (net >= 0) {
 
-            lowestAvg =
-                item.buyAvg;
+                    acc++;
 
-            lowestBroker =
-                item.broker;
+                } else {
 
-        }
+                    dist++;
 
-    });
+                }
+
+            }
+        );
+
+
+    document.getElementById(
+        "detailAcc"
+    ).innerText =
+        acc;
+
+
+    document.getElementById(
+        "detailDist"
+    ).innerText =
+        dist;
+
+
+    document.getElementById(
+        "detailLowest"
+    ).innerText =
+        "Rp" +
+        formatNumber(
+            lowest.buyAvg
+        );
+
+
+    document.getElementById(
+        "detailBroker"
+    ).innerText =
+        lowest.broker;
+
+
+    document.getElementById(
+        "detailGap"
+    ).innerText =
+        gap.toFixed(1) +
+        "%";
+
+
+    document.getElementById(
+        "infoPrice"
+    ).innerText =
+        "Rp" +
+        formatNumber(
+            stock.price
+        );
+
+
+    document.getElementById(
+        "infoMedian"
+    ).innerText =
+        "Rp" +
+        formatNumber(med);
+
+
+    document.getElementById(
+        "infoLowest"
+    ).innerText =
+        lowest.broker +
+        " / Rp" +
+        formatNumber(
+            lowest.buyAvg
+        );
+
+
+    document.getElementById(
+        "infoGap"
+    ).innerText =
+        gap.toFixed(1) +
+        "%";
 
 
     /*
-    SUMMARY
-    */
-
-    document.getElementById(
-        "accCount"
-    ).innerText =
-        accCount;
-
-
-    document.getElementById(
-        "distCount"
-    ).innerText =
-        distCount;
-
-
-    document.getElementById(
-        "lowestAvg"
-    ).innerText =
-        formatAvg(lowestAvg);
-
-
-    document.getElementById(
-        "lowestBroker"
-    ).innerText =
-        lowestBroker;
-
-
-    /*
-    POINTER BROKER ACTION
+    POINTER
     */
 
     let pointer =
-        50 + (totalNet / 3000);
+        50 +
+        (
+            totalNet /
+            3000
+        );
 
 
     if (pointer < 5) {
@@ -1673,137 +2753,199 @@ function render() {
 
 
     document.getElementById(
-        "pointer"
+        "actionPointer"
     ).style.left =
-        pointer + "%";
+        pointer +
+        "%";
 
 
     /*
-    TABLE
+    DETAIL TABLE
     */
 
     const table =
         document.getElementById(
-            "brokerTable"
+            "detailTable"
         );
 
 
     table.innerHTML = "";
 
 
-    data.forEach(item => {
+    sorted.forEach(
+        (item, index) => {
 
 
-        const netClass =
-            item.netValue >= 0
-                ? "net-positive"
-                : "net-negative";
+            const net =
+                item.buy -
+                item.sell;
 
 
-        const action =
-            item.netValue >= 0;
+            const netClass =
+                net >= 0
+                    ? "positive"
+                    : "negative";
 
 
-        const avgLow =
-            item.buyAvg <=
-            stock.price * 0.90;
+            const isLow =
+                item.buyAvg <=
+                med * 0.90;
 
 
-        table.innerHTML += `
-
-            <tr>
-
-                <td>
-
-                    <span class="broker-name">
-                        ${item.broker}
-                    </span>
-
-                </td>
+            const avgClass =
+                isLow
+                    ? "avg-low"
+                    : "avg-normal";
 
 
-                <td class="buy-value">
-
-                    ${formatValue(item.buyValue)}
-
-                </td>
-
-
-                <td>
-
-                    ${item.buyLot.toFixed(1)} K
-
-                </td>
+            const actionClass =
+                net >= 0
+                    ? "badge-acc"
+                    : "badge-dist";
 
 
-                <td
-                    class="${avgLow
-                        ? "low-average"
-                        : "buy-avg"}"
-                >
-
-                    ${formatAvg(item.buyAvg)}
-
-                </td>
+            const actionText =
+                net >= 0
+                    ? "ACC"
+                    : "DIST";
 
 
-                <td class="sell-value">
+            table.innerHTML += `
 
-                    ${formatValue(item.sellValue)}
+                <tr>
 
-                </td>
+                    <td>
+                        ${index + 1}
+                    </td>
+
+                    <td>
+                        <b
+                            style="color:#55a1ff">
+
+                            ${item.broker}
+
+                        </b>
+                    </td>
+
+                    <td class="positive">
+                        ${formatMoney(item.buy)}
+                    </td>
+
+                    <td>
+                        ${item.buyLot.toFixed(1)} K
+                    </td>
+
+                    <td class="${avgClass}">
+                        Rp${formatNumber(item.buyAvg)}
+                    </td>
+
+                    <td class="negative">
+                        ${formatMoney(item.sell)}
+                    </td>
+
+                    <td>
+                        ${item.sellLot.toFixed(1)} K
+                    </td>
+
+                    <td style="color:#ff6a76">
+                        Rp${formatNumber(item.sellAvg)}
+                    </td>
+
+                    <td class="${netClass}">
+                        ${net >= 0 ? "+" : ""}
+                        ${formatMoney(net)}
+                    </td>
+
+                    <td>
+
+                        <span
+                            class="badge ${actionClass}">
+
+                            ${actionText}
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
 
 
-                <td>
-
-                    ${item.sellLot.toFixed(1)} K
-
-                </td>
-
-
-                <td class="sell-avg">
-
-                    ${formatAvg(item.sellAvg)}
-
-                </td>
-
-
-                <td class="${netClass}">
-
-                    ${item.netValue >= 0
-                        ? "+"
-                        : ""}
-
-                    ${formatValue(item.netValue)}
-
-                </td>
-
-
-                <td>
-
-                    <span class="badge
-                        ${action
-                            ? "badge-acc"
-                            : "badge-dist"}">
-
-                        ${action
-                            ? "ACC"
-                            : "DIST"}
-
-                    </span>
-
-                </td>
-
-            </tr>
-
-        `;
-
-    });
+    updateDetailDate();
 
 }
 
 
-render();
+/*
+=========================================
+MODE
+=========================================
+*/
+
+function changeMode(mode) {
+
+
+    const modes = [
+        "multibagger",
+        "swing",
+        "daytrade"
+    ];
+
+
+    modes.forEach(
+        item => {
+
+            document.getElementById(
+                item + "App"
+            ).style.display =
+                item === mode
+                    ? "block"
+                    : "none";
+
+
+            document.getElementById(
+                "tab-" + item
+            ).classList.toggle(
+                "active",
+                item === mode
+            );
+
+        }
+    );
+
+
+}
+
+
+/*
+=========================================
+INIT
+=========================================
+*/
+
+function initialize() {
+
+
+    updateTimestamp();
+
+
+    setQuickPeriod(6);
+
+
+    scanAll();
+
+
+    showDetail("ENRG");
+
+}
+
+
+initialize();
+
 
 </script>
 
