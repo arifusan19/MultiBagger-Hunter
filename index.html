@@ -6,16 +6,304 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Multibagger Hunter</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f3f4f6;
+            color: #111827;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 25px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 25px;
+        }
+
+        .filter-box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .filter {
+            display: inline-block;
+            margin-right: 15px;
+            margin-bottom: 15px;
+        }
+
+        .filter label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        .filter input {
+            padding: 9px;
+            width: 110px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            padding: 11px 20px;
+            border: none;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .table-box {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 13px;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            background: #e5e7eb;
+        }
+
+        .score {
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
 
+<header>
     <h1>🚀 MULTIBAGGER HUNTER</h1>
-
     <p>Stock Screener Indonesia</p>
+</header>
 
-    <button>Cari Saham</button>
+<div class="container">
+
+    <div class="filter-box">
+
+        <h2>🔎 Filter Saham</h2>
+
+        <div class="filter">
+            <label>Market Cap Max</label>
+            <input type="number" id="marketCap" value="10000">
+            <small>Miliar</small>
+        </div>
+
+        <div class="filter">
+            <label>Revenue Growth Min</label>
+            <input type="number" id="growth" value="10">
+            <small>%</small>
+        </div>
+
+        <div class="filter">
+            <label>ROE Min</label>
+            <input type="number" id="roe" value="10">
+            <small>%</small>
+        </div>
+
+        <div class="filter">
+            <label>PER Max</label>
+            <input type="number" id="per" value="20">
+            <small>x</small>
+        </div>
+
+        <br>
+
+        <button onclick="screenStocks()">
+            🔎 SCREEN SAHAM
+        </button>
+
+    </div>
+
+    <div class="table-box">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Kode</th>
+                    <th>Harga</th>
+                    <th>Market Cap</th>
+                    <th>Growth</th>
+                    <th>ROE</th>
+                    <th>PER</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+
+            <tbody id="stockTable"></tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const stocks = [
+
+    {
+        kode: "AAA",
+        harga: 120,
+        marketCap: 2500,
+        growth: 25,
+        roe: 18,
+        per: 12
+    },
+
+    {
+        kode: "BBB",
+        harga: 450,
+        marketCap: 7500,
+        growth: 15,
+        roe: 14,
+        per: 17
+    },
+
+    {
+        kode: "CCC",
+        harga: 80,
+        marketCap: 1800,
+        growth: 35,
+        roe: 22,
+        per: 9
+    },
+
+    {
+        kode: "DDD",
+        harga: 900,
+        marketCap: 15000,
+        growth: 8,
+        roe: 7,
+        per: 25
+    },
+
+    {
+        kode: "EEE",
+        harga: 200,
+        marketCap: 5000,
+        growth: 18,
+        roe: 12,
+        per: 15
+    }
+
+];
+
+
+function calculateScore(stock) {
+
+    let score = 0;
+
+    if (stock.marketCap < 5000) {
+        score += 25;
+    }
+
+    if (stock.growth > 20) {
+        score += 25;
+    } else if (stock.growth > 10) {
+        score += 15;
+    }
+
+    if (stock.roe > 15) {
+        score += 25;
+    } else if (stock.roe > 10) {
+        score += 15;
+    }
+
+    if (stock.per < 15) {
+        score += 25;
+    } else if (stock.per < 20) {
+        score += 15;
+    }
+
+    return score;
+}
+
+
+function screenStocks() {
+
+    const marketCapMax =
+        Number(document.getElementById("marketCap").value);
+
+    const growthMin =
+        Number(document.getElementById("growth").value);
+
+    const roeMin =
+        Number(document.getElementById("roe").value);
+
+    const perMax =
+        Number(document.getElementById("per").value);
+
+
+    const results = stocks
+        .filter(stock =>
+            stock.marketCap <= marketCapMax &&
+            stock.growth >= growthMin &&
+            stock.roe >= roeMin &&
+            stock.per <= perMax
+        )
+        .map(stock => ({
+            ...stock,
+            score: calculateScore(stock)
+        }))
+        .sort((a, b) => b.score - a.score);
+
+
+    const table =
+        document.getElementById("stockTable");
+
+    table.innerHTML = "";
+
+
+    results.forEach(stock => {
+
+        table.innerHTML += `
+            <tr>
+                <td><b>${stock.kode}</b></td>
+                <td>Rp${stock.harga}</td>
+                <td>${stock.marketCap.toLocaleString()} M</td>
+                <td>${stock.growth}%</td>
+                <td>${stock.roe}%</td>
+                <td>${stock.per}</td>
+                <td class="score">${stock.score}/100</td>
+            </tr>
+        `;
+
+    });
+
+}
+
+
+screenStocks();
+
+</script>
 
 </body>
-
 </html>
