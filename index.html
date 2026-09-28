@@ -9,8 +9,8 @@
 
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
+            font-family: Arial, sans-serif;
             background: #f3f4f6;
             color: #111827;
         }
@@ -23,38 +23,46 @@
 
         header h1 {
             margin: 0;
+            font-size: 32px;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: auto;
             padding: 25px;
         }
 
-        .filter-box {
+        .box {
             background: white;
             padding: 20px;
             border-radius: 12px;
             margin-bottom: 20px;
         }
 
+        .filters {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: end;
+        }
+
         .filter {
-            display: inline-block;
-            margin-right: 15px;
-            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
         }
 
-        .filter label {
-            display: block;
-            margin-bottom: 6px;
+        label {
             font-weight: bold;
+            margin-bottom: 8px;
         }
 
-        .filter input {
-            padding: 9px;
-            width: 110px;
+        select,
+        input {
+            padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 6px;
+            border-radius: 7px;
+            font-size: 15px;
+            min-width: 150px;
         }
 
         button {
@@ -67,10 +75,12 @@
             cursor: pointer;
         }
 
-        .table-box {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        h2 {
+            margin-top: 0;
         }
 
         table {
@@ -80,17 +90,28 @@
 
         th,
         td {
-            padding: 13px;
-            text-align: center;
+            padding: 12px;
             border-bottom: 1px solid #e5e7eb;
+            text-align: center;
         }
 
         th {
             background: #e5e7eb;
         }
 
-        .score {
+        .positive {
+            color: green;
             font-weight: bold;
+        }
+
+        .negative {
+            color: red;
+            font-weight: bold;
+        }
+
+        .note {
+            color: #666;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -99,64 +120,75 @@
 
 <header>
     <h1>🚀 MULTIBAGGER HUNTER</h1>
-    <p>Stock Screener Indonesia</p>
+    <p>Broker Accumulation Screener</p>
 </header>
 
 <div class="container">
 
-    <div class="filter-box">
+    <div class="box">
 
-        <h2>🔎 Filter Saham</h2>
+        <h2>🔎 Broker Screener</h2>
 
-        <div class="filter">
-            <label>Market Cap Max</label>
-            <input type="number" id="marketCap" value="10000">
-            <small>Miliar</small>
+        <div class="filters">
+
+            <div class="filter">
+                <label>Periode</label>
+
+                <select id="period">
+                    <option value="1">1 Bulan</option>
+                    <option value="3">3 Bulan</option>
+                    <option value="6" selected>6 Bulan</option>
+                    <option value="12">12 Bulan</option>
+                </select>
+            </div>
+
+
+            <div class="filter">
+                <label>Saham</label>
+
+                <select id="stock">
+                    <option value="ENRG">ENRG</option>
+                    <option value="BUMI">BUMI</option>
+                    <option value="NCKL">NCKL</option>
+                </select>
+            </div>
+
+
+            <button onclick="showBroker()">
+                🔎 SCREEN
+            </button>
+
         </div>
-
-        <div class="filter">
-            <label>Revenue Growth Min</label>
-            <input type="number" id="growth" value="10">
-            <small>%</small>
-        </div>
-
-        <div class="filter">
-            <label>ROE Min</label>
-            <input type="number" id="roe" value="10">
-            <small>%</small>
-        </div>
-
-        <div class="filter">
-            <label>PER Max</label>
-            <input type="number" id="per" value="20">
-            <small>x</small>
-        </div>
-
-        <br>
-
-        <button onclick="screenStocks()">
-            🔎 SCREEN SAHAM
-        </button>
 
     </div>
 
-    <div class="table-box">
+
+    <div class="box">
+
+        <h2 id="title">
+            ENRG - 6 Bulan
+        </h2>
+
+        <p class="note">
+            Data di bawah masih DATA CONTOH untuk belajar.
+        </p>
 
         <table>
 
             <thead>
+
                 <tr>
-                    <th>Kode</th>
-                    <th>Harga</th>
-                    <th>Market Cap</th>
-                    <th>Growth</th>
-                    <th>ROE</th>
-                    <th>PER</th>
-                    <th>Score</th>
+                    <th>Broker</th>
+                    <th>Buy Value</th>
+                    <th>Sell Value</th>
+                    <th>Net Buy</th>
+                    <th>Avg Buy</th>
+                    <th>Avg Sell</th>
                 </tr>
+
             </thead>
 
-            <tbody id="stockTable"></tbody>
+            <tbody id="brokerTable"></tbody>
 
         </table>
 
@@ -167,133 +199,136 @@
 
 <script>
 
-const stocks = [
+const brokerData = {
 
-    {
-        kode: "AAA",
-        harga: 120,
-        marketCap: 2500,
-        growth: 25,
-        roe: 18,
-        per: 12
+    1: {
+        ENRG: [
+            { broker: "RX", buy: 120, sell: 60, avgBuy: 1250, avgSell: 1270 },
+            { broker: "LG", buy: 90, sell: 80, avgBuy: 1230, avgSell: 1240 },
+            { broker: "YP", buy: 50, sell: 75, avgBuy: 1280, avgSell: 1260 }
+        ],
+        BUMI: [
+            { broker: "RX", buy: 100, sell: 40, avgBuy: 180, avgSell: 185 },
+            { broker: "CC", buy: 70, sell: 50, avgBuy: 175, avgSell: 178 }
+        ],
+        NCKL: [
+            { broker: "RX", buy: 200, sell: 100, avgBuy: 1100, avgSell: 1130 },
+            { broker: "LG", buy: 120, sell: 90, avgBuy: 1080, avgSell: 1110 }
+        ]
     },
 
-    {
-        kode: "BBB",
-        harga: 450,
-        marketCap: 7500,
-        growth: 15,
-        roe: 14,
-        per: 17
+    3: {
+        ENRG: [
+            { broker: "RX", buy: 350, sell: 150, avgBuy: 1210, avgSell: 1260 },
+            { broker: "LG", buy: 210, sell: 170, avgBuy: 1190, avgSell: 1220 },
+            { broker: "YP", buy: 120, sell: 190, avgBuy: 1240, avgSell: 1210 }
+        ],
+        BUMI: [
+            { broker: "RX", buy: 300, sell: 100, avgBuy: 175, avgSell: 182 },
+            { broker: "CC", buy: 180, sell: 120, avgBuy: 170, avgSell: 178 }
+        ],
+        NCKL: [
+            { broker: "RX", buy: 450, sell: 180, avgBuy: 1070, avgSell: 1120 },
+            { broker: "LG", buy: 250, sell: 200, avgBuy: 1060, avgSell: 1100 }
+        ]
     },
 
-    {
-        kode: "CCC",
-        harga: 80,
-        marketCap: 1800,
-        growth: 35,
-        roe: 22,
-        per: 9
+    6: {
+        ENRG: [
+            { broker: "RX", buy: 850, sell: 420, avgBuy: 1180, avgSell: 1240 },
+            { broker: "LG", buy: 620, sell: 580, avgBuy: 1160, avgSell: 1190 },
+            { broker: "YP", buy: 300, sell: 510, avgBuy: 1230, avgSell: 1200 }
+        ],
+        BUMI: [
+            { broker: "RX", buy: 700, sell: 300, avgBuy: 170, avgSell: 180 },
+            { broker: "CC", buy: 450, sell: 350, avgBuy: 168, avgSell: 175 }
+        ],
+        NCKL: [
+            { broker: "RX", buy: 900, sell: 400, avgBuy: 1050, avgSell: 1110 },
+            { broker: "LG", buy: 550, sell: 450, avgBuy: 1030, avgSell: 1080 }
+        ]
     },
 
-    {
-        kode: "DDD",
-        harga: 900,
-        marketCap: 15000,
-        growth: 8,
-        roe: 7,
-        per: 25
-    },
-
-    {
-        kode: "EEE",
-        harga: 200,
-        marketCap: 5000,
-        growth: 18,
-        roe: 12,
-        per: 15
+    12: {
+        ENRG: [
+            { broker: "RX", buy: 1500, sell: 700, avgBuy: 1100, avgSell: 1210 },
+            { broker: "LG", buy: 1100, sell: 900, avgBuy: 1080, avgSell: 1150 },
+            { broker: "YP", buy: 600, sell: 1000, avgBuy: 1200, avgSell: 1170 }
+        ],
+        BUMI: [
+            { broker: "RX", buy: 1200, sell: 500, avgBuy: 165, avgSell: 178 },
+            { broker: "CC", buy: 800, sell: 600, avgBuy: 160, avgSell: 172 }
+        ],
+        NCKL: [
+            { broker: "RX", buy: 1600, sell: 700, avgBuy: 1000, avgSell: 1100 },
+            { broker: "LG", buy: 1000, sell: 800, avgBuy: 980, avgSell: 1060 }
+        ]
     }
 
-];
+};
 
 
-function calculateScore(stock) {
+function showBroker() {
 
-    let score = 0;
+    const period =
+        document.getElementById("period").value;
 
-    if (stock.marketCap < 5000) {
-        score += 25;
-    }
+    const stock =
+        document.getElementById("stock").value;
 
-    if (stock.growth > 20) {
-        score += 25;
-    } else if (stock.growth > 10) {
-        score += 15;
-    }
-
-    if (stock.roe > 15) {
-        score += 25;
-    } else if (stock.roe > 10) {
-        score += 15;
-    }
-
-    if (stock.per < 15) {
-        score += 25;
-    } else if (stock.per < 20) {
-        score += 15;
-    }
-
-    return score;
-}
-
-
-function screenStocks() {
-
-    const marketCapMax =
-        Number(document.getElementById("marketCap").value);
-
-    const growthMin =
-        Number(document.getElementById("growth").value);
-
-    const roeMin =
-        Number(document.getElementById("roe").value);
-
-    const perMax =
-        Number(document.getElementById("per").value);
-
-
-    const results = stocks
-        .filter(stock =>
-            stock.marketCap <= marketCapMax &&
-            stock.growth >= growthMin &&
-            stock.roe >= roeMin &&
-            stock.per <= perMax
-        )
-        .map(stock => ({
-            ...stock,
-            score: calculateScore(stock)
-        }))
-        .sort((a, b) => b.score - a.score);
-
+    const data =
+        brokerData[period][stock] || [];
 
     const table =
-        document.getElementById("stockTable");
+        document.getElementById("brokerTable");
 
     table.innerHTML = "";
 
+    document.getElementById("title").innerText =
+        stock + " - " + period + " Bulan";
 
-    results.forEach(stock => {
+
+    data.forEach(item => {
+
+        const netBuy =
+            item.buy - item.sell;
+
+        const netClass =
+            netBuy >= 0
+                ? "positive"
+                : "negative";
+
 
         table.innerHTML += `
+
             <tr>
-                <td><b>${stock.kode}</b></td>
-                <td>Rp${stock.harga}</td>
-                <td>${stock.marketCap.toLocaleString()} M</td>
-                <td>${stock.growth}%</td>
-                <td>${stock.roe}%</td>
-                <td>${stock.per}</td>
-                <td class="score">${stock.score}/100</td>
+
+                <td>
+                    <b>${item.broker}</b>
+                </td>
+
+                <td>
+                    Rp ${item.buy} M
+                </td>
+
+                <td>
+                    Rp ${item.sell} M
+                </td>
+
+                <td class="${netClass}">
+                    Rp ${netBuy} M
+                </td>
+
+                <td>
+                    Rp ${item.avgBuy}
+                </td>
+
+                <td>
+                    Rp ${item.avgSell}
+                </td>
+
             </tr>
+
         `;
 
     });
@@ -301,9 +336,10 @@ function screenStocks() {
 }
 
 
-screenStocks();
+showBroker();
 
 </script>
 
 </body>
+
 </html>
