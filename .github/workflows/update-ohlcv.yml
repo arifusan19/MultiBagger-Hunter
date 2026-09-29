@@ -12,9 +12,6 @@ jobs:
 
     steps:
 
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Test API Search
         env:
           API_KEY: ${{ secrets.IDX_EDGE_API_KEY }}
@@ -24,7 +21,6 @@ jobs:
           python3 - <<'PY'
 
           import requests
-          import json
           import os
 
           API_KEY = os.environ["API_KEY"]
@@ -36,28 +32,30 @@ jobs:
               "Accept": "application/json"
           }
 
-          print("======================================")
-          print("TEST API SEARCH")
-          print("======================================")
+          tests = [
+              ("q=BBCA", {"q": "BBCA"}),
+              ("q=A", {"q": "A"}),
+              ("query=BBCA", {"query": "BBCA"}),
+              ("search=BBCA", {"search": "BBCA"}),
+          ]
 
-          url = f"{BASE}/api/search"
+          for name, params in tests:
 
-          print("URL:", url)
-          print("")
+              print("")
+              print("======================================")
+              print("TEST:", name)
+              print("======================================")
 
-          r = requests.get(
-              url,
-              headers=HEADERS,
-              timeout=60
-          )
+              r = requests.get(
+                  f"{BASE}/api/search",
+                  headers=HEADERS,
+                  params=params,
+                  timeout=60
+              )
 
-          print("HTTP:", r.status_code)
-          print("")
-
-          print("RESPONSE:")
-          print(r.text[:20000])
-
-          print("")
-          print("======================================")
+              print("URL:", r.url)
+              print("HTTP:", r.status_code)
+              print("RESPONSE:")
+              print(r.text[:10000])
 
           PY
