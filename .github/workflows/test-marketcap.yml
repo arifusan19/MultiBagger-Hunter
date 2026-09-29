@@ -1,0 +1,77 @@
+name: Test Market Cap
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test Market Cap
+        env:
+          API_KEY: ${{ secrets.IDX_EDGE_API_KEY }}
+
+        run: |
+
+          python3 - <<'PY'
+
+          import requests
+          import os
+          import json
+
+          API_KEY = os.environ["API_KEY"]
+
+          url = "https://stock.arjum.com/api/market-cap"
+
+          headers = {
+              "X-API-Key": API_KEY,
+              "Accept": "application/json"
+          }
+
+          tests = [
+              ("default", {}),
+              ("all_data=true", {"all_data": "true"}),
+              ("limit=1000", {"limit": "1000"}),
+              ("all_data=true + limit=1000", {
+                  "all_data": "true",
+                  "limit": "1000"
+              })
+          ]
+
+          for name, params in tests:
+
+              print("")
+              print("======================================")
+              print("TEST:", name)
+              print("======================================")
+
+              r = requests.get(
+                  url,
+                  headers=headers,
+                  params=params,
+                  timeout=60
+              )
+
+              print("HTTP:", r.status_code)
+              print("URL:", r.url)
+
+              try:
+                  data = r.json()
+
+                  if isinstance(data, list):
+                      print("JUMLAH DATA:", len(data))
+
+                  elif isinstance(data, dict):
+                      print("KEY:", list(data.keys()))
+
+                  print("RESPONSE:")
+                  print(json.dumps(
+                      data,
+                      ensure_ascii=False
+                  )[:5000])
+
+              except Exception:
+                  print(r.text[:5000])
+
+          PY
