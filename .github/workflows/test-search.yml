@@ -1,0 +1,59 @@
+name: Test Search IDX
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test API Search
+        env:
+          API_KEY: ${{ secrets.IDX_EDGE_API_KEY }}
+
+        run: |
+          python3 - <<'PY'
+
+          import requests
+          import os
+
+          API_KEY = os.environ["API_KEY"]
+
+          BASE = "https://stock.arjum.com"
+
+          HEADERS = {
+              "X-API-Key": API_KEY,
+              "Accept": "application/json"
+          }
+
+          tests = [
+              ("q=BBCA", {"q": "BBCA"}),
+              ("q=A", {"q": "A"}),
+              ("query=BBCA", {"query": "BBCA"}),
+              ("search=BBCA", {"search": "BBCA"}),
+          ]
+
+          for name, params in tests:
+
+              print("")
+              print("======================================")
+              print("TEST:", name)
+              print("======================================")
+
+              r = requests.get(
+                  f"{BASE}/api/search",
+                  headers=HEADERS,
+                  params=params,
+                  timeout=60
+              )
+
+              print("URL:", r.url)
+              print("HTTP:", r.status_code)
+              print("RESPONSE:")
+              print(r.text[:10000])
+
+          PY
