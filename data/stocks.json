@@ -1,0 +1,858 @@
+{
+  "AADI": {
+    "stock_code": "AADI",
+    "stock_name": "Adaro Andalan Indonesia Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "adaro andalan indonesia",
+    "_nc": "adaroandalanindonesia",
+    "_init": "aai"
+  },
+  "AALI": {
+    "stock_code": "AALI",
+    "stock_name": "Astra Agro Lestari Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "astra agro lestari",
+    "_nc": "astraagrolestari",
+    "_init": "aal"
+  },
+  "ABBA": {
+    "stock_code": "ABBA",
+    "stock_name": "Mahaka Media Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "mahaka media",
+    "_nc": "mahakamedia",
+    "_init": "mm"
+  },
+  "ABDA": {
+    "stock_code": "ABDA",
+    "stock_name": "Asuransi Bina Dana Arta Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "asuransi bina dana arta",
+    "_nc": "asuransibinadanaarta",
+    "_init": "abda"
+  },
+  "ABMM": {
+    "stock_code": "ABMM",
+    "stock_name": "ABM Investama Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "abm investama",
+    "_nc": "abminvestama",
+    "_init": "ai"
+  },
+  "ACES": {
+    "stock_code": "ACES",
+    "stock_name": "Aspirasi Hidup Indonesia Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "aspirasi hidup indonesia",
+    "_nc": "aspirasihidupindonesia",
+    "_init": "ahi"
+  },
+  "ACRO": {
+    "stock_code": "ACRO",
+    "stock_name": "Samcro Hyosung Adilestari Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "samcro hyosung adilestari",
+    "_nc": "samcrohyosungadilestari",
+    "_init": "sha"
+  },
+  "ACST": {
+    "stock_code": "ACST",
+    "stock_name": "Acset Indonusa Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "acset indonusa",
+    "_nc": "acsetindonusa",
+    "_init": "ai"
+  },
+  "ADCP": {
+    "stock_code": "ADCP",
+    "stock_name": "Adhi Commuter Properti Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "adhi commuter properti",
+    "_nc": "adhicommuterproperti",
+    "_init": "acp"
+  },
+  "ADES": {
+    "stock_code": "ADES",
+    "stock_name": "Akasha Wira International Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "akasha wira international",
+    "_nc": "akashawirainternational",
+    "_init": "awi"
+  },
+  "ADHI": {
+    "stock_code": "ADHI",
+    "stock_name": "Adhi Karya (Persero) Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "adhi karya",
+    "_nc": "adhikarya",
+    "_init": "ak"
+  },
+  "ADMF": {
+    "stock_code": "ADMF",
+    "stock_name": "Adira Dinamika Multi Finance Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "adira dinamika multi finance",
+    "_nc": "adiradinamikamultifinance",
+    "_init": "admf"
+  },
+  "AGRO": {
+    "stock_code": "AGRO",
+    "stock_name": "Bank Raya Indonesia Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "bank raya indonesia",
+    "_nc": "bankrayaindonesia",
+    "_init": "bri"
+  },
+  "AGRS": {
+    "stock_code": "AGRS",
+    "stock_name": "Bank IBK Indonesia Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "bank ibk indonesia",
+    "_nc": "bankibkindonesia",
+    "_init": "bii"
+  },
+  "AKSI": {
+    "stock_code": "AKSI",
+    "stock_name": "Mineral Sumberdaya Mandiri Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "mineral sumberdaya mandiri",
+    "_nc": "mineralsumberdayamandiri",
+    "_init": "msm"
+  },
+  "ALTO": {
+    "stock_code": "ALTO",
+    "stock_name": "Tri Banyan Tirta Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "tri banyan tirta",
+    "_nc": "tribanyantirta",
+    "_init": "tbt"
+  },
+  "AMAN": {
+    "stock_code": "AMAN",
+    "stock_name": "Makmur Berkah Amanda Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "makmur berkah amanda",
+    "_nc": "makmurberkahamanda",
+    "_init": "mba"
+  },
+  "AMAR": {
+    "stock_code": "AMAR",
+    "stock_name": "Bank Amar Indonesia Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "bank amar indonesia",
+    "_nc": "bankamarindonesia",
+    "_init": "bai"
+  },
+  "AMRT": {
+    "stock_code": "AMRT",
+    "stock_name": "Sumber Alfaria Trijaya Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "sumber alfaria trijaya",
+    "_nc": "sumberalfariatrijaya",
+    "_init": "sat"
+  },
+  "ANTM": {
+    "stock_code": "ANTM",
+    "stock_name": "Aneka Tambang Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "aneka tambang",
+    "_nc": "anekatambang",
+    "_init": "at"
+  },
+  "ARTI": {
+    "stock_code": "ARTI",
+    "stock_name": "Ratu Prabu Energi Tbk",
+    "last_date": "2026-09-29",
+    "_nn": "ratu prabu energi",
+    "_nc": "ratuprabuenergi",
+    "_init": "rpe"
+  },
+  "ARTO": {
+    "stock_code": "ARTO",
+    "stock_name": "Bank Jago Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "bank jago",
+    "_nc": "bankjago",
+    "_init": "bj"
+  },
+  "ADMG": {
+    "stock_code": "ADMG",
+    "stock_name": "Polychem Indonesia Tbk",
+    "last_date": "2026-09-29",
+    "_nn": "polychem indonesia",
+    "_nc": "polychemindonesia",
+    "_init": "pi"
+  },
+  "ADRO": {
+    "stock_code": "ADRO",
+    "stock_name": "Alamtri Resources Indonesia Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "alamtri resources indonesia",
+    "_nc": "alamtriresourcesindonesia",
+    "_init": "ari"
+  },
+  "AKRA": {
+    "stock_code": "AKRA",
+    "stock_name": "AKR Corporindo Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "akr corporindo",
+    "_nc": "akrcorporindo",
+    "_init": "ac"
+  },
+  "ALII": {
+    "stock_code": "ALII",
+    "stock_name": "Ancara Logistics Indonesia Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "ancara logistics indonesia",
+    "_nc": "ancaralogisticsindonesia",
+    "_init": "ali"
+  },
+  "AMIN": {
+    "stock_code": "AMIN",
+    "stock_name": "Ateliers Mecaniques D Indonesie Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "ateliers mecaniques d indonesie",
+    "_nc": "ateliersmecaniquesdindonesie",
+    "_init": "amdi"
+  },
+  "APIC": {
+    "stock_code": "APIC",
+    "stock_name": "Pacific Strategic Financial Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "pacific strategic financial",
+    "_nc": "pacificstrategicfinancial",
+    "_init": "psf"
+  },
+  "APOL": {
+    "stock_code": "APOL",
+    "stock_name": "Arpeni Pratama Ocean Line Tbk.",
+    "last_date": "2020-04-03",
+    "_nn": "arpeni pratama ocean line",
+    "_nc": "arpenipratamaoceanline",
+    "_init": "apol"
+  },
+  "ARCI": {
+    "stock_code": "ARCI",
+    "stock_name": "Archi Indonesia Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "archi indonesia",
+    "_nc": "archiindonesia",
+    "_init": "ai"
+  },
+  "ADMR": {
+    "stock_code": "ADMR",
+    "stock_name": "Alamtri Minerals Indonesia Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "alamtri minerals indonesia",
+    "_nc": "alamtrimineralsindonesia",
+    "_init": "ami"
+  },
+  "AISA": {
+    "stock_code": "AISA",
+    "stock_name": "Tiga Pilar Sejahtera Food Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "tiga pilar sejahtera food",
+    "_nc": "tigapilarsejahterafood",
+    "_init": "tpsf"
+  },
+  "AMFG": {
+    "stock_code": "AMFG",
+    "stock_name": "Asahimas Flat Glass Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "asahimas flat glass",
+    "_nc": "asahimasflatglass",
+    "_init": "afg"
+  },
+  "ASHA": {
+    "stock_code": "ASHA",
+    "stock_name": "Cilacap Samudera Fishing Industry Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "cilacap samudera fishing industry",
+    "_nc": "cilacapsamuderafishingindustry",
+    "_init": "csfi"
+  },
+  "BBLD": {
+    "stock_code": "BBLD",
+    "stock_name": "Buana Finance Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "buana finance",
+    "_nc": "buanafinance",
+    "_init": "bf"
+  },
+  "BEST": {
+    "stock_code": "BEST",
+    "stock_name": "Bekasi Fajar Industrial Estate Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "bekasi fajar industrial estate",
+    "_nc": "bekasifajarindustrialestate",
+    "_init": "bfie"
+  },
+  "BFIN": {
+    "stock_code": "BFIN",
+    "stock_name": "BFI Finance  Indonesia Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "bfi finance indonesia",
+    "_nc": "bfifinanceindonesia",
+    "_init": "bfi"
+  },
+  "BIMA": {
+    "stock_code": "BIMA",
+    "stock_name": "Primarindo Asia Infrastructure Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "primarindo asia infrastructure",
+    "_nc": "primarindoasiainfrastructure",
+    "_init": "pai"
+  },
+  "BIPI": {
+    "stock_code": "BIPI",
+    "stock_name": "Astrindo Nusantara Infrastruktur Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "astrindo nusantara infrastruktur",
+    "_nc": "astrindonusantarainfrastruktur",
+    "_init": "ani"
+  },
+  "BOBA": {
+    "stock_code": "BOBA",
+    "stock_name": "Formosa Ingredient Factory Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "formosa ingredient factory",
+    "_nc": "formosaingredientfactory",
+    "_init": "fif"
+  },
+  "AEGS": {
+    "stock_code": "AEGS",
+    "stock_name": "Anugerah Spareparts Sejahtera Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "anugerah spareparts sejahtera",
+    "_nc": "anugerahsparepartssejahtera",
+    "_init": "ass"
+  },
+  "AGII": {
+    "stock_code": "AGII",
+    "stock_name": "Samator Indo Gas Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "samator indo gas",
+    "_nc": "samatorindogas",
+    "_init": "sig"
+  },
+  "AKKU": {
+    "stock_code": "AKKU",
+    "stock_name": "Anugerah Kagum Karya Utama Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "anugerah kagum karya utama",
+    "_nc": "anugerahkagumkaryautama",
+    "_init": "akku"
+  },
+  "AKPI": {
+    "stock_code": "AKPI",
+    "stock_name": "Argha Karya Prima Industry Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "argha karya prima industry",
+    "_nc": "arghakaryaprimaindustry",
+    "_init": "akpi"
+  },
+  "ALMI": {
+    "stock_code": "ALMI",
+    "stock_name": "Alumindo Light Metal Industry Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "alumindo light metal industry",
+    "_nc": "alumindolightmetalindustry",
+    "_init": "almi"
+  },
+  "AMAG": {
+    "stock_code": "AMAG",
+    "stock_name": "Asuransi Multi Artha Guna Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "asuransi multi artha guna",
+    "_nc": "asuransimultiarthaguna",
+    "_init": "amag"
+  },
+  "AMMS": {
+    "stock_code": "AMMS",
+    "stock_name": "Agung Menjangan Mas Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "agung menjangan mas",
+    "_nc": "agungmenjanganmas",
+    "_init": "amm"
+  },
+  "AGAR": {
+    "stock_code": "AGAR",
+    "stock_name": "Asia Sejahtera Mina Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "asia sejahtera mina",
+    "_nc": "asiasejahteramina",
+    "_init": "asm"
+  },
+  "AHAP": {
+    "stock_code": "AHAP",
+    "stock_name": "Asuransi Harta Aman Pratama Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "asuransi harta aman pratama",
+    "_nc": "asuransihartaamanpratama",
+    "_init": "ahap"
+  },
+  "AIMS": {
+    "stock_code": "AIMS",
+    "stock_name": "Artha Mahiya Investama Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "artha mahiya investama",
+    "_nc": "arthamahiyainvestama",
+    "_init": "ami"
+  },
+  "ANJT": {
+    "stock_code": "ANJT",
+    "stock_name": "Austindo Nusantara Jaya Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "austindo nusantara jaya",
+    "_nc": "austindonusantarajaya",
+    "_init": "anj"
+  },
+  "ARKA": {
+    "stock_code": "ARKA",
+    "stock_name": "Arkha Jayanti Persada Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "arkha jayanti persada",
+    "_nc": "arkhajayantipersada",
+    "_init": "ajp"
+  },
+  "ASJT": {
+    "stock_code": "ASJT",
+    "stock_name": "Asuransi Jasa Tania Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "asuransi jasa tania",
+    "_nc": "asuransijasatania",
+    "_init": "ajt"
+  },
+  "AYAM": {
+    "stock_code": "AYAM",
+    "stock_name": "Janu Putra Sejahtera Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "janu putra sejahtera",
+    "_nc": "januputrasejahtera",
+    "_init": "jps"
+  },
+  "BAJA": {
+    "stock_code": "BAJA",
+    "stock_name": "Saranacentral Bajatama Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "saranacentral bajatama",
+    "_nc": "saranacentralbajatama",
+    "_init": "sb"
+  },
+  "BAUT": {
+    "stock_code": "BAUT",
+    "stock_name": "Mitra Angkasa Sejahtera Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "mitra angkasa sejahtera",
+    "_nc": "mitraangkasasejahtera",
+    "_init": "mas"
+  },
+  "ALDO": {
+    "stock_code": "ALDO",
+    "stock_name": "Alkindo Naratama Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "alkindo naratama",
+    "_nc": "alkindonaratama",
+    "_init": "an"
+  },
+  "ALKA": {
+    "stock_code": "ALKA",
+    "stock_name": "Alakasa Industrindo Tbk",
+    "last_date": "2026-09-29",
+    "_nn": "alakasa industrindo",
+    "_nc": "alakasaindustrindo",
+    "_init": "ai"
+  },
+  "APEX": {
+    "stock_code": "APEX",
+    "stock_name": "Apexindo Pratama Duta Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "apexindo pratama duta",
+    "_nc": "apexindopratamaduta",
+    "_init": "apd"
+  },
+  "APII": {
+    "stock_code": "APII",
+    "stock_name": "Arita Prima Indonesia Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "arita prima indonesia",
+    "_nc": "aritaprimaindonesia",
+    "_init": "api"
+  },
+  "APLI": {
+    "stock_code": "APLI",
+    "stock_name": "Asiaplast Industries Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "asiaplast industries",
+    "_nc": "asiaplastindustries",
+    "_init": "ai"
+  },
+  "BKSW": {
+    "stock_code": "BKSW",
+    "stock_name": "Bank QNB Indonesia Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "bank qnb indonesia",
+    "_nc": "bankqnbindonesia",
+    "_init": "bqi"
+  },
+  "GSMF": {
+    "stock_code": "GSMF",
+    "stock_name": "Equity Development Investment Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "equity development investment",
+    "_nc": "equitydevelopmentinvestment",
+    "_init": "edi"
+  },
+  "KREN": {
+    "stock_code": "KREN",
+    "stock_name": "Quantum Clovera Investama Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "quantum clovera investama",
+    "_nc": "quantumcloverainvestama",
+    "_init": "qci"
+  },
+  "AREA": {
+    "stock_code": "AREA",
+    "stock_name": "Dunia Virtual Online Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "dunia virtual online",
+    "_nc": "duniavirtualonline",
+    "_init": "dvo"
+  },
+  "ARTA": {
+    "stock_code": "ARTA",
+    "stock_name": "Arthavest Tbk",
+    "last_date": "2026-09-29",
+    "_nn": "arthavest",
+    "_nc": "arthavest",
+    "_init": "a"
+  },
+  "AVIA": {
+    "stock_code": "AVIA",
+    "stock_name": "Avia Avian Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "avia avian",
+    "_nc": "aviaavian",
+    "_init": "aa"
+  },
+  "BHIT": {
+    "stock_code": "BHIT",
+    "stock_name": "MNC Investama Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "mnc investama",
+    "_nc": "mncinvestama",
+    "_init": "mi"
+  },
+  "BMBL": {
+    "stock_code": "BMBL",
+    "stock_name": "Lavender Bina Cendikia Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "lavender bina cendikia",
+    "_nc": "lavenderbinacendikia",
+    "_init": "lbc"
+  },
+  "BOAT": {
+    "stock_code": "BOAT",
+    "stock_name": "Newport Marine Services Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "newport marine services",
+    "_nc": "newportmarineservices",
+    "_init": "nms"
+  },
+  "BPII": {
+    "stock_code": "BPII",
+    "stock_name": "Batavia Prosperindo Internasional Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "batavia prosperindo internasional",
+    "_nc": "bataviaprosperindointernasional",
+    "_init": "bpi"
+  },
+  "BPTR": {
+    "stock_code": "BPTR",
+    "stock_name": "Batavia Prosperindo Trans Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "batavia prosperindo trans",
+    "_nc": "bataviaprosperindotrans",
+    "_init": "bpt"
+  },
+  "BUVA": {
+    "stock_code": "BUVA",
+    "stock_name": "Bukit Uluwatu Villa Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "bukit uluwatu villa",
+    "_nc": "bukituluwatuvilla",
+    "_init": "buv"
+  },
+  "BVIC": {
+    "stock_code": "BVIC",
+    "stock_name": "Bank Victoria International Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "bank victoria international",
+    "_nc": "bankvictoriainternational",
+    "_init": "bvi"
+  },
+  "ARNA": {
+    "stock_code": "ARNA",
+    "stock_name": "Arwana Citramulia Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "arwana citramulia",
+    "_nc": "arwanacitramulia",
+    "_init": "ac"
+  },
+  "ATAP": {
+    "stock_code": "ATAP",
+    "stock_name": "Trimitra Prawara Goldland Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "trimitra prawara goldland",
+    "_nc": "trimitraprawaragoldland",
+    "_init": "tpg"
+  },
+  "BALI": {
+    "stock_code": "BALI",
+    "stock_name": "Bali Towerindo Sentra Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "bali towerindo sentra",
+    "_nc": "balitowerindosentra",
+    "_init": "bts"
+  },
+  "BBSS": {
+    "stock_code": "BBSS",
+    "stock_name": "Bumi Benowo Sukses Sejahtera Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "bumi benowo sukses sejahtera",
+    "_nc": "bumibenowosuksessejahtera",
+    "_init": "bbss"
+  },
+  "BIPP": {
+    "stock_code": "BIPP",
+    "stock_name": "Bhuwanatala Indah Permai Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "bhuwanatala indah permai",
+    "_nc": "bhuwanatalaindahpermai",
+    "_init": "bip"
+  },
+  "BJBR": {
+    "stock_code": "BJBR",
+    "stock_name": "Bank Pembangunan Daerah Jawa Barat dan Banten Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "bank pembangunan daerah jawa barat dan banten",
+    "_nc": "bankpembangunandaerahjawabaratdanbanten",
+    "_init": "bpdjbdb"
+  },
+  "BJTM": {
+    "stock_code": "BJTM",
+    "stock_name": "Bank Pembangunan Daerah Jawa Timur Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "bank pembangunan daerah jawa timur",
+    "_nc": "bankpembangunandaerahjawatimur",
+    "_init": "bpdjt"
+  },
+  "BPFI": {
+    "stock_code": "BPFI",
+    "stock_name": "Woori Finance Indonesia Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "woori finance indonesia",
+    "_nc": "woorifinanceindonesia",
+    "_init": "wfi"
+  },
+  "BREN": {
+    "stock_code": "BREN",
+    "stock_name": "Barito Renewables Energy Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "barito renewables energy",
+    "_nc": "baritorenewablesenergy",
+    "_init": "bre"
+  },
+  "BSBK": {
+    "stock_code": "BSBK",
+    "stock_name": "Wulandari Bangun Laksana Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "wulandari bangun laksana",
+    "_nc": "wulandaribangunlaksana",
+    "_init": "wbl"
+  },
+  "ASMI": {
+    "stock_code": "ASMI",
+    "stock_name": "Asuransi Maximus Graha Persada Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "asuransi maximus graha persada",
+    "_nc": "asuransimaximusgrahapersada",
+    "_init": "amgp"
+  },
+  "BELL": {
+    "stock_code": "BELL",
+    "stock_name": "Trisula Textile Industries Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "trisula textile industries",
+    "_nc": "trisulatextileindustries",
+    "_init": "tti"
+  },
+  "CNKO": {
+    "stock_code": "CNKO",
+    "stock_name": "Exploitasi Energi Indonesia Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "exploitasi energi indonesia",
+    "_nc": "exploitasienergiindonesia",
+    "_init": "eei"
+  },
+  "CNTB": {
+    "stock_code": "CNTB",
+    "stock_name": "Saham Seri B ( Centex Tbk )",
+    "last_date": "2026-07-29",
+    "_nn": "saham seri b centex",
+    "_nc": "sahamseribcentex",
+    "_init": "ssbc"
+  },
+  "CNTX": {
+    "stock_code": "CNTX",
+    "stock_name": "Century Textile Industry Tbk.",
+    "last_date": "2026-07-29",
+    "_nn": "century textile industry",
+    "_nc": "centurytextileindustry",
+    "_init": "cti"
+  },
+  "DMMX": {
+    "stock_code": "DMMX",
+    "stock_name": "Digital Mediatama Maxima Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "digital mediatama maxima",
+    "_nc": "digitalmediatamamaxima",
+    "_init": "dmm"
+  },
+  "ERTX": {
+    "stock_code": "ERTX",
+    "stock_name": "Eratex Djaja Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "eratex djaja",
+    "_nc": "eratexdjaja",
+    "_init": "ed"
+  },
+  "ESTI": {
+    "stock_code": "ESTI",
+    "stock_name": "Ever Shine Tex Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "ever shine tex",
+    "_nc": "evershinetex",
+    "_init": "est"
+  },
+  "EXCL": {
+    "stock_code": "EXCL",
+    "stock_name": "XLSMART Telecom Sejahtera Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "xlsmart telecom sejahtera",
+    "_nc": "xlsmarttelecomsejahtera",
+    "_init": "xts"
+  },
+  "HEXA": {
+    "stock_code": "HEXA",
+    "stock_name": "Hexindo Adiperkasa Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "hexindo adiperkasa",
+    "_nc": "hexindoadiperkasa",
+    "_init": "ha"
+  },
+  "KOBX": {
+    "stock_code": "KOBX",
+    "stock_name": "Kobexindo Tractors Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "kobexindo tractors",
+    "_nc": "kobexindotractors",
+    "_init": "kt"
+  },
+  "CASH": {
+    "stock_code": "CASH",
+    "stock_name": "Cashlez Worldwide Indonesia Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "cashlez worldwide indonesia",
+    "_nc": "cashlezworldwideindonesia",
+    "_init": "cwi"
+  },
+  "DAAZ": {
+    "stock_code": "DAAZ",
+    "stock_name": "Daaz Bara Lestari Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "daaz bara lestari",
+    "_nc": "daazbaralestari",
+    "_init": "dbl"
+  },
+  "ENZO": {
+    "stock_code": "ENZO",
+    "stock_name": "Morenzo Abadi Perkasa Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "morenzo abadi perkasa",
+    "_nc": "morenzoabadiperkasa",
+    "_init": "map"
+  },
+  "FORZ": {
+    "stock_code": "FORZ",
+    "stock_name": "Forza Land Indonesia Tbk.",
+    "last_date": "2025-07-18",
+    "_nn": "forza land indonesia",
+    "_nc": "forzalandindonesia",
+    "_init": "fli"
+  },
+  "GZCO": {
+    "stock_code": "GZCO",
+    "stock_name": "Gozco Plantations Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "gozco plantations",
+    "_nc": "gozcoplantations",
+    "_init": "gp"
+  },
+  "MEDS": {
+    "stock_code": "MEDS",
+    "stock_name": "Hetzer Medical Indonesia Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "hetzer medical indonesia",
+    "_nc": "hetzermedicalindonesia",
+    "_init": "hmi"
+  },
+  "NZIA": {
+    "stock_code": "NZIA",
+    "stock_name": "Nusantara Almazia Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "nusantara almazia",
+    "_nc": "nusantaraalmazia",
+    "_init": "na"
+  },
+  "PLIN": {
+    "stock_code": "PLIN",
+    "stock_name": "Plaza Indonesia Realty Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "plaza indonesia realty",
+    "_nc": "plazaindonesiarealty",
+    "_init": "pir"
+  },
+  "ZATA": {
+    "stock_code": "ZATA",
+    "stock_name": "Bersama Zatta Jaya Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "bersama zatta jaya",
+    "_nc": "bersamazattajaya",
+    "_init": "bzj"
+  },
+  "ZBRA": {
+    "stock_code": "ZBRA",
+    "stock_name": "Zebra Nusantara Tbk",
+    "last_date": "2026-09-29",
+    "_nn": "zebra nusantara",
+    "_nc": "zebranusantara",
+    "_init": "zn"
+  },
+  "ZYRX": {
+    "stock_code": "ZYRX",
+    "stock_name": "Zyrexindo Mandiri Buana Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "zyrexindo mandiri buana",
+    "_nc": "zyrexindomandiribuana",
+    "_init": "zmb"
+  },
+  "ZINC": {
+    "stock_code": "ZINC",
+    "stock_name": "Kapuas Prima Coal Tbk.",
+    "last_date": "2026-09-29",
+    "_nn": "kapuas prima coal",
+    "_nc": "kapuasprimacoal",
+    "_init": "kpc"
+  }
+}
