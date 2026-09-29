@@ -1,0 +1,26 @@
+name: Test OHLCV
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Ambil data TRUK
+        run: |
+          mkdir -p data
+
+          curl -L \
+            -H "Authorization: Bearer ${{ secrets.IDX_EDGE_API_KEY }}" \
+            "https://stock.arjum.com/api/history/TRUK" \
+            -o data/truk_history.json
+
+      - name: Cek hasil
+        run: |
+          echo "=== HASIL API ==="
+          head -c 3000 data/truk_history.json
