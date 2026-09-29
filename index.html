@@ -3,64 +3,1824 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>MultiBagger Hunter — Volume Scanner</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f6f8fa;color:#17212b}
-header{background:#fff;border-bottom:1px solid #e2e7ec}.header{max-width:1400px;margin:auto;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:20px}
-h1{margin:0;font-size:24px}.brand span{color:#08a66a}.brand p{margin:5px 0 0;color:#7a8794;font-size:12px}
-.header-right{display:flex;gap:8px}.mini{border:1px solid #e0e6eb;border-radius:8px;padding:8px 12px;min-width:110px}.mini small{display:block;color:#8a96a2;font-size:9px}.mini strong{font-size:12px}
-.container{max-width:1400px;margin:auto;padding:18px 22px}.panel{background:#fff;border:1px solid #e0e6eb;border-radius:10px;margin-bottom:14px}
-.panel-head{padding:14px 16px;border-bottom:1px solid #e7ebef;display:flex;justify-content:space-between;align-items:center;gap:10px}.panel-head h2{margin:0;font-size:14px}.panel-head span{font-size:11px;color:#87929d}
-.controls{padding:15px;display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr 1fr auto;gap:9px;align-items:end}
-.field label{display:block;margin-bottom:5px;font-size:9px;font-weight:bold;color:#71808e;text-transform:uppercase}
-input,select{width:100%;height:36px;border:1px solid #d6dee5;background:#fff;border-radius:7px;padding:0 9px;color:#253342;font-size:11px}
-button{height:36px;border-radius:7px;padding:0 16px;cursor:pointer;font-size:11px;font-weight:bold}.scan{border:0;background:#08a66a;color:#fff}
-.quick{display:flex;gap:6px;padding:0 15px 15px}.quick button{height:30px;background:#fff;color:#657584;border:1px solid #d7e0e6}.quick button.active{background:#eef9f4;color:#078c5b;border-color:#9ed8c2}
-.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:950px}th{background:#f7f9fa;color:#71808e;font-size:9px;text-transform:uppercase;text-align:right;padding:10px 9px;border-bottom:1px solid #e2e7ec;white-space:nowrap}th:first-child,td:first-child{text-align:left}
-td{padding:11px 9px;border-bottom:1px solid #edf0f2;font-size:11px;text-align:right}tr:hover{background:#f8fbfa}.code{font-weight:bold;color:#176fb5;cursor:pointer}.hot{font-weight:bold;color:#078c5b}
-.badge{display:inline-block;padding:4px 7px;border-radius:12px;font-size:9px;font-weight:bold}.badge.hot{background:#eaf8f2;color:#078c5b}.badge.warn{background:#fff5df;color:#b47700}
-.detail{display:grid;grid-template-columns:280px 1fr;gap:14px;padding:15px}.stock-card{border:1px solid #e0e6eb;border-radius:9px;padding:15px}.stock-code{font-size:24px;font-weight:bold}.stock-name{font-size:11px;color:#7d8995;margin-top:3px}
-.stats{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:7px}.stat{background:#f7f9fa;border-radius:7px;padding:9px}.stat small{display:block;color:#87939e;font-size:8px}.stat strong{display:block;margin-top:4px;font-size:12px}
-.chart{min-height:330px;border:1px solid #e0e6eb;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#8a96a1;font-size:12px;text-align:center}
-.note{padding:12px 15px;color:#7c8893;font-size:10px;border-top:1px solid #edf0f2}
-@media(max-width:1000px){.controls{grid-template-columns:1fr 1fr 1fr}.detail{grid-template-columns:1fr}}@media(max-width:650px){.header{align-items:flex-start;flex-direction:column}.controls{grid-template-columns:1fr}}
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f6f8fa;
+  color:#17212b
+}
+
+header{
+  background:#fff;
+  border-bottom:1px solid #e2e7ec
+}
+
+.header{
+  max-width:1400px;
+  margin:auto;
+  padding:18px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px
+}
+
+h1{
+  margin:0;
+  font-size:24px
+}
+
+.brand span{
+  color:#08a66a
+}
+
+.brand p{
+  margin:5px 0 0;
+  color:#7a8794;
+  font-size:12px
+}
+
+.header-right{
+  display:flex;
+  gap:8px
+}
+
+.mini{
+  border:1px solid #e0e6eb;
+  border-radius:8px;
+  padding:8px 12px;
+  min-width:110px
+}
+
+.mini small{
+  display:block;
+  color:#8a96a2;
+  font-size:9px
+}
+
+.mini strong{
+  font-size:12px
+}
+
+.container{
+  max-width:1400px;
+  margin:auto;
+  padding:18px 22px
+}
+
+.panel{
+  background:#fff;
+  border:1px solid #e0e6eb;
+  border-radius:10px;
+  margin-bottom:14px
+}
+
+.panel-head{
+  padding:14px 16px;
+  border-bottom:1px solid #e7ebef;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px
+}
+
+.panel-head h2{
+  margin:0;
+  font-size:14px
+}
+
+.panel-head span{
+  font-size:11px;
+  color:#87929d
+}
+
+.controls{
+  padding:15px;
+  display:grid;
+  grid-template-columns:1.2fr 1fr 1fr 1fr 1fr auto;
+  gap:9px;
+  align-items:end
+}
+
+.field label{
+  display:block;
+  margin-bottom:5px;
+  font-size:9px;
+  font-weight:bold;
+  color:#71808e;
+  text-transform:uppercase
+}
+
+input,select{
+  width:100%;
+  height:36px;
+  border:1px solid #d6dee5;
+  background:#fff;
+  border-radius:7px;
+  padding:0 9px;
+  color:#253342;
+  font-size:11px
+}
+
+button{
+  height:36px;
+  border-radius:7px;
+  padding:0 16px;
+  cursor:pointer;
+  font-size:11px;
+  font-weight:bold
+}
+
+.scan{
+  border:0;
+  background:#08a66a;
+  color:#fff
+}
+
+.scan:disabled{
+  opacity:.6;
+  cursor:wait
+}
+
+.quick{
+  display:flex;
+  gap:6px;
+  padding:0 15px 15px
+}
+
+.quick button{
+  height:30px;
+  background:#fff;
+  color:#657584;
+  border:1px solid #d7e0e6
+}
+
+.quick button.active{
+  background:#eef9f4;
+  color:#078c5b;
+  border-color:#9ed8c2
+}
+
+.statusbar{
+  padding:10px 15px;
+  background:#f7f9fa;
+  border-top:1px solid #edf0f2;
+  color:#71808e;
+  font-size:10px
+}
+
+.table-wrap{
+  overflow:auto
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:950px
+}
+
+th{
+  background:#f7f9fa;
+  color:#71808e;
+  font-size:9px;
+  text-transform:uppercase;
+  text-align:right;
+  padding:10px 9px;
+  border-bottom:1px solid #e2e7ec;
+  white-space:nowrap
+}
+
+th:first-child,
+td:first-child{
+  text-align:left
+}
+
+td{
+  padding:11px 9px;
+  border-bottom:1px solid #edf0f2;
+  font-size:11px;
+  text-align:right
+}
+
+tr:hover{
+  background:#f8fbfa
+}
+
+.code{
+  font-weight:bold;
+  color:#176fb5;
+  cursor:pointer
+}
+
+.hot{
+  font-weight:bold;
+  color:#078c5b
+}
+
+.badge{
+  display:inline-block;
+  padding:4px 7px;
+  border-radius:12px;
+  font-size:9px;
+  font-weight:bold
+}
+
+.badge.hot{
+  background:#eaf8f2;
+  color:#078c5b
+}
+
+.badge.warn{
+  background:#fff5df;
+  color:#b47700
+}
+
+.empty{
+  padding:35px;
+  text-align:center;
+  color:#8a96a1;
+  font-size:12px
+}
+
+.detail{
+  display:grid;
+  grid-template-columns:280px 1fr;
+  gap:14px;
+  padding:15px
+}
+
+.stock-card{
+  border:1px solid #e0e6eb;
+  border-radius:9px;
+  padding:15px
+}
+
+.stock-code{
+  font-size:24px;
+  font-weight:bold
+}
+
+.stock-name{
+  font-size:11px;
+  color:#7d8995;
+  margin-top:3px
+}
+
+.stats{
+  margin-top:16px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px
+}
+
+.stat{
+  background:#f7f9fa;
+  border-radius:7px;
+  padding:9px
+}
+
+.stat small{
+  display:block;
+  color:#87939e;
+  font-size:8px
+}
+
+.stat strong{
+  display:block;
+  margin-top:4px;
+  font-size:12px
+}
+
+.chart{
+  min-height:330px;
+  border:1px solid #e0e6eb;
+  border-radius:9px;
+  overflow:hidden
+}
+
+.note{
+  padding:12px 15px;
+  color:#7c8893;
+  font-size:10px;
+  border-top:1px solid #edf0f2
+}
+
+.loading{
+  padding:30px;
+  text-align:center;
+  color:#078c5b;
+  font-weight:bold;
+  font-size:12px
+}
+
+@media(max-width:1000px){
+  .controls{
+    grid-template-columns:1fr 1fr 1fr
+  }
+
+  .detail{
+    grid-template-columns:1fr
+  }
+}
+
+@media(max-width:650px){
+  .header{
+    align-items:flex-start;
+    flex-direction:column
+  }
+
+  .controls{
+    grid-template-columns:1fr
+  }
+}
 </style>
 </head>
+
 <body>
-<header><div class="header">
-<div class="brand"><h1>MULTIBAGGER <span>HUNTER</span></h1><p>Volume Spike + Sideways Screener</p></div>
-<div class="header-right"><div class="mini"><small>TOTAL EMITEN</small><strong>±950</strong></div><div class="mini"><small>DATA</small><strong>OHLCV</strong></div></div>
-</div></header>
+
+<header>
+<div class="header">
+
+  <div class="brand">
+    <h1>MULTIBAGGER <span>HUNTER</span></h1>
+    <p>Volume Spike + Sideways Screener</p>
+  </div>
+
+  <div class="header-right">
+
+    <div class="mini">
+      <small>TOTAL EMITEN</small>
+      <strong id="totalEmitens">-</strong>
+    </div>
+
+    <div class="mini">
+      <small>DATA</small>
+      <strong id="dataStatus">Loading...</strong>
+    </div>
+
+  </div>
+
+</div>
+</header>
+
+
 <main class="container">
+
+<!-- ============================= -->
+<!-- SCREENING -->
+<!-- ============================= -->
+
 <section class="panel">
-<div class="panel-head"><h2>Screening Volume</h2><span>Volume besar saat harga belum naik jauh</span></div>
-<div class="quick"><button class="active">1 Bulan</button><button>3 Bulan</button><button>6 Bulan</button><button>12 Bulan</button></div>
-<div class="controls">
-<div class="field"><label>Volume / Avg Volume</label><select><option>≥ 2x</option><option>≥ 3x</option><option>≥ 4x</option><option>≥ 5x</option></select></div>
-<div class="field"><label>Harga Maks. Naik</label><select><option>≤ 5%</option><option selected>≤ 10%</option><option>≤ 15%</option><option>≤ 20%</option></select></div>
-<div class="field"><label>Rata-rata Volume</label><select><option>20 Hari</option><option>30 Hari</option><option>60 Hari</option></select></div>
-<div class="field"><label>Sideways</label><select><option>30 Hari</option><option>20 Hari</option><option>60 Hari</option></select></div>
-<div class="field"><label>Minimum Volume</label><input value="500.000"></div>
-<button class="scan">SCAN ALL</button>
-</div>
+
+  <div class="panel-head">
+    <h2>Screening Volume</h2>
+    <span>Volume besar saat harga belum naik jauh</span>
+  </div>
+
+  <div class="quick">
+
+    <button class="period active" data-months="1">
+      1 Bulan
+    </button>
+
+    <button class="period" data-months="3">
+      3 Bulan
+    </button>
+
+    <button class="period" data-months="6">
+      6 Bulan
+    </button>
+
+    <button class="period" data-months="12">
+      12 Bulan
+    </button>
+
+  </div>
+
+
+  <div class="controls">
+
+    <div class="field">
+      <label>Volume / Avg Volume</label>
+
+      <select id="spike">
+        <option value="2">≥ 2x</option>
+        <option value="3">≥ 3x</option>
+        <option value="4">≥ 4x</option>
+        <option value="5">≥ 5x</option>
+      </select>
+    </div>
+
+
+    <div class="field">
+      <label>Harga Maks. Naik</label>
+
+      <select id="maxChange">
+        <option value="5">≤ 5%</option>
+        <option value="10" selected>≤ 10%</option>
+        <option value="15">≤ 15%</option>
+        <option value="20">≤ 20%</option>
+      </select>
+    </div>
+
+
+    <div class="field">
+      <label>Rata-rata Volume</label>
+
+      <select id="avgDays">
+        <option value="20">20 Hari</option>
+        <option value="30">30 Hari</option>
+        <option value="60">60 Hari</option>
+      </select>
+    </div>
+
+
+    <div class="field">
+      <label>Sideways</label>
+
+      <select id="sideDays">
+        <option value="30">30 Hari</option>
+        <option value="20">20 Hari</option>
+        <option value="60">60 Hari</option>
+      </select>
+    </div>
+
+
+    <div class="field">
+      <label>Minimum Volume</label>
+
+      <input
+        id="minVolume"
+        value="500000"
+        inputmode="numeric"
+      >
+    </div>
+
+
+    <button class="scan" id="scanBtn">
+      SCAN ALL
+    </button>
+
+  </div>
+
+  <div class="statusbar" id="scanStatus">
+    Siap melakukan scan.
+  </div>
+
 </section>
+
+
+<!-- ============================= -->
+<!-- HASIL -->
+<!-- ============================= -->
+
 <section class="panel">
-<div class="panel-head"><h2>Hasil Screening</h2><span>Contoh UI</span></div>
-<div class="table-wrap"><table><thead><tr><th>Kode</th><th>Tanggal</th><th>Harga</th><th>Volume</th><th>Avg Vol 20D</th><th>Vol Spike</th><th>Change</th><th>Range 30D</th><th>Status</th></tr></thead>
-<tbody>
-<tr><td class="code">TRUK</td><td>09 Jul 2026</td><td>2.350</td><td>8,2 jt</td><td>1,4 jt</td><td class="hot">5,86x</td><td>+2,1%</td><td>8,4%</td><td><span class="badge hot">VOLUME + SIDEWAYS</span></td></tr>
-<tr><td class="code">ABCD</td><td>15 Jul 2026</td><td>850</td><td>6,1 jt</td><td>1,2 jt</td><td class="hot">5,08x</td><td>+3,4%</td><td>11,2%</td><td><span class="badge hot">VOLUME + SIDEWAYS</span></td></tr>
-<tr><td class="code">XXXX</td><td>21 Aug 2026</td><td>1.120</td><td>4,8 jt</td><td>1,7 jt</td><td class="hot">2,82x</td><td>+6,1%</td><td>14,5%</td><td><span class="badge warn">WATCH</span></td></tr>
-</tbody></table></div>
-<div class="note">Data di atas hanya contoh UI. Belum terhubung ke data OHLCV asli.</div>
+
+  <div class="panel-head">
+
+    <h2>Hasil Screening</h2>
+
+    <span id="resultInfo">
+      Belum di-scan
+    </span>
+
+  </div>
+
+
+  <div class="table-wrap">
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <th>Kode</th>
+          <th>Tanggal</th>
+          <th>Harga</th>
+          <th>Volume</th>
+          <th>Avg Vol</th>
+          <th>Vol Spike</th>
+          <th>Change</th>
+          <th>Range</th>
+          <th>Status</th>
+        </tr>
+
+      </thead>
+
+      <tbody id="resultBody">
+
+        <tr>
+          <td colspan="9">
+            <div class="empty">
+              Klik SCAN ALL untuk mencari pola.
+            </div>
+          </td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <div class="note">
+    Data berasal dari OHLCV yang tersimpan di data/ohlcv.json.
+    Scanner mencari volume yang melonjak dibanding rata-rata volume
+    sebelumnya dan harga yang masih bergerak dalam range terbatas.
+  </div>
+
 </section>
+
+
+<!-- ============================= -->
+<!-- DETAIL -->
+<!-- ============================= -->
+
 <section class="panel">
-<div class="panel-head"><h2>Detail Saham</h2><span>Contoh tampilan</span></div>
-<div class="detail">
-<div class="stock-card"><div class="stock-code">TRUK</div><div class="stock-name">PT Guna Timur Raya Tbk</div>
-<div class="stats"><div class="stat"><small>TANGGAL</small><strong>09 Jul 2026</strong></div><div class="stat"><small>HARGA</small><strong>2.350</strong></div><div class="stat"><small>VOLUME</small><strong>8,2 jt</strong></div><div class="stat"><small>VOL SPIKE</small><strong class="hot">5,86x</strong></div><div class="stat"><small>CHANGE</small><strong>+2,1%</strong></div><div class="stat"><small>RANGE 30D</small><strong>8,4%</strong></div></div></div>
-<div class="chart">Nanti di sini dipasang chart TradingView<br>candle + volume dan bisa digeser ke tanggal tertentu.</div>
-</div>
+
+  <div class="panel-head">
+
+    <h2>Detail Saham</h2>
+
+    <span id="detailTitle">
+      Pilih hasil screening
+    </span>
+
+  </div>
+
+
+  <div class="detail">
+
+    <div class="stock-card">
+
+      <div class="stock-code" id="detailCode">
+        -
+      </div>
+
+      <div class="stock-name" id="detailName">
+        -
+      </div>
+
+
+      <div class="stats">
+
+        <div class="stat">
+          <small>TANGGAL</small>
+          <strong id="dDate">-</strong>
+        </div>
+
+        <div class="stat">
+          <small>HARGA</small>
+          <strong id="dPrice">-</strong>
+        </div>
+
+        <div class="stat">
+          <small>VOLUME</small>
+          <strong id="dVolume">-</strong>
+        </div>
+
+        <div class="stat">
+          <small>VOL SPIKE</small>
+          <strong class="hot" id="dSpike">-</strong>
+        </div>
+
+        <div class="stat">
+          <small>CHANGE</small>
+          <strong id="dChange">-</strong>
+        </div>
+
+        <div class="stat">
+          <small>RANGE</small>
+          <strong id="dRange">-</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="chart" id="tvchart">
+
+      Pilih saham dari hasil screening
+      untuk melihat chart TradingView.
+
+    </div>
+
+  </div>
+
 </section>
+
 </main>
-</body></html>
+
+
+<script>
+
+let OHLCV = {};
+let STOCK_NAMES = {};
+let RESULTS = [];
+
+let selectedMonths = 1;
+
+
+/* ==========================================
+   FORMAT
+========================================== */
+
+function number(v){
+
+  return Number(v || 0);
+
+}
+
+
+function formatPrice(v){
+
+  return number(v).toLocaleString(
+    "id-ID",
+    {
+      maximumFractionDigits:2
+    }
+  );
+
+}
+
+
+function formatVolume(v){
+
+  v = number(v);
+
+  if(v >= 1000000000){
+
+    return (
+      (v / 1000000000)
+      .toFixed(2)
+      .replace(".",",")
+      + " M"
+    );
+
+  }
+
+  if(v >= 1000000){
+
+    return (
+      (v / 1000000)
+      .toFixed(2)
+      .replace(".",",")
+      + " jt"
+    );
+
+  }
+
+  if(v >= 1000){
+
+    return (
+      (v / 1000)
+      .toFixed(1)
+      .replace(".",",")
+      + " rb"
+    );
+
+  }
+
+  return formatPrice(v);
+
+}
+
+
+function formatPercent(v){
+
+  const n = number(v);
+
+  return (
+    n >= 0 ? "+" : ""
+  ) + n.toFixed(2) + "%";
+
+}
+
+
+function formatDate(date){
+
+  if(!date) return "-";
+
+  const d = new Date(date + "T00:00:00");
+
+  return d.toLocaleDateString(
+    "id-ID",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric"
+    }
+  );
+
+}
+
+
+/* ==========================================
+   AMBIL ROWS DARI API JSON
+========================================== */
+
+function getRows(payload){
+
+  if(Array.isArray(payload)){
+    return payload;
+  }
+
+  if(payload && Array.isArray(payload.rows)){
+    return payload.rows;
+  }
+
+  if(payload && Array.isArray(payload.data)){
+    return payload.data;
+  }
+
+  return [];
+
+}
+
+
+/* ==========================================
+   LOAD DATA
+========================================== */
+
+async function loadData(){
+
+  const status =
+    document.getElementById("dataStatus");
+
+  try{
+
+    status.textContent = "Loading...";
+
+    const [ohlcvResponse,nameResponse] =
+      await Promise.all([
+
+        fetch(
+          "data/ohlcv.json?t=" +
+          Date.now()
+        ),
+
+        fetch(
+          "data/market_cap_raw.json?t=" +
+          Date.now()
+        )
+
+      ]);
+
+
+    if(!ohlcvResponse.ok){
+
+      throw new Error(
+        "ohlcv.json tidak ditemukan"
+      );
+
+    }
+
+
+    const rawOHLCV =
+      await ohlcvResponse.json();
+
+
+    OHLCV = rawOHLCV;
+
+
+    /* ==========================
+       NAMA SAHAM
+    ========================== */
+
+    if(nameResponse.ok){
+
+      const rawNames =
+        await nameResponse.json();
+
+      buildNames(rawNames);
+
+    }
+
+
+    const total =
+      Object.keys(OHLCV).length;
+
+
+    document.getElementById(
+      "totalEmitens"
+    ).textContent =
+      total.toLocaleString("id-ID");
+
+
+    let latest = "-";
+
+
+    for(const code of Object.keys(OHLCV)){
+
+      const rows =
+        getRows(OHLCV[code]);
+
+      if(!rows.length) continue;
+
+      const sorted =
+        [...rows].sort(
+          (a,b) =>
+            String(a.date)
+            .localeCompare(String(b.date))
+        );
+
+      const d =
+        sorted[sorted.length - 1].date;
+
+      if(
+        latest === "-" ||
+        d > latest
+      ){
+
+        latest = d;
+
+      }
+
+    }
+
+
+    document.getElementById(
+      "dataStatus"
+    ).textContent =
+      latest !== "-"
+      ? formatDate(latest)
+      : "OHLCV";
+
+
+    document.getElementById(
+      "scanStatus"
+    ).textContent =
+      "Data siap. " +
+      total.toLocaleString("id-ID") +
+      " emiten tersedia.";
+
+
+  }catch(error){
+
+    console.error(error);
+
+    status.textContent =
+      "ERROR";
+
+    document.getElementById(
+      "scanStatus"
+    ).textContent =
+      "Gagal membaca data/ohlcv.json: " +
+      error.message;
+
+  }
+
+}
+
+
+/* ==========================================
+   BANGUN NAMA SAHAM
+========================================== */
+
+function buildNames(obj){
+
+  function walk(value){
+
+    if(Array.isArray(value)){
+
+      value.forEach(walk);
+
+      return;
+
+    }
+
+
+    if(
+      value &&
+      typeof value === "object"
+    ){
+
+      const code =
+        value.code ||
+        value.stock_code ||
+        value.symbol ||
+        value.ticker;
+
+      const name =
+        value.name ||
+        value.company_name ||
+        value.company;
+
+      if(
+        typeof code === "string" &&
+        typeof name === "string"
+      ){
+
+        STOCK_NAMES[
+          code.toUpperCase()
+        ] = name;
+
+      }
+
+
+      Object.values(value)
+        .forEach(walk);
+
+    }
+
+  }
+
+  walk(obj);
+
+}
+
+
+/* ==========================================
+   AMBIL MIN VOLUME
+========================================== */
+
+function parseMinVolume(){
+
+  const value =
+    document.getElementById(
+      "minVolume"
+    ).value;
+
+  return Number(
+    String(value)
+      .replace(/[^\d]/g,"")
+  ) || 0;
+
+}
+
+
+/* ==========================================
+   HITUNG EVENT
+========================================== */
+
+function calculateEvents(
+  code,
+  payload,
+  settings
+){
+
+  let rows =
+    getRows(payload)
+      .filter(r =>
+        r &&
+        r.date &&
+        number(r.close) > 0
+      )
+      .map(r => ({
+
+        date:String(r.date),
+        open:number(r.open),
+        high:number(r.high),
+        low:number(r.low),
+        close:number(r.close),
+        volume:number(r.volume)
+
+      }));
+
+
+  rows.sort(
+    (a,b) =>
+      a.date.localeCompare(b.date)
+  );
+
+
+  if(
+    rows.length <
+    Math.max(
+      settings.avgDays,
+      settings.sideDays
+    ) + 2
+  ){
+
+    return [];
+
+  }
+
+
+  /* ==========================
+     TANGGAL MULAI SCAN
+  ========================== */
+
+  const latestDate =
+    new Date(
+      rows[rows.length - 1].date +
+      "T00:00:00"
+    );
+
+  const startDate =
+    new Date(latestDate);
+
+  startDate.setMonth(
+    startDate.getMonth() -
+    settings.months
+  );
+
+
+  const events = [];
+
+
+  /* ==========================
+     SETIAP HARI
+  ========================== */
+
+  for(
+    let i = settings.avgDays;
+    i < rows.length;
+    i++
+  ){
+
+    const current =
+      rows[i];
+
+
+    const currentDate =
+      new Date(
+        current.date +
+        "T00:00:00"
+      );
+
+
+    if(currentDate < startDate){
+
+      continue;
+
+    }
+
+
+    /* ==========================
+       AVG VOLUME
+       SEBELUM HARI INI
+    ========================== */
+
+    const volumeWindow =
+      rows.slice(
+        i - settings.avgDays,
+        i
+      );
+
+
+    const validVolumes =
+      volumeWindow
+        .map(x => x.volume)
+        .filter(x => x > 0);
+
+
+    if(
+      validVolumes.length <
+      settings.avgDays
+    ){
+
+      continue;
+
+    }
+
+
+    const avgVolume =
+      validVolumes.reduce(
+        (a,b) => a + b,
+        0
+      ) /
+      validVolumes.length;
+
+
+    if(avgVolume <= 0){
+
+      continue;
+
+    }
+
+
+    const spike =
+      current.volume /
+      avgVolume;
+
+
+    /* ==========================
+       MINIMUM VOLUME
+    ========================== */
+
+    if(
+      current.volume <
+      settings.minVolume
+    ){
+
+      continue;
+
+    }
+
+
+    /* ==========================
+       VOLUME SPIKE
+    ========================== */
+
+    if(
+      spike <
+      settings.spike
+    ){
+
+      continue;
+
+    }
+
+
+    /* ==========================
+       SIDEWAYS WINDOW
+    ========================== */
+
+    const sideStart =
+      Math.max(
+        0,
+        i - settings.sideDays + 1
+      );
+
+
+    const sideRows =
+      rows.slice(
+        sideStart,
+        i + 1
+      );
+
+
+    if(
+      sideRows.length <
+      settings.sideDays
+    ){
+
+      continue;
+
+    }
+
+
+    const base =
+      rows[
+        i - settings.sideDays
+      ];
+
+
+    if(
+      !base ||
+      number(base.close) <= 0
+    ){
+
+      continue;
+
+    }
+
+
+    /* ==========================
+       CHANGE HARGA
+    ========================== */
+
+    const change =
+      (
+        current.close /
+        base.close -
+        1
+      ) * 100;
+
+
+    /* ==========================
+       RANGE SIDEWAYS
+    ========================== */
+
+    const highs =
+      sideRows
+        .map(x => x.high || x.close)
+        .filter(x => x > 0);
+
+
+    const lows =
+      sideRows
+        .map(x => x.low || x.close)
+        .filter(x => x > 0);
+
+
+    if(
+      !highs.length ||
+      !lows.length
+    ){
+
+      continue;
+
+    }
+
+
+    const highest =
+      Math.max(...highs);
+
+    const lowest =
+      Math.min(...lows);
+
+
+    if(lowest <= 0){
+
+      continue;
+
+    }
+
+
+    const range =
+      (
+        highest /
+        lowest -
+        1
+      ) * 100;
+
+
+    /* ==========================
+       FILTER HARGA
+    ========================== */
+
+    if(
+      change >
+      settings.maxChange
+    ){
+
+      continue;
+
+    }
+
+
+    /* ==========================
+       HASIL
+    ========================== */
+
+    events.push({
+
+      code,
+      name:
+        STOCK_NAMES[code] ||
+        code,
+
+      date:
+        current.date,
+
+      price:
+        current.close,
+
+      volume:
+        current.volume,
+
+      avgVolume,
+
+      spike,
+
+      change,
+
+      range
+
+    });
+
+  }
+
+
+  return events;
+
+}
+
+
+/* ==========================================
+   SCAN ALL
+========================================== */
+
+function scanAll(){
+
+  if(
+    !OHLCV ||
+    !Object.keys(OHLCV).length
+  ){
+
+    alert(
+      "Data OHLCV belum siap."
+    );
+
+    return;
+
+  }
+
+
+  const btn =
+    document.getElementById(
+      "scanBtn"
+    );
+
+
+  btn.disabled = true;
+
+  btn.textContent =
+    "SCANNING...";
+
+
+  document.getElementById(
+    "scanStatus"
+  ).textContent =
+    "Sedang scan seluruh emiten...";
+
+
+  setTimeout(() => {
+
+    const settings = {
+
+      months:
+        selectedMonths,
+
+      spike:
+        Number(
+          document.getElementById(
+            "spike"
+          ).value
+        ),
+
+      maxChange:
+        Number(
+          document.getElementById(
+            "maxChange"
+          ).value
+        ),
+
+      avgDays:
+        Number(
+          document.getElementById(
+            "avgDays"
+          ).value
+        ),
+
+      sideDays:
+        Number(
+          document.getElementById(
+            "sideDays"
+          ).value
+        ),
+
+      minVolume:
+        parseMinVolume()
+
+    };
+
+
+    let allResults = [];
+
+
+    const entries =
+      Object.entries(OHLCV);
+
+
+    for(
+      const [code,payload]
+      of entries
+    ){
+
+      const cleanCode =
+        String(code)
+          .toUpperCase();
+
+
+      const events =
+        calculateEvents(
+          cleanCode,
+          payload,
+          settings
+        );
+
+
+      allResults.push(
+        ...events
+      );
+
+    }
+
+
+    /* ==========================
+       SORT
+       VOLUME SPIKE TERBESAR
+    ========================== */
+
+    allResults.sort(
+      (a,b) => {
+
+        if(
+          b.spike !==
+          a.spike
+        ){
+
+          return (
+            b.spike -
+            a.spike
+          );
+
+        }
+
+        return (
+          Math.abs(a.change) -
+          Math.abs(b.change)
+        );
+
+      }
+    );
+
+
+    RESULTS =
+      allResults;
+
+
+    renderResults();
+
+
+    document.getElementById(
+      "scanStatus"
+    ).textContent =
+      "Scan selesai: " +
+      entries.length.toLocaleString(
+        "id-ID"
+      ) +
+      " emiten → " +
+      RESULTS.length.toLocaleString(
+        "id-ID"
+      ) +
+      " event ditemukan.";
+
+
+    document.getElementById(
+      "resultInfo"
+    ).textContent =
+      RESULTS.length.toLocaleString(
+        "id-ID"
+      ) +
+      " hasil";
+
+
+    btn.disabled = false;
+
+    btn.textContent =
+      "SCAN ALL";
+
+
+  },50);
+
+}
+
+
+/* ==========================================
+   RENDER HASIL
+========================================== */
+
+function renderResults(){
+
+  const body =
+    document.getElementById(
+      "resultBody"
+    );
+
+
+  if(!RESULTS.length){
+
+    body.innerHTML = `
+
+      <tr>
+        <td colspan="9">
+
+          <div class="empty">
+
+            Tidak ada saham yang memenuhi
+            filter saat ini.
+
+            <br><br>
+
+            Coba turunkan Volume Spike
+            atau naikkan batas harga.
+
+          </div>
+
+        </td>
+      </tr>
+
+    `;
+
+    return;
+
+  }
+
+
+  body.innerHTML =
+    RESULTS
+      .slice(0,500)
+      .map(
+        (r,index) => `
+
+        <tr>
+
+          <td
+            class="code"
+            onclick="showDetail(${index})"
+          >
+            ${escapeHtml(r.code)}
+          </td>
+
+          <td>
+            ${formatDate(r.date)}
+          </td>
+
+          <td>
+            ${formatPrice(r.price)}
+          </td>
+
+          <td>
+            ${formatVolume(r.volume)}
+          </td>
+
+          <td>
+            ${formatVolume(r.avgVolume)}
+          </td>
+
+          <td class="hot">
+            ${r.spike.toFixed(2)}x
+          </td>
+
+          <td>
+            ${formatPercent(r.change)}
+          </td>
+
+          <td>
+            ${r.range.toFixed(2)}%
+          </td>
+
+          <td>
+            <span class="badge hot">
+              VOLUME + SIDEWAYS
+            </span>
+          </td>
+
+        </tr>
+
+        `
+      )
+      .join("");
+
+}
+
+
+/* ==========================================
+   DETAIL
+========================================== */
+
+function showDetail(index){
+
+  const r =
+    RESULTS[index];
+
+
+  if(!r) return;
+
+
+  document.getElementById(
+    "detailCode"
+  ).textContent =
+    r.code;
+
+
+  document.getElementById(
+    "detailName"
+  ).textContent =
+    r.name;
+
+
+  document.getElementById(
+    "detailTitle"
+  ).textContent =
+    r.code +
+    " — " +
+    formatDate(r.date);
+
+
+  document.getElementById(
+    "dDate"
+  ).textContent =
+    formatDate(r.date);
+
+
+  document.getElementById(
+    "dPrice"
+  ).textContent =
+    formatPrice(r.price);
+
+
+  document.getElementById(
+    "dVolume"
+  ).textContent =
+    formatVolume(r.volume);
+
+
+  document.getElementById(
+    "dSpike"
+  ).textContent =
+    r.spike.toFixed(2) +
+    "x";
+
+
+  document.getElementById(
+    "dChange"
+  ).textContent =
+    formatPercent(r.change);
+
+
+  document.getElementById(
+    "dRange"
+  ).textContent =
+    r.range.toFixed(2) +
+    "%";
+
+
+  loadTradingView(
+    r.code
+  );
+
+}
+
+
+/* ==========================================
+   TRADINGVIEW
+========================================== */
+
+function loadTradingView(code){
+
+  const box =
+    document.getElementById(
+      "tvchart"
+    );
+
+
+  box.innerHTML = "";
+
+
+  const widget =
+    document.createElement(
+      "div"
+    );
+
+
+  widget.className =
+    "tradingview-widget-container__widget";
+
+
+  widget.style.width =
+    "100%";
+
+  widget.style.height =
+    "330px";
+
+
+  box.appendChild(
+    widget
+  );
+
+
+  const script =
+    document.createElement(
+      "script"
+    );
+
+
+  script.src =
+    "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+
+  script.type =
+    "text/javascript";
+
+  script.async = true;
+
+
+  script.innerHTML =
+    JSON.stringify({
+
+      autosize:true,
+
+      symbol:
+        "IDX:" + code,
+
+      interval:"D",
+
+      timezone:
+        "Asia/Jakarta",
+
+      theme:"light",
+
+      style:"1",
+
+      locale:"id",
+
+      allow_symbol_change:true,
+
+      calendar:false,
+
+      hide_top_toolbar:false,
+
+      hide_legend:false,
+
+      save_image:false,
+
+      support_host:
+        "https://www.tradingview.com"
+
+    });
+
+
+  box.appendChild(
+    script
+  );
+
+}
+
+
+/* ==========================================
+   ESCAPE HTML
+========================================== */
+
+function escapeHtml(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* ==========================================
+   PERIOD BUTTON
+========================================== */
+
+document
+  .querySelectorAll(".period")
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        document
+          .querySelectorAll(
+            ".period"
+          )
+          .forEach(x =>
+            x.classList.remove(
+              "active"
+            )
+          );
+
+
+        button.classList.add(
+          "active"
+        );
+
+
+        selectedMonths =
+          Number(
+            button.dataset.months
+          );
+
+
+        document.getElementById(
+          "scanStatus"
+        ).textContent =
+          "Periode scan: " +
+          selectedMonths +
+          " bulan.";
+
+      }
+    );
+
+  });
+
+
+/* ==========================================
+   SCAN BUTTON
+========================================== */
+
+document
+  .getElementById("scanBtn")
+  .addEventListener(
+    "click",
+    scanAll
+  );
+
+
+/* ==========================================
+   START
+========================================== */
+
+loadData();
+
+</script>
+
+</body>
+</html>
