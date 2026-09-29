@@ -11,17 +11,28 @@ permissions:
 
 jobs:
   update:
+
     runs-on: ubuntu-latest
 
     steps:
 
+      # ============================================
+      # CHECKOUT
+      # ============================================
+
       - name: Checkout
         uses: actions/checkout@v4
+
         with:
           fetch-depth: 1
 
 
+      # ============================================
+      # AMBIL DATA IDX
+      # ============================================
+
       - name: Ambil 963 Emiten IDX + OHLCV
+
         env:
           API_KEY: ${{ secrets.IDX_EDGE_API_KEY }}
 
@@ -33,8 +44,11 @@ jobs:
           import json
           import os
           import time
-          from concurrent.futures import ThreadPoolExecutor, as_completed
 
+
+          # ============================================
+          # KONFIGURASI
+          # ============================================
 
           API_KEY = os.environ["API_KEY"]
 
@@ -50,43 +64,63 @@ jobs:
 
 
           print("")
-          print("======================================")
+          print("==========================================")
           print("MULTIBAGGER HUNTER")
           print("UPDATE SEMUA EMITEN IDX")
-          print("======================================")
+          print("==========================================")
           print("")
 
 
-          # ==================================================
-          # 1. AMBIL SEMUA EMITEN DARI MARKET CAP
-          # ==================================================
+          # ============================================
+          # BAGIAN 1
+          # AMBIL SEMUA EMITEN
+          # ============================================
 
-          print("[1/3] Mengambil daftar seluruh emiten IDX...")
+          print("[1/3] Mengambil seluruh emiten IDX...")
           print("")
 
 
-          first_url = f"{BASE}/api/market-cap"
+          try:
 
-          r = requests.get(
-              first_url,
-              headers=HEADERS,
-              params={"page": 1},
-              timeout=60
-          )
+              response = requests.get(
+                  f"{BASE}/api/market-cap",
+                  headers=HEADERS,
+                  params={"page": 1},
+                  timeout=60
+              )
 
+          except Exception as e:
 
-          if r.status_code != 200:
-              print("ERROR MARKET CAP:", r.status_code)
-              print(r.text[:2000])
+              print("ERROR:", e)
               raise SystemExit(1)
 
 
-          first = r.json()
+          if response.status_code != 200:
+
+              print(
+                  "ERROR MARKET CAP:",
+                  response.status_code
+              )
+
+              print(response.text[:2000])
+
+              raise SystemExit(1)
 
 
-          total = int(first.get("total", 0))
-          total_pages = int(first.get("total_pages", 0))
-          per_page = int(first.get("per_page", 0))
+          first = response.json()
+
+
+          total = int(
+              first.get("total", 0)
+          )
+
+          total_pages = int(
+              first.get("total_pages", 0)
+          )
+
+          per_page = int(
+              first.get("per_page", 0)
+          )
 
 
           print("TOTAL EMITEN :", total)
@@ -96,119 +130,186 @@ jobs:
 
 
           if total_pages < 1:
-              print("ERROR: total_pages tidak ditemukan.")
+
+              print(
+                  "ERROR: total_pages tidak ditemukan."
+              )
+
               raise SystemExit(1)
 
 
           stocks = {}
-          market_cap_data = []
 
 
-          # halaman pertama
-          for item in first.get("data", []):
+          # ============================================
+          # PAGE 1
+          # ============================================
+
+          rows = first.get("data", [])
+
+
+          for item in rows:
 
               code = item.get("code")
 
               if code:
+
                   code = code.strip().upper()
 
                   stocks[code] = item
-                  market_cap_data.append(item)
 
 
           print(
               f"Page 1/{total_pages} selesai | "
-              f"{len(first.get('data', []))} emiten"
+              f"+{len(rows)} | "
+              f"total unik: {len(stocks)}"
           )
 
 
-          # halaman berikutnya
-          for page in range(2, total_pages + 1):
+          # ============================================
+          # PAGE 2 SAMPAI TERAKHIR
+          # ============================================
 
-              try:
+          for page in range(
+              2,
+              total_pages + 1
+          ):
 
-                  response = requests.get(
-                      f"{BASE}/api/market-cap",
-                      headers=HEADERS,
-                      params={"page": page},
-                      timeout=60
-                  )
+              success_page = False
 
 
-                  if response.status_code != 200:
+              for attempt in range(1, 6):
 
-                      print(
-                          f"GAGAL PAGE {page}: "
-                          f"HTTP {response.status_code}"
+                  try:
+
+                      response = requests.get(
+                          f"{BASE}/api/market-cap",
+                          headers=HEADERS,
+                          params={"page": page},
+                          timeout=60
                       )
 
-                      continue
+
+                      if response.status_code == 200:
+
+                          data = response.json()
+
+                          rows = data.get(
+                              "data",
+                              []
+                          )
 
 
-                  data = response.json()
+                          for item in rows:
+
+                              code = item.get(
+                                  "code"
+                              )
+
+                              if code:
+
+                                  code = (
+                                      code
+                                      .strip()
+                                      .upper()
+                                  )
+
+                                  stocks[code] = item
 
 
-                  rows = data.get("data", [])
+                          print(
+                              f"Page {page}/{total_pages} "
+                              f"selesai | "
+                              f"+{len(rows)} | "
+                              f"total unik: "
+                              f"{len(stocks)}"
+                          )
 
 
-                  for item in rows:
+                          success_page = True
 
-                      code = item.get("code")
+                          break
 
-                      if code:
 
-                          code = code.strip().upper()
+                      elif response.status_code == 429:
 
-                          stocks[code] = item
-                          market_cap_data.append(item)
+                          wait = 10 * attempt
 
+                          print(
+                              f"RATE LIMIT PAGE {page} "
+                              f"| retry {attempt}/5 "
+                              f"| tunggu {wait} detik"
+                          )
+
+                          time.sleep(wait)
+
+
+                      else:
+
+                          print(
+                              f"GAGAL PAGE {page}: "
+                              f"HTTP "
+                              f"{response.status_code}"
+                          )
+
+                          break
+
+
+                  except Exception as e:
+
+                      print(
+                          f"ERROR PAGE {page}: "
+                          f"{e}"
+                      )
+
+                      time.sleep(
+                          5 * attempt
+                      )
+
+
+              if not success_page:
 
                   print(
-                      f"Page {page}/{total_pages} selesai | "
-                      f"+{len(rows)} | "
-                      f"total unik: {len(stocks)}"
+                      f"WARNING: PAGE {page} "
+                      f"tidak berhasil."
                   )
 
 
-              except Exception as e:
-
-                  print(
-                      f"GAGAL PAGE {page}: {e}"
-                  )
+              time.sleep(1)
 
 
-              time.sleep(0.2)
+          codes = sorted(
+              stocks.keys()
+          )
 
 
-          codes = sorted(stocks.keys())
-
+          # ============================================
+          # HASIL EMITEN
+          # ============================================
 
           print("")
-          print("======================================")
+          print("==========================================")
           print("HASIL DAFTAR EMITEN")
-          print("======================================")
-          print("Total API       :", total)
-          print("Total ditemukan :", len(codes))
-          print("======================================")
+          print("==========================================")
+          print("Target API       :", total)
+          print("Emiten ditemukan :", len(codes))
+          print("==========================================")
           print("")
 
 
           if len(codes) < 900:
 
               print(
-                  "ERROR: jumlah emiten kurang dari 900."
-              )
-
-              print(
-                  "Tidak melanjutkan pengambilan OHLCV."
+                  "ERROR: jumlah emiten "
+                  "kurang dari 900."
               )
 
               raise SystemExit(1)
 
 
-          # ==================================================
+          # ============================================
           # SIMPAN STOCKS
-          # ==================================================
+          # ============================================
 
           with open(
               "data/stocks.json",
@@ -224,22 +325,9 @@ jobs:
               )
 
 
-          # ==================================================
+          # ============================================
           # SIMPAN MARKET CAP
-          # ==================================================
-
-          market_cap_unique = {}
-
-          for item in market_cap_data:
-
-              code = item.get("code")
-
-              if code:
-
-                  code = code.strip().upper()
-
-                  market_cap_unique[code] = item
-
+          # ============================================
 
           with open(
               "data/market_cap_raw.json",
@@ -248,131 +336,235 @@ jobs:
           ) as f:
 
               json.dump(
-                  market_cap_unique,
+                  stocks,
                   f,
                   ensure_ascii=False,
                   separators=(",", ":")
               )
 
 
+          # ============================================
+          # BAGIAN 2
+          # AMBIL HISTORY / OHLCV
+          # ============================================
+
           print("")
-          print("[2/3] Mengambil OHLCV seluruh emiten...")
+          print(
+              "[2/3] Mengambil OHLCV "
+              "seluruh emiten..."
+          )
           print("")
 
+          print(
+              "MODE: 1 REQUEST SEKALIGUS"
+          )
 
-          # ==================================================
-          # 2. AMBIL HISTORY
-          # ==================================================
+          print(
+              "RATE LIMIT PROTECTION: AKTIF"
+          )
+
+          print("")
+
 
           result = {}
 
           success = 0
+
           failed = 0
 
 
+          # ============================================
+          # FUNGSI HISTORY
+          # ============================================
+
           def get_history(code):
 
-              try:
-
-                  response = requests.get(
-                      f"{BASE}/api/history/{code}",
-                      headers=HEADERS,
-                      timeout=60
-                  )
+              max_retry = 8
 
 
-                  if response.status_code != 200:
+              for attempt in range(
+                  1,
+                  max_retry + 1
+              ):
+
+                  try:
+
+                      response = requests.get(
+                          f"{BASE}/api/history/{code}",
+                          headers=HEADERS,
+                          timeout=60
+                      )
+
+
+                      # ----------------------------
+                      # BERHASIL
+                      # ----------------------------
+
+                      if response.status_code == 200:
+
+                          return (
+                              code,
+                              response.json(),
+                              None
+                          )
+
+
+                      # ----------------------------
+                      # RATE LIMIT
+                      # ----------------------------
+
+                      if response.status_code == 429:
+
+                          retry_after = (
+                              response.headers
+                              .get("Retry-After")
+                          )
+
+
+                          if retry_after:
+
+                              try:
+
+                                  wait = int(
+                                      retry_after
+                                  )
+
+                              except:
+
+                                  wait = 10
+
+                          else:
+
+                              wait = min(
+                                  10 * attempt,
+                                  60
+                              )
+
+
+                          print(
+                              f"429 {code} | "
+                              f"retry "
+                              f"{attempt}/{max_retry} | "
+                              f"tunggu "
+                              f"{wait} detik"
+                          )
+
+
+                          time.sleep(wait)
+
+                          continue
+
+
+                      # ----------------------------
+                      # ERROR LAIN
+                      # ----------------------------
 
                       return (
                           code,
                           None,
-                          f"HTTP {response.status_code}"
+                          f"HTTP "
+                          f"{response.status_code}"
                       )
 
 
-                  data = response.json()
+                  except Exception as e:
+
+                      print(
+                          f"ERROR {code}: "
+                          f"{e}"
+                      )
 
 
-                  return (
-                      code,
-                      data,
-                      None
+                      if attempt < max_retry:
+
+                          wait = min(
+                              5 * attempt,
+                              30
+                          )
+
+                          time.sleep(
+                              wait
+                          )
+
+                      else:
+
+                          return (
+                              code,
+                              None,
+                              str(e)
+                          )
+
+
+              return (
+                  code,
+                  None,
+                  "Gagal setelah retry"
+              )
+
+
+          # ============================================
+          # AMBIL SATU PER SATU
+          # ============================================
+
+          for i, code in enumerate(
+              codes,
+              1
+          ):
+
+              code_result, data, error = (
+                  get_history(code)
+              )
+
+
+              if data is not None:
+
+                  result[code_result] = data
+
+                  success += 1
+
+
+              else:
+
+                  failed += 1
+
+                  print(
+                      f"GAGAL {code_result}: "
+                      f"{error}"
                   )
 
 
-              except Exception as e:
+              # ----------------------------------------
+              # LAPORAN PROGRESS
+              # ----------------------------------------
 
-                  return (
-                      code,
-                      None,
-                      str(e)
-                  )
-
-
-          # Jangan terlalu agresif supaya API aman
-          MAX_WORKERS = 5
-
-
-          with ThreadPoolExecutor(
-              max_workers=MAX_WORKERS
-          ) as executor:
-
-
-              futures = {
-
-                  executor.submit(
-                      get_history,
-                      code
-                  ): code
-
-                  for code in codes
-
-              }
-
-
-              for i, future in enumerate(
-                  as_completed(futures),
-                  1
+              if (
+                  i % 25 == 0
+                  or i == len(codes)
               ):
 
+                  print("")
 
-                  code, data, error = (
-                      future.result()
+                  print(
+                      f"Progress: "
+                      f"{i}/{len(codes)} | "
+                      f"sukses: {success} | "
+                      f"gagal: {failed}"
                   )
 
-
-                  if data is not None:
-
-                      result[code] = data
-
-                      success += 1
+                  print("")
 
 
-                  else:
+              # ----------------------------------------
+              # JEDA ANTAR REQUEST
+              # ----------------------------------------
 
-                      failed += 1
-
-                      print(
-                          f"GAGAL {code}: {error}"
-                      )
+              time.sleep(1)
 
 
-                  if (
-                      i % 25 == 0
-                      or i == len(codes)
-                  ):
-
-                      print(
-                          f"Progress: "
-                          f"{i}/{len(codes)} | "
-                          f"sukses: {success} | "
-                          f"gagal: {failed}"
-                      )
-
-
-          # ==================================================
-          # 3. SIMPAN OHLCV
-          # ==================================================
+          # ============================================
+          # BAGIAN 3
+          # SIMPAN OHLCV
+          # ============================================
 
           print("")
           print("[3/3] Menyimpan data...")
@@ -393,30 +585,48 @@ jobs:
               )
 
 
+          # ============================================
+          # HASIL AKHIR
+          # ============================================
+
           print("")
-          print("======================================")
+          print("==========================================")
           print("UPDATE SELESAI")
-          print("======================================")
+          print("==========================================")
           print("Total emiten :", len(codes))
           print("OHLCV sukses  :", success)
           print("OHLCV gagal   :", failed)
-          print("======================================")
+          print("==========================================")
           print("")
 
 
           if success < 900:
 
               print(
-                  "WARNING: OHLCV sukses kurang dari 900."
+                  "WARNING: OHLCV sukses "
+                  "kurang dari 900."
               )
+
+          else:
+
+              print(
+                  "✅ OHLCV 900+ BERHASIL"
+              )
+
 
           PY
 
 
+      # ============================================
+      # COMMIT DATA
+      # ============================================
+
       - name: Commit dan Push Data
+
         run: |
 
-          git config user.name "github-actions[bot]"
+          git config user.name \
+            "github-actions[bot]"
 
           git config user.email \
             "41898282+github-actions[bot]@users.noreply.github.com"
@@ -442,6 +652,6 @@ jobs:
 
 
           echo ""
-          echo "======================================"
+          echo "=========================================="
           echo "PUSH SELESAI"
-          echo "======================================"
+          echo "=========================================="
